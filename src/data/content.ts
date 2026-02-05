@@ -1,5 +1,5 @@
 export const stats = [
-  { value: "<2 hrs", label: "WhatsApp response" },
+  { value: "Fast Response", label: "Whatsapp Response", suffix: "" },
   { value: "Bali-based", label: "Local expertise" },
   { value: "English-first", label: "Client support" },
   { value: "Compliance-led", label: "Reporting workflow" },
