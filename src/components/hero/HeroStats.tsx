@@ -45,16 +45,14 @@ export function HeroStats({ stats }: HeroStatsProps) {
           className="flex items-center gap-2.5 text-sm md:text-base group cursor-default"
         >
           {/* Accent Dot */}
-          <div className="w-2 h-2 rounded-full bg-primary-500 shadow-[0_0_8px_rgba(0,102,204,0.4)] shrink-0 group-hover:scale-125 transition-transform duration-300" />
+          <div className="w-2 h-2 rounded-full bg-[var(--color-primary)] shrink-0 group-hover:scale-125 transition-transform duration-300" />
 
-          <div className="flex flex-col md:flex-row md:items-baseline md:gap-1.5">
+          <div className="flex flex-wrap items-baseline gap-1.5">
             <span className="font-bold text-slate-800 tracking-tight leading-none group-hover:text-primary-700 transition-colors">
               {stat.value}
             </span>
-            <span className="hidden md:inline-block text-slate-400 font-medium">
-              ·
-            </span>
-            <span className="text-slate-500 text-xs md:text-sm font-medium leading-none">
+            <span className="text-primary-300 font-bold">·</span>
+            <span className="text-slate-500 text-sm font-medium leading-none">
               {stat.label}
             </span>
           </div>
