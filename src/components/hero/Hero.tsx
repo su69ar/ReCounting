@@ -1,6 +1,7 @@
 "use client";
 
-import { HeroBackground } from "./HeroBackground";
+import { HeroBackground } from "./HeroBackgroundNew"; // New image bg
+// import { HeroBackground } from "./HeroBackground"; // Rollback: uncomment this
 import { HeroHeadline } from "./HeroHeadline";
 import { HeroStats } from "./HeroStats";
 import { HeroCTA } from "./HeroCTA";
@@ -31,21 +32,21 @@ export function Hero({
   return (
     <section className="relative min-h-[90vh] flex items-center overflow-hidden">
       <HeroBackground />
-      
+
       <div className="container-grid relative z-10 py-20 lg:py-28">
         <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <div className="space-y-8">
             <span className="badge-new">Available for new clients</span>
-            
+
             <HeroHeadline text={headline} subtitle={subtitle} />
-            
+
             <HeroCTA
               primaryHref={primaryCta.href}
               primaryLabel={primaryCta.label}
               secondaryHref={secondaryCta.href}
               secondaryLabel={secondaryCta.label}
             />
-            
+
             <HeroStats stats={stats} />
           </div>
 

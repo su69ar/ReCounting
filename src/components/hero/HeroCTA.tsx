@@ -57,7 +57,8 @@ export function HeroCTA({
         />
       </Link>
 
-      <a
+      {/* Secondary Button - Removed as per request */}
+      {/* <a
         href={secondaryHref}
         target="_blank"
         rel="noreferrer"
@@ -65,7 +66,7 @@ export function HeroCTA({
         {...secondaryMagnetic}
       >
         {secondaryLabel}
-      </a>
+      </a> */}
     </div>
   );
 }
