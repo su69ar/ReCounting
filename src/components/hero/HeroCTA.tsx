@@ -29,13 +29,13 @@ export function HeroCTA({
       return;
     }
 
-    // Much faster entrance - reduced delay from 1.5 to 0.5
+    // Much faster entrance - ensure visibility
     gsap.from(containerRef.current?.children || [], {
       y: 15,
-      autoAlpha: 0,
-      duration: 0.4,
+      opacity: 0,
+      duration: 0.5,
       stagger: 0.1,
-      delay: 0.5,
+      delay: 0.1,
       ease: "power3.out",
     });
   }, { scope: containerRef });
