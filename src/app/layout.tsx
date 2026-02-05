@@ -95,7 +95,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${plusJakarta.variable} ${sora.variable}`}>
+    <html lang="en" className={`${plusJakarta.variable} ${sora.variable}`} suppressHydrationWarning>
       <head>
         {/* Structured Data for SEO & AI Search */}
         <script
@@ -117,7 +117,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="antialiased">
+      <body className="antialiased" suppressHydrationWarning>
         <MotionProvider />
         <HoverInteractions />
         <ScrollProgress />
