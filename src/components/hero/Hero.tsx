@@ -1,7 +1,7 @@
 "use client";
 
-// import { HeroBackground } from "./HeroBackgroundNew"; // New image bg
-import { HeroBackground } from "./HeroBackground"; // Rollback: uncomment this
+import { HeroBackground } from "./HeroBackgroundNew"; // New image bg
+// import { HeroBackground } from "./HeroBackground"; // Rollback: uncomment this
 import { HeroHeadline } from "./HeroHeadline";
 import { HeroStats } from "./HeroStats";
 import { HeroCTA } from "./HeroCTA";
