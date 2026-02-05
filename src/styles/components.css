@@ -1,0 +1,202 @@
+/* Button Base */
+.btn,
+.btn-primary-new,
+.btn-secondary-new {
+  --btn-height: 48px;
+  --btn-padding-x: 1.5rem;
+  --btn-radius: var(--radius-xl);
+  --btn-font-size: var(--text-sm);
+  --btn-font-weight: var(--font-semibold);
+  --btn-transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  height: var(--btn-height);
+  padding: 0 var(--btn-padding-x);
+  border-radius: var(--btn-radius);
+  font-size: var(--btn-font-size);
+  font-weight: var(--btn-font-weight);
+  transition: var(--btn-transition);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none; /* Ensure links don't have underlines */
+}
+
+/* Primary Button - Gradient with glow */
+.btn-primary-new {
+  background: var(--gradient-primary);
+  color: white;
+  border: none;
+  box-shadow: var(--shadow-sm), var(--shadow-primary);
+}
+
+.btn-primary-new:hover {
+  box-shadow: var(--shadow-md), 0 6px 20px rgba(10, 124, 255, 0.35);
+  transform: translateY(-2px);
+}
+
+.btn-primary-new:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-xs), var(--shadow-primary);
+}
+
+/* Secondary Button - Gradient border */
+.btn-secondary-new {
+  background: var(--color-bg-primary);
+  color: var(--color-primary-600);
+  border: 2px solid transparent;
+  background-image: linear-gradient(white, white), var(--gradient-hero);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
+.btn-secondary-new:hover {
+  background-image: linear-gradient(var(--color-primary-50), var(--color-primary-50)), var(--gradient-hero);
+  transform: translateY(-2px);
+}
+
+/* Card Base */
+.card-new {
+  --card-padding: var(--space-6);
+  --card-radius: var(--radius-2xl);
+  --card-bg: var(--color-bg-primary);
+  --card-border: var(--border-subtle);
+  --card-shadow: var(--shadow-sm);
+  
+  padding: var(--card-padding);
+  border-radius: var(--card-radius);
+  background: var(--card-bg);
+  border: var(--card-border);
+  box-shadow: var(--card-shadow);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Card Hover - 3D Tilt Ready */
+.card-new-hover:hover {
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-primary-200);
+  transform: translateY(-4px);
+}
+
+/* Glass Card */
+.card-glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* Gradient Border Card */
+.card-gradient-border {
+  position: relative;
+  background: var(--card-bg);
+  border-radius: var(--card-radius);
+}
+
+.card-gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: var(--gradient-hero);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card-gradient-border:hover::before {
+  opacity: 1;
+}
+
+/* Badge Pill - Enhanced */
+.badge-new {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: var(--font-bold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  background: linear-gradient(135deg, rgba(20, 184, 166, 0.1), rgba(10, 124, 255, 0.1));
+  border: 1px solid rgba(20, 184, 166, 0.2);
+  color: var(--color-accent-600);
+}
+
+/* Badge with dot indicator */
+.badge-new::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-accent-500);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.2); }
+}
+
+/* Heading Styles */
+.heading-hero {
+  font-family: var(--font-display);
+  font-size: var(--text-5xl);
+  font-weight: var(--font-black);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+
+.heading-1 {
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  font-weight: var(--font-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+
+.heading-2 {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: var(--font-bold);
+  line-height: var(--leading-snug);
+}
+
+.heading-3 {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: var(--font-semibold);
+  line-height: var(--leading-snug);
+}
+
+/* Body Styles */
+.body-large {
+  font-size: var(--text-lg);
+  line-height: var(--leading-relaxed);
+}
+
+.body-base {
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+}
+
+.body-small {
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+}
+
+/* Label/Badge Styles */
+.label-caps {
+  font-size: var(--text-xs);
+  font-weight: var(--font-bold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+}
