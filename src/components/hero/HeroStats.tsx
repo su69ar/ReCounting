@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
-import { motionTokens, prefersReducedMotion } from "@/lib/motion";
+import { prefersReducedMotion } from "@/lib/motion";
 
 type Stat = {
   value: string;
@@ -17,7 +17,6 @@ type HeroStatsProps = {
 
 export function HeroStats({ stats }: HeroStatsProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const statRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useGSAP(() => {
     if (!containerRef.current || prefersReducedMotion()) {
@@ -25,72 +24,67 @@ export function HeroStats({ stats }: HeroStatsProps) {
       return;
     }
 
-    // Faster entrance - reduced delay from 1.2 to 0.4
-    const tl = gsap.timeline({
-      delay: 0.4,
-    });
+    const tl = gsap.timeline({ delay: 0.2 });
 
+    // Floating entrance
     tl.from(containerRef.current, {
-      y: 20,
+      y: 40,
       autoAlpha: 0,
-      duration: 0.5,
+      duration: 1,
       ease: "power3.out",
     });
 
-    statRefs.current.forEach((statEl, index) => {
-      if (!statEl) return;
+    // Stagger items inside
+    tl.from(".stat-pill", {
+      scale: 0.8,
+      autoAlpha: 0,
+      duration: 0.6,
+      stagger: 0.1,
+      ease: "back.out(1.5)",
+    }, "<0.2");
 
-      const valueEl = statEl.querySelector(".stat-value");
-      const labelEl = statEl.querySelector(".stat-label");
-      const stat = stats[index];
-
-      // Counter animation - faster
-      if (stat.numericValue !== undefined && valueEl) {
-        const counter = { value: 0 };
-
-        tl.to(counter, {
-          value: stat.numericValue,
-          duration: 0.8,
-          ease: "power2.out",
-          onUpdate: () => {
-            valueEl.textContent = Math.round(counter.value) + (stat.suffix || "");
-          },
-        }, `-=${index === 0 ? 0 : 0.6}`);
-      }
-
-      tl.from(labelEl, {
-        autoAlpha: 0,
-        y: 5,
-        duration: 0.3,
-      }, "<0.1");
+    // Continuous floating animation
+    gsap.to(containerRef.current, {
+      y: 10,
+      duration: 3,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
     });
+
   }, { scope: containerRef });
 
   return (
     <div
       ref={containerRef}
-      className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-0
-                 px-6 py-5 lg:px-8 rounded-2xl lg:rounded-full
-                 border border-neutral-200/60 bg-white/80 backdrop-blur-xl 
-                 shadow-[0_8px_30px_rgba(0,0,0,0.08)]"
+      className="inline-flex md:mx-auto max-w-[90vw] overflow-x-auto no-scrollbar
+                 items-center gap-3 p-3 rounded-[2rem]
+                 bg-white/40 backdrop-blur-2xl border border-white/60
+                 shadow-[0_20px_40px_rgba(0,0,0,0.05),inset_0_0_0_1px_rgba(255,255,255,0.5)]"
     >
       {stats.map((stat, index) => (
         <div
           key={stat.label}
-          ref={(el) => { statRefs.current[index] = el; }}
-          className={`flex flex-col lg:flex-row items-center lg:items-center gap-1 lg:gap-3 
-                      text-center lg:text-left px-2 lg:px-6
-                      ${index !== stats.length - 1 ? 'lg:border-r lg:border-neutral-200/60' : ''}`}
+          className="stat-pill shrink-0 group flex items-center gap-3 px-5 py-3 
+                     bg-white/60 rounded-[1.5rem] border border-white/40
+                     shadow-sm hover:shadow-md hover:scale-105 hover:bg-white/80
+                     transition-all duration-300 cursor-default"
         >
-          <p className="stat-value text-2xl lg:text-3xl font-bold text-[color:var(--color-slate-dark)]">
-            {stat.value}
-          </p>
-          <p className="stat-label text-[10px] lg:text-xs font-semibold uppercase tracking-wider text-neutral-400 lg:max-w-[80px] leading-tight">
-            {stat.label}
-          </p>
+          <div className="flex flex-col text-left">
+            <span className="text-lg font-bold text-neutral-800 leading-tight group-hover:text-primary-600 transition-colors">
+              {stat.value}
+            </span>
+            <span className="text-[10px] font-semibold uppercase tracking-wider text-neutral-500 leading-none mt-1">
+              {stat.label}
+            </span>
+          </div>
+
+          {/* Decorative dot */}
+          {index < stats.length - 1 && (
+            <div className="h-1.5 w-1.5 rounded-full bg-primary-400/40 group-hover:bg-primary-500 transition-colors" />
+          )}
         </div>
       ))}
     </div>
   );
 }
-
