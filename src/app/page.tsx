@@ -5,6 +5,7 @@ import { StaggerGroup } from "@/components/animations/StaggerGroup";
 import { SplitTextHeading } from "@/components/animations/SplitTextHeading";
 import { MaskReveal } from "@/components/animations/MaskReveal";
 import { StoryScroll } from "@/components/animations/StoryScroll";
+import { FAQ } from "@/components/sections/FAQ";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { primaryCta, secondaryCta, siteConfig } from "@/lib/site";
 import Link from "next/link";
@@ -191,9 +192,8 @@ export default function Home() {
             {services.map((service) => (
               <div
                 key={service.title}
-                className={`card card-hover stagger-item h-full p-6 ${
-                  service.disabled ? "opacity-60" : ""
-                }`}
+                className={`card card-hover stagger-item h-full p-6 ${service.disabled ? "opacity-60" : ""
+                  }`}
               >
                 {service.badge && (
                   <span className="mb-3 inline-flex rounded-full bg-[color:var(--color-primary)]/10 px-3 py-1 text-xs font-semibold text-[color:var(--color-primary)]">
@@ -396,19 +396,9 @@ export default function Home() {
               </p>
             </div>
           </Reveal>
-          <StaggerGroup className="mt-8 grid gap-4">
-            {faqs.map((faq) => (
-              <details key={faq.question} className="faq-item card stagger-item p-6">
-                <summary className="flex items-center justify-between text-sm font-semibold">
-                  {faq.question}
-                  <span className="text-[color:var(--color-slate-light)]">+</span>
-                </summary>
-                <p className="mt-3 text-sm text-[color:var(--color-slate-light)]">
-                  {faq.answer}
-                </p>
-              </details>
-            ))}
-          </StaggerGroup>
+          <div className="mt-8">
+            <FAQ items={faqs} />
+          </div>
         </div>
       </section>
 

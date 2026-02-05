@@ -66,11 +66,10 @@ export function Header() {
   return (
     <header
       ref={headerRef}
-      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
-        isScrolled
+      className={`sticky top-0 z-50 w-full transition-all duration-300 ${isScrolled
           ? "bg-white/90 backdrop-blur-lg border-b border-neutral-200 shadow-sm"
           : "bg-transparent"
-      }`}
+        }`}
     >
       <div className="container-grid">
         <div className="flex h-20 items-center justify-between gap-6">
@@ -126,7 +125,7 @@ export function Header() {
                          hover:text-primary-600 transition-colors"
               >
                 {item.label}
-                <span 
+                <span
                   className="nav-underline absolute -bottom-1 left-0 right-0 h-0.5 
                            bg-primary-500 origin-left scale-x-0"
                 />
@@ -137,7 +136,7 @@ export function Header() {
           <div className="hidden md:block">
             <Link
               href="/free-consultation"
-              className="btn-primary-new"
+              className="btn-primary"
               {...ctaMagnetic}
             >
               Get Free Consultation
@@ -152,9 +151,8 @@ export function Header() {
           >
             <svg
               viewBox="0 0 24 24"
-              className={`h-5 w-5 transition-transform duration-300 ${
-                isMobileMenuOpen ? "rotate-45" : ""
-              }`}
+              className={`h-5 w-5 transition-transform duration-300 ${isMobileMenuOpen ? "rotate-45" : ""
+                }`}
               fill="none"
               stroke="currentColor"
               strokeWidth="2"
@@ -187,7 +185,7 @@ export function Header() {
               ))}
               <Link
                 href="/free-consultation"
-                className="mobile-nav-item btn-primary-new w-full mt-2"
+                className="mobile-nav-item btn-primary w-full mt-2"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Get Free Consultation

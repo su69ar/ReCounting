@@ -29,13 +29,14 @@ export function HeroCTA({
       return;
     }
 
+    // Much faster entrance - reduced delay from 1.5 to 0.5
     gsap.from(containerRef.current?.children || [], {
-      y: 20,
+      y: 15,
       autoAlpha: 0,
-      duration: 0.6,
-      stagger: 0.15,
-      delay: 1.5,
-      ease: "back.out(1.4)",
+      duration: 0.4,
+      stagger: 0.1,
+      delay: 0.5,
+      ease: "power3.out",
     });
   }, { scope: containerRef });
 
@@ -43,24 +44,24 @@ export function HeroCTA({
     <div ref={containerRef} className="flex flex-wrap gap-4">
       <Link
         href={primaryHref}
-        className="btn-primary-new group relative overflow-hidden"
+        className="btn-primary group relative overflow-hidden"
         {...primaryMagnetic}
       >
         <span className="relative z-10">{primaryLabel}</span>
-        
-        <span 
+
+        <span
           className="absolute inset-0 -translate-x-full bg-gradient-to-r 
                      from-transparent via-white/20 to-transparent 
                      group-hover:translate-x-full transition-transform 
-                     duration-700 ease-out"
+                     duration-500 ease-out"
         />
       </Link>
-      
+
       <a
         href={secondaryHref}
         target="_blank"
         rel="noreferrer"
-        className="btn-secondary-new"
+        className="btn-secondary"
         {...secondaryMagnetic}
       >
         {secondaryLabel}
@@ -68,3 +69,4 @@ export function HeroCTA({
     </div>
   );
 }
+

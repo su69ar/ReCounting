@@ -132,7 +132,7 @@ export function HeroFloatingCard({
 
       <Link
         href="/services"
-        className="relative z-10 block w-full text-center btn-secondary-new"
+        className="relative z-10 block w-full text-center btn-secondary"
       >
         Explore Services
       </Link>

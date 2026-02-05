@@ -1,6 +1,6 @@
 export const siteConfig = {
   name: "ReCounting",
-  url: "https://recounting.id",
+  url: "https://recounting.my.id",
   description:
     "Stress-free accounting, bookkeeping, and tax compliance services for SMEs and expats in Bali, Indonesia.",
   phone: "0811-3940-4640",

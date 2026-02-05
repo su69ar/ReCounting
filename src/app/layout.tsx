@@ -5,6 +5,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { StickyWhatsApp } from "@/components/layout/StickyWhatsApp";
 import { siteConfig } from "@/lib/site";
+import { organizationSchema, localBusinessSchema, websiteSchema } from "@/lib/schema";
 import { MotionProvider } from "@/components/animations/MotionProvider";
 import { HoverInteractions } from "@/components/animations/HoverInteractions";
 import { ScrollProgress } from "@/components/animations/ScrollProgress";
@@ -35,7 +36,18 @@ export const metadata: Metadata = {
     "tax compliance Indonesia",
     "payroll services Bali",
     "expat accountant Bali",
+    "jasa akuntan Bali",
+    "pembukuan usaha Bali",
+    "konsultan pajak Bali",
   ],
+  authors: [{ name: "ReCounting", url: siteConfig.url }],
+  creator: "ReCounting",
+  publisher: "ReCounting",
+  formatDetection: {
+    email: true,
+    address: true,
+    telephone: true,
+  },
   openGraph: {
     type: "website",
     locale: "en_ID",
@@ -61,6 +73,20 @@ export const metadata: Metadata = {
   alternates: {
     canonical: siteConfig.url,
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  verification: {
+    google: "your-google-verification-code", // TODO: Add actual verification code
+  },
 };
 
 export default function RootLayout({
@@ -70,6 +96,27 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${plusJakarta.variable} ${sora.variable}`}>
+      <head>
+        {/* Structured Data for SEO & AI Search */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationSchema),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(localBusinessSchema),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(websiteSchema),
+          }}
+        />
+      </head>
       <body className="antialiased">
         <MotionProvider />
         <HoverInteractions />
@@ -82,3 +129,4 @@ export default function RootLayout({
     </html>
   );
 }
+
