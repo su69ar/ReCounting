@@ -7,6 +7,7 @@ import { MaskReveal } from "@/components/animations/MaskReveal";
 import { StoryScroll } from "@/components/animations/StoryScroll";
 import { FAQ } from "@/components/sections/FAQ";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { TrustStrip } from "@/components/TrustStrip";
 import { primaryCta, secondaryCta, siteConfig } from "@/lib/site";
 import Link from "next/link";
 import {
@@ -95,7 +96,7 @@ export default function Home() {
         cardContent={{
           tagline: "Built for SMEs & expats",
           title: "Your finance partner on the ground in Bali",
-          description: "Local compliance expertise, transparent pricing, and a team that responds in under 2 hours.",
+          description: "Local compliance expertise, transparent pricing, and a team that responds in less than 2 hours.",
           features: [
             "Monthly bookkeeping & reconciliation",
             "Tax filing for PPh, PPN, SPT",
@@ -104,6 +105,8 @@ export default function Home() {
           ],
         }}
       />
+
+      <TrustStrip />
 
       <section className="border-y border-[color:var(--color-border)] bg-white">
         <div className="container-grid section-space">
@@ -170,7 +173,7 @@ export default function Home() {
       <section id="services" className="section-space">
         <div className="container-grid">
           <Reveal>
-            <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
               <div className="max-w-2xl">
                 <SplitTextHeading
                   text="Services built for Bali businesses"
@@ -183,9 +186,14 @@ export default function Home() {
                   team that works at your pace.
                 </p>
               </div>
-              <Link href="/services" className="btn-secondary">
-                View all services
-              </Link>
+              <div className="flex-shrink-0">
+                <Link
+                  href="/services"
+                  className="btn-secondary inline-flex items-center justify-center whitespace-nowrap"
+                >
+                  View all services
+                </Link>
+              </div>
             </div>
           </Reveal>
           <StaggerGroup className="mt-10 grid gap-6 md:grid-cols-2">
@@ -402,34 +410,47 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section-space">
+      <section className="section-space relative">
         <div className="container-grid">
-          <MaskReveal className="rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-primary)]/10 p-8">
+          <MaskReveal className="relative rounded-3xl overflow-hidden">
+            {/* Background gradient - full bleed dalam card */}
+            <div className="absolute inset-0 bg-gradient-to-br from-[color:var(--color-primary)]/5 via-[color:var(--color-accent)]/5 to-[color:var(--color-secondary)]/5" />
+            
+            {/* Animated background orbs - dalam card */}
+            <div className="absolute inset-0 overflow-hidden">
+              <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-[color:var(--color-primary)]/20 rounded-full blur-3xl animate-pulse-slow" />
+              <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-[color:var(--color-accent)]/20 rounded-full blur-3xl animate-pulse-slow-delayed" />
+            </div>
+            
             <Reveal>
-              <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
-                <div>
-                  <SplitTextHeading
-                    text="Ready for stress-free accounting?"
-                    as="h2"
-                    className="text-3xl font-semibold text-[color:var(--color-slate-dark)]"
-                  />
-                  <p className="mt-3 text-sm text-[color:var(--color-slate-light)]">
-                    Book a free consultation and get a tailored compliance plan
-                    for your Bali business within 24 hours.
-                  </p>
-                </div>
-                <div className="flex flex-wrap gap-3">
-                  <Link href={primaryCta.href} className="btn-primary">
-                    {primaryCta.label}
-                  </Link>
-                  <a
-                    href={secondaryCta.href}
-                    className="btn-secondary"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {secondaryCta.label}
-                  </a>
+              <div className="relative card-glass border border-white/50 rounded-3xl p-8 lg:p-10 backdrop-blur-xl">
+                <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+                  <div>
+                    <p className="badge-gradient inline-flex mb-3">Get started</p>
+                    <SplitTextHeading
+                      text="Ready for stress-free accounting?"
+                      as="h2"
+                      className="text-3xl font-semibold text-[color:var(--color-slate-dark)]"
+                    />
+                    <p className="mt-3 text-sm text-[color:var(--color-slate-light)]">
+                      Book a free consultation and get a tailored compliance plan
+                      for your Bali business within 24 hours.
+                    </p>
+                    <div className="mt-4 glow-bar glow-bar-md" />
+                  </div>
+                  <div className="flex flex-wrap gap-3">
+                    <Link href={primaryCta.href} className="btn-primary shimmer">
+                      {primaryCta.label}
+                    </Link>
+                    <a
+                      href={secondaryCta.href}
+                      className="btn-secondary"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {secondaryCta.label}
+                    </a>
+                  </div>
                 </div>
               </div>
             </Reveal>

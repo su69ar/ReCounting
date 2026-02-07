@@ -27,20 +27,33 @@ export function CTASection({
   const secondaryMagnetic = useMagneticButton<HTMLAnchorElement>({ strength: 0.15 });
 
   useGSAP(() => {
-    if (!sectionRef.current || prefersReducedMotion()) return;
+    if (!sectionRef.current) return;
+    
+    const prefersReduced = prefersReducedMotion();
+    const buttons = sectionRef.current.querySelectorAll(".cta-button");
+    
+    // Always ensure visibility first
+    gsap.set(buttons, { opacity: 1, y: 0, visibility: "visible" });
+    
+    if (prefersReduced || buttons.length === 0) return;
 
-    gsap.from(".cta-button", {
-      y: motionTokens.distance.sm,
-      autoAlpha: 0,
-      duration: motionTokens.duration.medium,
-      stagger: 0.15,
-      ease: "back.out(1.5)",
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top 80%",
-        toggleActions: "play none none reverse",
-      },
-    });
+    gsap.fromTo(
+      buttons,
+      { y: motionTokens.distance.sm, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: motionTokens.duration.medium,
+        stagger: 0.12,
+        ease: "back.out(1.5)",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        },
+        overwrite: "auto",
+      }
+    );
   }, { scope: sectionRef });
 
   const bgClasses = {

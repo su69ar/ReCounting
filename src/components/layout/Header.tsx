@@ -4,12 +4,61 @@ import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap";
 import { useMagneticButton } from "@/hooks/useMagneticButton";
+import { MegaMenu } from "./MegaMenu";
 
 const navItems = [
-  { label: "Services", href: "/services" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
   { label: "Blog", href: "/blog" },
+];
+
+const mobileServices = [
+  {
+    title: "Bookkeeping",
+    href: "/services/bookkeeping",
+    description: "Monthly accounting & reconciliations",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+        <rect x="3" y="3" width="18" height="18" rx="2" strokeLinecap="round"/>
+        <path d="M7 7h10M7 12h10M7 17h6" strokeLinecap="round"/>
+      </svg>
+    ),
+  },
+  {
+    title: "Tax Compliance",
+    href: "/services/tax-compliance",
+    description: "PPh, PPN & SPT filings",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" strokeLinecap="round"/>
+        <path d="m9 12 2 2 4-4" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    ),
+  },
+  {
+    title: "Payroll",
+    href: "/services/payroll",
+    description: "Staff salaries & BPJS",
+    badge: "Soon",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" strokeLinecap="round"/>
+        <circle cx="9" cy="7" r="4"/>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87" strokeLinecap="round"/>
+      </svg>
+    ),
+  },
+  {
+    title: "Business Setup",
+    href: "/services/initial-setup",
+    description: "Company registration",
+    badge: "Soon",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+        <path d="M3 21h18M5 21V7l8-4 8 4v14M8 21V11h8v10" strokeLinecap="round"/>
+      </svg>
+    ),
+  },
 ];
 
 export function Header() {
@@ -66,7 +115,7 @@ export function Header() {
   return (
     <header
       ref={headerRef}
-      className={`sticky top-0 z-50 w-full transition-all duration-300 ${isScrolled
+      className={`sticky top-0 z-[100] w-full transition-all duration-300 ${isScrolled
           ? "bg-white/90 backdrop-blur-lg border-b border-neutral-200 shadow-sm"
           : "bg-transparent"
         }`}
@@ -117,6 +166,10 @@ export function Header() {
           </Link>
 
           <nav className="hidden md:flex items-center gap-8">
+            {/* Mega Menu for Services */}
+            <MegaMenu />
+            
+            {/* Regular nav items */}
             {navItems.map((item) => (
               <Link
                 key={item.href}
@@ -169,31 +222,119 @@ export function Header() {
 
       {isMobileMenuOpen && (
         <div className="md:hidden absolute top-full left-0 right-0 bg-white 
-                      border-b border-neutral-200 shadow-lg">
+                      border-b border-neutral-200 shadow-xl max-h-[calc(100vh-80px)] overflow-y-auto">
           <div className="container-grid py-4">
-            <nav className="flex flex-col gap-3">
+            <nav className="flex flex-col">
+              {/* Expandable Services Section */}
+              <MobileServicesMenu onClose={() => setIsMobileMenuOpen(false)} />
+              
+              {/* Divider */}
+              <div className="h-px bg-neutral-200 my-3" />
+              
+              {/* Regular nav items */}
               {navItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
                   className="mobile-nav-item text-sm font-medium text-neutral-700 
-                           py-2 hover:text-primary-600"
+                           py-3 px-2 rounded-lg hover:bg-neutral-50 hover:text-primary-600 transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {item.label}
                 </Link>
               ))}
-              <Link
-                href="/free-consultation"
-                className="mobile-nav-item btn-primary w-full mt-2"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Get Free Consultation
-              </Link>
+              
+              {/* Simple CTA - Same as navbar */}
+              <div className="mt-4">
+                <Link
+                  href="/free-consultation"
+                  className="btn-primary w-full flex items-center justify-center"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Get Free Consultation
+                </Link>
+              </div>
             </nav>
           </div>
         </div>
       )}
     </header>
+  );
+}
+
+// Mobile Services Expandable Menu Component
+function MobileServicesMenu({ onClose }: { onClose: () => void }) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  return (
+    <div className="mobile-nav-item">
+      <button
+        onClick={() => setIsExpanded(!isExpanded)}
+        className="w-full flex items-center justify-between py-3 px-2 rounded-lg hover:bg-neutral-50 transition-colors"
+      >
+        <span className="text-sm font-medium text-neutral-700">Services</span>
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          className={`w-4 h-4 text-neutral-500 transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`}
+        >
+          <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      </button>
+
+      {/* Expandable Services List */}
+      <div className={`overflow-hidden transition-all duration-300 ${isExpanded ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"}`}>
+        <div className="pt-2 pb-1 pl-2 space-y-1">
+          {mobileServices.map((service) => (
+            <Link
+              key={service.href}
+              href={service.href}
+              onClick={onClose}
+              className="flex items-center gap-3 py-3 px-3 rounded-xl hover:bg-neutral-50 transition-colors group"
+            >
+              <div className="w-10 h-10 rounded-lg bg-primary-50 text-primary-500 flex items-center justify-center group-hover:bg-primary-100 transition-colors">
+                {service.icon}
+              </div>
+              <div className="flex-1">
+                <div className="flex items-center gap-2">
+                  <span className="font-medium text-sm text-neutral-800 group-hover:text-primary-600 transition-colors">
+                    {service.title}
+                  </span>
+                  {service.badge && (
+                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-neutral-100 text-neutral-500 font-medium">
+                      {service.badge}
+                    </span>
+                  )}
+                </div>
+                <p className="text-xs text-neutral-500 mt-0.5">{service.description}</p>
+              </div>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                className="w-4 h-4 text-neutral-300 group-hover:text-primary-500 group-hover:translate-x-1 transition-all"
+              >
+                <path d="M9 18l6-6-6-6" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </Link>
+          ))}
+          
+          {/* View All Services Link */}
+          <Link
+            href="/services"
+            onClick={onClose}
+            className="flex items-center justify-center gap-2 py-3 px-3 mt-2 rounded-xl bg-neutral-50 hover:bg-neutral-100 transition-colors"
+          >
+            <span className="text-sm font-medium text-primary-600">View All Services</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4 text-primary-600">
+              <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </Link>
+        </div>
+      </div>
+    </div>
   );
 }

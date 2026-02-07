@@ -100,18 +100,26 @@ export default function BookkeepingPage() {
                   </a>
                 </div>
               </div>
-              <StaggerGroup className="card p-6">
-                <h2 className="text-lg font-semibold">What&apos;s included</h2>
-                <ul className="mt-4 space-y-3 text-sm text-[color:var(--color-slate-light)]">
+              <StaggerGroup className="card-glow p-6 relative overflow-hidden">
+                {/* Glow orb background */}
+                <div className="absolute -top-20 -right-20 w-40 h-40 bg-[color:var(--color-secondary)]/20 rounded-full blur-3xl pointer-events-none" />
+                
+                <h2 className="text-lg font-semibold relative z-10">What&apos;s included</h2>
+                <ul className="mt-4 space-y-3 text-sm text-[color:var(--color-slate-light)] relative z-10">
                   {[
-                    "Monthly transaction entry & categorization",
-                    "Bank & cash reconciliation",
-                    "Receipt and invoice organization",
-                    "Monthly profit & loss and balance sheet",
-                    "Compliance-ready reports for tax filing",
+                    { text: "Monthly transaction entry & categorization", color: "primary" },
+                    { text: "Bank & cash reconciliation", color: "accent" },
+                    { text: "Receipt and invoice organization", color: "secondary" },
+                    { text: "Monthly profit & loss and balance sheet", color: "primary" },
+                    { text: "Compliance-ready reports for tax filing", color: "accent" },
                   ].map((item) => (
-                    <li key={item} className="stagger-item">
-                      {item}
+                    <li key={item.text} className="stagger-item flex items-center gap-3 group">
+                      <span className={`check-glow bg-${item.color}-500/10 text-${item.color}-500`}>
+                        <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                          <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                      </span>
+                      {item.text}
                     </li>
                   ))}
                 </ul>
@@ -121,29 +129,74 @@ export default function BookkeepingPage() {
         </div>
       </section>
 
-      <section className="section-space bg-white">
-        <div className="container-grid">
+      <section className="section-space bg-white relative overflow-hidden">
+        {/* Background glow orbs */}
+        <div className="absolute top-1/2 left-0 w-64 h-64 bg-[color:var(--color-primary)]/5 rounded-full blur-3xl -translate-y-1/2" />
+        <div className="absolute top-1/2 right-0 w-64 h-64 bg-[color:var(--color-accent)]/5 rounded-full blur-3xl -translate-y-1/2" />
+        
+        <div className="container-grid relative z-10">
           <Reveal>
+            <div className="text-center mb-8">
+              <p className="badge-gradient inline-flex mb-3">How it works</p>
+              <h2 className="section-title">Your bookkeeping journey</h2>
+            </div>
             <StaggerGroup className="grid gap-8 md:grid-cols-3">
               {[
                 {
                   title: "Setup & onboarding",
                   desc: "We collect your existing records, bank statements, and workflows.",
+                  color: "primary",
+                  icon: "setup",
+                  step: "01",
                 },
                 {
                   title: "Monthly delivery",
                   desc: "Receive clear reports and compliance updates every month.",
+                  color: "accent",
+                  icon: "calendar",
+                  step: "02",
                 },
                 {
                   title: "Ongoing support",
                   desc: "Ask questions anytime via WhatsApp or email.",
+                  color: "secondary",
+                  icon: "support",
+                  step: "03",
                 },
               ].map((item) => (
-                <div key={item.title} className="card stagger-item p-6">
-                  <h3 className="text-base font-semibold">{item.title}</h3>
-                  <p className="mt-2 text-sm text-[color:var(--color-slate-light)]">
+                <div key={item.title} className={`group card-glow card-glow-${item.color} stagger-item p-6 relative overflow-hidden`}>
+                  {/* Step number background */}
+                  <span className={`step-number text-${item.color}-500`}>{item.step}</span>
+                  
+                  {/* Icon */}
+                  <div className={`icon-glow bg-${item.color}-500/10 text-${item.color}-500 mb-4 relative z-10`}>
+                    {item.icon === "setup" && (
+                      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                      </svg>
+                    )}
+                    {item.icon === "calendar" && (
+                      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                        <line x1="16" y1="2" x2="16" y2="6"/>
+                        <line x1="8" y1="2" x2="8" y2="6"/>
+                        <line x1="3" y1="10" x2="21" y2="10"/>
+                      </svg>
+                    )}
+                    {item.icon === "support" && (
+                      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7A8.38 8.38 0 0 1 4 11.5a8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                      </svg>
+                    )}
+                  </div>
+                  
+                  <h3 className="text-base font-semibold relative z-10">{item.title}</h3>
+                  <p className="mt-2 text-sm text-[color:var(--color-slate-light)] relative z-10">
                     {item.desc}
                   </p>
+                  
+                  {/* Glow bar */}
+                  <div className={`mt-4 h-[2px] w-0 rounded-full bg-gradient-to-r from-${item.color}-500 to-${item.color}-400 group-hover:w-16 transition-all duration-500`} />
                 </div>
               ))}
             </StaggerGroup>
@@ -151,30 +204,42 @@ export default function BookkeepingPage() {
         </div>
       </section>
 
-      <section className="section-space">
-        <div className="container-grid">
+      <section className="section-space relative overflow-hidden">
+        {/* Background glow */}
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-[color:var(--color-primary)]/5 rounded-full blur-3xl" />
+        
+        <div className="container-grid relative z-10">
           <Reveal>
-            <div className="card card-hover grid gap-8 bg-white p-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-              <div>
+            <div className="card-glow card-glow-primary grid gap-8 p-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center relative overflow-hidden">
+              {/* Decorative orb */}
+              <div className="absolute -top-20 -right-20 w-40 h-40 bg-[color:var(--color-accent)]/10 rounded-full blur-3xl" />
+              
+              <div className="relative z-10">
+                <p className="badge-gradient inline-flex mb-3">Target clients</p>
                 <h2 className="text-2xl font-semibold">Who this is for</h2>
                 <p className="mt-3 text-sm text-[color:var(--color-slate-light)]">
                   Perfect for Bali business owners who want bookkeeping clarity,
                   reliable tax-ready reports, and a responsive accounting team.
                 </p>
+                <div className="mt-4 glow-bar glow-bar-md" />
               </div>
-              <StaggerGroup className="grid gap-3">
+              <StaggerGroup className="grid gap-3 relative z-10">
                 {[
-                  "SMEs needing monthly bookkeeping",
-                  "Expat founders who want English-first support",
-                  "Growing teams preparing for tax season",
+                  { text: "SMEs needing monthly bookkeeping", color: "primary" },
+                  { text: "Expat founders who want English-first support", color: "accent" },
+                  { text: "Growing teams preparing for tax season", color: "secondary" },
                 ].map((item) => (
                   <div
-                    key={item}
-                    className="card stagger-item flex items-start gap-3 p-4"
+                    key={item.text}
+                    className={`group card-glow card-glow-${item.color} stagger-item flex items-center gap-4 p-4`}
                   >
-                    <span className="mt-1 h-2.5 w-2.5 rounded-full bg-[color:var(--color-primary)]" />
+                    <span className={`check-glow bg-${item.color}-500/10 text-${item.color}-500`}>
+                      <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                        <polyline points="20 6 9 17 4 12"/>
+                      </svg>
+                    </span>
                     <p className="text-sm text-[color:var(--color-slate-light)]">
-                      {item}
+                      {item.text}
                     </p>
                   </div>
                 ))}
@@ -184,32 +249,50 @@ export default function BookkeepingPage() {
         </div>
       </section>
 
-      <section className="section-space">
-        <div className="container-grid">
-          <MaskReveal className="rounded-3xl border border-[color:var(--color-border)] bg-white p-8">
+      <section className="section-space relative overflow-hidden">
+        <div className="container-grid relative z-10">
+          <MaskReveal className="relative rounded-3xl overflow-hidden">
+            {/* Background glow orbs */}
+            <div className="absolute top-0 left-0 w-64 h-64 bg-[color:var(--color-primary)]/10 rounded-full blur-3xl" />
+            <div className="absolute bottom-0 right-0 w-64 h-64 bg-[color:var(--color-accent)]/10 rounded-full blur-3xl" />
+            
             <Reveal>
-              <div>
-                <SplitTextHeading
-                  text="Pricing snapshot"
-                  as="h2"
-                  className="text-2xl font-semibold"
-                />
-                <p className="mt-3 text-sm text-[color:var(--color-slate-light)]">
-                  Transparent monthly pricing based on transaction volume and
-                  reporting complexity. Request a tailored quote for your business.
-                </p>
-                <StaggerGroup className="mt-6 grid gap-4 md:grid-cols-2">
+              <div className="relative card-glass border border-white/50 rounded-3xl p-8 backdrop-blur-xl">
+                <div className="mb-6">
+                  <p className="badge-gradient inline-flex mb-3">Pricing</p>
+                  <SplitTextHeading
+                    text="Pricing snapshot"
+                    as="h2"
+                    className="text-2xl font-semibold"
+                  />
+                  <p className="mt-3 text-sm text-[color:var(--color-slate-light)]">
+                    Transparent monthly pricing based on transaction volume and
+                    reporting complexity. Request a tailored quote for your business.
+                  </p>
+                </div>
+                <StaggerGroup className="grid gap-4 md:grid-cols-2">
                   {[
-                    "Starter: Monthly bookkeeping essentials",
-                    "Growth: Expanded transaction volume",
-                    "Enterprise: Custom reporting & multi-entity",
-                    "Add-ons: Inventory tracking, payroll",
+                    { text: "Starter: Monthly bookkeeping essentials", color: "primary" },
+                    { text: "Growth: Expanded transaction volume", color: "accent" },
+                    { text: "Enterprise: Custom reporting & multi-entity", color: "secondary" },
+                    { text: "Add-ons: Inventory tracking, payroll", color: "primary" },
                   ].map((item) => (
                     <div
-                      key={item}
-                      className="stagger-item rounded-xl border border-[color:var(--color-border)] bg-white p-4 text-sm"
+                      key={item.text}
+                      className={`group stagger-item relative`}
                     >
-                      {item}
+                      {/* Animated gradient border */}
+                      <div className={`absolute -inset-[1px] rounded-xl bg-gradient-to-r 
+                          from-${item.color}-500/0 via-${item.color}-500/40 to-${item.color}-500/0 
+                          opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-[1px]`} />
+                      <div className={`relative card-glow card-glow-${item.color} p-4 h-full`}>
+                        <div className="flex items-center gap-3">
+                          <span className={`w-2 h-2 rounded-full bg-${item.color}-500`} />
+                          <span className="text-sm">{item.text}</span>
+                        </div>
+                        {/* Glow bar */}
+                        <div className={`mt-3 h-[2px] w-0 rounded-full bg-gradient-to-r from-${item.color}-500 to-${item.color}-400 group-hover:w-12 transition-all duration-500`} />
+                      </div>
                     </div>
                   ))}
                 </StaggerGroup>
@@ -219,61 +302,95 @@ export default function BookkeepingPage() {
         </div>
       </section>
 
-      <section className="section-space bg-white">
-        <div className="container-grid">
+      <section className="section-space bg-white relative overflow-hidden">
+        {/* Continuous subtle gradient background untuk FAQ + CTA */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white via-[color:var(--color-neutral-50)] to-[color:var(--color-neutral-100)]" />
+        <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-[color:var(--color-primary)]/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-[color:var(--color-accent)]/5 rounded-full blur-3xl" />
+        
+        <div className="container-grid relative z-10">
+          {/* FAQ Section */}
           <Reveal>
-            <h2 className="section-title">Bookkeeping FAQs</h2>
+            <div className="text-center mb-8">
+              <p className="badge-gradient inline-flex mb-3">FAQ</p>
+              <h2 className="section-title">Bookkeeping FAQs</h2>
+            </div>
           </Reveal>
-          <div className="mt-6 grid gap-4">
-            {faqItems.map((item) => (
-              <Reveal key={item.question}>
-                <details className="faq-item card p-6">
-                  <summary className="flex items-center justify-between text-sm font-semibold">
-                    {item.question}
-                    <span className="text-[color:var(--color-slate-light)]">+</span>
-                  </summary>
-                  <p className="mt-3 text-sm text-[color:var(--color-slate-light)]">
-                    {item.answer}
-                  </p>
-                </details>
-              </Reveal>
-            ))}
+          <div className="mt-6 grid gap-4 max-w-3xl mx-auto">
+            {faqItems.map((item, index) => {
+              const colors = ['primary', 'accent', 'secondary'];
+              const color = colors[index % colors.length];
+              return (
+                <Reveal key={item.question}>
+                  <details className="faq-glow group bg-white/80 backdrop-blur-sm">
+                    {/* Background glow when open */}
+                    <div className="faq-glow-bg" />
+                    <summary className="relative flex items-center justify-between p-6 cursor-pointer list-none">
+                      <span className="text-sm font-semibold pr-4">{item.question}</span>
+                      <span className={`w-8 h-8 rounded-full bg-${color}-500/10 flex items-center justify-center text-${color}-500 transition-all duration-300 flex-shrink-0`}>
+                        <svg className="w-4 h-4 transition-transform duration-300 group-open:rotate-45" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <line x1="12" y1="5" x2="12" y2="19"/>
+                          <line x1="5" y1="12" x2="19" y2="12"/>
+                        </svg>
+                      </span>
+                    </summary>
+                    <div className="relative px-6 pb-6">
+                      <p className="text-sm text-[color:var(--color-slate-light)]">
+                        {item.answer}
+                      </p>
+                      {/* Glow bar */}
+                      <div className={`mt-4 h-[2px] w-16 rounded-full bg-gradient-to-r from-${color}-500 to-${color}-400`} />
+                    </div>
+                  </details>
+                </Reveal>
+              );
+            })}
           </div>
-        </div>
-      </section>
 
-      <section className="section-space">
-        <div className="container-grid">
-          <MaskReveal className="rounded-3xl border border-[color:var(--color-border)] bg-[color:var(--color-primary)]/10 p-8">
-            <Reveal>
-              <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
-                <div>
-                  <SplitTextHeading
-                    text="Get clean books within 30 days"
-                    as="h2"
-                    className="text-2xl font-semibold"
-                  />
-                  <p className="mt-3 text-sm text-[color:var(--color-slate-light)]">
-                    Start with a free consultation and we will map a monthly
-                    bookkeeping plan tailored to your business size.
-                  </p>
-                </div>
-                <div className="flex flex-wrap gap-3">
-                  <Link href={primaryCta.href} className="btn-primary">
-                    {primaryCta.label}
-                  </Link>
-                  <a
-                    href={secondaryCta.href}
-                    className="btn-secondary"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {secondaryCta.label}
-                  </a>
+          {/* CTA Section - menyatu dengan FAQ dalam satu section */}
+          <Reveal>
+            <div className="mt-12 relative rounded-3xl overflow-hidden">
+              {/* Background gradient - continuous dengan FAQ */}
+              <div className="absolute inset-0 bg-gradient-to-br from-[color:var(--color-primary)]/10 via-[color:var(--color-accent)]/10 to-[color:var(--color-secondary)]/10" />
+              
+              {/* Animated background orbs */}
+              <div className="absolute inset-0 overflow-hidden">
+                <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-[color:var(--color-primary)]/20 rounded-full blur-3xl animate-pulse-slow" />
+                <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-[color:var(--color-accent)]/20 rounded-full blur-3xl animate-pulse-slow-delayed" />
+              </div>
+              
+              <div className="relative card-glass border border-white/60 rounded-3xl p-8 lg:p-10 backdrop-blur-xl">
+                <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+                  <div>
+                    <p className="badge-gradient inline-flex mb-3">Get started</p>
+                    <SplitTextHeading
+                      text="Get clean books within 30 days"
+                      as="h2"
+                      className="text-2xl font-semibold"
+                    />
+                    <p className="mt-3 text-sm text-[color:var(--color-slate-light)]">
+                      Start with a free consultation and we will map a monthly
+                      bookkeeping plan tailored to your business size.
+                    </p>
+                    <div className="mt-4 glow-bar glow-bar-md" />
+                  </div>
+                  <div className="flex flex-wrap gap-3">
+                    <Link href={primaryCta.href} className="btn-primary shimmer">
+                      {primaryCta.label}
+                    </Link>
+                    <a
+                      href={secondaryCta.href}
+                      className="btn-secondary"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {secondaryCta.label}
+                    </a>
+                  </div>
                 </div>
               </div>
-            </Reveal>
-          </MaskReveal>
+            </div>
+          </Reveal>
         </div>
       </section>
     </>

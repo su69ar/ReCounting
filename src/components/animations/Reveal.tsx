@@ -34,12 +34,12 @@ export function Reveal({
       if (!ref.current) return;
       const prefersReduced = prefersReducedMotion();
 
-      if (prefersReduced) {
-        gsap.set(ref.current, { autoAlpha: 1, y: 0, x: 0, scale: 1 });
-        return;
-      }
+      // Always ensure visibility first
+      gsap.set(ref.current, { opacity: 1, y: 0, x: 0, scale: 1, visibility: "visible" });
 
-      const fromVars: gsap.TweenVars = { autoAlpha: 0 };
+      if (prefersReduced) return;
+
+      const fromVars: gsap.TweenVars = { opacity: 0 };
       
       switch (variant) {
         case "fade":
@@ -60,31 +60,39 @@ export function Reveal({
           break;
       }
 
-      gsap.from(ref.current, {
-        ...fromVars,
-        duration,
-        ease: motionTokens.ease.enter,
-        delay,
-        onStart: () => {
-          if (!ref.current) return;
-          ref.current.style.willChange = "transform, opacity";
-        },
-        onComplete: () => {
-          if (!ref.current) return;
-          ref.current.style.willChange = "auto";
-        },
-        scrollTrigger: {
-          trigger: ref.current,
-          start,
-          toggleActions: once ? "play none none none" : "play none none reverse",
-        },
-      });
+      gsap.fromTo(
+        ref.current,
+        fromVars,
+        {
+          opacity: 1,
+          y: 0,
+          x: 0,
+          scale: 1,
+          duration,
+          ease: motionTokens.ease.enter,
+          delay,
+          onStart: () => {
+            if (!ref.current) return;
+            ref.current.style.willChange = "transform, opacity";
+          },
+          onComplete: () => {
+            if (!ref.current) return;
+            ref.current.style.willChange = "auto";
+          },
+          scrollTrigger: {
+            trigger: ref.current,
+            start,
+            toggleActions: once ? "play none none none" : "play none none reverse",
+          },
+          overwrite: "auto",
+        }
+      );
     },
     { scope: ref }
   );
 
   return (
-    <div ref={ref} className={className}>
+    <div ref={ref} className={className} style={{ opacity: 1, visibility: "visible" }}>
       {children}
     </div>
   );

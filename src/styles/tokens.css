@@ -1,52 +1,70 @@
 :root {
   /* ============================================
-     PRIMARY PALETTE - Evolved Professional Blue
+     PRIMARY PALETTE - Warm Navy (Bali Ocean)
+     Deep, trustworthy blue with warmth
      ============================================ */
-  --color-primary-50: #f0f7ff;
-  --color-primary-100: #e0efff;
-  --color-primary-200: #b9dcff;
-  --color-primary-300: #7cc0ff;
-  --color-primary-400: #369dff;
-  --color-primary-500: #0a7cff;   /* New primary - slightly warmer, more vibrant */
-  --color-primary-600: #005fd4;
-  --color-primary-700: #004bab;
-  --color-primary-800: #00408d;
-  --color-primary-900: #063774;
+  --color-primary-50: #f0f5f9;
+  --color-primary-100: #d9e6f0;
+  --color-primary-200: #b3d0e1;
+  --color-primary-300: #8ab9d1;
+  --color-primary-400: #5a9ab8;
+  --color-primary-500: #1e4d6b;   /* Warm navy - deep ocean */
+  --color-primary-600: #163d56;
+  --color-primary-700: #0f2e42;
+  --color-primary-800: #091f2d;
+  --color-primary-900: #05131b;
   
   /* Legacy compatibility */
   --color-primary: var(--color-primary-500);
   --color-primary-dark: var(--color-primary-700);
 
   /* ============================================
-     ACCENT - Warm Teal (Trust + Approachability)
+     ACCENT - Terracotta (Balinese Architecture)
+     Warm, earthy, local character
      ============================================ */
-  --color-accent-50: #f0fdfc;
-  --color-accent-100: #ccfbf6;
-  --color-accent-200: #99f6ec;
-  --color-accent-300: #5eeadb;
-  --color-accent-400: #2dd4c3;
-  --color-accent-500: #14b8a6;   /* Slightly warmer teal */
-  --color-accent-600: #0d9488;
-  --color-accent-700: #0f766e;
-  --color-accent-800: #115e59;
-  --color-accent-900: #134e4a;
+  --color-accent-50: #fdf6f3;
+  --color-accent-100: #f9e8e0;
+  --color-accent-200: #f0d0c1;
+  --color-accent-300: #e4b39e;
+  --color-accent-400: #d48f73;
+  --color-accent-500: #c67b5c;   /* Warm terracotta */
+  --color-accent-600: #a65d3f;
+  --color-accent-700: #854832;
+  --color-accent-800: #633626;
+  --color-accent-900: #42241a;
   
-  /* Legacy compatibility */
+  /* Legacy compatibility - teal now maps to accent */
   --color-teal: var(--color-accent-500);
 
   /* ============================================
-     NEUTRAL - Warm Slate (Not Cold Gray)
+     SECONDARY - Sage (Tropical Foliage)
+     Natural, calming green
      ============================================ */
-  --color-neutral-50: #f8fafc;
-  --color-neutral-100: #f1f5f9;
-  --color-neutral-200: #e2e8f0;
-  --color-neutral-300: #cbd5e1;
-  --color-neutral-400: #94a3b8;
-  --color-neutral-500: #64748b;
-  --color-neutral-600: #475569;
-  --color-neutral-700: #334155;
-  --color-neutral-800: #1e293b;
-  --color-neutral-900: #0f172a;
+  --color-secondary-50: #f4f8f6;
+  --color-secondary-100: #e3ebe6;
+  --color-secondary-200: #c5d8cb;
+  --color-secondary-300: #9bbba6;
+  --color-secondary-400: #769e83;
+  --color-secondary-500: #5a8a6e;   /* Sage green */
+  --color-secondary-600: #476e56;
+  --color-secondary-700: #365741;
+  --color-secondary-800: #26402f;
+  --color-secondary-900: #16291d;
+
+  /* ============================================
+     NEUTRAL - Warm Tones (Not Cold Gray)
+     Inspired by rice paper, sand, natural materials
+     ============================================ */
+  --color-neutral-50: #fdfcfb;
+  --color-neutral-100: #f8f5f2;   /* Rice paper white */
+  --color-neutral-200: #ebe5de;   /* Warm border */
+  --color-neutral-300: #d9cfc4;
+  --color-neutral-400: #b8a99a;
+  --color-neutral-500: #968574;   /* Warm gray */
+  --color-neutral-600: #786a5c;
+  --color-neutral-700: #5a4f44;
+  --color-neutral-800: #3d352e;
+  --color-neutral-900: #211c18;   /* Warm black */
   
   /* Legacy compatibility */
   --color-slate-dark: var(--color-neutral-900);
@@ -57,45 +75,48 @@
   /* ============================================
      SEMANTIC COLORS
      ============================================ */
-  --color-success-500: #10b981;
-  --color-warning-500: #f59e0b;
-  --color-error-500: #ef4444;
+  --color-success-500: #5a8a6e;  /* Using sage for success */
+  --color-warning-500: #d4a574;  /* Warm amber */
+  --color-error-500: #c67b5c;    /* Using terracotta for error */
   --color-info-500: var(--color-primary-500);
 
   /* ============================================
      BACKGROUNDS
      ============================================ */
   --color-bg-primary: #fefefe;
-  --color-bg-secondary: #f8fafb;      /* Slightly warm white */
-  --color-bg-tertiary: #f1f4f6;
-  --color-bg-cream: #fcfcf9;          /* Keep for hero sections */
+  --color-bg-secondary: #faf8f5;      /* Warm white */
+  --color-bg-tertiary: #f5f2ed;
+  --color-bg-cream: #fcfaf7;          /* Warmer cream for heroes */
   
   /* ============================================
-     GRADIENTS
+     GRADIENTS - Bali-inspired
      ============================================ */
   --gradient-primary: linear-gradient(135deg, var(--color-primary-500), var(--color-primary-600));
   --gradient-accent: linear-gradient(135deg, var(--color-accent-500), var(--color-accent-600));
-  --gradient-hero: linear-gradient(135deg, var(--color-primary-500), var(--color-accent-500));
-  --gradient-glow: radial-gradient(circle, rgba(10, 124, 255, 0.15), transparent 70%);
+  --gradient-secondary: linear-gradient(135deg, var(--color-secondary-500), var(--color-secondary-600));
+  --gradient-hero: linear-gradient(135deg, var(--color-primary-500), var(--color-secondary-500));
+  --gradient-sunset: linear-gradient(135deg, var(--color-accent-400), var(--color-accent-600));
+  --gradient-glow: radial-gradient(circle, rgba(30, 77, 107, 0.15), transparent 70%);
   --gradient-mesh: 
-    radial-gradient(at 40% 20%, rgba(10, 124, 255, 0.12) 0px, transparent 50%),
-    radial-gradient(at 80% 0%, rgba(20, 184, 166, 0.1) 0px, transparent 50%),
-    radial-gradient(at 0% 50%, rgba(10, 124, 255, 0.08) 0px, transparent 50%),
-    radial-gradient(at 80% 50%, rgba(20, 184, 166, 0.08) 0px, transparent 50%);
+    radial-gradient(at 40% 20%, rgba(198, 123, 92, 0.1) 0px, transparent 50%),
+    radial-gradient(at 80% 0%, rgba(90, 138, 110, 0.08) 0px, transparent 50%),
+    radial-gradient(at 0% 50%, rgba(30, 77, 107, 0.06) 0px, transparent 50%),
+    radial-gradient(at 80% 50%, rgba(198, 123, 92, 0.06) 0px, transparent 50%);
   
   /* ============================================
-     SHADOWS (Elevation System)
+     SHADOWS (Elevation System) - Warm tinted
      ============================================ */
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
-  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.06);
-  --shadow-xl: 0 16px 32px rgba(0, 0, 0, 0.12), 0 8px 16px rgba(0, 0, 0, 0.08);
-  --shadow-2xl: 0 24px 48px rgba(0, 0, 0, 0.15), 0 12px 24px rgba(0, 0, 0, 0.1);
+  --shadow-xs: 0 1px 2px rgba(33, 28, 24, 0.04);
+  --shadow-sm: 0 2px 4px rgba(33, 28, 24, 0.05), 0 1px 2px rgba(33, 28, 24, 0.03);
+  --shadow-md: 0 4px 8px rgba(33, 28, 24, 0.06), 0 2px 4px rgba(33, 28, 24, 0.04);
+  --shadow-lg: 0 8px 16px rgba(33, 28, 24, 0.08), 0 4px 8px rgba(33, 28, 24, 0.05);
+  --shadow-xl: 0 16px 32px rgba(33, 28, 24, 0.1), 0 8px 16px rgba(33, 28, 24, 0.06);
+  --shadow-2xl: 0 24px 48px rgba(33, 28, 24, 0.12), 0 12px 24px rgba(33, 28, 24, 0.08);
   
-  /* Colored shadows for depth */
-  --shadow-primary: 0 4px 14px rgba(10, 124, 255, 0.25);
-  --shadow-accent: 0 4px 14px rgba(20, 184, 166, 0.25);
+  /* Colored shadows for depth - updated to warm palette */
+  --shadow-primary: 0 4px 14px rgba(30, 77, 107, 0.25);
+  --shadow-accent: 0 4px 14px rgba(198, 123, 92, 0.25);
+  --shadow-secondary: 0 4px 14px rgba(90, 138, 110, 0.25);
   
   /* ============================================
      BORDERS

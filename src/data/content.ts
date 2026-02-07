@@ -21,7 +21,7 @@ export const valueProps = [
   {
     title: "English-Speaking, Local Experts",
     description:
-      "Fluent in both business and bureaucracy. We explain tax concepts simply and respond to questions in under 2 hours.",
+      "Fluent in both business and bureaucracy. We explain tax concepts simply and respond to questions in less than 2 hours.",
     icon: "chat",
   },
 ];
@@ -88,7 +88,7 @@ export const faqs = [
   {
     question: "How fast do you respond on WhatsApp?",
     answer:
-      "We respond within 2 hours during business days (Mon–Fri, 08:00–17:00 WITA).",
+      "We respond in less than 2 hours during business days (Mon–Fri, 08:00–17:00 WITA).",
   },
   {
     question: "Do you work with expats or foreign-owned companies?",
@@ -134,27 +134,43 @@ export const blogPosts = [
 
 export const storySteps = [
   {
-    label: "01 · Assess",
+    step: "01",
+    label: "Assess",
     title: "Map your current finances",
     description:
       "We review your bookkeeping process, tax obligations, and reporting gaps to establish a clean starting point.",
+    icon: "search" as const,
+    color: "primary" as const,
+    illustration: "assess" as const,
   },
   {
-    label: "02 · Implement",
+    step: "02",
+    label: "Implement",
     title: "Build a compliance-ready system",
     description:
       "Monthly bookkeeping, reconciliations, and tax timelines are structured so nothing is missed.",
+    icon: "build" as const,
+    color: "accent" as const,
+    illustration: "implement" as const,
   },
   {
-    label: "03 · Monitor",
+    step: "03",
+    label: "Monitor",
     title: "Stay aligned with Indonesian tax rules",
     description:
       "We track PPh, PPN, and SPT requirements and keep you updated with clear, English-first guidance.",
+    icon: "shield" as const,
+    color: "secondary" as const,
+    illustration: "monitor" as const,
   },
   {
-    label: "04 · Scale",
+    step: "04",
+    label: "Scale",
     title: "Support growth without the stress",
     description:
       "As your business expands, we adapt reporting and compliance workflows to match new needs.",
+    icon: "trending" as const,
+    color: "primary" as const,
+    illustration: "scale" as const,
   },
 ];

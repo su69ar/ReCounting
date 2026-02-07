@@ -32,24 +32,24 @@ export function StaggerGroup({
 
       const prefersReduced = prefersReducedMotion();
 
-      if (prefersReduced) {
-        gsap.set(items, { autoAlpha: 1, y: 0 });
-        return;
-      }
+      // Always ensure visibility first
+      gsap.set(items, { opacity: 1, y: 0, visibility: "visible" });
+
+      if (prefersReduced) return;
 
       ScrollTrigger.batch(items, {
-        start: "top 85%",
+        start: "top 90%",
         onEnter: (batch) =>
           gsap.fromTo(
             batch,
-            { y: motionDefaults.distance, autoAlpha: 0 },
+            { y: motionDefaults.distance, opacity: 0 },
             {
               y: 0,
-              autoAlpha: 1,
+              opacity: 1,
               duration: motionDefaults.duration,
               ease: motionDefaults.ease,
               stagger: motionDefaults.stagger,
-              overwrite: true,
+              overwrite: "auto",
               onStart: () => {
                 (batch as HTMLElement[]).forEach((el) => {
                   el.style.willChange = "transform, opacity";
@@ -63,7 +63,7 @@ export function StaggerGroup({
             }
           ),
         onLeaveBack: (batch) =>
-          gsap.set(batch, { autoAlpha: 0, y: 26, overwrite: true }),
+          gsap.set(batch, { opacity: 0, y: motionDefaults.distance, overwrite: "auto" }),
       });
     },
     { scope: ref }

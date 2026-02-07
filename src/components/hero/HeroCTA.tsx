@@ -24,24 +24,34 @@ export function HeroCTA({
   const secondaryMagnetic = useMagneticButton<HTMLAnchorElement>({ strength: 0.15 });
 
   useGSAP(() => {
-    if (!containerRef.current || prefersReducedMotion()) {
-      gsap.set(containerRef.current, { autoAlpha: 1 });
-      return;
-    }
+    if (!containerRef.current) return;
+    
+    const prefersReduced = prefersReducedMotion();
+    const children = containerRef.current.children;
 
-    // Much faster entrance - ensure visibility
-    gsap.from(containerRef.current?.children || [], {
-      y: 15,
-      opacity: 0,
-      duration: 0.5,
-      stagger: 0.1,
-      delay: 0.1,
-      ease: "power3.out",
-    });
+    // Always ensure visibility first
+    gsap.set(children, { opacity: 1, y: 0, visibility: "visible" });
+
+    if (prefersReduced) return;
+
+    // Animate from initial state - ensure smooth entrance
+    gsap.fromTo(
+      children,
+      { y: 20, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.5,
+        stagger: 0.08,
+        delay: 0.1,
+        ease: "power3.out",
+        overwrite: "auto",
+      }
+    );
   }, { scope: containerRef });
 
   return (
-    <div ref={containerRef} className="flex flex-wrap gap-4">
+    <div ref={containerRef} className="flex flex-wrap gap-4" style={{ opacity: 1, visibility: "visible" }}>
       <Link
         href={primaryHref}
         className="btn-primary group relative overflow-hidden"

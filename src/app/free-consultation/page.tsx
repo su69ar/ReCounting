@@ -45,128 +45,168 @@ export default function FreeConsultationPage() {
                 Share your business details and we&apos;ll provide a tailored
                 bookkeeping & tax compliance plan with fast follow-up.
               </p>
-              <div className="card p-6 text-sm text-[color:var(--color-slate-light)]">
-                <p className="font-semibold text-[color:var(--color-slate-dark)]">
+              <div className="card-glow p-6 text-sm text-[color:var(--color-slate-light)] relative overflow-hidden">
+                {/* Glow orb */}
+                <div className="absolute -top-10 -right-10 w-32 h-32 bg-[color:var(--color-secondary)]/15 rounded-full blur-2xl" />
+                
+                <p className="badge-gradient inline-flex mb-3">
                   What to expect
                 </p>
-                <ul className="mt-3 space-y-2">
-                  <li>30-minute discovery call with our senior accountant</li>
-                  <li>Compliance review for PPh/PPN/SPT</li>
-                  <li>Transparent pricing recommendation</li>
+                <ul className="mt-3 space-y-3 relative z-10">
+                  {[
+                    { text: "30-minute discovery call with our senior accountant", color: "primary", step: "1" },
+                    { text: "Compliance review for PPh/PPN/SPT", color: "accent", step: "2" },
+                    { text: "Transparent pricing recommendation", color: "secondary", step: "3" },
+                  ].map((item) => (
+                    <li key={item.text} className="flex items-center gap-3">
+                      <span className={`w-6 h-6 rounded-full bg-${item.color}-500/10 text-${item.color}-500 flex items-center justify-center text-xs font-bold flex-shrink-0`}>
+                        {item.step}
+                      </span>
+                      {item.text}
+                    </li>
+                  ))}
                 </ul>
+                <div className="mt-4 glow-bar glow-bar-sm" />
               </div>
               <div className="flex flex-wrap gap-3">
-                <a
-                  href={secondaryCta.href}
+                <Link 
+                  href="/services" 
                   className="btn-secondary"
-                  target="_blank"
-                  rel="noreferrer"
                 >
-                  Chat on WhatsApp instead
-                </a>
-                <Link href="/services" className="text-sm font-semibold text-[color:var(--color-primary)]">
                   Explore services
                 </Link>
               </div>
             </div>
 
-            <MaskReveal className="card p-6">
-              <SplitTextHeading
-                text="Request a consultation"
-                as="h2"
-                className="text-lg font-semibold"
-              />
-              <form className="mt-4 grid gap-4" action="/api/lead" method="POST">
-                <input type="hidden" name="source" value="free-consultation" />
-                <label className="text-sm font-medium">
-                  Full name
-                  <input
-                    type="text"
-                    name="name"
-                    className="mt-2 w-full rounded-lg border border-[color:var(--color-border)] px-4 py-3 text-sm"
-                    placeholder="Jane Smith"
-                    required
-                  />
-                </label>
-                <label className="text-sm font-medium">
-                  Email address
-                  <input
-                    type="email"
-                    name="email"
-                    className="mt-2 w-full rounded-lg border border-[color:var(--color-border)] px-4 py-3 text-sm"
-                    placeholder="you@company.com"
-                    required
-                  />
-                </label>
-                <label className="text-sm font-medium">
-                  WhatsApp number
-                  <input
-                    type="tel"
-                    name="phone"
-                    className="mt-2 w-full rounded-lg border border-[color:var(--color-border)] px-4 py-3 text-sm"
-                    placeholder="+62"
-                  />
-                </label>
-                <label className="text-sm font-medium">
-                  Service interest
-                  <select
-                    name="service"
-                    className="mt-2 w-full rounded-lg border border-[color:var(--color-border)] px-4 py-3 text-sm"
-                  >
-                    <option value="Bookkeeping">Bookkeeping</option>
-                    <option value="Tax compliance">Tax compliance</option>
-                    <option value="Payroll">Payroll (coming soon)</option>
-                    <option value="Business setup">Business setup (coming soon)</option>
-                  </select>
-                </label>
-                <label className="text-sm font-medium">
-                  Monthly transaction volume
-                  <select
-                    name="transaction_volume"
-                    className="mt-2 w-full rounded-lg border border-[color:var(--color-border)] px-4 py-3 text-sm"
-                  >
-                    <option value="Below 100">Below 100</option>
-                    <option value="100-300">100–300</option>
-                    <option value="300-600">300–600</option>
-                    <option value="600+">600+</option>
-                  </select>
-                </label>
-                <label className="text-sm font-medium">
-                  What do you need help with?
-                  <textarea
-                    name="message"
-                    className="mt-2 min-h-[120px] w-full rounded-lg border border-[color:var(--color-border)] px-4 py-3 text-sm"
-                    placeholder="Tell us about your business and goals..."
-                  />
-                </label>
-                <button type="submit" className="btn-primary w-full">
-                  Submit request
-                </button>
-                <p className="text-xs text-[color:var(--color-slate-light)]">
-                  By submitting, you agree to be contacted by the ReCounting team
-                  within 2 hours during business days.
-                </p>
-              </form>
+            <MaskReveal className="relative rounded-2xl overflow-hidden">
+              {/* Background glow orb */}
+              <div className="absolute -top-20 -right-20 w-48 h-48 bg-[color:var(--color-primary)]/15 rounded-full blur-3xl pointer-events-none" />
+              
+              <div className="relative card-glass rounded-2xl border border-white/40 backdrop-blur-xl p-6 shadow-2xl overflow-hidden">
+                <SplitTextHeading
+                  text="Request a consultation"
+                  as="h2"
+                  className="text-lg font-semibold relative z-10"
+                />
+                <form className="mt-4 grid gap-4 relative z-10" action="/api/lead" method="POST">
+                  <input type="hidden" name="source" value="free-consultation" />
+                  <label className="text-sm font-medium">
+                    Full name
+                    <input
+                      type="text"
+                      name="name"
+                      className="mt-2 w-full rounded-lg border border-[color:var(--color-border)] px-4 py-3 text-sm input-glow"
+                      placeholder="Jane Smith"
+                      required
+                    />
+                  </label>
+                  <label className="text-sm font-medium">
+                    Email address
+                    <input
+                      type="email"
+                      name="email"
+                      className="mt-2 w-full rounded-lg border border-[color:var(--color-border)] px-4 py-3 text-sm input-glow"
+                      placeholder="you@company.com"
+                      required
+                    />
+                  </label>
+                  <label className="text-sm font-medium">
+                    WhatsApp number
+                    <input
+                      type="tel"
+                      name="phone"
+                      className="mt-2 w-full rounded-lg border border-[color:var(--color-border)] px-4 py-3 text-sm input-glow"
+                      placeholder="+62"
+                    />
+                  </label>
+                  <label className="text-sm font-medium">
+                    Service interest
+                    <select
+                      name="service"
+                      className="mt-2 w-full rounded-lg border border-[color:var(--color-border)] px-4 py-3 text-sm input-glow bg-white"
+                    >
+                      <option value="Bookkeeping">Bookkeeping</option>
+                      <option value="Tax compliance">Tax compliance</option>
+                      <option value="Payroll">Payroll (coming soon)</option>
+                      <option value="Business setup">Business setup (coming soon)</option>
+                    </select>
+                  </label>
+                  <label className="text-sm font-medium">
+                    Monthly transaction volume
+                    <select
+                      name="transaction_volume"
+                      className="mt-2 w-full rounded-lg border border-[color:var(--color-border)] px-4 py-3 text-sm input-glow bg-white"
+                    >
+                      <option value="Below 100">Below 100</option>
+                      <option value="100-300">100–300</option>
+                      <option value="300-600">300–600</option>
+                      <option value="600+">600+</option>
+                    </select>
+                  </label>
+                  <label className="text-sm font-medium">
+                    What do you need help with?
+                    <textarea
+                      name="message"
+                      className="mt-2 min-h-[120px] w-full rounded-lg border border-[color:var(--color-border)] px-4 py-3 text-sm input-glow resize-none"
+                      placeholder="Tell us about your business and goals..."
+                    />
+                  </label>
+                  <button type="submit" className="btn-primary w-full shimmer relative overflow-hidden">
+                    Submit request
+                  </button>
+                  <p className="text-xs text-[color:var(--color-slate-light)]">
+                    By submitting, you agree to be contacted by the ReCounting team
+                    in less than 2 hours during business days.
+                  </p>
+                </form>
+              </div>
             </MaskReveal>
           </div>
         </Reveal>
 
+        {/* CTA Section - Same style as service pages */}
         <Reveal>
-          <MaskReveal className="mt-12 card card-hover bg-white p-6">
-            <SplitTextHeading
-              text="Need help right away?"
-              as="h2"
-              className="text-lg font-semibold"
-            />
-            <p className="mt-2 text-sm text-[color:var(--color-slate-light)]">
-              WhatsApp is the fastest way to reach us. Our team is available
-              Monday–Friday, 08:00–17:00 WITA.
-            </p>
-            <div className="mt-4 text-sm text-[color:var(--color-slate-light)]">
-              <p>{siteConfig.phone}</p>
-              <p>{siteConfig.email}</p>
+          <div className="mt-12 relative rounded-3xl overflow-hidden">
+            {/* Background gradient */}
+            <div className="absolute inset-0 bg-gradient-to-br from-[color:var(--color-primary)]/5 via-[color:var(--color-accent)]/5 to-[color:var(--color-secondary)]/5" />
+            
+            {/* Animated background orbs */}
+            <div className="absolute inset-0 overflow-hidden">
+              <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-[color:var(--color-primary)]/20 rounded-full blur-3xl animate-pulse-slow" />
+              <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-[color:var(--color-accent)]/20 rounded-full blur-3xl animate-pulse-slow-delayed" />
             </div>
-          </MaskReveal>
+            
+            <div className="relative card-glass border border-white/50 rounded-3xl p-8 lg:p-10 backdrop-blur-xl">
+              <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+                <div>
+                  <p className="badge-gradient inline-flex mb-3">Get started</p>
+                  <SplitTextHeading
+                    text="Need help right away?"
+                    as="h2"
+                    className="text-2xl font-semibold"
+                  />
+                  <p className="mt-3 text-sm text-[color:var(--color-slate-light)]">
+                    WhatsApp is the fastest way to reach us. Our team is available
+                    Monday–Friday, 08:00–17:00 WITA.
+                  </p>
+                  <div className="mt-4 glow-bar glow-bar-md" />
+                </div>
+                <div className="flex flex-wrap gap-3">
+                  <a
+                    href={secondaryCta.href}
+                    className="btn-primary shimmer"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Chat on WhatsApp
+                  </a>
+                  <Link href="/contact" className="btn-secondary">
+                    Contact us
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
         </Reveal>
       </div>
     </section>

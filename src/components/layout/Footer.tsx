@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import Link from "next/link";
 import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap";
 import { motionTokens, prefersReducedMotion } from "@/lib/motion";
@@ -33,23 +33,61 @@ const socialLinks = [
 
 export function Footer() {
   const footerRef = useRef<HTMLElement>(null);
+  const hasAnimated = useRef(false);
+
+  // Ensure visibility immediately on mount
+  useEffect(() => {
+    if (!footerRef.current) return;
+    
+    // Force visibility immediately
+    const sections = footerRef.current.querySelectorAll(".footer-section");
+    gsap.set(sections, { opacity: 1, y: 0, visibility: "visible" });
+    
+    // Refresh ScrollTrigger after a short delay
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 100);
+    
+    return () => clearTimeout(timer);
+  }, []);
 
   useGSAP(() => {
-    if (!footerRef.current || prefersReducedMotion()) return;
+    if (!footerRef.current) return;
+    
+    const prefersReduced = prefersReducedMotion();
+    
+    // Skip animation if user prefers reduced motion
+    if (prefersReduced) return;
+    
+    // Skip if already animated this session
+    if (hasAnimated.current) {
+      gsap.set(".footer-section", { opacity: 1, y: 0 });
+      return;
+    }
 
     const ctx = gsap.context(() => {
-      gsap.from(".footer-section", {
-        y: 40,
-        autoAlpha: 0,
-        duration: 0.6,
-        stagger: 0.1,
-        ease: motionTokens.ease.enter,
-        scrollTrigger: {
-          trigger: footerRef.current,
-          start: "top 90%",
-          toggleActions: "play none none reverse",
-        },
-      });
+      // Animate from hidden state only once
+      gsap.fromTo(
+        ".footer-section",
+        { y: 20, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.5,
+          stagger: 0.06,
+          ease: motionTokens.ease.enter,
+          scrollTrigger: {
+            trigger: footerRef.current,
+            start: "top 98%", // Almost at bottom
+            toggleActions: "play none none none", // Only play once
+            once: true,
+            onEnter: () => {
+              hasAnimated.current = true;
+            },
+          },
+          overwrite: "auto",
+        }
+      );
 
       const links = footerRef.current?.querySelectorAll(".footer-link");
       links?.forEach((link) => {
@@ -96,10 +134,10 @@ export function Footer() {
   }, { scope: footerRef });
 
   return (
-    <footer ref={footerRef} className="border-t border-neutral-200 bg-white">
+    <footer ref={footerRef} className="border-t border-neutral-200 bg-white" style={{ opacity: 1, visibility: "visible" }}>
       <div className="container-grid py-16 lg:py-20">
         <div className="grid gap-12 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
-          <div className="footer-section space-y-6">
+          <div className="footer-section space-y-6" style={{ opacity: 1, visibility: "visible" }}>
             <div className="flex items-center gap-3">
               <span className="flex h-12 w-12 items-center justify-center rounded-xl 
                              bg-gradient-to-br from-primary-500 to-accent-500 text-white">
@@ -165,7 +203,7 @@ export function Footer() {
             </div>
           </div>
 
-          <div className="footer-section space-y-4">
+          <div className="footer-section space-y-4" style={{ opacity: 1, visibility: "visible" }}>
             <h3 className="text-sm font-semibold text-neutral-900 uppercase tracking-wide">
               Services
             </h3>
@@ -187,7 +225,7 @@ export function Footer() {
             </nav>
           </div>
 
-          <div className="footer-section space-y-4">
+          <div className="footer-section space-y-4" style={{ opacity: 1, visibility: "visible" }}>
             <h3 className="text-sm font-semibold text-neutral-900 uppercase tracking-wide">
               Company
             </h3>
@@ -204,7 +242,7 @@ export function Footer() {
             </nav>
           </div>
 
-          <div className="footer-section space-y-4">
+          <div className="footer-section space-y-4" style={{ opacity: 1, visibility: "visible" }}>
             <h3 className="text-sm font-semibold text-neutral-900 uppercase tracking-wide">
               Resources
             </h3>

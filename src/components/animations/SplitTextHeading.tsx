@@ -38,23 +38,26 @@ export function SplitTextHeading({
       if (!ref.current) return;
       const prefersReduced = prefersReducedMotion();
 
-      if (prefersReduced) {
-        gsap.set(ref.current, { autoAlpha: 1 });
-        return;
-      }
+      // Always ensure visibility first
+      gsap.set(ref.current, { opacity: 1, visibility: "visible" });
+
+      if (prefersReduced) return;
 
       let split: SplitText | null = null;
       try {
         split = new SplitText(ref.current, { type: splitType });
       } catch (e) {
         console.warn("SplitText plugin not available", e);
-        gsap.to(ref.current, { autoAlpha: 1, duration: 0.5 });
+        gsap.to(ref.current, { opacity: 1, duration: 0.5 });
         return;
       }
       
       const targets = splitType.includes("chars") ? split.chars : 
                       splitType.includes("words") ? split.words : 
                       split.lines;
+
+      // Ensure targets are visible before animating
+      gsap.set(targets, { opacity: 1 });
 
       let staggerConfig: gsap.NumberValue | gsap.StaggerVars = stagger;
       
@@ -80,24 +83,29 @@ export function SplitTextHeading({
           break;
       }
 
-      const animation = gsap.from(targets, {
-        y: motionTokens.distance.sm,
-        autoAlpha: 0,
-        duration,
-        ease: motionTokens.ease.enter,
-        stagger: staggerConfig,
-        delay,
-        onStart: () => {
-          targets.forEach((el: Element) => {
-            (el as HTMLElement).style.willChange = "transform, opacity";
-          });
-        },
-        onComplete: () => {
-          targets.forEach((el: Element) => {
-            (el as HTMLElement).style.willChange = "auto";
-          });
-        },
-      });
+      const animation = gsap.fromTo(
+        targets,
+        { y: motionTokens.distance.sm, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration,
+          ease: motionTokens.ease.enter,
+          stagger: staggerConfig,
+          delay,
+          overwrite: "auto",
+          onStart: () => {
+            targets.forEach((el: Element) => {
+              (el as HTMLElement).style.willChange = "transform, opacity";
+            });
+          },
+          onComplete: () => {
+            targets.forEach((el: Element) => {
+              (el as HTMLElement).style.willChange = "auto";
+            });
+          },
+        }
+      );
 
       if (animateOnScroll) {
         ScrollTrigger.create({

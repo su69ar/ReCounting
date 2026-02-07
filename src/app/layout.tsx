@@ -9,6 +9,7 @@ import { organizationSchema, localBusinessSchema, websiteSchema } from "@/lib/sc
 import { MotionProvider } from "@/components/animations/MotionProvider";
 import { HoverInteractions } from "@/components/animations/HoverInteractions";
 import { ScrollProgress } from "@/components/animations/ScrollProgress";
+import { GrainOverlay } from "@/components/GrainOverlay";
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -118,6 +119,7 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased" suppressHydrationWarning>
+        <GrainOverlay />
         <MotionProvider />
         <HoverInteractions />
         <ScrollProgress />
