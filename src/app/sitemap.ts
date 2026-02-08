@@ -41,13 +41,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const base = siteConfig.url;
   const lastModified = new Date();
 
-  // Ensure base URL doesn't have trailing slash and routes do (for consistency)
+  // Ensure base URL doesn't have trailing slash
   const baseUrl = base.replace(/\/$/, "");
 
   return sitemapRoutes.map(({ route, priority, changeFrequency }) => {
-    // Remove leading slash from route if present, then add it consistently
-    const cleanRoute = route.startsWith("/") ? route : `/${route}`;
-    const url = `${baseUrl}${cleanRoute}`;
+    // Build the full URL with proper trailing slash
+    // Homepage gets no trailing slash, all other pages get trailing slash
+    const cleanRoute = route.startsWith("/") ? route.slice(1) : route;
+    const url = cleanRoute
+      ? `${baseUrl}/${cleanRoute}/`
+      : `${baseUrl}/`;
 
     return {
       url,
