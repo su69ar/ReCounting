@@ -41,11 +41,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const base = siteConfig.url;
   const lastModified = new Date();
 
-  return sitemapRoutes.map(({ route, priority, changeFrequency }) => ({
-    url: `${base}${route}`,
-    lastModified,
-    changeFrequency,
-    priority,
-  }));
+  // Ensure base URL doesn't have trailing slash and routes do (for consistency)
+  const baseUrl = base.replace(/\/$/, "");
+
+  return sitemapRoutes.map(({ route, priority, changeFrequency }) => {
+    // Remove leading slash from route if present, then add it consistently
+    const cleanRoute = route.startsWith("/") ? route : `/${route}`;
+    const url = `${baseUrl}${cleanRoute}`;
+
+    return {
+      url,
+      lastModified,
+      changeFrequency,
+      priority,
+    };
+  });
 }
 
