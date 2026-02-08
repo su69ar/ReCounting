@@ -1,0 +1,18 @@
+services:
+  recounting:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: recounting-app
+    restart: unless-stopped
+    ports:
+      - "3103:3103"
+    environment:
+      - NODE_ENV=production
+      - PORT=3103
+    networks:
+      - recounting-network
+
+networks:
+  recounting-network:
+    driver: bridge
