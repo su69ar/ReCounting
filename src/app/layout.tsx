@@ -11,6 +11,7 @@ import { HoverInteractions } from "@/components/animations/HoverInteractions";
 import { ScrollProgress } from "@/components/animations/ScrollProgress";
 import { GrainOverlay } from "@/components/GrainOverlay";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { ConsentBanner } from "@/components/ConsentBanner";
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -99,6 +100,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${plusJakarta.variable} ${sora.variable}`} suppressHydrationWarning>
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{ad_storage:'denied',analytics_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'});",
+          }}
+        />
         {/* Structured Data for SEO & AI Search */}
         <script
           type="application/ld+json"
@@ -120,6 +127,7 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased" suppressHydrationWarning>
+        <ConsentBanner />
         <GrainOverlay />
         <MotionProvider />
         <HoverInteractions />
