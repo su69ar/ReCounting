@@ -64,7 +64,7 @@ export function Testimonials({ items }: TestimonialsProps) {
           </div>
 
           <p className="text-sm text-neutral-600 leading-relaxed flex-grow">
-            "{testimonial.quote}"
+            &ldquo;{testimonial.quote}&rdquo;
           </p>
 
           <div className="mt-6 pt-4 border-t border-neutral-200 flex items-center gap-3">

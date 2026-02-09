@@ -23,20 +23,18 @@ type ReducedMotionProviderProps = {
 };
 
 export function ReducedMotionProvider({ children }: ReducedMotionProviderProps) {
-    const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-    const [manualOverride, setManualOverride] = useState<boolean | null>(null);
+    const [prefersReducedMotion, setPrefersReducedMotion] = useState(() => {
+        if (typeof window === "undefined") return false;
+        return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    });
+    const [manualOverride, setManualOverride] = useState<boolean | null>(() => {
+        if (typeof window === "undefined") return null;
+        const stored = localStorage.getItem("animations-enabled");
+        return stored !== null ? stored === "true" : null;
+    });
 
     useEffect(() => {
-        // Check localStorage for user preference
-        const stored = localStorage.getItem("animations-enabled");
-        if (stored !== null) {
-            setManualOverride(stored === "true");
-        }
-
-        // Check system preference
         const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-        setPrefersReducedMotion(mediaQuery.matches);
-
         const handleChange = (e: MediaQueryListEvent) => {
             setPrefersReducedMotion(e.matches);
         };

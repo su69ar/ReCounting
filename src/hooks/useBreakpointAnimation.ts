@@ -23,29 +23,26 @@ type UseBreakpointAnimationConfig<T> = {
     "2xl"?: T;
 };
 
+function getBreakpoint(width: number): Breakpoint {
+    if (width >= breakpointValues["2xl"]) return "2xl";
+    if (width >= breakpointValues.xl) return "xl";
+    if (width >= breakpointValues.lg) return "lg";
+    if (width >= breakpointValues.md) return "md";
+    if (width >= breakpointValues.sm) return "sm";
+    return "xs";
+}
+
 export function useBreakpointAnimation<T>(config: UseBreakpointAnimationConfig<T>): T {
-    const [currentBreakpoint, setCurrentBreakpoint] = useState<Breakpoint>("lg");
+    const [currentBreakpoint, setCurrentBreakpoint] = useState<Breakpoint>(() => {
+        if (typeof window === "undefined") return "lg";
+        return getBreakpoint(window.innerWidth);
+    });
 
     const updateBreakpoint = useCallback(() => {
-        const width = window.innerWidth;
-
-        if (width >= breakpointValues["2xl"]) {
-            setCurrentBreakpoint("2xl");
-        } else if (width >= breakpointValues.xl) {
-            setCurrentBreakpoint("xl");
-        } else if (width >= breakpointValues.lg) {
-            setCurrentBreakpoint("lg");
-        } else if (width >= breakpointValues.md) {
-            setCurrentBreakpoint("md");
-        } else if (width >= breakpointValues.sm) {
-            setCurrentBreakpoint("sm");
-        } else {
-            setCurrentBreakpoint("xs");
-        }
+        setCurrentBreakpoint(getBreakpoint(window.innerWidth));
     }, []);
 
     useEffect(() => {
-        updateBreakpoint();
         window.addEventListener("resize", updateBreakpoint);
         return () => window.removeEventListener("resize", updateBreakpoint);
     }, [updateBreakpoint]);

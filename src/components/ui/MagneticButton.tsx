@@ -54,7 +54,7 @@ export const MagneticButton = forwardRef<HTMLElement, MagneticButtonProps>(({
     }
   }, [strength]);
 
-  const handleMouseEnter = useCallback((e: React.MouseEvent) => {
+  const handleMouseEnter = useCallback(() => {
     if (!buttonRef.current) return;
     rectRef.current = buttonRef.current.getBoundingClientRect();
 
@@ -119,7 +119,7 @@ export const MagneticButton = forwardRef<HTMLElement, MagneticButtonProps>(({
     ghost: "bg-transparent hover:bg-neutral-100 text-neutral-700",
   };
 
-  const Component: any = href ? (external ? "a" : Link) : "button";
+  const Component: React.ElementType = href ? (external ? "a" : Link) : "button";
   // Explicitly cast href to string when Component is Link to satisfy TS
   const linkProps = href 
     ? { href: href as string, ...(external && { target: "_blank", rel: "noreferrer" }) } 
@@ -127,7 +127,7 @@ export const MagneticButton = forwardRef<HTMLElement, MagneticButtonProps>(({
 
   return (
     <Component
-      ref={buttonRef as any}
+      ref={buttonRef as React.Ref<HTMLElement>}
       className={cn(
         "relative btn",
         variantClasses[variant],
