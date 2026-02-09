@@ -10,6 +10,7 @@ import { MotionProvider } from "@/components/animations/MotionProvider";
 import { HoverInteractions } from "@/components/animations/HoverInteractions";
 import { ScrollProgress } from "@/components/animations/ScrollProgress";
 import { GrainOverlay } from "@/components/GrainOverlay";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -98,14 +99,6 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${plusJakarta.variable} ${sora.variable}`} suppressHydrationWarning>
       <head>
-        {/* Google Analytics */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-5BRHQP1441" />
-        <script
-          dangerouslySetInnerHTML={{
-            __html:
-              "window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-5BRHQP1441');",
-          }}
-        />
         {/* Structured Data for SEO & AI Search */}
         <script
           type="application/ld+json"
@@ -135,6 +128,7 @@ export default function RootLayout({
         <main className="min-h-screen">{children}</main>
         <Footer />
         <StickyWhatsApp />
+        <GoogleAnalytics gaId="G-5BRHQP1441" />
       </body>
     </html>
   );
