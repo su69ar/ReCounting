@@ -10,7 +10,6 @@ import { MotionProvider } from "@/components/animations/MotionProvider";
 import { HoverInteractions } from "@/components/animations/HoverInteractions";
 import { ScrollProgress } from "@/components/animations/ScrollProgress";
 import { GrainOverlay } from "@/components/GrainOverlay";
-import { GoogleAnalytics } from "@next/third-parties/google";
 import { ConsentBanner } from "@/components/ConsentBanner";
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -100,10 +99,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${plusJakarta.variable} ${sora.variable}`} suppressHydrationWarning>
       <head>
+        {/* Google tag (gtag.js) */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-5BRHQP1441" />
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{ad_storage:'denied',analytics_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'});",
+              "window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-5BRHQP1441');",
           }}
         />
         {/* Structured Data for SEO & AI Search */}
@@ -136,7 +137,6 @@ export default function RootLayout({
         <main className="min-h-screen">{children}</main>
         <Footer />
         <StickyWhatsApp />
-        <GoogleAnalytics gaId="G-5BRHQP1441" />
       </body>
     </html>
   );
