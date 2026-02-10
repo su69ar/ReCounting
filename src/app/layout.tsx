@@ -102,11 +102,6 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${plusJakarta.variable} ${sora.variable}`} suppressHydrationWarning>
       <head>
-        {/* Explicit Favicon - Override Next.js default */}
-        <link rel="icon" href="/assets/favicon.png" />
-        <link rel="shortcut icon" href="/assets/favicon.png" />
-        <link rel="apple-touch-icon" href="/assets/favicon.png" />
-
         {/* Performance Hints - Preconnect to external origins */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
