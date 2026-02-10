@@ -9,16 +9,67 @@ on:
 jobs:
   deploy:
     runs-on: self-hosted
+    timeout-minutes: 60
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Cleanup old Docker images
         run: |
-          docker image prune -af --filter "until=24h"
+          docker image prune -af --filter "until=24h" || true
 
       - name: Build and start Docker container
         run: |
           cd /home/dotdev/Documents/Workspaces/Dotdev/Projects/ReCounting/recounting-app
-          docker compose build --no-cache
-          docker compose up -d
+
+          # Retry logic for docker build (handles network timeouts)
+          MAX_RETRIES=3
+          RETRY_COUNT=0
+
+          while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
+            echo "Build attempt $((RETRY_COUNT + 1))/$MAX_RETRIES"
+
+            if docker compose build --no-cache; then
+              echo "Build successful!"
+
+              # Start container
+              docker compose up -d
+
+              # Verify container is running
+              if docker ps | grep -q recounting-app; then
+                echo "Deployment successful!"
+                exit 0
+              else
+                echo "Container failed to start"
+                exit 1
+              fi
+            else
+              RETRY_COUNT=$((RETRY_COUNT + 1))
+
+              if [ $RETRY_COUNT -lt $MAX_RETRIES ]; then
+                echo "Build failed, retrying in 10 seconds..."
+                sleep 10
+              else
+                echo "Build failed after $MAX_RETRIES attempts"
+                exit 1
+              fi
+            fi
+          done
+
+      - name: Verify deployment
+        run: |
+          # Check if container is running
+          if docker ps | grep -q recounting-app; then
+            echo "✅ Container is running"
+
+            # Check if app is responding
+            sleep 5
+            if curl -f http://localhost:3103/ > /dev/null 2>&1; then
+              echo "✅ Application is responding"
+            else
+              echo "⚠️ Application not responding yet, but container is running"
+            fi
+          else
+            echo "❌ Container is not running"
+            exit 1
+          fi
