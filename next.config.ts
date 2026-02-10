@@ -8,10 +8,7 @@ const nextConfig: NextConfig = {
   // Optimize compilation
   swcMinify: true,
 
-  // Production optimizations
-  compress: true,
-
-  // Modern browser targets (reduces polyfills)
+  // Reduce bundle size
   productionBrowserSourceMaps: false,
 };
 
