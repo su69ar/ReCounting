@@ -57,31 +57,15 @@ export default function TwitterImage() {
             zIndex: 1,
           }}
         >
-          <div
+          <img
+            src={`${siteConfig.url}/assets/ReCounting_Logo_Accounting_Services.png`}
+            alt="ReCounting Logo"
+            width="110"
+            height="110"
             style={{
-              width: "110px",
-              height: "110px",
-              borderRadius: "26px",
-              background: "#0066CC",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              boxShadow: "0 20px 40px rgba(0,0,0,0.12)",
+              objectFit: "contain",
             }}
-          >
-            <svg
-              width="68"
-              height="68"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect x="5" y="4" width="14" height="16" rx="3" stroke="#FCFCF9" strokeWidth="2" />
-              <path d="M8 9h8" stroke="#FCFCF9" strokeWidth="2" strokeLinecap="round" />
-              <path d="M8 12.5h5" stroke="#FCFCF9" strokeWidth="2" strokeLinecap="round" />
-              <path d="m13.5 15.2 1.6 1.6 3-3.4" stroke="#208C8D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </div>
+          />
           <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
             <div
               style={{

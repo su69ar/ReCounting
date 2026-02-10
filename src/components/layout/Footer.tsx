@@ -141,7 +141,7 @@ export function Footer() {
             <div className="flex items-center gap-3">
               <span className="flex h-12 w-auto items-center justify-center">
                 <img
-                  src="/assets/logo.png"
+                  src="/assets/ReCounting_Logo_Accounting_Services.png"
                   alt="ReCounting Logo"
                   className="h-10 w-auto object-contain"
                 />
