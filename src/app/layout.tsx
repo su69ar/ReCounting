@@ -12,6 +12,7 @@ import { HoverInteractions } from "@/components/animations/HoverInteractions";
 import { ScrollProgress } from "@/components/animations/ScrollProgress";
 import { GrainOverlay } from "@/components/GrainOverlay";
 import { ConsentBanner } from "@/components/ConsentBanner";
+import { Favicon } from "@/components/Favicon";
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -140,6 +141,7 @@ export default function RootLayout({
             __html: JSON.stringify(websiteSchema),
           }}
         />
+        <Favicon />
       </head>
       <body className="antialiased" suppressHydrationWarning>
         <ConsentBanner />
