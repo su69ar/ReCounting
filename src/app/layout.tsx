@@ -51,11 +51,8 @@ export const metadata: Metadata = {
     address: true,
     telephone: true,
   },
-  icons: {
-    icon: "/assets/favicon.png",
-    shortcut: "/assets/favicon.png",
-    apple: "/assets/favicon.png",
-  },
+  // icons: Removed to prevent Next.js from auto-generating favicon.ico
+  // Using explicit <link> tags in <head> instead
   openGraph: {
     type: "website",
     locale: "en_ID",
