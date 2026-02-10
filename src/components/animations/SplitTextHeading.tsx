@@ -30,7 +30,7 @@ export function SplitTextHeading({
   duration = motionTokens.duration.slow,
   stagger = motionTokens.stagger.tight,
 }: SplitTextHeadingProps) {
-  const ref = useRef<HTMLElement | null>(null);
+  const ref = useRef<HTMLHeadingElement | HTMLSpanElement | HTMLParagraphElement | null>(null);
   const Tag = as;
 
   useGSAP(
