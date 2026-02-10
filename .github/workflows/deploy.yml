@@ -13,12 +13,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Build and start Docker container
-        run: |
-          cd /home/dotdev/Documents/Workspaces/Dotdev/Projects/ReCounting/recounting-app
-          docker compose build
-          docker compose up -d
-
       - name: Cleanup old Docker images
         run: |
           docker image prune -af --filter "until=24h"
+
+      - name: Build and start Docker container
+        run: |
+          cd /home/dotdev/Documents/Workspaces/Dotdev/Projects/ReCounting/recounting-app
+          docker compose build --no-cache
+          docker compose up -d
