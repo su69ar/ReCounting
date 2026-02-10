@@ -5,9 +5,6 @@ const nextConfig: NextConfig = {
   // Ensure sitemap.xml is properly generated and served
   trailingSlash: true,
 
-  // Optimize compilation
-  swcMinify: true,
-
   // Reduce bundle size
   productionBrowserSourceMaps: false,
 };
