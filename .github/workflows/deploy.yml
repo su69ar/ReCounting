@@ -20,41 +20,41 @@ jobs:
 
       - name: Build and start Docker container
         run: |
+          set -x  # Enable command logging
           cd /home/dotdev/Documents/Workspaces/Dotdev/Projects/ReCounting/recounting-app
 
-          # Retry logic for docker build (handles network timeouts)
-          MAX_RETRIES=3
-          RETRY_COUNT=0
+          echo "=== Starting Docker Compose Build ==="
 
-          while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
-            echo "Build attempt $((RETRY_COUNT + 1))/$MAX_RETRIES"
+          # Stop any existing container first
+          docker compose down 2>/dev/null || true
 
-            if docker compose build; then
-              echo "Build successful!"
+          # Build with error output
+          if ! docker compose build 2>&1 | tee /tmp/build.log; then
+            echo "=== BUILD FAILED ==="
+            tail -50 /tmp/build.log
+            exit 1
+          fi
 
-              # Start container
-              docker compose up -d
+          echo "=== Build successful, starting container ==="
+          docker compose up -d
 
-              # Verify container is running
-              if docker ps | grep -q recounting-app; then
-                echo "Deployment successful!"
-                exit 0
-              else
-                echo "Container failed to start"
-                exit 1
-              fi
+          echo "=== Verifying container ==="
+          sleep 5
+          if docker ps | grep -q recounting-app; then
+            echo "✅ Container is running"
+
+            # Test app response
+            if curl -f http://localhost:3103/ > /dev/null 2>&1; then
+              echo "✅ Application is responding"
             else
-              RETRY_COUNT=$((RETRY_COUNT + 1))
-
-              if [ $RETRY_COUNT -lt $MAX_RETRIES ]; then
-                echo "Build failed, retrying in 10 seconds..."
-                sleep 10
-              else
-                echo "Build failed after $MAX_RETRIES attempts"
-                exit 1
-              fi
+              echo "⚠️ Application not responding yet"
             fi
-          done
+            echo "=== Deployment completed successfully ==="
+          else
+            echo "❌ Container failed to start"
+            docker compose logs
+            exit 1
+          fi
 
       - name: Verify deployment
         run: |
