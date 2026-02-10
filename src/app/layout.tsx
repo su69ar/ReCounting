@@ -51,6 +51,11 @@ export const metadata: Metadata = {
     address: true,
     telephone: true,
   },
+  icons: {
+    icon: "/assets/favicon.png",
+    shortcut: "/assets/favicon.png",
+    apple: "/assets/favicon.png",
+  },
   openGraph: {
     type: "website",
     locale: "en_ID",
@@ -60,7 +65,7 @@ export const metadata: Metadata = {
     siteName: "ReCounting",
     images: [
       {
-        url: "/opengraph-image",
+        url: "/assets/logo.png",
         width: 1200,
         height: 630,
         alt: "ReCounting | Accounting & Bookkeeping Services in Bali",
@@ -71,7 +76,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "ReCounting | Accounting & Bookkeeping Services in Bali",
     description: siteConfig.description,
-    images: ["/twitter-image"],
+    images: ["/assets/logo.png"],
   },
   alternates: {
     canonical: siteConfig.url,

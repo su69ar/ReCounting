@@ -139,17 +139,12 @@ export function Footer() {
         <div className="grid gap-12 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
           <div className="footer-section space-y-6" style={{ opacity: 1, visibility: "visible" }}>
             <div className="flex items-center gap-3">
-              <span className="flex h-12 w-12 items-center justify-center rounded-xl 
-                             bg-gradient-to-br from-primary-500 to-accent-500 text-white">
-                <svg viewBox="0 0 24 24" className="h-7 w-7" fill="none">
-                  <path d="M6 4.5h9.5a2 2 0 0 1 2 2V8" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
-                  <path d="M6 4.5h8.5a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2z" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
-                  <path d="M7.5 9.2h6.5M7.5 12.2h4.2" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
-                  <path d="m17 13.8 1.6 1.6 3.1-3.4" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </span>
-              <span className="text-xl font-bold tracking-tight text-neutral-900">
-                ReCounting
+              <span className="flex h-12 w-auto items-center justify-center">
+                <img
+                  src="/assets/logo.png"
+                  alt="ReCounting Logo"
+                  className="h-10 w-auto object-contain"
+                />
               </span>
             </div>
             

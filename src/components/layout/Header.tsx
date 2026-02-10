@@ -123,45 +123,12 @@ export function Header() {
       <div className="container-grid">
         <div className="flex h-20 items-center justify-between gap-6">
           <Link href="/" className="flex items-center gap-3 group">
-            <span className="flex h-10 w-10 items-center justify-center rounded-full 
-                           bg-primary-500/10 text-primary-500 
-                           group-hover:bg-primary-500/20 transition-colors">
-              <svg
-                viewBox="0 0 24 24"
-                aria-hidden
-                className="h-6 w-6"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M6 4.5h9.5a2 2 0 0 1 2 2V8"
-                  stroke="currentColor"
-                  strokeWidth="1.7"
-                  strokeLinecap="round"
-                />
-                <path
-                  d="M6 4.5h8.5a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2z"
-                  stroke="currentColor"
-                  strokeWidth="1.7"
-                  strokeLinecap="round"
-                />
-                <path
-                  d="M7.5 9.2h6.5M7.5 12.2h4.2"
-                  stroke="currentColor"
-                  strokeWidth="1.7"
-                  strokeLinecap="round"
-                />
-                <path
-                  d="m17 13.8 1.6 1.6 3.1-3.4"
-                  stroke="currentColor"
-                  strokeWidth="1.7"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </span>
-            <span className="text-lg font-bold tracking-tight text-neutral-900">
-              ReCounting
+            <span className="flex h-10 w-auto items-center justify-center transition-opacity hover:opacity-90">
+              <img
+                src="/assets/logo.png"
+                alt="ReCounting Logo"
+                className="h-10 w-auto object-contain"
+              />
             </span>
           </Link>
 
