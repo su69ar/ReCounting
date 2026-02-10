@@ -8,11 +8,6 @@ const nextConfig: NextConfig = {
   // Optimize compilation
   swcMinify: true,
 
-  // Reduce bundle size by excluding unnecessary polyfills
-  experimental: {
-    optimizePackageImports: ['gsap', 'lucide-react', 'clsx', 'tailwind-merge'],
-  },
-
   // Production optimizations
   compress: true,
 
