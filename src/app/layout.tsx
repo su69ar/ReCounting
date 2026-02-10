@@ -51,6 +51,15 @@ export const metadata: Metadata = {
     address: true,
     telephone: true,
   },
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 5,
+  },
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+  ],
   openGraph: {
     type: "website",
     locale: "en_ID",
@@ -100,6 +109,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${plusJakarta.variable} ${sora.variable}`} suppressHydrationWarning>
       <head>
+        {/* Performance Hints - Preconnect to external origins */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+
         {/* Google Analytics */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-5BRHQP1441"
