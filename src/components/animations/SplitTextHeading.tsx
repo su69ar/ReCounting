@@ -3,7 +3,6 @@
 import { useRef } from "react";
 import { gsap, useGSAP, ScrollTrigger, SplitText } from "@/lib/gsap";
 import { motionTokens, prefersReducedMotion } from "@/lib/motion";
-import type { ComponentProps } from "react";
 
 type SplitType = "chars" | "words" | "lines" | "chars,words" | "words,lines" | "chars,words,lines";
 type AnimationType = "stagger" | "wave" | "cascade" | "random";
@@ -32,7 +31,7 @@ export function SplitTextHeading({
   stagger = motionTokens.stagger.tight,
 }: SplitTextHeadingProps) {
   const ref = useRef<HTMLElement>(null);
-  const Tag = as as keyof JSX.IntrinsicElements;
+  const Tag = as as any;
 
   useGSAP(
     () => {
