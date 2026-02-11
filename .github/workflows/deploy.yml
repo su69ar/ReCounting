@@ -16,7 +16,8 @@ jobs:
 
       - name: Cleanup old Docker images and build cache
         run: |
-          docker image prune -af --filter "until=24h" || true
+          # Clean up all dangling images (no time filter for active development)
+          docker image prune -af || true
           # Clean up Next.js cache to ensure fresh builds
           rm -rf .next || true
 
