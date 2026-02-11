@@ -31,7 +31,7 @@ export function ContactForm({ source, submitText, showTransactionVolume }: Conta
     const data = Object.fromEntries(formData.entries());
 
     try {
-      const response = await fetch('/api/lead', {
+      const response = await fetch('/api/lead/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
