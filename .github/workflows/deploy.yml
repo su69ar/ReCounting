@@ -14,9 +14,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Cleanup old Docker images
+      - name: Cleanup old Docker images and build cache
         run: |
           docker image prune -af --filter "until=24h" || true
+          # Clean up Next.js cache to ensure fresh builds
+          rm -rf .next || true
 
       - name: Build and start Docker container
         run: |
