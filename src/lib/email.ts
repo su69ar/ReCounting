@@ -65,7 +65,7 @@ export async function sendAdminNotificationEmail(data: EmailData) {
   const adminEmail = process.env.ADMIN_EMAIL || process.env.EMAIL_USER;
 
   await transporter.sendMail({
-    from: `"ReCounting Website" <${process.env.EMAIL_FROM || process.env.EMAIL_USER}>`,
+    from: `"${data.name} via ReCounting" <${process.env.EMAIL_FROM || process.env.EMAIL_USER}>`,
     to: adminEmail,
     replyTo: data.email,
     subject,
