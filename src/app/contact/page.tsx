@@ -4,6 +4,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { SplitTextHeading } from "@/components/animations/SplitTextHeading";
 import { MaskReveal } from "@/components/animations/MaskReveal";
 import { secondaryCta, siteConfig } from "@/lib/site";
+import { ContactForm } from "@/components/forms/ContactForm";
 
 const breadcrumbSchema = {
   "@context": "https://schema.org",
@@ -72,61 +73,7 @@ export default function ContactPage() {
                   as="h2"
                   className="text-lg font-semibold relative z-10"
                 />
-                <form className="mt-4 grid gap-4 relative z-10" action="/api/lead" method="POST">
-                  <input type="hidden" name="source" value="contact" />
-                  <label className="text-sm font-medium">
-                    Name
-                    <input
-                      type="text"
-                      name="name"
-                      className="mt-2 w-full rounded-lg border border-[color:var(--color-border)] px-4 py-3 text-sm input-glow"
-                      placeholder="Your name"
-                      required
-                    />
-                  </label>
-                  <label className="text-sm font-medium">
-                    Email
-                    <input
-                      type="email"
-                      name="email"
-                      className="mt-2 w-full rounded-lg border border-[color:var(--color-border)] px-4 py-3 text-sm input-glow"
-                      placeholder="you@company.com"
-                      required
-                    />
-                  </label>
-                  <label className="text-sm font-medium">
-                    Phone / WhatsApp
-                    <input
-                      type="tel"
-                      name="phone"
-                      className="mt-2 w-full rounded-lg border border-[color:var(--color-border)] px-4 py-3 text-sm input-glow"
-                      placeholder="+62"
-                    />
-                  </label>
-                  <label className="text-sm font-medium">
-                    Service interest
-                    <select
-                      name="service"
-                      className="mt-2 w-full rounded-lg border border-[color:var(--color-border)] px-4 py-3 text-sm input-glow bg-white"
-                    >
-                      <option value="Bookkeeping">Bookkeeping</option>
-                      <option value="Tax compliance">Tax compliance</option>
-                      <option value="Payroll">Payroll (coming soon)</option>
-                      <option value="Business setup">Business setup (coming soon)</option>
-                    </select>
-                  </label>
-                  <label className="text-sm font-medium">
-                    Message
-                    <textarea
-                      name="message"
-                      className="mt-2 min-h-[120px] w-full rounded-lg border border-[color:var(--color-border)] px-4 py-3 text-sm input-glow resize-none"
-                      placeholder="Tell us about your needs..."
-                    />
-                  </label>
-                  <button type="submit" className="btn-primary w-full shimmer relative overflow-hidden">
-                    Send message
-                  </button>
-                </form>
+                <ContactForm source="contact" />
               </div>
             </MaskReveal>
           </div>

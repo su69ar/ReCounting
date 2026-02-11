@@ -5,6 +5,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { SplitTextHeading } from "@/components/animations/SplitTextHeading";
 import { MaskReveal } from "@/components/animations/MaskReveal";
 import { secondaryCta, siteConfig } from "@/lib/site";
+import { ContactForm } from "@/components/forms/ContactForm";
 
 const breadcrumbSchema = {
   "@context": "https://schema.org",
@@ -88,77 +89,7 @@ export default function FreeConsultationPage() {
                   as="h2"
                   className="text-lg font-semibold relative z-10"
                 />
-                <form className="mt-4 grid gap-4 relative z-10" action="/api/lead" method="POST">
-                  <input type="hidden" name="source" value="free-consultation" />
-                  <label className="text-sm font-medium">
-                    Full name
-                    <input
-                      type="text"
-                      name="name"
-                      className="mt-2 w-full rounded-lg border border-[color:var(--color-border)] px-4 py-3 text-sm input-glow"
-                      placeholder="Jane Smith"
-                      required
-                    />
-                  </label>
-                  <label className="text-sm font-medium">
-                    Email address
-                    <input
-                      type="email"
-                      name="email"
-                      className="mt-2 w-full rounded-lg border border-[color:var(--color-border)] px-4 py-3 text-sm input-glow"
-                      placeholder="you@company.com"
-                      required
-                    />
-                  </label>
-                  <label className="text-sm font-medium">
-                    WhatsApp number
-                    <input
-                      type="tel"
-                      name="phone"
-                      className="mt-2 w-full rounded-lg border border-[color:var(--color-border)] px-4 py-3 text-sm input-glow"
-                      placeholder="+62"
-                    />
-                  </label>
-                  <label className="text-sm font-medium">
-                    Service interest
-                    <select
-                      name="service"
-                      className="mt-2 w-full rounded-lg border border-[color:var(--color-border)] px-4 py-3 text-sm input-glow bg-white"
-                    >
-                      <option value="Bookkeeping">Bookkeeping</option>
-                      <option value="Tax compliance">Tax compliance</option>
-                      <option value="Payroll">Payroll (coming soon)</option>
-                      <option value="Business setup">Business setup (coming soon)</option>
-                    </select>
-                  </label>
-                  <label className="text-sm font-medium">
-                    Monthly transaction volume
-                    <select
-                      name="transaction_volume"
-                      className="mt-2 w-full rounded-lg border border-[color:var(--color-border)] px-4 py-3 text-sm input-glow bg-white"
-                    >
-                      <option value="Below 100">Below 100</option>
-                      <option value="100-300">100–300</option>
-                      <option value="300-600">300–600</option>
-                      <option value="600+">600+</option>
-                    </select>
-                  </label>
-                  <label className="text-sm font-medium">
-                    What do you need help with?
-                    <textarea
-                      name="message"
-                      className="mt-2 min-h-[120px] w-full rounded-lg border border-[color:var(--color-border)] px-4 py-3 text-sm input-glow resize-none"
-                      placeholder="Tell us about your business and goals..."
-                    />
-                  </label>
-                  <button type="submit" className="btn-primary w-full shimmer relative overflow-hidden">
-                    Submit request
-                  </button>
-                  <p className="text-xs text-[color:var(--color-slate-light)]">
-                    By submitting, you agree to be contacted by the ReCounting team
-                    in less than 2 hours during business days.
-                  </p>
-                </form>
+                <ContactForm source="free-consultation" showTransactionVolume />
               </div>
             </MaskReveal>
           </div>

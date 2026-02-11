@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer';
-import { hbs } from 'nodemailer-express-handlebars';
+import hbs from 'nodemailer-express-handlebars';
 import path from 'path';
 
 export interface EmailData {
@@ -30,12 +30,12 @@ const handlebarsOptions = {
   },
   viewPath: path.resolve('./src/emails/templates'),
   extName: '.hbs',
-};
+} as const;
 
-transporter.use('compile', hbs(handlebarsOptions));
+transporter.use('compile', hbs(handlebarsOptions as any));
 
 export async function sendUserNotificationEmail(data: EmailData) {
-  const subject = data.source === 'free-consultation' 
+  const subject = data.source === 'free-consultation'
     ? 'Your Free Consultation Request - ReCounting'
     : 'Thank You for Contacting ReCounting';
 
@@ -51,7 +51,7 @@ export async function sendUserNotificationEmail(data: EmailData) {
       companyPhone: '+62 812 3456 7890',
       whatsappUrl: 'https://wa.me/6281234567890',
     },
-  });
+  } as any);
 }
 
 export async function sendAdminNotificationEmail(data: EmailData) {
@@ -69,7 +69,7 @@ export async function sendAdminNotificationEmail(data: EmailData) {
       submittedAt: new Date().toLocaleString('en-ID', { timeZone: 'Asia/Makassar' }),
       year: new Date().getFullYear(),
     },
-  });
+  } as any);
 }
 
 export async function sendEmails(data: EmailData) {
