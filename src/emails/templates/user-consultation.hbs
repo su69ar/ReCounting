@@ -18,13 +18,18 @@
     }
     .header {
       background: linear-gradient(135deg, #1f4c68 0%, #143649 100%);
-      padding: 40px 20px;
+      padding: 30px 20px;
       text-align: center;
+    }
+    .logo {
+      max-width: 180px;
+      height: auto;
+      margin-bottom: 10px;
     }
     .header h1 {
       color: #ffffff;
-      font-size: 28px;
-      margin: 0;
+      font-size: 24px;
+      margin: 10px 0 0 0;
       font-weight: 700;
       letter-spacing: -0.5px;
     }
@@ -79,23 +84,25 @@
     .expectation-item {
       display: flex;
       align-items: flex-start;
-      margin-bottom: 15px;
+      margin-bottom: 18px;
       font-size: 15px;
       color: #475569;
     }
     .expectation-icon {
-      width: 24px;
-      height: 24px;
-      background: linear-gradient(135deg, #1f4c68, #143649);
-      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(135deg, #c1fd73, #a0e95e);
+      border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-right: 12px;
+      margin-right: 14px;
       flex-shrink: 0;
-      color: white;
-      font-weight: bold;
-      font-size: 12px;
+      color: #1f4c68;
+    }
+    .expectation-icon svg {
+      width: 16px;
+      height: 16px;
     }
     .cta-button {
       display: inline-block;
@@ -110,18 +117,17 @@
       box-shadow: 0 4px 14px rgba(31, 76, 104, 0.4);
     }
     .footer {
-      background-color: #f1f5f9;
+      background: linear-gradient(135deg, #1f4c68 0%, #143649 100%);
       padding: 30px;
       text-align: center;
-      border-top: 1px solid #e2e8f0;
     }
     .footer-text {
-      color: #64748b;
+      color: #e2e8f0;
       font-size: 13px;
       line-height: 1.6;
     }
     .footer-link {
-      color: #1f4c68;
+      color: #c1fd73;
       text-decoration: none;
       font-weight: 500;
     }
@@ -131,22 +137,25 @@
     .social-links a {
       display: inline-block;
       margin: 0 8px;
-      color: #3b82f6;
+      color: #c1fd73;
       text-decoration: none;
       font-size: 13px;
       font-weight: 500;
+    }
+    .social-links a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
   <div class="email-container">
     <div class="header">
-      <h1>ReCounting</h1>
+      <img src="https://recounting.my.id/assets/ReCounting_Logo_Accounting_Services.png" alt="ReCounting Logo" class="logo">
     </div>
 
     <div class="content">
       <h2 class="greeting">Hi {{name}},</h2>
-      
+
       <p class="message">
         Thank you for requesting a free consultation with ReCounting! We're excited to learn more about your business and how we can help with your bookkeeping and tax compliance needs.
       </p>
@@ -179,15 +188,27 @@
 
       <ul class="expectation-list">
         <li class="expectation-item">
-          <span class="expectation-icon">1</span>
+          <span class="expectation-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </span>
           <span>Our senior accountant will review your information within 2 hours during business days</span>
         </li>
         <li class="expectation-item">
-          <span class="expectation-icon">2</span>
+          <span class="expectation-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </span>
           <span>We'll contact you via WhatsApp or email to schedule your 30-minute discovery call</span>
         </li>
         <li class="expectation-item">
-          <span class="expectation-icon">3</span>
+          <span class="expectation-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </span>
           <span>You'll receive personalized recommendations for your bookkeeping and tax compliance needs</span>
         </li>
       </ul>
@@ -220,12 +241,12 @@
         You're receiving this email because you requested a free consultation at ReCounting.
       </p>
       <div class="social-links">
-        <a href="https://recounting.asia" style="color: #c1fd73;">Website</a>
-        <a href="https://wa.me/6281234567890" style="color: #c1fd73;">WhatsApp</a>
-        <a href="mailto:{{companyEmail}}" style="color: #c1fd73;">Email</a>
+        <a href="https://recounting.my.id">Website</a>
+        <a href="https://wa.me/6281139404640">WhatsApp</a>
+        <a href="mailto:{{companyEmail}}">Email</a>
       </div>
       <p class="footer-text" style="margin-top: 15px;">
-        © {{year}} ReCounting. All rights reserved.
+        © {{year}} ReCounting. All rights reserved. Part of <a href="https://balimicrotechnology.com" style="color: #c1fd73; text-decoration: none; font-weight: 500;">Bali Micro Technology</a>
       </p>
     </div>
   </div>

@@ -32,17 +32,22 @@ export async function POST(request: Request) {
   const webhookUrl = process.env.LEAD_WEBHOOK_URL;
 
   if (webhookUrl) {
-    const res = await fetch(webhookUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Webhook-Secret": process.env.LEAD_WEBHOOK_SECRET ?? "",
-      },
-      body: JSON.stringify(leadPayload),
-    });
+    try {
+      const res = await fetch(webhookUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Webhook-Secret": process.env.LEAD_WEBHOOK_SECRET ?? "",
+        },
+        body: JSON.stringify(leadPayload),
+      });
 
-    if (!res.ok) {
-      return Response.json({ ok: false }, { status: 502 });
+      if (!res.ok) {
+        console.error('Webhook failed:', res.status, res.statusText);
+      }
+    } catch (error) {
+      console.error('Webhook error:', error);
+      // Continue even if webhook fails - email was already sent
     }
   }
 

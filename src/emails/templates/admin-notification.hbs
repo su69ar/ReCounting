@@ -22,6 +22,11 @@
       padding: 30px;
       color: #ffffff;
     }
+    .logo {
+      max-width: 180px;
+      height: auto;
+      margin-bottom: 15px;
+    }
     .header-title {
       font-size: 20px;
       font-weight: 700;
@@ -41,12 +46,12 @@
       margin-top: 12px;
     }
     .badge-consultation {
-      background: linear-gradient(135deg, #1f4c68, #143649);
-      color: #ffffff;
+      background: linear-gradient(135deg, #c1fd73, #a0e95e);
+      color: #1f4c68;
     }
     .badge-contact {
-      background: linear-gradient(135deg, #1f4c68, #143649);
-      color: #ffffff;
+      background: linear-gradient(135deg, #c1fd73, #a0e95e);
+      color: #1f4c68;
     }
     .content {
       padding: 30px;
@@ -157,12 +162,11 @@
       border: 2px solid #1f4c68;
     }
     .footer {
-      background-color: #f8fafc;
+      background: linear-gradient(135deg, #1f4c68 0%, #143649 100%);
       padding: 20px;
       text-align: center;
-      border-top: 1px solid #e2e8f0;
       font-size: 12px;
-      color: #94a3b8;
+      color: #e2e8f0;
     }
     @media only screen and (max-width: 600px) {
       .info-grid {
@@ -180,6 +184,7 @@
 <body>
   <div class="email-container">
     <div class="header">
+      <img src="https://recounting.my.id/assets/ReCounting_Logo_Accounting_Services.png" alt="ReCounting Logo" class="logo">
       <h1 class="header-title">🎉 New Lead Received</h1>
       <p class="header-subtitle">Someone is interested in ReCounting services</p>
       <span class="badge {{#if (eq source 'free-consultation')}}badge-consultation{{else}}badge-contact{{/if}}">
@@ -258,14 +263,14 @@
           <a href="https://wa.me/{{phone}}" class="cta-button cta-button-primary">Reply on WhatsApp</a>
           {{/if}}
           <a href="mailto:{{email}}" class="cta-button cta-button-secondary">Send Email</a>
-          <a href="https://recounting.asia" class="cta-button cta-button-secondary">View Website</a>
+          <a href="https://recounting.my.id" class="cta-button cta-button-secondary">View Website</a>
         </div>
       </div>
     </div>
 
     <div class="footer">
       <p>This is an automated notification from the ReCounting website.</p>
-      <p>© {{year}} ReCounting. All rights reserved.</p>
+      <p>© {{year}} ReCounting. All rights reserved. Part of <a href="https://balimicrotechnology.com" style="color: #c1fd73; text-decoration: none;">Bali Micro Technology</a></p>
     </div>
   </div>
 </body>

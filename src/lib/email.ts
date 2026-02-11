@@ -48,8 +48,8 @@ export async function sendUserNotificationEmail(data: EmailData) {
       ...data,
       year: new Date().getFullYear(),
       companyEmail: process.env.EMAIL_USER,
-      companyPhone: '+62 812 3456 7890',
-      whatsappUrl: 'https://wa.me/6281234567890',
+      companyPhone: '0811-3940-4640',
+      whatsappUrl: 'https://wa.me/6281139404640',
     },
   } as any);
 }
