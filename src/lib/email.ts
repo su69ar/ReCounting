@@ -27,12 +27,12 @@ const handlebarsOptions = {
     extName: '.hbs',
     partialsDir: path.resolve('./src/emails/templates'),
     defaultLayout: false,
+    helpers: {
+      eq: (a: unknown, b: unknown) => a === b,
+    },
   },
   viewPath: path.resolve('./src/emails/templates'),
   extName: '.hbs',
-  helpers: {
-    eq: (a: unknown, b: unknown) => a === b,
-  },
 } as const;
 
 transporter.use('compile', hbs(handlebarsOptions as any));
