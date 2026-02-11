@@ -10,7 +10,7 @@ export const siteConfig = {
   address: "Jalan Sedap Malam No 9A Sanur Kaja, Denpasar - Bali",
   hours: "Mon–Fri, 08:00–17:00 WITA",
   socials: {
-    instagram: "https://www.instagram.com/recounting",
+    instagram: "https://www.instagram.com/recountingasia/",
     linkedin: "https://www.linkedin.com/company/recounting",
     facebook: "https://www.facebook.com/recounting",
   },
