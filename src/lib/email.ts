@@ -1,0 +1,86 @@
+import nodemailer from 'nodemailer';
+import { hbs } from 'nodemailer-express-handlebars';
+import path from 'path';
+
+export interface EmailData {
+  name: string;
+  email: string;
+  phone?: string;
+  service?: string;
+  message?: string;
+  transaction_volume?: string;
+  source: string;
+}
+
+const transporter = nodemailer.createTransport({
+  host: 'smtp.gmail.com',
+  port: 587,
+  secure: false,
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_APP_PASSWORD,
+  },
+});
+
+const handlebarsOptions = {
+  viewEngine: {
+    extName: '.hbs',
+    partialsDir: path.resolve('./src/emails/templates'),
+    defaultLayout: false,
+  },
+  viewPath: path.resolve('./src/emails/templates'),
+  extName: '.hbs',
+};
+
+transporter.use('compile', hbs(handlebarsOptions));
+
+export async function sendUserNotificationEmail(data: EmailData) {
+  const subject = data.source === 'free-consultation' 
+    ? 'Your Free Consultation Request - ReCounting'
+    : 'Thank You for Contacting ReCounting';
+
+  await transporter.sendMail({
+    from: `"ReCounting" <${process.env.EMAIL_FROM || process.env.EMAIL_USER}>`,
+    to: data.email,
+    subject,
+    template: data.source === 'free-consultation' ? 'user-consultation' : 'user-contact',
+    context: {
+      ...data,
+      year: new Date().getFullYear(),
+      companyEmail: process.env.EMAIL_USER,
+      companyPhone: '+62 812 3456 7890',
+      whatsappUrl: 'https://wa.me/6281234567890',
+    },
+  });
+}
+
+export async function sendAdminNotificationEmail(data: EmailData) {
+  const subject = data.source === 'free-consultation'
+    ? `New Free Consultation Request - ${data.name}`
+    : `New Contact Form Submission - ${data.name}`;
+
+  await transporter.sendMail({
+    from: `"ReCounting Website" <${process.env.EMAIL_FROM || process.env.EMAIL_USER}>`,
+    to: process.env.ADMIN_EMAIL || process.env.EMAIL_USER,
+    subject,
+    template: 'admin-notification',
+    context: {
+      ...data,
+      submittedAt: new Date().toLocaleString('en-ID', { timeZone: 'Asia/Makassar' }),
+      year: new Date().getFullYear(),
+    },
+  });
+}
+
+export async function sendEmails(data: EmailData) {
+  try {
+    await Promise.all([
+      sendUserNotificationEmail(data),
+      sendAdminNotificationEmail(data),
+    ]);
+    return { success: true };
+  } catch (error) {
+    console.error('Email sending failed:', error);
+    return { success: false, error };
+  }
+}

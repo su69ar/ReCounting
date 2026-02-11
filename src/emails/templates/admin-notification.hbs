@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Lead Notification - ReCounting</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      background-color: #f1f5f9;
+    }
+    .email-container {
+      max-width: 700px;
+      margin: 0 auto;
+      background-color: #ffffff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .header {
+      background: linear-gradient(135deg, #1f4c68 0%, #143649 100%);
+      padding: 30px;
+      color: #ffffff;
+    }
+    .header-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin: 0 0 8px 0;
+    }
+    .header-subtitle {
+      font-size: 14px;
+      color: #cbd5e1;
+      margin: 0;
+    }
+    .badge {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-top: 12px;
+    }
+    .badge-consultation {
+      background: linear-gradient(135deg, #1f4c68, #143649);
+      color: #ffffff;
+    }
+    .badge-contact {
+      background: linear-gradient(135deg, #1f4c68, #143649);
+      color: #ffffff;
+    }
+    .content {
+      padding: 30px;
+    }
+    .section {
+      margin-bottom: 30px;
+    }
+    .section-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #64748b;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 10px;
+    }
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+    .info-item {
+      display: flex;
+      flex-direction: column;
+    }
+    .info-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #64748b;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .info-value {
+      font-size: 14px;
+      color: #1e293b;
+      font-weight: 500;
+    }
+    .info-value-highlight {
+      font-size: 16px;
+      color: #c1fd73;
+      font-weight: 600;
+    }
+    .message-box {
+      background-color: #f8fafc;
+      border-left: 4px solid #1f4c68;
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 10px;
+    }
+    .message-text {
+      font-size: 14px;
+      color: #475569;
+      line-height: 1.6;
+      margin: 0;
+    }
+    .meta-box {
+      background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+      border-radius: 8px;
+      padding: 15px;
+      font-size: 12px;
+      color: #64748b;
+    }
+    .meta-item {
+      display: flex;
+      margin-bottom: 6px;
+    }
+    .meta-label {
+      font-weight: 600;
+      min-width: 100px;
+    }
+    .cta-section {
+      background: linear-gradient(135deg, #f0f5f9 0%, #f4f8f6 100%);
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 25px;
+      text-align: center;
+    }
+    .cta-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1f4c68;
+      margin-bottom: 12px;
+    }
+    .cta-buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .cta-button {
+      display: inline-block;
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 13px;
+    }
+    .cta-button-primary {
+      background: linear-gradient(135deg, #1f4c68, #143649);
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(31, 76, 104, 0.3);
+    }
+    .cta-button-secondary {
+      background-color: #ffffff;
+      color: #1f4c68;
+      border: 2px solid #1f4c68;
+    }
+    .footer {
+      background-color: #f8fafc;
+      padding: 20px;
+      text-align: center;
+      border-top: 1px solid #e2e8f0;
+      font-size: 12px;
+      color: #94a3b8;
+    }
+    @media only screen and (max-width: 600px) {
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+      .cta-buttons {
+        flex-direction: column;
+      }
+      .cta-button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="email-container">
+    <div class="header">
+      <h1 class="header-title">🎉 New Lead Received</h1>
+      <p class="header-subtitle">Someone is interested in ReCounting services</p>
+      <span class="badge {{#if (eq source 'free-consultation')}}badge-consultation{{else}}badge-contact{{/if}}">
+        {{#if (eq source 'free-consultation')}}Free Consultation Request{{else}}Contact Form{{/if}}
+      </span>
+    </div>
+
+    <div class="content">
+      <div class="section">
+        <div class="section-title">Contact Information</div>
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="info-label">Name</span>
+            <span class="info-value info-value-highlight">{{name}}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Email</span>
+            <span class="info-value">
+              <a href="mailto:{{email}}" style="color: #1f4c68; text-decoration: none;">{{email}}</a>
+            </span>
+          </div>
+          {{#if phone}}
+          <div class="info-item">
+            <span class="info-label">Phone / WhatsApp</span>
+            <span class="info-value">
+              <a href="https://wa.me/{{phone}}" style="color: #1f4c68; text-decoration: none;">{{phone}}</a>
+            </span>
+          </div>
+          {{/if}}
+          <div class="info-item">
+            <span class="info-label">Service Interest</span>
+            <span class="info-value">{{service}}</span>
+          </div>
+          {{#if transaction_volume}}
+          <div class="info-item">
+            <span class="info-label">Transaction Volume</span>
+            <span class="info-value">{{transaction_volume}}</span>
+          </div>
+          {{/if}}
+        </div>
+      </div>
+
+      {{#if message}}
+      <div class="section">
+        <div class="section-title">Message</div>
+        <div class="message-box">
+          <p class="message-text">{{message}}</p>
+        </div>
+      </div>
+      {{/if}}
+
+      <div class="section">
+        <div class="section-title">Submission Details</div>
+        <div class="meta-box">
+          <div class="meta-item">
+            <span class="meta-label">Submitted:</span>
+            <span>{{submittedAt}}</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Source:</span>
+            <span>{{source}}</span>
+          </div>
+          {{#if userAgent}}
+          <div class="meta-item">
+            <span class="meta-label">User Agent:</span>
+            <span style="word-break: break-all;">{{userAgent}}</span>
+          </div>
+          {{/if}}
+        </div>
+      </div>
+
+      <div class="cta-section">
+        <div class="cta-title">📞 Respond within 2 hours to convert this lead!</div>
+        <div class="cta-buttons">
+          {{#if phone}}
+          <a href="https://wa.me/{{phone}}" class="cta-button cta-button-primary">Reply on WhatsApp</a>
+          {{/if}}
+          <a href="mailto:{{email}}" class="cta-button cta-button-secondary">Send Email</a>
+          <a href="https://recounting.asia" class="cta-button cta-button-secondary">View Website</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>This is an automated notification from the ReCounting website.</p>
+      <p>© {{year}} ReCounting. All rights reserved.</p>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Free Consultation Request - ReCounting</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      background-color: #f8fafc;
+    }
+    .email-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #ffffff;
+    }
+    .header {
+      background: linear-gradient(135deg, #1f4c68 0%, #143649 100%);
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .header h1 {
+      color: #ffffff;
+      font-size: 28px;
+      margin: 0;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    .content {
+      padding: 40px 30px;
+    }
+    .greeting {
+      font-size: 20px;
+      color: #1e293b;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+    .message {
+      color: #475569;
+      line-height: 1.7;
+      margin-bottom: 30px;
+      font-size: 15px;
+    }
+    .info-box {
+      background: linear-gradient(135deg, #f0f5f9 0%, #f4f8f6 100%);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 25px 0;
+      border-left: 4px solid #1f4c68;
+    }
+    .info-box-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1f4c68;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .info-item {
+      display: flex;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+    .info-label {
+      font-weight: 600;
+      color: #334155;
+      min-width: 140px;
+    }
+    .info-value {
+      color: #64748b;
+    }
+    .expectation-list {
+      margin: 25px 0;
+      padding: 0;
+      list-style: none;
+    }
+    .expectation-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 15px;
+      font-size: 15px;
+      color: #475569;
+    }
+    .expectation-icon {
+      width: 24px;
+      height: 24px;
+      background: linear-gradient(135deg, #1f4c68, #143649);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 12px;
+      flex-shrink: 0;
+      color: white;
+      font-weight: bold;
+      font-size: 12px;
+    }
+    .cta-button {
+      display: inline-block;
+      background: linear-gradient(135deg, #1f4c68 0%, #143649 100%);
+      color: #ffffff;
+      padding: 14px 32px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      margin: 20px 0;
+      box-shadow: 0 4px 14px rgba(31, 76, 104, 0.4);
+    }
+    .footer {
+      background-color: #f1f5f9;
+      padding: 30px;
+      text-align: center;
+      border-top: 1px solid #e2e8f0;
+    }
+    .footer-text {
+      color: #64748b;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .footer-link {
+      color: #1f4c68;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .social-links {
+      margin-top: 15px;
+    }
+    .social-links a {
+      display: inline-block;
+      margin: 0 8px;
+      color: #3b82f6;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <div class="email-container">
+    <div class="header">
+      <h1>ReCounting</h1>
+    </div>
+
+    <div class="content">
+      <h2 class="greeting">Hi {{name}},</h2>
+      
+      <p class="message">
+        Thank you for requesting a free consultation with ReCounting! We're excited to learn more about your business and how we can help with your bookkeeping and tax compliance needs.
+      </p>
+
+      <div class="info-box">
+        <div class="info-box-title">Your Request Details</div>
+        <div class="info-item">
+          <span class="info-label">Service Interest:</span>
+          <span class="info-value">{{service}}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Transaction Volume:</span>
+          <span class="info-value">{{transaction_volume}}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Email:</span>
+          <span class="info-value">{{email}}</span>
+        </div>
+        {{#if phone}}
+        <div class="info-item">
+          <span class="info-label">Phone:</span>
+          <span class="info-value">{{phone}}</span>
+        </div>
+        {{/if}}
+      </div>
+
+      <p class="message">
+        <strong>What happens next:</strong>
+      </p>
+
+      <ul class="expectation-list">
+        <li class="expectation-item">
+          <span class="expectation-icon">1</span>
+          <span>Our senior accountant will review your information within 2 hours during business days</span>
+        </li>
+        <li class="expectation-item">
+          <span class="expectation-icon">2</span>
+          <span>We'll contact you via WhatsApp or email to schedule your 30-minute discovery call</span>
+        </li>
+        <li class="expectation-item">
+          <span class="expectation-icon">3</span>
+          <span>You'll receive personalized recommendations for your bookkeeping and tax compliance needs</span>
+        </li>
+      </ul>
+
+      <div style="text-align: center;">
+        <a href="{{whatsappUrl}}" class="cta-button">Chat on WhatsApp</a>
+      </div>
+
+      <p class="message">
+        If you have any questions or need immediate assistance, feel free to reach out to us directly:
+      </p>
+
+      <p class="message">
+        <strong>Email:</strong> <a href="mailto:{{companyEmail}}" class="footer-link">{{companyEmail}}</a><br>
+        <strong>WhatsApp:</strong> <a href="{{whatsappUrl}}" class="footer-link">{{companyPhone}}</a>
+      </p>
+
+      <p class="message">
+        We look forward to helping your business grow!
+      </p>
+
+      <p class="message">
+        Best regards,<br>
+        <strong>The ReCounting Team</strong>
+      </p>
+    </div>
+
+    <div class="footer">
+      <p class="footer-text">
+        You're receiving this email because you requested a free consultation at ReCounting.
+      </p>
+      <div class="social-links">
+        <a href="https://recounting.asia" style="color: #c1fd73;">Website</a>
+        <a href="https://wa.me/6281234567890" style="color: #c1fd73;">WhatsApp</a>
+        <a href="mailto:{{companyEmail}}" style="color: #c1fd73;">Email</a>
+      </div>
+      <p class="footer-text" style="margin-top: 15px;">
+        © {{year}} ReCounting. All rights reserved.
+      </p>
+    </div>
+  </div>
+</body>
+</html>

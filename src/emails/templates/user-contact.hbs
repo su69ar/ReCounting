@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thank You for Contacting ReCounting</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      background-color: #f8fafc;
+    }
+    .email-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #ffffff;
+    }
+    .header {
+      background: linear-gradient(135deg, #1f4c68 0%, #143649 100%);
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .header h1 {
+      color: #ffffff;
+      font-size: 28px;
+      margin: 0;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    .content {
+      padding: 40px 30px;
+    }
+    .greeting {
+      font-size: 20px;
+      color: #1e293b;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+    .message {
+      color: #475569;
+      line-height: 1.7;
+      margin-bottom: 20px;
+      font-size: 15px;
+    }
+    .info-box {
+      background: linear-gradient(135deg, #f0f5f9 0%, #f4f8f6 100%);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 25px 0;
+      border-left: 4px solid #1f4c68;
+    }
+    .info-box-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1f4c68;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .info-item {
+      display: flex;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+    .info-label {
+      font-weight: 600;
+      color: #334155;
+      min-width: 140px;
+    }
+    .info-value {
+      color: #64748b;
+    }
+    .message-preview {
+      background-color: #f8fafc;
+      border-radius: 8px;
+      padding: 15px;
+      margin: 20px 0;
+      border-left: 3px solid #e2e8f0;
+    }
+    .message-preview-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: #64748b;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .message-preview-text {
+      font-size: 14px;
+      color: #475569;
+      line-height: 1.6;
+      font-style: italic;
+    }
+    .response-time-box {
+      background: linear-gradient(135deg, #f0f5f9 0%, #f4f8f6 100%);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 25px 0;
+      text-align: center;
+    }
+    .response-time-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1f4c68;
+      margin-bottom: 8px;
+    }
+    .response-time-text {
+      font-size: 14px;
+      color: #475569;
+      line-height: 1.6;
+    }
+    .cta-button {
+      display: inline-block;
+      background: linear-gradient(135deg, #1f4c68 0%, #143649 100%);
+      color: #ffffff;
+      padding: 14px 32px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      margin: 20px 0;
+      box-shadow: 0 4px 14px rgba(31, 76, 104, 0.4);
+    }
+    .footer {
+      background-color: #f1f5f9;
+      padding: 30px;
+      text-align: center;
+      border-top: 1px solid #e2e8f0;
+    }
+    .footer-text {
+      color: #64748b;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .footer-link {
+      color: #1f4c68;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .social-links {
+      margin-top: 15px;
+    }
+    .social-links a {
+      display: inline-block;
+      margin: 0 8px;
+      color: #3b82f6;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <div class="email-container">
+    <div class="header">
+      <h1>ReCounting</h1>
+    </div>
+
+    <div class="content">
+      <h2 class="greeting">Hi {{name}},</h2>
+      
+      <p class="message">
+        Thank you for reaching out to ReCounting! We've received your message and our team will get back to you shortly.
+      </p>
+
+      <div class="info-box">
+        <div class="info-box-title">Your Message Details</div>
+        <div class="info-item">
+          <span class="info-label">Service Interest:</span>
+          <span class="info-value">{{service}}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Email:</span>
+          <span class="info-value">{{email}}</span>
+        </div>
+        {{#if phone}}
+        <div class="info-item">
+          <span class="info-label">Phone:</span>
+          <span class="info-value">{{phone}}</span>
+        </div>
+        {{/if}}
+      </div>
+
+      {{#if message}}
+      <div class="message-preview">
+        <div class="message-preview-label">Your Message</div>
+        <div class="message-preview-text">{{message}}</div>
+      </div>
+      {{/if}}
+
+      <div class="response-time-box">
+        <div class="response-time-title">⚡ Fast Response Guaranteed</div>
+        <div class="response-time-text">
+          We respond to all inquiries within 2 hours during business days (Mon-Fri, 08:00-17:00 WITA).
+        </div>
+      </div>
+
+      <div style="text-align: center;">
+        <a href="{{whatsappUrl}}" class="cta-button">Chat on WhatsApp</a>
+      </div>
+
+      <p class="message">
+        <strong>Need immediate assistance?</strong> Feel free to reach out to us directly:
+      </p>
+
+      <p class="message">
+        <strong>Email:</strong> <a href="mailto:{{companyEmail}}" class="footer-link">{{companyEmail}}</a><br>
+        <strong>WhatsApp:</strong> <a href="{{whatsappUrl}}" class="footer-link">{{companyPhone}}</a>
+      </p>
+
+      <p class="message">
+        We're here to help your business succeed!
+      </p>
+
+      <p class="message">
+        Best regards,<br>
+        <strong>The ReCounting Team</strong>
+      </p>
+    </div>
+
+    <div class="footer">
+      <p class="footer-text">
+        You're receiving this email because you submitted the contact form at ReCounting.
+      </p>
+      <div class="social-links">
+        <a href="https://recounting.asia" style="color: #c1fd73;">Website</a>
+        <a href="https://wa.me/6281234567890" style="color: #c1fd73;">WhatsApp</a>
+        <a href="mailto:{{companyEmail}}" style="color: #c1fd73;">Email</a>
+      </div>
+      <p class="footer-text" style="margin-top: 15px;">
+        © {{year}} ReCounting. All rights reserved.
+      </p>
+    </div>
+  </div>
+</body>
+</html>
