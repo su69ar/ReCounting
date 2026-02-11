@@ -1,244 +1,190 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <meta name="supported-color-schemes" content="light dark">
   <title>Thank You for Contacting ReCounting</title>
+  <!--[if mso]>
+  <noscript>
+    <xml>
+      <o:OfficeDocumentSettings>
+        <o:PixelsPerInch>96</o:PixelsPerInch>
+      </o:OfficeDocumentSettings>
+    </xml>
+  </noscript>
+  <![endif]-->
   <style>
+    :root {
+      color-scheme: light dark;
+      supported-color-schemes: light dark;
+    }
     body {
       margin: 0;
       padding: 0;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-      background-color: #f8fafc;
+      background-color: #f4f4f4;
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
     }
-    .email-container {
-      max-width: 600px;
-      margin: 0 auto;
-      background-color: #ffffff;
+    table { border-spacing: 0; }
+    td { padding: 0; }
+    img { border: 0; display: block; }
+    @media (prefers-color-scheme: dark) {
+      .email-body { background-color: #1a1a1a !important; }
+      .email-container { background-color: #2d2d2d !important; }
+      .header-banner { background-color: #1f4c68 !important; }
+      .content-cell { background-color: #2d2d2d !important; }
+      .greeting { color: #f0f0f0 !important; }
+      .body-text { color: #d4d4d4 !important; }
+      .info-box { background-color: #3a3a3a !important; }
+      .info-box-title { color: #8bc4e0 !important; }
+      .info-label { color: #c0c0c0 !important; }
+      .info-value { color: #e0e0e0 !important; }
+      .msg-preview { background-color: #3a3a3a !important; }
+      .msg-preview-label { color: #a0a0a0 !important; }
+      .msg-preview-text { color: #d4d4d4 !important; }
+      .response-box { background-color: #3a3a3a !important; }
+      .response-title { color: #8bc4e0 !important; }
+      .response-text { color: #d4d4d4 !important; }
+      .contact-link { color: #8bc4e0 !important; }
     }
-    .header {
-      background: linear-gradient(135deg, #1f4c68 0%, #143649 100%);
-      padding: 30px 20px;
-      text-align: center;
-    }
-    .logo {
-      max-width: 180px;
-      height: auto;
-      margin-bottom: 10px;
-    }
-    .header h1 {
-      color: #ffffff;
-      font-size: 24px;
-      margin: 10px 0 0 0;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-    }
-    .content {
-      padding: 40px 30px;
-    }
-    .greeting {
-      font-size: 20px;
-      color: #1e293b;
-      margin-bottom: 20px;
-      font-weight: 600;
-    }
-    .message {
-      color: #475569;
-      line-height: 1.7;
-      margin-bottom: 20px;
-      font-size: 15px;
-    }
-    .info-box {
-      background: linear-gradient(135deg, #f0f5f9 0%, #f4f8f6 100%);
-      border-radius: 12px;
-      padding: 20px;
-      margin: 25px 0;
-      border-left: 4px solid #1f4c68;
-    }
-    .info-box-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: #1f4c68;
-      margin-bottom: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .info-item {
-      display: flex;
-      margin-bottom: 10px;
-      font-size: 14px;
-    }
-    .info-label {
-      font-weight: 600;
-      color: #334155;
-      min-width: 140px;
-    }
-    .info-value {
-      color: #64748b;
-    }
-    .message-preview {
-      background-color: #f8fafc;
-      border-radius: 8px;
-      padding: 15px;
-      margin: 20px 0;
-      border-left: 3px solid #e2e8f0;
-    }
-    .message-preview-label {
-      font-size: 12px;
-      font-weight: 600;
-      color: #64748b;
-      margin-bottom: 8px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .message-preview-text {
-      font-size: 14px;
-      color: #475569;
-      line-height: 1.6;
-      font-style: italic;
-    }
-    .response-time-box {
-      background: linear-gradient(135deg, #f0f5f9 0%, #f4f8f6 100%);
-      border-radius: 12px;
-      padding: 20px;
-      margin: 25px 0;
-      text-align: center;
-    }
-    .response-time-title {
-      font-size: 16px;
-      font-weight: 700;
-      color: #1f4c68;
-      margin-bottom: 8px;
-    }
-    .response-time-text {
-      font-size: 14px;
-      color: #475569;
-      line-height: 1.6;
-    }
-    .cta-button {
-      display: inline-block;
-      background: linear-gradient(135deg, #1f4c68 0%, #143649 100%);
-      color: #ffffff;
-      padding: 14px 32px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 15px;
-      margin: 20px 0;
-      box-shadow: 0 4px 14px rgba(31, 76, 104, 0.4);
-    }
-    .footer {
-      background: linear-gradient(135deg, #1f4c68 0%, #143649 100%);
-      padding: 30px;
-      text-align: center;
-    }
-    .footer-text {
-      color: #e2e8f0;
-      font-size: 13px;
-      line-height: 1.6;
-    }
-    .footer-link {
-      color: #c1fd73;
-      text-decoration: none;
-      font-weight: 500;
-    }
-    .social-links {
-      margin-top: 15px;
-    }
-    .social-links a {
-      display: inline-block;
-      margin: 0 8px;
-      color: #c1fd73;
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 500;
-    }
-    .social-links a:hover {
-      text-decoration: underline;
-    }
+    [data-ogsc] .email-body { background-color: #1a1a1a !important; }
+    [data-ogsc] .email-container { background-color: #2d2d2d !important; }
+    [data-ogsc] .header-banner { background-color: #1f4c68 !important; }
+    [data-ogsc] .content-cell { background-color: #2d2d2d !important; }
+    [data-ogsc] .greeting { color: #f0f0f0 !important; }
+    [data-ogsc] .body-text { color: #d4d4d4 !important; }
+    [data-ogsc] .info-box { background-color: #3a3a3a !important; }
+    [data-ogsc] .info-box-title { color: #8bc4e0 !important; }
+    [data-ogsc] .info-label { color: #c0c0c0 !important; }
+    [data-ogsc] .info-value { color: #e0e0e0 !important; }
+    [data-ogsc] .msg-preview { background-color: #3a3a3a !important; }
+    [data-ogsc] .msg-preview-label { color: #a0a0a0 !important; }
+    [data-ogsc] .msg-preview-text { color: #d4d4d4 !important; }
+    [data-ogsc] .response-box { background-color: #3a3a3a !important; }
+    [data-ogsc] .response-title { color: #8bc4e0 !important; }
+    [data-ogsc] .response-text { color: #d4d4d4 !important; }
+    [data-ogsc] .contact-link { color: #8bc4e0 !important; }
   </style>
 </head>
-<body>
-  <div class="email-container">
-    <div class="header">
-      <img src="https://recounting.my.id/assets/ReCounting_Logo_Accounting_Services.png" alt="ReCounting Logo" class="logo">
-    </div>
+<body class="email-body" style="margin: 0; padding: 0; background-color: #f4f4f4; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: #f4f4f4;">
+    <tr>
+      <td align="center" style="padding: 20px 10px;">
+        <table role="presentation" class="email-container" width="600" cellpadding="0" cellspacing="0" style="max-width: 600px; width: 100%; background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+          <!-- Header / Banner -->
+          <tr>
+            <td class="header-banner" align="center" style="background-color: #f8f8f8; padding: 32px 20px;">
+              <img src="https://recounting.my.id/assets/ReCounting_Logo_Accounting_Services.png" alt="ReCounting" width="180" style="max-width: 180px; height: auto; display: block;">
+            </td>
+          </tr>
+          <!-- Content -->
+          <tr>
+            <td class="content-cell" style="background-color: #ffffff; padding: 40px 32px;">
+              <h2 class="greeting" style="font-size: 20px; color: #1e293b; margin: 0 0 20px 0; font-weight: 600;">Hi {{name}},</h2>
 
-    <div class="content">
-      <h2 class="greeting">Hi {{name}},</h2>
+              <p class="body-text" style="color: #333333; line-height: 1.7; margin: 0 0 28px 0; font-size: 15px;">
+                Thank you for reaching out to ReCounting! We've received your message and our team will get back to you shortly.
+              </p>
 
-      <p class="message">
-        Thank you for reaching out to ReCounting! We've received your message and our team will get back to you shortly.
-      </p>
+              <!-- Info Box -->
+              <table role="presentation" class="info-box" width="100%" cellpadding="0" cellspacing="0" style="background-color: #f5f7fa; border-radius: 10px; border-left: 4px solid #1f4c68; margin-bottom: 28px;">
+                <tr>
+                  <td style="padding: 20px;">
+                    <p class="info-box-title" style="font-size: 13px; font-weight: 700; color: #1f4c68; margin: 0 0 14px 0; text-transform: uppercase; letter-spacing: 0.5px;">Your Message Details</p>
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td class="info-label" style="font-weight: 600; color: #333333; padding: 5px 0; width: 150px; font-size: 14px;">Service Interest:</td>
+                        <td class="info-value" style="color: #555555; padding: 5px 0; font-size: 14px;">{{service}}</td>
+                      </tr>
+                      <tr>
+                        <td class="info-label" style="font-weight: 600; color: #333333; padding: 5px 0; width: 150px; font-size: 14px;">Email:</td>
+                        <td class="info-value" style="color: #555555; padding: 5px 0; font-size: 14px;">{{email}}</td>
+                      </tr>
+                      {{#if phone}}
+                      <tr>
+                        <td class="info-label" style="font-weight: 600; color: #333333; padding: 5px 0; width: 150px; font-size: 14px;">Phone:</td>
+                        <td class="info-value" style="color: #555555; padding: 5px 0; font-size: 14px;">{{phone}}</td>
+                      </tr>
+                      {{/if}}
+                    </table>
+                  </td>
+                </tr>
+              </table>
 
-      <div class="info-box">
-        <div class="info-box-title">Your Message Details</div>
-        <div class="info-item">
-          <span class="info-label">Service Interest:</span>
-          <span class="info-value">{{service}}</span>
-        </div>
-        <div class="info-item">
-          <span class="info-label">Email:</span>
-          <span class="info-value">{{email}}</span>
-        </div>
-        {{#if phone}}
-        <div class="info-item">
-          <span class="info-label">Phone:</span>
-          <span class="info-value">{{phone}}</span>
-        </div>
-        {{/if}}
-      </div>
+              {{#if message}}
+              <!-- Message Preview -->
+              <table role="presentation" class="msg-preview" width="100%" cellpadding="0" cellspacing="0" style="background-color: #f8fafc; border-radius: 8px; border-left: 3px solid #e2e8f0; margin-bottom: 28px;">
+                <tr>
+                  <td style="padding: 16px;">
+                    <p class="msg-preview-label" style="font-size: 12px; font-weight: 600; color: #64748b; margin: 0 0 8px 0; text-transform: uppercase; letter-spacing: 0.5px;">Your Message</p>
+                    <p class="msg-preview-text" style="font-size: 14px; color: #333333; line-height: 1.6; font-style: italic; margin: 0;">{{message}}</p>
+                  </td>
+                </tr>
+              </table>
+              {{/if}}
 
-      {{#if message}}
-      <div class="message-preview">
-        <div class="message-preview-label">Your Message</div>
-        <div class="message-preview-text">{{message}}</div>
-      </div>
-      {{/if}}
+              <!-- Response Time Box -->
+              <table role="presentation" class="response-box" width="100%" cellpadding="0" cellspacing="0" style="background-color: #f5f7fa; border-radius: 10px; margin-bottom: 28px;">
+                <tr>
+                  <td align="center" style="padding: 20px;">
+                    <p class="response-title" style="font-size: 16px; font-weight: 700; color: #1f4c68; margin: 0 0 8px 0;">Fast Response Guaranteed</p>
+                    <p class="response-text" style="font-size: 14px; color: #333333; line-height: 1.6; margin: 0;">
+                      We respond to all inquiries within 2 hours during business days (Mon-Fri, 08:00-17:00 WITA).
+                    </p>
+                  </td>
+                </tr>
+              </table>
 
-      <div class="response-time-box">
-        <div class="response-time-title">⚡ Fast Response Guaranteed</div>
-        <div class="response-time-text">
-          We respond to all inquiries within 2 hours during business days (Mon-Fri, 08:00-17:00 WITA).
-        </div>
-      </div>
+              <!-- CTA Button -->
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td align="center" style="padding: 8px 0 28px 0;">
+                    <a href="{{whatsappUrl}}" style="display: inline-block; background-color: #1f4c68; color: #ffffff; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 15px;">Chat on WhatsApp</a>
+                  </td>
+                </tr>
+              </table>
 
-      <div style="text-align: center;">
-        <a href="{{whatsappUrl}}" class="cta-button">Chat on WhatsApp</a>
-      </div>
+              <p class="body-text" style="color: #333333; line-height: 1.7; margin: 0 0 16px 0; font-size: 15px;">
+                <strong>Need immediate assistance?</strong> Feel free to reach out to us directly:
+              </p>
 
-      <p class="message">
-        <strong>Need immediate assistance?</strong> Feel free to reach out to us directly:
-      </p>
+              <p class="body-text" style="color: #333333; line-height: 1.7; margin: 0 0 16px 0; font-size: 15px;">
+                <strong>Email:</strong> <a href="mailto:{{companyEmail}}" class="contact-link" style="color: #1f4c68; text-decoration: none;">{{companyEmail}}</a><br>
+                <strong>WhatsApp:</strong> <a href="{{whatsappUrl}}" class="contact-link" style="color: #1f4c68; text-decoration: none;">{{companyPhone}}</a>
+              </p>
 
-      <p class="message">
-        <strong>Email:</strong> <a href="mailto:{{companyEmail}}" class="footer-link">{{companyEmail}}</a><br>
-        <strong>WhatsApp:</strong> <a href="{{whatsappUrl}}" class="footer-link">{{companyPhone}}</a>
-      </p>
+              <p class="body-text" style="color: #333333; line-height: 1.7; margin: 0 0 16px 0; font-size: 15px;">
+                We're here to help your business succeed!
+              </p>
 
-      <p class="message">
-        We're here to help your business succeed!
-      </p>
-
-      <p class="message">
-        Best regards,<br>
-        <strong>The ReCounting Team</strong>
-      </p>
-    </div>
-
-    <div class="footer">
-      <p class="footer-text">
-        You're receiving this email because you submitted the contact form at ReCounting.
-      </p>
-      <div class="social-links">
-        <a href="https://recounting.my.id">Website</a>
-        <a href="{{whatsappUrl}}">WhatsApp</a>
-        <a href="mailto:{{companyEmail}}">Email</a>
-      </div>
-      <p class="footer-text" style="margin-top: 15px;">
-        © {{year}} ReCounting. All rights reserved. Part of <a href="https://balimicrotechnology.com" style="color: #c1fd73; text-decoration: none; font-weight: 500;">Bali Micro Technology</a>
-      </p>
-    </div>
-  </div>
+              <p class="body-text" style="color: #333333; line-height: 1.7; margin: 0; font-size: 15px;">
+                Best regards,<br>
+                <strong>The ReCounting Team</strong>
+              </p>
+            </td>
+          </tr>
+          <!-- Footer -->
+          <tr>
+            <td align="center" style="background-color: #1f4c68; padding: 28px 20px;">
+              <p style="color: #e2e8f0; font-size: 13px; line-height: 1.6; margin: 0 0 12px 0;">
+                You're receiving this email because you submitted the contact form at ReCounting.
+              </p>
+              <p style="margin: 0 0 12px 0;">
+                <a href="https://recounting.my.id" style="color: #c1fd73; text-decoration: none; font-size: 13px; font-weight: 500; margin: 0 8px;">Website</a>
+                <a href="{{whatsappUrl}}" style="color: #c1fd73; text-decoration: none; font-size: 13px; font-weight: 500; margin: 0 8px;">WhatsApp</a>
+                <a href="mailto:{{companyEmail}}" style="color: #c1fd73; text-decoration: none; font-size: 13px; font-weight: 500; margin: 0 8px;">Email</a>
+              </p>
+              <p style="color: #e2e8f0; font-size: 13px; line-height: 1.6; margin: 0;">
+                &copy; {{year}} ReCounting. All rights reserved. Part of <a href="https://balimicrotechnology.com" style="color: #c1fd73; text-decoration: none; font-weight: 500;">Bali Micro Technology</a>
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
 </body>
 </html>

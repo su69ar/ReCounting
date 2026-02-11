@@ -59,9 +59,12 @@ export async function sendAdminNotificationEmail(data: EmailData) {
     ? `New Free Consultation Request - ${data.name}`
     : `New Contact Form Submission - ${data.name}`;
 
+  const adminEmail = process.env.ADMIN_EMAIL || process.env.EMAIL_USER;
+
   await transporter.sendMail({
     from: `"ReCounting Website" <${process.env.EMAIL_FROM || process.env.EMAIL_USER}>`,
-    to: process.env.ADMIN_EMAIL || process.env.EMAIL_USER,
+    to: adminEmail,
+    replyTo: data.email,
     subject,
     template: 'admin-notification',
     context: {
@@ -74,13 +77,11 @@ export async function sendAdminNotificationEmail(data: EmailData) {
 
 export async function sendEmails(data: EmailData) {
   try {
-    await Promise.all([
-      sendUserNotificationEmail(data),
-      sendAdminNotificationEmail(data),
-    ]);
+    await sendUserNotificationEmail(data);
+    await sendAdminNotificationEmail(data);
     return { success: true };
   } catch (error) {
     console.error('Email sending failed:', error);
-    return { success: false, error };
+    throw error;
   }
 }

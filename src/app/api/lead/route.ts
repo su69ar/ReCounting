@@ -1,8 +1,17 @@
 import { sendEmails, type EmailData } from '@/lib/email';
 
 export async function POST(request: Request) {
-  const formData = await request.formData();
-  const payload = Object.fromEntries(formData.entries());
+  const contentType = request.headers.get('content-type') || '';
+  let payload: Record<string, string>;
+
+  if (contentType.includes('application/x-www-form-urlencoded')) {
+    const text = await request.text();
+    const params = new URLSearchParams(text);
+    payload = Object.fromEntries(params.entries());
+  } else {
+    const formData = await request.formData();
+    payload = Object.fromEntries(formData.entries()) as Record<string, string>;
+  }
 
   const leadPayload = {
     ...payload,
