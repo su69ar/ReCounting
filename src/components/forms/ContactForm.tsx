@@ -27,7 +27,8 @@ export function ContactForm({ source, submitText, showTransactionVolume }: Conta
     e.preventDefault();
     setIsSubmitting(true);
 
-    const formData = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
 
     try {
@@ -48,7 +49,7 @@ export function ContactForm({ source, submitText, showTransactionVolume }: Conta
             ? 'Consultation request submitted! We\'ll contact you soon.'
             : 'Message sent! We\'ll get back to you within 2 hours.'
         );
-        (e.currentTarget as HTMLFormElement).reset();
+        form.reset();
       } else {
         showToast('error', 'Something went wrong. Please try again or contact us on WhatsApp.');
       }
