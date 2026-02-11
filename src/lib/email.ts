@@ -30,6 +30,9 @@ const handlebarsOptions = {
   },
   viewPath: path.resolve('./src/emails/templates'),
   extName: '.hbs',
+  helpers: {
+    eq: (a: unknown, b: unknown) => a === b,
+  },
 } as const;
 
 transporter.use('compile', hbs(handlebarsOptions as any));
