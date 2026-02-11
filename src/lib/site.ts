@@ -11,7 +11,7 @@ export const siteConfig = {
   hours: "Mon–Fri, 08:00–17:00 WITA",
   socials: {
     instagram: "https://www.instagram.com/recountingasia/",
-    linkedin: "https://www.linkedin.com/in/recounting-asia-5322463b0/",
+    linkedin: "https://www.linkedin.com/in/recounting-asia-accounting-services/",
     facebook: "https://www.facebook.com/recounting",
   },
 };
