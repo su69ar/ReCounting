@@ -63,7 +63,7 @@ export const metadata: Metadata = {
     siteName: "ReCounting",
     images: [
       {
-        url: "/assets/ReCounting_Logo_Accounting_Services.png",
+        url: "/assets/logo/ReCounting_Accounting_Services_Bali.png",
         width: 1200,
         height: 630,
         alt: "ReCounting | Accounting & Bookkeeping Services in Bali",
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "ReCounting | Accounting & Bookkeeping Services in Bali",
     description: siteConfig.description,
-    images: ["/assets/ReCounting_Logo_Accounting_Services.png"],
+    images: ["/assets/logo/ReCounting_Accounting_Services_Bali.png"],
   },
   alternates: {
     canonical: siteConfig.url,
