@@ -14,8 +14,13 @@ export default function manifest(): MetadataRoute.Manifest {
         categories: ["business", "finance", "productivity"],
         icons: [
             {
-                src: "/icon.png",
-                sizes: "any",
+                src: "/assets/logo/ReCounting_Accounting_Services_Bali_Instagram.png",
+                sizes: "192x192",
+                type: "image/png",
+            },
+            {
+                src: "/assets/logo/ReCounting_Accounting_Services_Bali_Instagram.png",
+                sizes: "512x512",
                 type: "image/png",
             },
         ],
