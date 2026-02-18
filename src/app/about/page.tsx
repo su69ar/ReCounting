@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Reveal } from "@/components/animations/Reveal";
@@ -13,8 +14,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "/about" },
 };
 
-const team = [
-  { name: "Rikotama", role: "Head Accountant & Advisor", credential: "8+ years of experience in accounting and financial advisory for SMEs in Bali" },
+const team: { name: string; role: string; credential: string; image?: string }[] = [
+  { name: "Rikotama", role: "Head Accountant & Advisor", credential: "Xero Certified Advisor. 8+ years of experience in accounting", image: "/team/rikotama.png" },
   { name: "Toni Artana", role: "Tax Compliance Lead", credential: "10+ years of experience in Indonesian tax compliance, PPh, PPN, and SPT filing" },
   { name: "Medita", role: "Client Success Manager", credential: "English-first client support and onboarding for expat and local businesses" },
 ];
@@ -61,11 +62,21 @@ export default function AboutPage() {
                   {/* Glow orb background */}
                   <div className={`absolute -top-10 -right-10 w-32 h-32 bg-${color}-500/20 rounded-full blur-2xl group-hover:bg-${color}-500/30 transition-colors pointer-events-none`} />
                   
-                  {/* Avatar dengan gradient border */}
+                  {/* Avatar */}
                   <div className="mb-4 avatar-gradient w-14 h-14 group-hover:scale-105 transition-transform">
-                    <div className="avatar-gradient-inner text-lg font-bold text-[color:var(--color-primary)]">
-                      {member.name.slice(0, 1)}
-                    </div>
+                    {member.image ? (
+                      <Image
+                        src={member.image}
+                        alt={member.name}
+                        width={56}
+                        height={56}
+                        className="rounded-full object-cover w-full h-full"
+                      />
+                    ) : (
+                      <div className="avatar-gradient-inner text-lg font-bold text-[color:var(--color-primary)]">
+                        {member.name.slice(0, 1)}
+                      </div>
+                    )}
                   </div>
                   
                   <h3 className="text-lg font-semibold relative z-10">{member.name}</h3>
