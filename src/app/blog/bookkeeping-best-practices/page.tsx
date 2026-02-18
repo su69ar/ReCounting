@@ -66,7 +66,7 @@ const faqItems = [
     question:
       "How much does professional bookkeeping cost in Bali?",
     answer:
-      "Monthly bookkeeping services in Bali typically range from Rp 1,500,000 to Rp 5,000,000 depending on transaction volume and reporting complexity. This is significantly less than the cost of fixing compliance issues or paying late-filing penalties, which can reach 2% per month on unpaid taxes.",
+      "The cost of professional bookkeeping in Bali depends on your transaction volume and reporting complexity. Contact us for a tailored quote. Either way, it is significantly less than the cost of fixing compliance issues or paying late-filing penalties, which can reach 2% per month on unpaid taxes.",
   },
   {
     question:
@@ -367,11 +367,11 @@ export default function BookkeepingBestPracticesPage() {
                     confidence that your numbers are correct.
                   </p>
                   <p>
-                    The cost of professional bookkeeping in Bali ranges from
-                    Rp 1,500,000 to Rp 5,000,000 per month depending on your
-                    transaction volume and the complexity of your operations.
+                    The cost of professional bookkeeping in Bali varies depending
+                    on your transaction volume and the complexity of your
+                    operations — contact us for a tailored quote.
                     Compare that to the cost of a single DJP penalty, which can be
-                    Rp 1,000,000 per late report plus 2% per month on unpaid
+                    significant plus 2% per month on unpaid
                     taxes. The math usually favors professional help.
                   </p>
                   <p>
@@ -415,7 +415,7 @@ export default function BookkeepingBestPracticesPage() {
                     <li key={item.text} className="stagger-item flex items-center gap-3 group list-none">
                       <span className={`check-glow bg-${item.color}-500/10 text-${item.color}-500`}>
                         <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-                          <polyline points="20 6 9 17 4 12"/>
+                          <polyline points="20 6 9 17 4 12" />
                         </svg>
                       </span>
                       {item.text}

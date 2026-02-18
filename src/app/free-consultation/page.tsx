@@ -92,7 +92,7 @@ export default function FreeConsultationPage() {
               <div className="card-glow p-6 text-sm text-[color:var(--color-slate-light)] relative overflow-hidden">
                 {/* Glow orb */}
                 <div className="absolute -top-10 -right-10 w-32 h-32 bg-[color:var(--color-secondary)]/15 rounded-full blur-2xl" />
-                
+
                 <p className="badge-gradient inline-flex mb-3">
                   What to expect
                 </p>
@@ -113,8 +113,8 @@ export default function FreeConsultationPage() {
                 <div className="mt-4 glow-bar glow-bar-sm" />
               </div>
               <div className="flex flex-wrap gap-3">
-                <Link 
-                  href="/services" 
+                <Link
+                  href="/services"
                   className="btn-secondary"
                 >
                   Explore services
@@ -125,7 +125,7 @@ export default function FreeConsultationPage() {
             <MaskReveal className="relative rounded-2xl overflow-hidden">
               {/* Background glow orb */}
               <div className="absolute -top-20 -right-20 w-48 h-48 bg-[color:var(--color-primary)]/15 rounded-full blur-3xl pointer-events-none" />
-              
+
               <div className="relative card-glass rounded-2xl border border-white/40 backdrop-blur-xl p-6 shadow-2xl overflow-hidden">
                 <SplitTextHeading
                   text="Request a consultation"
@@ -231,7 +231,7 @@ export default function FreeConsultationPage() {
                   color: "accent",
                 },
                 {
-                  quote: "Saved over Rp 15 million in penalties by getting compliant on time",
+                  quote: "Avoided costly penalties by getting compliant on time",
                   color: "secondary",
                 },
               ].map((item) => (
@@ -306,13 +306,13 @@ export default function FreeConsultationPage() {
           <div className="mt-12 relative rounded-3xl overflow-hidden">
             {/* Background gradient */}
             <div className="absolute inset-0 bg-gradient-to-br from-[color:var(--color-primary)]/5 via-[color:var(--color-accent)]/5 to-[color:var(--color-secondary)]/5" />
-            
+
             {/* Animated background orbs */}
             <div className="absolute inset-0 overflow-hidden">
               <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-[color:var(--color-primary)]/20 rounded-full blur-3xl animate-pulse-slow" />
               <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-[color:var(--color-accent)]/20 rounded-full blur-3xl animate-pulse-slow-delayed" />
             </div>
-            
+
             <div className="relative card-glass border border-white/50 rounded-3xl p-8 lg:p-10 backdrop-blur-xl">
               <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
                 <div>

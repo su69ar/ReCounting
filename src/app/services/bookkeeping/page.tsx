@@ -24,7 +24,7 @@ const faqItems = [
   {
     question: "How is pricing calculated?",
     answer:
-      "Pricing starts at Rp 1,500,000/month and scales with transaction volume and reporting complexity.",
+      "Pricing is tailored to your business and scales with transaction volume and reporting complexity. Book a free consultation to get a custom quote.",
   },
   {
     question: "Can you work with foreign-owned companies?",
