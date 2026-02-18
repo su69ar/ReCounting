@@ -50,7 +50,7 @@ export const services = [
   {
     title: "Initial Setup",
     description:
-      "Chart of accounts, opening balances, fixed assets, inventory, AP/AR setup, and data migration into your accounting application.",
+      "Get your accounting system set up right — chart of accounts, opening balances, fixed assets, inventory, and AP/AR configured and ready for operations.",
     href: "/services/initial-setup",
     price: "From Rp 2,500,000 one-time",
   },

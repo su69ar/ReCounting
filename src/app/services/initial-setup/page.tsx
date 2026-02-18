@@ -9,9 +9,9 @@ import { primaryCta, secondaryCta, siteConfig } from "@/lib/site";
 import { generateServiceSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Accounting Initial Setup for Bali Businesses | Chart of Accounts, Opening Balances & Data Migration",
+  title: "Accounting Setup Services in Bali | Chart of Accounts, Opening Balances & Data Migration",
   description:
-    "Professional accounting setup services for businesses in Bali. Chart of accounts, opening balances, fixed assets, inventory, AP/AR setup, and data migration into your accounting application.",
+    "Get your accounting system set up correctly from the start. We configure your chart of accounts, opening balances, fixed assets, inventory, and AP/AR — so your books are accurate from day one. Serving businesses across Bali.",
   alternates: { canonical: "/services/initial-setup" },
 };
 
@@ -19,42 +19,42 @@ const setupServices = [
   {
     title: "Chart of Accounts Setup",
     description:
-      "We create a customized chart of accounts tailored to your business. This framework organizes all financial transactions, ensuring clarity and accuracy in tracking income, expenses, assets, and liabilities.",
+      "We build a chart of accounts structured around how your business actually operates — so every transaction lands in the right category from the start. No generic templates. Your income, expenses, assets, and liabilities are organized for clarity and faster reporting.",
     color: "primary",
     icon: "ledger",
   },
   {
     title: "Opening Balance Setup",
     description:
-      "Your financial books begin with accurate opening balances including initial assets, liabilities, and equity. Starting with the correct numbers is critical for maintaining accurate financial statements going forward.",
+      "Accurate opening balances are the foundation of reliable financial statements. We verify and enter your starting assets, liabilities, and equity so your books reflect reality from day one — no guesswork, no corrections later.",
     color: "accent",
     icon: "balance",
   },
   {
     title: "Fixed Assets Management",
     description:
-      "We handle the setup of your fixed assets including asset categorization, acquisition dates, and depreciation schedules. Every asset is properly tracked and accounted for in your financial system.",
+      "We categorize every fixed asset, record acquisition details, and configure depreciation schedules in your accounting system. Whether you have 10 assets or 250+, each one is tracked and accounted for correctly.",
     color: "secondary",
     icon: "asset",
   },
   {
     title: "Inventory & Product Setup",
     description:
-      "If your business deals with inventory, we organize and configure your inventory management system. From tracking product quantities to managing stock levels and cost of goods, everything is set up for efficiency.",
+      "We configure your inventory management so you can track stock levels, monitor cost of goods, and manage product quantities with confidence. Your inventory data goes in clean and structured — ready for daily operations.",
     color: "primary",
     icon: "inventory",
   },
   {
-    title: "Accounts Payable & Receivable",
+    title: "Accounts Payable & Receivable Setup",
     description:
-      "We establish a reliable system for managing your outstanding bills (AP) and outstanding invoices (AR). This includes organizing all vendor and customer records to ensure timely payments and collections.",
+      "We organize all outstanding bills (AP) and invoices (AR) with complete vendor and customer records. The result: a clear view of what you owe and what is owed to you, so you can manage cash flow from the start.",
     color: "accent",
     icon: "transfer",
   },
   {
-    title: "Training & Handover",
+    title: "Training & Ongoing Support",
     description:
-      "After setup, we train you and your team on how to use your accounting application for day-to-day tasks. We walk you through transaction entry, reconciliation, and report generation so your team is confident and self-sufficient.",
+      "Setup is only valuable if your team knows how to use it. We walk you through transaction entry, bank reconciliation, and report generation — then provide 3 months of post-setup support so you are never stuck.",
     color: "secondary",
     icon: "training",
   },
@@ -65,28 +65,28 @@ const processSteps = [
     step: "01",
     title: "Discovery & assessment",
     description:
-      "We review your current financial records, understand your business structure, and determine the scope of data migration needed.",
+      "We review your current financial records, understand your business structure, and scope out exactly what data needs to be migrated into your new system.",
     color: "primary",
   },
   {
     step: "02",
     title: "Data collection",
     description:
-      "We gather your existing financial data — bank statements, invoices, asset lists, inventory records, and vendor/customer information.",
+      "We collect your bank statements, invoices, asset registers, inventory records, and vendor/customer lists — everything needed to build an accurate starting point.",
     color: "accent",
   },
   {
     step: "03",
-    title: "System configuration",
+    title: "System configuration & migration",
     description:
-      "We set up your accounting application with a customized chart of accounts, configure modules, and migrate all data with verified opening balances.",
+      "We configure your accounting application with a customized chart of accounts, import all data, set up modules, and verify every opening balance for accuracy.",
     color: "secondary",
   },
   {
     step: "04",
-    title: "Verification & training",
+    title: "Verification & team training",
     description:
-      "We verify all balances, run trial reports to ensure accuracy, and train your team on daily workflows. Includes 3 months of post-setup consultation support.",
+      "We run trial balance reports, verify all figures against source records, and train your team on daily workflows. Includes 3 months of post-setup consultation support.",
     color: "primary",
   },
 ];
@@ -95,32 +95,37 @@ const faqItems = [
   {
     question: "What accounting software do you set up?",
     answer:
-      "We work with popular accounting applications used in Indonesia including Jurnal.id, Accurate, Xero, QuickBooks, and others. The setup process is tailored to your specific platform and business requirements.",
+      "We work with popular accounting applications used in Indonesia including Jurnal.id, Accurate, Xero, QuickBooks, and others. We tailor the setup to your specific platform so your chart of accounts, modules, and workflows match how your business operates.",
   },
   {
-    question: "How long does the initial setup take?",
+    question: "How long does the accounting setup take?",
     answer:
-      "The timeline depends on the complexity of your data. A simple setup with under 50 items can be completed in 3 to 5 business days. More complex migrations with 100+ items typically take 1 to 2 weeks. We provide a timeline estimate during the discovery phase.",
+      "A straightforward setup with under 50 items can be completed in 3 to 5 business days. More complex data migrations with 100+ items typically take 1 to 2 weeks. We provide a clear timeline estimate during the initial discovery phase so there are no surprises.",
   },
   {
-    question: "What if I am starting a brand new business with no existing data?",
+    question: "I am starting a new business with no existing data — can you still help?",
     answer:
-      "We handle that too. For new businesses, we set up your chart of accounts, configure your accounting application, and prepare the structure so you are ready to start recording transactions from day one. The Package A tier is designed for this scenario.",
+      "Yes. For new businesses, we configure your chart of accounts and accounting application from scratch so you are ready to record transactions from day one. Package A is designed exactly for this scenario — no prior data needed.",
+  },
+  {
+    question: "Is this a company registration or legal setup service?",
+    answer:
+      "No. This is strictly an accounting system setup service. We configure your bookkeeping and accounting software — chart of accounts, opening balances, fixed assets, inventory, and AP/AR. We do not handle notary, legal registration, or company incorporation.",
   },
   {
     question: "Do I need to provide all my data at once?",
     answer:
-      "Ideally, yes. Having all data available upfront allows us to complete the setup efficiently and ensure accurate opening balances. However, we can work in phases if needed — we will prioritize the most critical data first.",
+      "Ideally, yes — having everything upfront allows us to complete the setup efficiently and ensure accurate opening balances. However, we can work in phases if needed, prioritizing the most critical data first.",
   },
   {
     question: "What happens after the setup is complete?",
     answer:
-      "All packages include 3 months of consultation support after setup. During this period, you can reach out via WhatsApp for guidance on accounting treatment, transaction entry questions, or software usage. Many clients transition to our monthly bookkeeping service after this period.",
+      "All packages include 3 months of consultation support. During this period, you can reach out for guidance on accounting treatment, transaction entry, or software usage. Many clients transition to our monthly bookkeeping service after this period for ongoing support.",
   },
   {
-    question: "Can you migrate data from my old accounting system?",
+    question: "Can you migrate data from my old accounting system or spreadsheets?",
     answer:
-      "Yes. We regularly migrate data from spreadsheets, legacy accounting software, and other platforms into modern accounting applications. We verify all migrated data against your source records to ensure nothing is lost or miscategorized.",
+      "Yes. We regularly migrate data from spreadsheets, legacy accounting software, and other platforms into modern accounting applications. Every data point is verified against your source records to ensure nothing is lost or miscategorized.",
   },
 ];
 
@@ -145,9 +150,9 @@ const breadcrumbSchema = {
 };
 
 const serviceSchema = generateServiceSchema({
-  name: "Accounting Initial Setup",
+  name: "Accounting Setup Services in Bali",
   description:
-    "Professional accounting setup services. Chart of accounts, opening balances, fixed assets, inventory, AP/AR setup, and data migration into your accounting application.",
+    "Professional accounting system setup for businesses in Bali. Chart of accounts configuration, opening balance verification, fixed assets, inventory management, AP/AR setup, and data migration into your accounting application.",
   url: `${siteConfig.url}/services/initial-setup`,
 });
 
@@ -177,17 +182,18 @@ export default function InitialSetupPage() {
           <Reveal>
             <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
               <div className="space-y-5">
-                <p className="badge-pill">Initial Setup</p>
+                <p className="badge-pill">Accounting Setup</p>
                 <SplitTextHeading
-                  text="Accounting Setup Done Right From Day One"
+                  text="Your Books, Set Up Right From Day One"
                   as="h1"
                   className="text-4xl font-bold tracking-tight text-[color:var(--color-slate-dark)]"
                 />
                 <p className="section-subtitle">
-                  Starting a business or transitioning to a new accounting system?
-                  We handle everything from chart of accounts configuration to
-                  data migration and opening balances, so your financial
-                  infrastructure is established correctly from the start.
+                  Starting a business or moving to a new accounting system? We
+                  handle the entire setup — chart of accounts, opening balances,
+                  fixed assets, inventory, and AP/AR — so your financial records
+                  are accurate and ready for operations from the start. This is
+                  not company registration. This is getting your accounting right.
                 </p>
                 <p className="text-sm font-medium text-[color:var(--color-primary)]">
                   From Rp 2,500,000 one-time
@@ -209,16 +215,16 @@ export default function InitialSetupPage() {
               <StaggerGroup className="card-glow p-6 relative overflow-hidden">
                 <div className="absolute -top-20 -right-20 w-40 h-40 bg-[color:var(--color-secondary)]/20 rounded-full blur-3xl pointer-events-none" />
                 <h2 className="text-lg font-semibold relative z-10">
-                  What we set up
+                  What gets set up
                 </h2>
                 <ul className="mt-4 space-y-3 text-sm text-[color:var(--color-slate-light)] relative z-10">
                   {[
-                    { text: "Chart of Accounts customized to your business", color: "primary" },
-                    { text: "Opening balances with verified accuracy", color: "accent" },
+                    { text: "Chart of Accounts built for your business", color: "primary" },
+                    { text: "Opening balances verified for accuracy", color: "accent" },
                     { text: "Fixed assets with depreciation schedules", color: "secondary" },
-                    { text: "Inventory & product catalog configuration", color: "primary" },
-                    { text: "Accounts payable & receivable records", color: "accent" },
-                    { text: "Team training on your accounting application", color: "secondary" },
+                    { text: "Inventory & product catalog configured", color: "primary" },
+                    { text: "Accounts payable & receivable organized", color: "accent" },
+                    { text: "Team training + 3 months support included", color: "secondary" },
                   ].map((item) => (
                     <li key={item.text} className="stagger-item flex items-center gap-3 group">
                       <span className={`check-glow bg-${item.color}-500/10 text-${item.color}-500`}>
@@ -244,11 +250,12 @@ export default function InitialSetupPage() {
           <Reveal>
             <div className="text-center mb-8">
               <p className="badge-gradient inline-flex mb-3">What we offer</p>
-              <h2 className="section-title">Comprehensive setup services</h2>
+              <h2 className="section-title">Everything your accounting system needs</h2>
               <p className="section-subtitle mt-3 max-w-2xl mx-auto">
                 Every component of your accounting system is configured with
-                precision, ensuring a solid foundation for accurate financial
-                management and compliance.
+                precision — from your chart of accounts to your last inventory
+                item — so your financial data is reliable from the first
+                transaction.
               </p>
             </div>
           </Reveal>
@@ -333,7 +340,7 @@ export default function InitialSetupPage() {
           <Reveal>
             <div className="text-center mb-8">
               <p className="badge-gradient inline-flex mb-3">The process</p>
-              <h2 className="section-title">How accounting setup works</h2>
+              <h2 className="section-title">How your accounting setup works</h2>
             </div>
             <StaggerGroup className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
               {processSteps.map((item) => (
@@ -370,14 +377,14 @@ export default function InitialSetupPage() {
                 <div className="mb-6">
                   <p className="badge-gradient inline-flex mb-3">Pricing</p>
                   <SplitTextHeading
-                    text="Initial setup packages"
+                    text="Accounting setup packages"
                     as="h2"
                     className="text-2xl font-semibold"
                   />
                   <p className="mt-3 text-sm text-[color:var(--color-slate-light)]">
-                    One-time setup fee based on the complexity of your data
-                    migration. All packages include 3 months of consultation
-                    support after setup completion.
+                    One-time setup fee based on the volume and complexity of your
+                    data. All packages include 3 months of post-setup
+                    consultation support and team training.
                   </p>
                 </div>
                 <StaggerGroup className="grid gap-4 md:grid-cols-3">
@@ -415,9 +422,9 @@ export default function InitialSetupPage() {
                       features: [
                         "Chart of Accounts setup",
                         "Opening Balance",
-                        "Fixed Assets (100+ items)",
-                        "Inventory (100+ items)",
-                        "Products & Services (100+ items)",
+                        "Fixed Assets (100–250 items)",
+                        "Inventory (100–250 items)",
+                        "Products & Services (100–250 items)",
                         "Accounts Payable & Receivable",
                       ],
                       color: "secondary",
@@ -455,8 +462,8 @@ export default function InitialSetupPage() {
                   ))}
                 </StaggerGroup>
                 <p className="mt-4 text-xs text-[color:var(--color-slate-light)] text-center">
-                  Client data migration into your selected accounting application to determine opening balances.
-                  Includes consultation services for 3 months after setup completion.
+                  We migrate your existing data into your accounting application and verify all opening balances.
+                  Every package includes team training and 3 months of consultation support after setup.
                 </p>
               </div>
             </Reveal>
@@ -473,7 +480,7 @@ export default function InitialSetupPage() {
           <Reveal>
             <div className="text-center mb-8">
               <p className="badge-gradient inline-flex mb-3">FAQ</p>
-              <h2 className="section-title">Initial setup FAQs</h2>
+              <h2 className="section-title">Accounting setup FAQs</h2>
             </div>
           </Reveal>
           <div className="mt-6 grid gap-4 max-w-3xl mx-auto">
@@ -518,14 +525,14 @@ export default function InitialSetupPage() {
                   <div>
                     <p className="badge-gradient inline-flex mb-3">Get started</p>
                     <SplitTextHeading
-                      text="Ready to set up your accounting system?"
+                      text="Ready to get your accounting system set up?"
                       as="h2"
                       className="text-2xl font-semibold"
                     />
                     <p className="mt-3 text-sm text-[color:var(--color-slate-light)]">
-                      Book a free consultation and we will assess your data,
+                      Book a free consultation. We will review your data,
                       recommend the right package, and give you a clear timeline
-                      for setup completion.
+                      — so you know exactly what to expect before we start.
                     </p>
                     <div className="mt-4 glow-bar glow-bar-md" />
                   </div>
