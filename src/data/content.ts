@@ -33,6 +33,7 @@ export const services = [
       "Transaction entry, bank reconciliation, receipt organization, and monthly reports with clear deliverables.",
     href: "/services/bookkeeping",
     badge: "Most Popular",
+    price: "From Rp 3,500,000/month",
   },
   {
     title: "Tax Compliance & Filing",
@@ -41,16 +42,31 @@ export const services = [
     href: "/services/tax-compliance",
   },
   {
+    title: "Initial Setup",
+    description:
+      "Data migration, chart of accounts, opening balances, and initial compliance framework for your accounting application.",
+    href: "/services/initial-setup",
+    price: "From Rp 2,500,000 one-time",
+  },
+  {
     title: "Payroll Services",
     description:
       "Employee salary processing, BPJS, tax withholding, and reporting. Ensuring accuracy and compliance.",
     href: "/services/payroll",
   },
   {
-    title: "Business Setup",
+    title: "Consultation & Report Review",
     description:
-      "Company registration, NPWP, bank account setup, and initial compliance for new businesses in Indonesia.",
-    href: "/services/initial-setup",
+      "Accounting treatment consultation and financial statement review for businesses managing their own bookkeeping.",
+    href: "/services/consultation",
+    price: "Rp 1,500,000/month",
+  },
+  {
+    title: "Training System",
+    description:
+      "Hands-on training for your team on how to use your accounting application effectively.",
+    href: "/services/training",
+    price: "Rp 200,000/hour",
   },
 ];
 

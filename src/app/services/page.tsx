@@ -69,6 +69,11 @@ export default function ServicesPage() {
                   <p className="mt-3 text-sm text-[color:var(--color-slate-light)]">
                     {service.description}
                   </p>
+                  {"price" in service && service.price && (
+                    <p className="mt-2 text-xs font-semibold text-[color:var(--color-primary)]">
+                      {service.price}
+                    </p>
+                  )}
                   {/* Glow bar */}
                   <div className={`mt-4 h-[2px] w-0 rounded-full bg-gradient-to-r 
                       from-${color}-500 to-${color}-400 

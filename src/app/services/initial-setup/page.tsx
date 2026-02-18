@@ -107,9 +107,6 @@ export default function InitialSetupPage() {
                   Designed for foreign entrepreneurs and local founders starting
                   in Indonesia.
                 </p>
-                <p className="text-sm font-medium text-[color:var(--color-primary)]">
-                  Pricing based on consultation
-                </p>
                 <div className="flex flex-wrap gap-4">
                   <Link href={primaryCta.href} className="btn-primary">
                     {primaryCta.label}
@@ -256,6 +253,110 @@ export default function InitialSetupPage() {
                     ))}
                   </StaggerGroup>
                 </div>
+              </div>
+            </Reveal>
+          </MaskReveal>
+        </div>
+      </section>
+
+      <section className="section-space relative overflow-hidden">
+        <div className="container-grid relative z-10">
+          <MaskReveal className="relative rounded-3xl overflow-hidden">
+            <div className="absolute top-0 left-0 w-64 h-64 bg-[color:var(--color-primary)]/10 rounded-full blur-3xl" />
+            <div className="absolute bottom-0 right-0 w-64 h-64 bg-[color:var(--color-accent)]/10 rounded-full blur-3xl" />
+            <Reveal>
+              <div className="relative card-glass border border-white/50 rounded-3xl p-8 backdrop-blur-xl">
+                <div className="mb-6">
+                  <p className="badge-gradient inline-flex mb-3">Pricing</p>
+                  <SplitTextHeading
+                    text="Initial setup packages"
+                    as="h2"
+                    className="text-2xl font-semibold"
+                  />
+                  <p className="mt-3 text-sm text-[color:var(--color-slate-light)]">
+                    One-time setup fee based on the complexity of your data
+                    migration. All packages include 3 months of consultation
+                    support after setup completion.
+                  </p>
+                </div>
+                <StaggerGroup className="grid gap-4 md:grid-cols-3">
+                  {[
+                    {
+                      name: "Package A",
+                      price: "Rp 2,500,000",
+                      features: [
+                        "Chart of Accounts setup",
+                        "Opening Balance",
+                        "Fixed Assets (max 50 items)",
+                        "Inventory (max 50 items)",
+                        "Products & Services (max 50 items)",
+                        "Accounts Payable & Receivable",
+                      ],
+                      color: "primary",
+                    },
+                    {
+                      name: "Package B",
+                      price: "Rp 4,000,000",
+                      features: [
+                        "Chart of Accounts setup",
+                        "Opening Balance",
+                        "Fixed Assets (max 100 items)",
+                        "Inventory (max 100 items)",
+                        "Products & Services (max 100 items)",
+                        "Accounts Payable & Receivable",
+                      ],
+                      color: "accent",
+                      popular: true,
+                    },
+                    {
+                      name: "Package C",
+                      price: "Rp 6,000,000",
+                      features: [
+                        "Chart of Accounts setup",
+                        "Opening Balance",
+                        "Fixed Assets (100+ items)",
+                        "Inventory (100+ items)",
+                        "Products & Services (100+ items)",
+                        "Accounts Payable & Receivable",
+                      ],
+                      color: "secondary",
+                    },
+                  ].map((tier) => (
+                    <div
+                      key={tier.name}
+                      className="group stagger-item relative"
+                    >
+                      <div className={`absolute -inset-[1px] rounded-xl bg-gradient-to-r 
+                          from-${tier.color}-500/0 via-${tier.color}-500/40 to-${tier.color}-500/0 
+                          ${tier.popular ? "opacity-100" : "opacity-0 group-hover:opacity-100"} transition-opacity duration-500 blur-[1px]`} />
+                      <div className={`relative card-glow card-glow-${tier.color} p-5 h-full flex flex-col`}>
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm font-semibold text-[color:var(--color-slate-dark)]">{tier.name}</span>
+                          {tier.popular && (
+                            <span className="badge-gradient text-[10px]">Popular</span>
+                          )}
+                        </div>
+                        <p className={`mt-2 text-xl font-bold text-${tier.color}-600`}>
+                          {tier.price}
+                        </p>
+                        <p className="text-xs text-[color:var(--color-slate-light)]">one-time</p>
+                        <ul className="mt-3 space-y-2 text-xs text-[color:var(--color-slate-light)] flex-1">
+                          {tier.features.map((f) => (
+                            <li key={f} className="flex items-center gap-2">
+                              <span className={`w-1.5 h-1.5 rounded-full bg-${tier.color}-500 flex-shrink-0`} />
+                              {f}
+                            </li>
+                          ))}
+                        </ul>
+                        <div className={`mt-4 h-[2px] w-0 rounded-full bg-gradient-to-r from-${tier.color}-500 to-${tier.color}-400 group-hover:w-full transition-all duration-500`} />
+                      </div>
+                    </div>
+                  ))}
+                </StaggerGroup>
+                <p className="mt-4 text-xs text-[color:var(--color-slate-light)] text-center">
+                  Client data migration into your selected accounting application to determine opening balances.
+                  Includes consultation services for 3 months after setup completion.
+                </p>
               </div>
             </Reveal>
           </MaskReveal>

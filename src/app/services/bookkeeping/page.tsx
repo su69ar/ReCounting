@@ -96,7 +96,7 @@ export default function BookkeepingPage() {
                   startups, and expat-owned businesses.
                 </p>
                 <p className="text-sm font-medium text-[color:var(--color-primary)]">
-                  Pricing based on consultation
+                  From Rp 3,500,000/month
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <Link href={primaryCta.href} className="btn-primary">
@@ -271,45 +271,78 @@ export default function BookkeepingPage() {
             <Reveal>
               <div className="relative card-glass border border-white/50 rounded-3xl p-8 backdrop-blur-xl">
                 <div className="mb-6">
-                  <p className="badge-gradient inline-flex mb-3">Flexible plans</p>
+                  <p className="badge-gradient inline-flex mb-3">Pricing</p>
                   <SplitTextHeading
-                    text="Tailored to your business"
+                    text="Transparent monthly pricing"
                     as="h2"
                     className="text-2xl font-semibold"
                   />
                   <p className="mt-3 text-sm text-[color:var(--color-slate-light)]">
-                    Every business is different. We create a custom bookkeeping
-                    plan based on your transaction volume, reporting needs, and
-                    compliance requirements. Book a free consultation to get
-                    a personalized quote.
+                    Choose a plan based on your monthly transaction volume.
+                    All plans include monthly financial statements. Need something
+                    custom? Book a free consultation.
                   </p>
                 </div>
-                <StaggerGroup className="grid gap-4 md:grid-cols-2">
+                <StaggerGroup className="grid gap-4 md:grid-cols-3">
                   {[
-                    { text: "Starter: Monthly bookkeeping essentials", color: "primary" },
-                    { text: "Growth: Expanded transaction volume", color: "accent" },
-                    { text: "Enterprise: Custom reporting & multi-entity", color: "secondary" },
-                    { text: "Add-ons: Inventory tracking, payroll", color: "primary" },
-                  ].map((item) => (
+                    {
+                      name: "Package A",
+                      price: "Rp 3,500,000",
+                      unit: "/month",
+                      features: ["Up to 200 transactions/month", "Monthly financial statements"],
+                      color: "primary",
+                    },
+                    {
+                      name: "Package B",
+                      price: "Rp 4,500,000",
+                      unit: "/month",
+                      features: ["201 to 400 transactions/month", "Monthly financial statements"],
+                      color: "accent",
+                      popular: true,
+                    },
+                    {
+                      name: "Package C",
+                      price: "Rp 5,500,000",
+                      unit: "/month",
+                      features: ["401 to 600 transactions/month", "Monthly financial statements"],
+                      color: "secondary",
+                    },
+                  ].map((tier) => (
                     <div
-                      key={item.text}
-                      className={`group stagger-item relative`}
+                      key={tier.name}
+                      className="group stagger-item relative"
                     >
-                      {/* Animated gradient border */}
                       <div className={`absolute -inset-[1px] rounded-xl bg-gradient-to-r 
-                          from-${item.color}-500/0 via-${item.color}-500/40 to-${item.color}-500/0 
-                          opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-[1px]`} />
-                      <div className={`relative card-glow card-glow-${item.color} p-4 h-full`}>
-                        <div className="flex items-center gap-3">
-                          <span className={`w-2 h-2 rounded-full bg-${item.color}-500`} />
-                          <span className="text-sm">{item.text}</span>
+                          from-${tier.color}-500/0 via-${tier.color}-500/40 to-${tier.color}-500/0 
+                          ${tier.popular ? "opacity-100" : "opacity-0 group-hover:opacity-100"} transition-opacity duration-500 blur-[1px]`} />
+                      <div className={`relative card-glow card-glow-${tier.color} p-5 h-full flex flex-col`}>
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm font-semibold text-[color:var(--color-slate-dark)]">{tier.name}</span>
+                          {tier.popular && (
+                            <span className="badge-gradient text-[10px]">Popular</span>
+                          )}
                         </div>
-                        {/* Glow bar */}
-                        <div className={`mt-3 h-[2px] w-0 rounded-full bg-gradient-to-r from-${item.color}-500 to-${item.color}-400 group-hover:w-12 transition-all duration-500`} />
+                        <p className={`mt-2 text-xl font-bold text-${tier.color}-600`}>
+                          {tier.price}
+                          <span className="text-xs font-normal text-[color:var(--color-slate-light)]">{tier.unit}</span>
+                        </p>
+                        <ul className="mt-3 space-y-2 text-xs text-[color:var(--color-slate-light)] flex-1">
+                          {tier.features.map((f) => (
+                            <li key={f} className="flex items-center gap-2">
+                              <span className={`w-1.5 h-1.5 rounded-full bg-${tier.color}-500`} />
+                              {f}
+                            </li>
+                          ))}
+                        </ul>
+                        <div className={`mt-4 h-[2px] w-0 rounded-full bg-gradient-to-r from-${tier.color}-500 to-${tier.color}-400 group-hover:w-full transition-all duration-500`} />
                       </div>
                     </div>
                   ))}
                 </StaggerGroup>
+                <p className="mt-4 text-xs text-[color:var(--color-slate-light)] text-center">
+                  Monthly bookkeeping services with final output in the form of monthly financial statements.
+                  For transactions above 600/month, contact us for a custom quote.
+                </p>
               </div>
             </Reveal>
           </MaskReveal>

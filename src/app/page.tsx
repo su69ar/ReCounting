@@ -197,7 +197,7 @@ export default function Home() {
             </div>
           </Reveal>
           <StaggerGroup className="mt-10 grid gap-6 md:grid-cols-2">
-            {services.map((service) => (
+            {services.slice(0, 4).map((service) => (
               <div
                 key={service.title}
                 className={`card card-hover stagger-item h-full p-6 ${"disabled" in service && service.disabled ? "opacity-60" : ""
