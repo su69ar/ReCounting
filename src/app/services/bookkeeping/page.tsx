@@ -271,15 +271,17 @@ export default function BookkeepingPage() {
             <Reveal>
               <div className="relative card-glass border border-white/50 rounded-3xl p-8 backdrop-blur-xl">
                 <div className="mb-6">
-                  <p className="badge-gradient inline-flex mb-3">Pricing</p>
+                  <p className="badge-gradient inline-flex mb-3">Flexible plans</p>
                   <SplitTextHeading
-                    text="Pricing snapshot"
+                    text="Tailored to your business"
                     as="h2"
                     className="text-2xl font-semibold"
                   />
                   <p className="mt-3 text-sm text-[color:var(--color-slate-light)]">
-                    Transparent monthly pricing based on transaction volume and
-                    reporting complexity. Request a tailored quote for your business.
+                    Every business is different. We create a custom bookkeeping
+                    plan based on your transaction volume, reporting needs, and
+                    compliance requirements. Book a free consultation to get
+                    a personalized quote.
                   </p>
                 </div>
                 <StaggerGroup className="grid gap-4 md:grid-cols-2">
