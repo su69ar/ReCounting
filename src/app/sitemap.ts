@@ -18,6 +18,7 @@ const routes: RouteConfig[] = [
 
   // Service pages
   { path: "/services/bookkeeping", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/services/financial-reports", priority: 0.8, changeFrequency: "monthly" },
   { path: "/services/tax-compliance", priority: 0.8, changeFrequency: "monthly" },
   { path: "/services/payroll", priority: 0.8, changeFrequency: "monthly" },
   { path: "/services/initial-setup", priority: 0.8, changeFrequency: "monthly" },

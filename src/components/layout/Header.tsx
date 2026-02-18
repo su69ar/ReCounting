@@ -25,6 +25,17 @@ const mobileServices = [
     ),
   },
   {
+    title: "Financial Reports",
+    href: "/services/financial-reports",
+    description: "P&L, balance sheet & cash flow",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+        <path d="M18 20V10M12 20V4M6 20v-6" strokeLinecap="round"/>
+        <rect x="2" y="20" width="20" height="2" rx="1"/>
+      </svg>
+    ),
+  },
+  {
     title: "Tax Compliance",
     href: "/services/tax-compliance",
     description: "PPh, PPN & SPT filings",
@@ -39,7 +50,6 @@ const mobileServices = [
     title: "Payroll",
     href: "/services/payroll",
     description: "Staff salaries & BPJS",
-    badge: "Soon",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" strokeLinecap="round"/>
@@ -49,13 +59,33 @@ const mobileServices = [
     ),
   },
   {
-    title: "Business Setup",
+    title: "Initial Setup",
     href: "/services/initial-setup",
-    description: "Company registration",
-    badge: "Soon",
+    description: "Data migration & opening balances",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
         <path d="M3 21h18M5 21V7l8-4 8 4v14M8 21V11h8v10" strokeLinecap="round"/>
+      </svg>
+    ),
+  },
+  {
+    title: "Consultation",
+    href: "/services/consultation",
+    description: "Report review & accounting advice",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7A8.38 8.38 0 0 1 4 11.5a8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" strokeLinecap="round"/>
+      </svg>
+    ),
+  },
+  {
+    title: "Training",
+    href: "/services/training",
+    description: "Accounting software training",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+        <rect x="3" y="4" width="18" height="18" rx="2" strokeLinecap="round"/>
+        <path d="M16 2v4M8 2v4M3 10h18" strokeLinecap="round"/>
       </svg>
     ),
   },
@@ -269,11 +299,6 @@ function MobileServicesMenu({ onClose }: { onClose: () => void }) {
                   <span className="font-medium text-sm text-neutral-800 group-hover:text-primary-600 transition-colors">
                     {service.title}
                   </span>
-                  {service.badge && (
-                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-neutral-100 text-neutral-500 font-medium">
-                      {service.badge}
-                    </span>
-                  )}
                 </div>
                 <p className="text-xs text-neutral-500 mt-0.5">{service.description}</p>
               </div>

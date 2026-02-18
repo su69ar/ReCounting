@@ -36,6 +36,12 @@ export const services = [
     price: "From Rp 3,500,000/month",
   },
   {
+    title: "Financial Reports",
+    description:
+      "Profit & Loss, balance sheet, cash flow statements, and compliance-ready financials prepared monthly.",
+    href: "/services/financial-reports",
+  },
+  {
     title: "Tax Compliance & Filing",
     description:
       "PPh, PPN, SPT filing and annual tax planning. Stay compliant without the headache.",

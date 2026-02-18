@@ -17,9 +17,15 @@ const serviceCategories = [
       },
       {
         title: "Financial Reports",
-        href: "/services/bookkeeping",
+        href: "/services/financial-reports",
         description: "P&L, balance sheet & cash flow",
         icon: "chart",
+      },
+      {
+        title: "Initial Setup",
+        href: "/services/initial-setup",
+        description: "Data migration & opening balances",
+        icon: "building",
       },
     ],
   },
@@ -33,29 +39,27 @@ const serviceCategories = [
         icon: "file",
       },
       {
-        title: "Compliance Calendar",
-        href: "/services/tax-compliance",
-        description: "Deadlines & reminders",
-        icon: "calendar",
-      },
-    ],
-  },
-  {
-    title: "Business Services",
-    services: [
-      {
         title: "Payroll",
         href: "/services/payroll",
         description: "Staff salaries & BPJS",
         icon: "users",
-        badge: "Soon",
+      },
+    ],
+  },
+  {
+    title: "Advisory & Training",
+    services: [
+      {
+        title: "Consultation",
+        href: "/services/consultation",
+        description: "Report review & accounting advice",
+        icon: "calendar",
       },
       {
-        title: "Business Setup",
-        href: "/services/initial-setup",
-        description: "Company registration",
-        icon: "building",
-        badge: "Soon",
+        title: "Training",
+        href: "/services/training",
+        description: "Accounting software training",
+        icon: "users",
       },
     ],
   },
