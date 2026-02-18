@@ -14,9 +14,9 @@ export const metadata: Metadata = {
 };
 
 const team = [
-  { name: "Lead Accountant", role: "Primary point of contact", credential: "Add credentials" },
-  { name: "Tax Compliance Lead", role: "PPh, PPN, SPT guidance", credential: "Add credentials" },
-  { name: "Client Success", role: "English-first support", credential: "Add credentials" },
+  { name: "Rikotama", role: "Head Accountant & Advisor", credential: "8+ years of experience in accounting and financial advisory for SMEs in Bali" },
+  { name: "Toni Artana", role: "Tax Compliance Lead", credential: "10+ years of experience in Indonesian tax compliance, PPh, PPN, and SPT filing" },
+  { name: "Medita", role: "Client Success Manager", credential: "English-first client support and onboarding for expat and local businesses" },
 ];
 
 const breadcrumbSchema = {
@@ -44,7 +44,9 @@ export default function AboutPage() {
             <p className="section-subtitle mt-4">
               We are a Bali-based accounting firm helping SMEs, startups, and
               expat-owned companies stay compliant with Indonesian tax
-              regulations.
+              regulations. With a combined 18+ years of experience, our team
+              serves businesses across hospitality, retail, technology, and
+              professional services throughout Bali.
             </p>
           </div>
         </Reveal>

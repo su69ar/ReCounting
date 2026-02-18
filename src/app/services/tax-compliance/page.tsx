@@ -6,6 +6,7 @@ import { StaggerGroup } from "@/components/animations/StaggerGroup";
 import { SplitTextHeading } from "@/components/animations/SplitTextHeading";
 import { MaskReveal } from "@/components/animations/MaskReveal";
 import { primaryCta, secondaryCta, siteConfig } from "@/lib/site";
+import { generateServiceSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Tax Compliance & Filing Services in Indonesia",
@@ -65,11 +66,19 @@ const faqSchema = {
   })),
 };
 
+const serviceSchema = generateServiceSchema({
+  name: "Tax Compliance & Filing Services in Indonesia",
+  description:
+    "Expert Indonesian tax compliance services. PPh, PPN, SPT filing for Bali SMEs and expat-owned businesses with clear timelines and English-speaking support.",
+  url: `${siteConfig.url}/services/tax-compliance`,
+});
+
 export default function TaxCompliancePage() {
   return (
     <>
       <JsonLd data={breadcrumbSchema} />
       <JsonLd data={faqSchema} />
+      <JsonLd data={serviceSchema} />
 
       <section className="section-space">
         <div className="container-grid">
@@ -86,6 +95,9 @@ export default function TaxCompliancePage() {
                   We handle PPh, PPN, and SPT filings with clear timelines and
                   documentation so you stay compliant year-round. Ideal for
                   Bali SMEs and expat-owned businesses.
+                </p>
+                <p className="text-sm font-medium text-[color:var(--color-primary)]">
+                  Pricing based on consultation
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <Link href={primaryCta.href} className="btn-primary">
@@ -104,7 +116,7 @@ export default function TaxCompliancePage() {
               <StaggerGroup className="card-glow p-6 relative overflow-hidden">
                 {/* Glow orb background */}
                 <div className="absolute -top-20 -right-20 w-40 h-40 bg-[color:var(--color-primary)]/20 rounded-full blur-3xl pointer-events-none" />
-                
+
                 <h2 className="text-lg font-semibold relative z-10">Compliance coverage</h2>
                 <ul className="mt-4 space-y-3 text-sm text-[color:var(--color-slate-light)] relative z-10">
                   {[
@@ -117,7 +129,7 @@ export default function TaxCompliancePage() {
                     <li key={item.text} className="stagger-item flex items-center gap-3 group">
                       <span className={`check-glow bg-${item.color}-500/10 text-${item.color}-500`}>
                         <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-                          <polyline points="20 6 9 17 4 12"/>
+                          <polyline points="20 6 9 17 4 12" />
                         </svg>
                       </span>
                       {item.text}
@@ -134,7 +146,7 @@ export default function TaxCompliancePage() {
         {/* Background glow orbs */}
         <div className="absolute top-1/2 left-0 w-64 h-64 bg-[color:var(--color-primary)]/5 rounded-full blur-3xl -translate-y-1/2" />
         <div className="absolute top-1/2 right-0 w-64 h-64 bg-[color:var(--color-accent)]/5 rounded-full blur-3xl -translate-y-1/2" />
-        
+
         <div className="container-grid relative z-10">
           <Reveal>
             <div className="text-center mb-8">
@@ -168,36 +180,36 @@ export default function TaxCompliancePage() {
                 <div key={item.title} className={`group card-glow card-glow-${item.color} stagger-item p-6 relative overflow-hidden`}>
                   {/* Step number background */}
                   <span className={`step-number text-${item.color}-500`}>{item.step}</span>
-                  
+
                   {/* Icon */}
                   <div className={`icon-glow bg-${item.color}-500/10 text-${item.color}-500 mb-4 relative z-10`}>
                     {item.icon === "search" && (
                       <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <circle cx="11" cy="11" r="8"/>
-                        <path d="m21 21-4.3-4.3"/>
+                        <circle cx="11" cy="11" r="8" />
+                        <path d="m21 21-4.3-4.3" />
                       </svg>
                     )}
                     {item.icon === "calendar" && (
                       <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                        <line x1="16" y1="2" x2="16" y2="6"/>
-                        <line x1="8" y1="2" x2="8" y2="6"/>
-                        <line x1="3" y1="10" x2="21" y2="10"/>
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                        <line x1="16" y1="2" x2="16" y2="6" />
+                        <line x1="8" y1="2" x2="8" y2="6" />
+                        <line x1="3" y1="10" x2="21" y2="10" />
                       </svg>
                     )}
                     {item.icon === "guide" && (
                       <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/>
-                        <path d="m9 12 2 2 4-4"/>
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
+                        <path d="m9 12 2 2 4-4" />
                       </svg>
                     )}
                   </div>
-                  
+
                   <h3 className="text-base font-semibold relative z-10">{item.title}</h3>
                   <p className="mt-2 text-sm text-[color:var(--color-slate-light)] relative z-10">
                     {item.desc}
                   </p>
-                  
+
                   {/* Glow bar */}
                   <div className={`mt-4 h-[2px] w-0 rounded-full bg-gradient-to-r from-${item.color}-500 to-${item.color}-400 group-hover:w-16 transition-all duration-500`} />
                 </div>
@@ -210,13 +222,13 @@ export default function TaxCompliancePage() {
       <section className="section-space relative overflow-hidden">
         {/* Timeline connector visualization */}
         <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[color:var(--color-primary)]/20 to-transparent" />
-        
+
         <div className="container-grid relative z-10">
           <MaskReveal className="relative rounded-3xl overflow-hidden">
             {/* Background glow orbs */}
             <div className="absolute top-0 left-0 w-64 h-64 bg-[color:var(--color-primary)]/10 rounded-full blur-3xl" />
             <div className="absolute bottom-0 right-0 w-64 h-64 bg-[color:var(--color-accent)]/10 rounded-full blur-3xl" />
-            
+
             <Reveal>
               <div className="relative card-glass border border-white/50 rounded-3xl p-8 backdrop-blur-xl">
                 <div className="mb-6">
@@ -256,7 +268,7 @@ export default function TaxCompliancePage() {
                     </div>
                   ))}
                 </StaggerGroup>
-                
+
                 {/* Visual timeline bar */}
                 <div className="mt-8 relative h-2 bg-[color:var(--color-neutral-200)] rounded-full overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-r from-[color:var(--color-primary)] via-[color:var(--color-accent)] to-[color:var(--color-secondary)] rounded-full" />
@@ -277,15 +289,15 @@ export default function TaxCompliancePage() {
       <section className="section-space relative overflow-hidden">
         {/* Background glow */}
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-[color:var(--color-accent)]/5 rounded-full blur-3xl" />
-        
+
         <div className="container-grid relative z-10">
           <MaskReveal className="relative rounded-3xl overflow-hidden">
             <Reveal>
               <div className="relative card-glow card-glow-accent border border-white/50 rounded-3xl p-8 lg:p-10 backdrop-blur-xl overflow-hidden">
-              {/* Decorative orb */}
-              <div className="absolute -top-20 -right-20 w-48 h-48 bg-[color:var(--color-primary)]/10 rounded-full blur-3xl" />
-              <div className="absolute -bottom-20 -left-20 w-48 h-48 bg-[color:var(--color-secondary)]/10 rounded-full blur-3xl" />
-                
+                {/* Decorative orb */}
+                <div className="absolute -top-20 -right-20 w-48 h-48 bg-[color:var(--color-primary)]/10 rounded-full blur-3xl" />
+                <div className="absolute -bottom-20 -left-20 w-48 h-48 bg-[color:var(--color-secondary)]/10 rounded-full blur-3xl" />
+
                 <div className="relative grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
                   <div className="relative z-10">
                     <p className="badge-gradient inline-flex mb-3">For you</p>
@@ -312,7 +324,7 @@ export default function TaxCompliancePage() {
                       >
                         <span className={`check-glow bg-${item.color}-500/10 text-${item.color}-500`}>
                           <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-                            <polyline points="20 6 9 17 4 12"/>
+                            <polyline points="20 6 9 17 4 12" />
                           </svg>
                         </span>
                         <p className="text-sm text-[color:var(--color-slate-light)]">
@@ -333,7 +345,7 @@ export default function TaxCompliancePage() {
         <div className="absolute inset-0 bg-gradient-to-b from-white via-[color:var(--color-neutral-50)] to-[color:var(--color-neutral-100)]" />
         <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-[color:var(--color-primary)]/5 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-[color:var(--color-accent)]/5 rounded-full blur-3xl" />
-        
+
         <div className="container-grid relative z-10">
           {/* FAQ Section */}
           <Reveal>
@@ -355,8 +367,8 @@ export default function TaxCompliancePage() {
                       <span className="text-sm font-semibold pr-4">{item.question}</span>
                       <span className={`w-8 h-8 rounded-full bg-${color}-500/10 flex items-center justify-center text-${color}-500 transition-all duration-300 flex-shrink-0`}>
                         <svg className="w-4 h-4 transition-transform duration-300 group-open:rotate-45" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <line x1="12" y1="5" x2="12" y2="19"/>
-                          <line x1="5" y1="12" x2="19" y2="12"/>
+                          <line x1="12" y1="5" x2="12" y2="19" />
+                          <line x1="5" y1="12" x2="19" y2="12" />
                         </svg>
                       </span>
                     </summary>
@@ -378,13 +390,13 @@ export default function TaxCompliancePage() {
             <div className="mt-12 relative rounded-3xl overflow-hidden">
               {/* Background gradient - continuous dengan FAQ */}
               <div className="absolute inset-0 bg-gradient-to-br from-[color:var(--color-primary)]/10 via-[color:var(--color-accent)]/10 to-[color:var(--color-secondary)]/10" />
-              
+
               {/* Animated background orbs */}
               <div className="absolute inset-0 overflow-hidden">
                 <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-[color:var(--color-primary)]/20 rounded-full blur-3xl animate-pulse-slow" />
                 <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-[color:var(--color-accent)]/20 rounded-full blur-3xl animate-pulse-slow-delayed" />
               </div>
-              
+
               <div className="relative card-glass border border-white/60 rounded-3xl p-8 lg:p-10 backdrop-blur-xl">
                 <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
                   <div>

@@ -67,16 +67,15 @@ export function HeroCTA({
         />
       </Link>
 
-      {/* Secondary Button - Removed as per request */}
-      {/* <a
+      <a
         href={secondaryHref}
         target="_blank"
         rel="noreferrer"
-        className="px-6 py-3.5 rounded-full font-semibold text-primary-700 bg-blue-50 border border-blue-200 hover:bg-blue-100 hover:border-blue-300 transition-all duration-300 shadow-sm"
+        className="btn-secondary"
         {...secondaryMagnetic}
       >
         {secondaryLabel}
-      </a> */}
+      </a>
     </div>
   );
 }

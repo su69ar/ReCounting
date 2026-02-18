@@ -45,37 +45,51 @@ export const services = [
     description:
       "Employee salary processing, BPJS, tax withholding, and reporting. Ensuring accuracy and compliance.",
     href: "/services/payroll",
-    badge: "Coming Soon",
-    disabled: true,
   },
   {
     title: "Business Setup",
     description:
       "Company registration, NPWP, bank account setup, and initial compliance for new businesses in Indonesia.",
     href: "/services/initial-setup",
-    badge: "Coming Soon",
-    disabled: true,
   },
 ];
 
 export const testimonials = [
   {
-    name: "Monthly reporting clarity",
-    role: "Outcome focus",
+    name: "The Shampoo Lounge",
+    role: "Salon & Beauty Business, Bali",
     quote:
-      "Clean books, reconciled accounts, and easy-to-read summaries every month.",
+      "ReCounting took over our books when things were getting messy. Within a month, we had clear monthly reports and knew exactly where our money was going. Their WhatsApp response time is unbeatable.",
   },
   {
-    name: "Compliance confidence",
-    role: "Outcome focus",
+    name: "Visa Agency Bali",
+    role: "Immigration Services, Bali",
     quote:
-      "Clear timelines for PPh, PPN, and SPT filings with proactive reminders.",
+      "As a growing agency, we needed an accountant who understood compliance for service businesses. ReCounting handles our PPh and PPN filings so we can focus on serving clients instead of worrying about deadlines.",
   },
   {
-    name: "Fast, reliable support",
-    role: "Outcome focus",
+    name: "Spiro Bali",
+    role: "Hospitality & F&B, Bali",
     quote:
-      "English-first communication and rapid WhatsApp responses during business hours.",
+      "We switched to ReCounting because we needed English-first reporting that our international partners could understand. The monthly P&L reports are clear, accurate, and delivered on time every month.",
+  },
+  {
+    name: "PT Akasa Bali Wisata",
+    role: "Tourism & Travel, Bali",
+    quote:
+      "Managing tax compliance across multiple revenue streams was overwhelming. ReCounting built a system that keeps us audit-ready year-round. Their proactive reminders have saved us from penalties more than once.",
+  },
+  {
+    name: "Ngalung Kalla Eco Retreat",
+    role: "Eco Tourism & Accommodation, Bali",
+    quote:
+      "Starting a business in Bali as a foreigner felt daunting, especially the accounting side. ReCounting made NPWP registration and our initial bookkeeping setup smooth and straightforward.",
+  },
+  {
+    name: "ReWaste",
+    role: "Waste Management & Social Enterprise, Bali",
+    quote:
+      "As a social enterprise, we need transparent financial reporting for our stakeholders. ReCounting delivers compliance-ready reports that satisfy both Indonesian regulations and our international donors.",
   },
 ];
 
@@ -104,13 +118,13 @@ export const faqs = [
 
 export const blogPosts = [
   {
-    title: "Indonesia Tax Deadlines 2024–2025: Don't Miss These Dates",
+    title: "Indonesia Tax Deadlines 2025: Key Filing Dates for Businesses",
     description:
-      "Key filing deadlines for SPT, PPh, and PPN—plus a simple compliance checklist for SMEs.",
+      "Key filing deadlines for SPT, PPh, and PPN plus a simple compliance checklist for SMEs.",
     href: "/blog/tax-deadlines-indonesia-2024",
     category: "Tax Compliance",
-    readTime: "7 min read",
-    date: "2024-11-15",
+    readTime: "8 min read",
+    date: "2025-01-10",
   },
   {
     title: "PPh vs PPN: What's the Difference?",
@@ -118,8 +132,8 @@ export const blogPosts = [
       "A plain-English guide to the two core taxes every Bali business needs to understand.",
     href: "/blog/ppn-pph-explained",
     category: "Guides",
-    readTime: "6 min read",
-    date: "2024-10-01",
+    readTime: "10 min read",
+    date: "2025-02-01",
   },
   {
     title: "Bookkeeping Best Practices for Bali SMEs",
@@ -127,8 +141,8 @@ export const blogPosts = [
       "How to keep your books clean, reduce stress, and prepare for tax season.",
     href: "/blog/bookkeeping-best-practices",
     category: "Bookkeeping",
-    readTime: "5 min read",
-    date: "2024-09-20",
+    readTime: "8 min read",
+    date: "2025-02-15",
   },
 ];
 

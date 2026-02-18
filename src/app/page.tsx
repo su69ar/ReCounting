@@ -200,7 +200,7 @@ export default function Home() {
             {services.map((service) => (
               <div
                 key={service.title}
-                className={`card card-hover stagger-item h-full p-6 ${service.disabled ? "opacity-60" : ""
+                className={`card card-hover stagger-item h-full p-6 ${"disabled" in service && service.disabled ? "opacity-60" : ""
                   }`}
               >
                 {service.badge && (
@@ -219,7 +219,7 @@ export default function Home() {
                     href={service.href}
                     className="text-sm font-semibold text-[color:var(--color-primary)]"
                   >
-                    {service.disabled ? "Notify me" : "Learn more"}
+                    {"disabled" in service && service.disabled ? "Notify me" : "Learn more"}
                   </Link>
                 </div>
               </div>
@@ -354,12 +354,12 @@ export default function Home() {
             <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
               <div>
                 <SplitTextHeading
-                  text="Outcomes we deliver"
+                  text="What our clients say"
                   as="h2"
                   className="section-title"
                 />
                 <p className="section-subtitle mt-3">
-                  Focused on clarity, compliance, and fast communication.
+                  Trusted by businesses across Bali, from startups to established companies.
                 </p>
               </div>
               <Link href={primaryCta.href} className="btn-primary">
@@ -368,7 +368,7 @@ export default function Home() {
             </div>
           </Reveal>
           <StaggerGroup className="mt-10 grid gap-6 md:grid-cols-3">
-            {testimonials.map((testimonial) => (
+            {testimonials.slice(0, 3).map((testimonial) => (
               <div
                 key={testimonial.name}
                 className="card card-hover stagger-item h-full p-6"
@@ -415,13 +415,13 @@ export default function Home() {
           <MaskReveal className="relative rounded-3xl overflow-hidden">
             {/* Background gradient - full bleed dalam card */}
             <div className="absolute inset-0 bg-gradient-to-br from-[color:var(--color-primary)]/5 via-[color:var(--color-accent)]/5 to-[color:var(--color-secondary)]/5" />
-            
+
             {/* Animated background orbs - dalam card */}
             <div className="absolute inset-0 overflow-hidden">
               <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-[color:var(--color-primary)]/20 rounded-full blur-3xl animate-pulse-slow" />
               <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-[color:var(--color-accent)]/20 rounded-full blur-3xl animate-pulse-slow-delayed" />
             </div>
-            
+
             <Reveal>
               <div className="relative card-glass border border-white/50 rounded-3xl p-8 lg:p-10 backdrop-blur-xl">
                 <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
