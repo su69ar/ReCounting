@@ -188,6 +188,7 @@ export default function InitialSetupPage() {
                   handle the entire setup — chart of accounts, opening balances,
                   fixed assets, inventory, and AP/AR — so your financial records
                   are accurate and ready for operations from the start.
+                  Stop guessing. Start with numbers you can trust.
                 </p>
                 <p className="text-sm font-medium text-[color:var(--color-primary)]">
                   From Rp 2,500,000 one-time
