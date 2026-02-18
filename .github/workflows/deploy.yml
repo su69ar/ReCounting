@@ -13,6 +13,25 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          path: 'recounting-app'
+
+      - name: Sync code to local repository
+        run: |
+          set -x
+          TARGET_DIR="/home/dotdev/Documents/Workspaces/Dotdev/Projects/ReCounting/recounting-app"
+
+          echo "=== Syncing code from GitHub checkout to local repository ==="
+
+          # Copy all files from GitHub checkout to local directory
+          rsync -av --delete \
+            --exclude '.git/' \
+            --exclude 'node_modules/' \
+            --exclude '.next/' \
+            --exclude '*.log' \
+            "$GITHUB_WORKSPACE/recounting-app/" "$TARGET_DIR/"
+
+          echo "=== Sync completed ==="
 
       - name: Cleanup old Docker images and build cache
         run: |
