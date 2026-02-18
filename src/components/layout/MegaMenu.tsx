@@ -245,11 +245,6 @@ export function MegaMenu() {
                                   <span className="font-medium text-sm text-neutral-800 group-hover:text-primary-600 transition-colors">
                                     {service.title}
                                   </span>
-                                  {(service as { badge?: string }).badge && (
-                                    <span className="text-[9px] px-1.5 py-0.5 rounded bg-neutral-200 text-neutral-500 font-medium">
-                                      {(service as { badge?: string }).badge}
-                                    </span>
-                                  )}
                                 </div>
                                 <p className="text-xs text-neutral-500 mt-0.5 line-clamp-1">
                                   {service.description}

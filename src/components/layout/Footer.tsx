@@ -9,9 +9,12 @@ import { siteConfig } from "@/lib/site";
 const footerLinks = {
   services: [
     { label: "Bookkeeping", href: "/services/bookkeeping" },
+    { label: "Financial Reports", href: "/services/financial-reports" },
     { label: "Tax Compliance", href: "/services/tax-compliance" },
-    { label: "Payroll", href: "/services/payroll", badge: "Soon" },
+    { label: "Payroll", href: "/services/payroll" },
     { label: "Initial Setup", href: "/services/initial-setup" },
+    { label: "Consultation", href: "/services/consultation" },
+    { label: "Training", href: "/services/training" },
   ],
   company: [
     { label: "About", href: "/about" },
@@ -210,11 +213,6 @@ export function Footer() {
                   className="footer-link text-sm text-neutral-600 flex items-center gap-2"
                 >
                   {link.label}
-                  {link.badge && (
-                    <span className="text-xs px-2 py-0.5 rounded-full bg-accent-100 text-accent-700">
-                      {link.badge}
-                    </span>
-                  )}
                 </Link>
               ))}
             </nav>
