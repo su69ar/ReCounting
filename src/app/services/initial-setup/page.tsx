@@ -108,11 +108,6 @@ const faqItems = [
       "Yes. For new businesses, we configure your chart of accounts and accounting application from scratch so you are ready to record transactions from day one. Package A is designed exactly for this scenario — no prior data needed.",
   },
   {
-    question: "Is this a company registration or legal setup service?",
-    answer:
-      "No. This is strictly an accounting system setup service. We configure your bookkeeping and accounting software — chart of accounts, opening balances, fixed assets, inventory, and AP/AR. We do not handle notary, legal registration, or company incorporation.",
-  },
-  {
     question: "Do I need to provide all my data at once?",
     answer:
       "Ideally, yes — having everything upfront allows us to complete the setup efficiently and ensure accurate opening balances. However, we can work in phases if needed, prioritizing the most critical data first.",
@@ -192,8 +187,7 @@ export default function InitialSetupPage() {
                   Starting a business or moving to a new accounting system? We
                   handle the entire setup — chart of accounts, opening balances,
                   fixed assets, inventory, and AP/AR — so your financial records
-                  are accurate and ready for operations from the start. This is
-                  not company registration. This is getting your accounting right.
+                  are accurate and ready for operations from the start.
                 </p>
                 <p className="text-sm font-medium text-[color:var(--color-primary)]">
                   From Rp 2,500,000 one-time
