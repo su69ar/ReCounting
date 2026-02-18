@@ -50,7 +50,7 @@ export const services = [
   {
     title: "Initial Setup",
     description:
-      "Data migration, chart of accounts, opening balances, and initial compliance framework for your accounting application.",
+      "Chart of accounts, opening balances, fixed assets, inventory, AP/AR setup, and data migration into your accounting application.",
     href: "/services/initial-setup",
     price: "From Rp 2,500,000 one-time",
   },
