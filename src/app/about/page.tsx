@@ -162,12 +162,12 @@ export default function AboutPage() {
             <div className="mb-10 text-center">
               <p className="badge-pill mb-3">Culture</p>
               <SplitTextHeading
-                text="Life at ReCounting"
+                text="ReCounting on Instagram"
                 as="h2"
                 className="section-title"
               />
               <p className="section-subtitle mt-3">
-                Behind the scenes of our Bali office. Follow <a href={siteConfig.socials.instagram} target="_blank" rel="noopener noreferrer" className="text-[color:var(--color-primary)] font-medium hover:underline">@recountingasia</a>
+                See how we help Bali businesses thrive with practical accounting and tax insights. Follow <a href={siteConfig.socials.instagram} target="_blank" rel="noopener noreferrer" className="text-[color:var(--color-primary)] font-medium hover:underline">@recountingasia</a>
               </p>
             </div>
           </Reveal>

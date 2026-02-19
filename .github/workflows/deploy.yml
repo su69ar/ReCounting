@@ -40,17 +40,30 @@ jobs:
           # Clean up Next.js cache to ensure fresh builds
           rm -rf .next || true
 
-      - name: Build and start Docker container
+      - name: Load environment and build container
         run: |
           set -x  # Enable command logging
           cd /home/dotdev/Documents/Workspaces/Dotdev/Projects/ReCounting/recounting-app
+
+          echo "=== Loading environment variables ==="
+
+          # Load .env file and export each variable
+          if [ -f .env ]; then
+            set -a
+            . .env
+            set +a
+            echo "✅ Environment variables loaded from .env"
+          else
+            echo "⚠️ .env file not found!"
+            exit 1
+          fi
 
           echo "=== Starting Docker Compose Build ==="
 
           # Stop any existing container first
           docker compose down 2>/dev/null || true
 
-          # Build with error output
+          # Build with error output (env vars now available from shell)
           if ! docker compose build --no-cache 2>&1 | tee /tmp/build.log; then
             echo "=== BUILD FAILED ==="
             tail -50 /tmp/build.log
