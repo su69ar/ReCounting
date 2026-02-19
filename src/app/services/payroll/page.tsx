@@ -6,6 +6,7 @@ import { StaggerGroup } from "@/components/animations/StaggerGroup";
 import { SplitTextHeading } from "@/components/animations/SplitTextHeading";
 import { MaskReveal } from "@/components/animations/MaskReveal";
 import { primaryCta, secondaryCta, siteConfig } from "@/lib/site";
+import { colorClasses, type ColorKey } from "@/lib/color-map";
 import { generateServiceSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
@@ -137,7 +138,7 @@ export default function PayrollPage() {
                     { text: "Annual 1721-A1 reconciliation & Bukti Potong", color: "accent" },
                   ].map((item) => (
                     <li key={item.text} className="stagger-item flex items-center gap-3 group">
-                      <span className={`check-glow bg-${item.color}-500/10 text-${item.color}-500`}>
+                      <span className={`check-glow ${colorClasses[item.color as ColorKey].bg} ${colorClasses[item.color as ColorKey].text}`}>
                         <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
                           <polyline points="20 6 9 17 4 12" />
                         </svg>
@@ -183,8 +184,8 @@ export default function PayrollPage() {
                 },
               ].map((item) => (
                 <div key={item.title} className={`group card-glow card-glow-${item.color} stagger-item p-6 relative overflow-hidden`}>
-                  <span className={`step-number text-${item.color}-500`}>{item.step}</span>
-                  <div className={`icon-glow bg-${item.color}-500/10 text-${item.color}-500 mb-4 relative z-10`}>
+                  <span className={`step-number ${colorClasses[item.color as ColorKey].text}`}>{item.step}</span>
+                  <div className={`icon-glow ${colorClasses[item.color as ColorKey].bg} ${colorClasses[item.color as ColorKey].text} mb-4 relative z-10`}>
                     <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       {item.step === "01" && <><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></>}
                       {item.step === "02" && <><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /></>}
@@ -195,7 +196,7 @@ export default function PayrollPage() {
                   <p className="mt-2 text-sm text-[color:var(--color-slate-light)] relative z-10">
                     {item.desc}
                   </p>
-                  <div className={`mt-4 h-[2px] w-0 rounded-full bg-gradient-to-r from-${item.color}-500 to-${item.color}-400 group-hover:w-16 transition-all duration-500`} />
+                  <div className={`mt-4 h-[2px] w-0 rounded-full bg-gradient-to-r ${colorClasses[item.color as ColorKey].from} ${colorClasses[item.color as ColorKey].to} group-hover:w-16 transition-all duration-500`} />
                 </div>
               ))}
             </StaggerGroup>
@@ -230,7 +231,7 @@ export default function PayrollPage() {
                     key={item.text}
                     className={`group card-glow card-glow-${item.color} stagger-item flex items-center gap-4 p-4`}
                   >
-                    <span className={`check-glow bg-${item.color}-500/10 text-${item.color}-500`}>
+                    <span className={`check-glow ${colorClasses[item.color as ColorKey].bg} ${colorClasses[item.color as ColorKey].text}`}>
                       <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
                         <polyline points="20 6 9 17 4 12" />
                       </svg>
@@ -260,14 +261,14 @@ export default function PayrollPage() {
           <div className="mt-6 grid gap-4 max-w-3xl mx-auto">
             {faqItems.map((item, index) => {
               const colors = ['primary', 'accent', 'secondary'];
-              const color = colors[index % colors.length];
+              const color = colors[index % colors.length] as ColorKey;
               return (
                 <Reveal key={item.question}>
                   <details className="faq-glow group bg-white/80 backdrop-blur-sm">
                     <div className="faq-glow-bg" />
                     <summary className="relative flex items-center justify-between p-6 cursor-pointer list-none">
                       <span className="text-sm font-semibold pr-4">{item.question}</span>
-                      <span className={`w-8 h-8 rounded-full bg-${color}-500/10 flex items-center justify-center text-${color}-500 transition-all duration-300 flex-shrink-0`}>
+                      <span className={`w-8 h-8 rounded-full ${colorClasses[color].bg} flex items-center justify-center ${colorClasses[color].text} transition-all duration-300 flex-shrink-0`}>
                         <svg className="w-4 h-4 transition-transform duration-300 group-open:rotate-45" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                           <line x1="12" y1="5" x2="12" y2="19" />
                           <line x1="5" y1="12" x2="19" y2="12" />
@@ -278,7 +279,7 @@ export default function PayrollPage() {
                       <p className="text-sm text-[color:var(--color-slate-light)]">
                         {item.answer}
                       </p>
-                      <div className={`mt-4 h-[2px] w-16 rounded-full bg-gradient-to-r from-${color}-500 to-${color}-400`} />
+                      <div className={`mt-4 h-[2px] w-16 rounded-full bg-gradient-to-r ${colorClasses[color].from} ${colorClasses[color].to}`} />
                     </div>
                   </details>
                 </Reveal>

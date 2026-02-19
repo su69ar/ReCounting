@@ -43,8 +43,18 @@ export function useBreakpointAnimation<T>(config: UseBreakpointAnimationConfig<T
     }, []);
 
     useEffect(() => {
-        window.addEventListener("resize", updateBreakpoint);
-        return () => window.removeEventListener("resize", updateBreakpoint);
+        let timeoutId: NodeJS.Timeout;
+
+        const debouncedUpdate = () => {
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(updateBreakpoint, 150);
+        };
+
+        window.addEventListener("resize", debouncedUpdate);
+        return () => {
+            window.removeEventListener("resize", debouncedUpdate);
+            clearTimeout(timeoutId);
+        };
     }, [updateBreakpoint]);
 
     // Find the appropriate value for current breakpoint

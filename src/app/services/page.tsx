@@ -7,6 +7,7 @@ import { SplitTextHeading } from "@/components/animations/SplitTextHeading";
 import { MaskReveal } from "@/components/animations/MaskReveal";
 import { services } from "@/data/content";
 import { primaryCta, secondaryCta, siteConfig } from "@/lib/site";
+import { colorClasses, type ColorKey } from "@/lib/color-map";
 
 export const metadata: Metadata = {
   title: "Accounting Services",
@@ -46,7 +47,7 @@ export default function ServicesPage() {
         <StaggerGroup className="mt-10 grid gap-6 md:grid-cols-2">
           {services.map((service, index) => {
             const colors = ['primary', 'accent', 'secondary', 'primary'];
-            const color = colors[index % colors.length];
+            const color = colors[index % colors.length] as ColorKey;
             return (
               <div
                 key={service.title}
@@ -55,7 +56,7 @@ export default function ServicesPage() {
               >
                 {/* Animated gradient border */}
                 <div className={`absolute -inset-[1px] rounded-[1.25rem] bg-gradient-to-r 
-                    from-${color}-500/0 via-${color}-500/40 to-${color}-500/0 
+                    ${colorClasses[color].fromTransparent} ${colorClasses[color].viaMid} ${colorClasses[color].toTransparent} 
                     opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-[1px]`} />
                 <div className={`relative card-glow card-glow-${color} h-full p-6`}>
                   {service.badge && (
@@ -74,9 +75,8 @@ export default function ServicesPage() {
                       {service.price}
                     </p>
                   )}
-                  {/* Glow bar */}
                   <div className={`mt-4 h-[2px] w-0 rounded-full bg-gradient-to-r 
-                      from-${color}-500 to-${color}-400 
+                      ${colorClasses[color].from} ${colorClasses[color].to} 
                       group-hover:w-16 transition-all duration-500`} />
                   <div className="mt-6">
                     <Link
@@ -137,7 +137,7 @@ export default function ServicesPage() {
                       key={item.text}
                       className={`group card-glow card-glow-${item.color} stagger-item flex items-center gap-4 p-4`}
                     >
-                      <div className={`icon-glow bg-${item.color}-500/10 text-${item.color}-500`}>
+                      <div className={`icon-glow ${colorClasses[item.color as ColorKey].bg} ${colorClasses[item.color as ColorKey].text}`}>
                         {item.icon === "globe" && (
                           <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                             <circle cx="12" cy="12" r="10" />

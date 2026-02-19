@@ -8,6 +8,7 @@ import { StickyWhatsApp } from "@/components/layout/StickyWhatsApp";
 import { siteConfig } from "@/lib/site";
 import { organizationSchema, localBusinessSchema, websiteSchema } from "@/lib/schema";
 import { MotionProvider } from "@/components/animations/MotionProvider";
+import { MotionConfigProvider } from "@/components/animations/MotionConfigProvider";
 import { HoverInteractions } from "@/components/animations/HoverInteractions";
 import { ScrollProgress } from "@/components/animations/ScrollProgress";
 import { GrainOverlay } from "@/components/GrainOverlay";
@@ -144,15 +145,17 @@ export default function RootLayout({
         <Favicon />
       </head>
       <body className="antialiased" suppressHydrationWarning>
-        <ConsentBanner />
-        <GrainOverlay />
-        <MotionProvider />
-        <HoverInteractions />
-        <ScrollProgress />
-        <Header />
-        <main className="min-h-screen">{children}</main>
-        <Footer />
-        <StickyWhatsApp />
+        <MotionConfigProvider>
+          <ConsentBanner />
+          <GrainOverlay />
+          <MotionProvider />
+          <HoverInteractions />
+          <ScrollProgress />
+          <Header />
+          <main className="min-h-screen">{children}</main>
+          <Footer />
+          <StickyWhatsApp />
+        </MotionConfigProvider>
       </body>
     </html>
   );

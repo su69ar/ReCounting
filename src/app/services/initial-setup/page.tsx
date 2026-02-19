@@ -6,6 +6,7 @@ import { StaggerGroup } from "@/components/animations/StaggerGroup";
 import { SplitTextHeading } from "@/components/animations/SplitTextHeading";
 import { MaskReveal } from "@/components/animations/MaskReveal";
 import { primaryCta, secondaryCta, siteConfig } from "@/lib/site";
+import { colorClasses, type ColorKey } from "@/lib/color-map";
 import { generateServiceSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
@@ -222,7 +223,7 @@ export default function InitialSetupPage() {
                     { text: "Team training + 3 months support included", color: "secondary" },
                   ].map((item) => (
                     <li key={item.text} className="stagger-item flex items-center gap-3 group">
-                      <span className={`check-glow bg-${item.color}-500/10 text-${item.color}-500`}>
+                      <span className={`check-glow ${colorClasses[item.color as ColorKey].bg} ${colorClasses[item.color as ColorKey].text}`}>
                         <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
                           <polyline points="20 6 9 17 4 12" />
                         </svg>
@@ -261,7 +262,7 @@ export default function InitialSetupPage() {
                 className={`group card-glow card-glow-${service.color} stagger-item p-6 relative overflow-hidden`}
               >
                 <div
-                  className={`icon-glow bg-${service.color}-500/10 text-${service.color}-500 mb-4 relative z-10`}
+                  className={`icon-glow ${colorClasses[service.color as ColorKey].bg} ${colorClasses[service.color as ColorKey].text} mb-4 relative z-10`}
                 >
                   <svg
                     className="w-5 h-5"
@@ -321,7 +322,7 @@ export default function InitialSetupPage() {
                   {service.description}
                 </p>
                 <div
-                  className={`mt-4 h-[2px] w-0 rounded-full bg-gradient-to-r from-${service.color}-500 to-${service.color}-400 group-hover:w-16 transition-all duration-500`}
+                  className={`mt-4 h-[2px] w-0 rounded-full bg-gradient-to-r ${colorClasses[service.color as ColorKey].from} ${colorClasses[service.color as ColorKey].to} group-hover:w-16 transition-all duration-500`}
                 />
               </div>
             ))}
@@ -340,8 +341,8 @@ export default function InitialSetupPage() {
             <StaggerGroup className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
               {processSteps.map((item) => (
                 <div key={item.title} className={`group card-glow card-glow-${item.color} stagger-item p-6 relative overflow-hidden`}>
-                  <span className={`step-number text-${item.color}-500`}>{item.step}</span>
-                  <div className={`icon-glow bg-${item.color}-500/10 text-${item.color}-500 mb-4 relative z-10`}>
+                  <span className={`step-number ${colorClasses[item.color as ColorKey].text}`}>{item.step}</span>
+                  <div className={`icon-glow ${colorClasses[item.color as ColorKey].bg} ${colorClasses[item.color as ColorKey].text} mb-4 relative z-10`}>
                     <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       {item.step === "01" && <><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" strokeLinecap="round" /></>}
                       {item.step === "02" && <><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></>}
@@ -353,7 +354,7 @@ export default function InitialSetupPage() {
                   <p className="mt-2 text-sm text-[color:var(--color-slate-light)] relative z-10">
                     {item.description}
                   </p>
-                  <div className={`mt-4 h-[2px] w-0 rounded-full bg-gradient-to-r from-${item.color}-500 to-${item.color}-400 group-hover:w-16 transition-all duration-500`} />
+                  <div className={`mt-4 h-[2px] w-0 rounded-full bg-gradient-to-r ${colorClasses[item.color as ColorKey].from} ${colorClasses[item.color as ColorKey].to} group-hover:w-16 transition-all duration-500`} />
                 </div>
               ))}
             </StaggerGroup>
@@ -430,7 +431,7 @@ export default function InitialSetupPage() {
                       className="group stagger-item relative"
                     >
                       <div className={`absolute -inset-[1px] rounded-xl bg-gradient-to-r 
-                          from-${tier.color}-500/0 via-${tier.color}-500/40 to-${tier.color}-500/0 
+                          ${colorClasses[tier.color as ColorKey].fromTransparent} ${colorClasses[tier.color as ColorKey].viaMid} ${colorClasses[tier.color as ColorKey].toTransparent} 
                           ${tier.popular ? "opacity-100" : "opacity-0 group-hover:opacity-100"} transition-opacity duration-500 blur-[1px]`} />
                       <div className={`relative card-glow card-glow-${tier.color} p-5 h-full flex flex-col`}>
                         <div className="flex items-center justify-between">
@@ -439,19 +440,19 @@ export default function InitialSetupPage() {
                             <span className="badge-gradient text-[10px]">Popular</span>
                           )}
                         </div>
-                        <p className={`mt-2 text-xl font-bold text-${tier.color}-600`}>
+                        <p className={`mt-2 text-xl font-bold ${colorClasses[tier.color as ColorKey].textDark}`}>
                           {tier.price}
                         </p>
                         <p className="text-xs text-[color:var(--color-slate-light)]">one-time</p>
                         <ul className="mt-3 space-y-2 text-xs text-[color:var(--color-slate-light)] flex-1">
                           {tier.features.map((f) => (
                             <li key={f} className="flex items-center gap-2">
-                              <span className={`w-1.5 h-1.5 rounded-full bg-${tier.color}-500 flex-shrink-0`} />
+                              <span className={`w-1.5 h-1.5 rounded-full ${colorClasses[tier.color as ColorKey].bgSolid} flex-shrink-0`} />
                               {f}
                             </li>
                           ))}
                         </ul>
-                        <div className={`mt-4 h-[2px] w-0 rounded-full bg-gradient-to-r from-${tier.color}-500 to-${tier.color}-400 group-hover:w-full transition-all duration-500`} />
+                        <div className={`mt-4 h-[2px] w-0 rounded-full bg-gradient-to-r ${colorClasses[tier.color as ColorKey].from} ${colorClasses[tier.color as ColorKey].to} group-hover:w-full transition-all duration-500`} />
                       </div>
                     </div>
                   ))}
@@ -481,14 +482,14 @@ export default function InitialSetupPage() {
           <div className="mt-6 grid gap-4 max-w-3xl mx-auto">
             {faqItems.map((item, index) => {
               const colors = ['primary', 'accent', 'secondary'];
-              const color = colors[index % colors.length];
+              const color = colors[index % colors.length] as ColorKey;
               return (
                 <Reveal key={item.question}>
                   <details className="faq-glow group bg-white/80 backdrop-blur-sm">
                     <div className="faq-glow-bg" />
                     <summary className="relative flex items-center justify-between p-6 cursor-pointer list-none">
                       <span className="text-sm font-semibold pr-4">{item.question}</span>
-                      <span className={`w-8 h-8 rounded-full bg-${color}-500/10 flex items-center justify-center text-${color}-500 transition-all duration-300 flex-shrink-0`}>
+                      <span className={`w-8 h-8 rounded-full ${colorClasses[color].bg} flex items-center justify-center ${colorClasses[color].text} transition-all duration-300 flex-shrink-0`}>
                         <svg className="w-4 h-4 transition-transform duration-300 group-open:rotate-45" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                           <line x1="12" y1="5" x2="12" y2="19" />
                           <line x1="5" y1="12" x2="19" y2="12" />
@@ -499,7 +500,7 @@ export default function InitialSetupPage() {
                       <p className="text-sm text-[color:var(--color-slate-light)]">
                         {item.answer}
                       </p>
-                      <div className={`mt-4 h-[2px] w-16 rounded-full bg-gradient-to-r from-${color}-500 to-${color}-400`} />
+                      <div className={`mt-4 h-[2px] w-16 rounded-full bg-gradient-to-r ${colorClasses[color].from} ${colorClasses[color].to}`} />
                     </div>
                   </details>
                 </Reveal>

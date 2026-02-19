@@ -6,6 +6,7 @@ import { StaggerGroup } from "@/components/animations/StaggerGroup";
 import { SplitTextHeading } from "@/components/animations/SplitTextHeading";
 import { MaskReveal } from "@/components/animations/MaskReveal";
 import { primaryCta, secondaryCta, siteConfig } from "@/lib/site";
+import { colorClasses, type ColorKey } from "@/lib/color-map";
 import { generateServiceSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
@@ -106,7 +107,7 @@ export default function ConsultationPage() {
                     { text: "Recommendations for process improvement", color: "accent" },
                   ].map((item) => (
                     <li key={item.text} className="stagger-item flex items-center gap-3 group">
-                      <span className={`check-glow bg-${item.color}-500/10 text-${item.color}-500`}>
+                      <span className={`check-glow ${colorClasses[item.color as ColorKey].bg} ${colorClasses[item.color as ColorKey].text}`}>
                         <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
                           <polyline points="20 6 9 17 4 12" />
                         </svg>
@@ -133,14 +134,14 @@ export default function ConsultationPage() {
           <div className="mt-6 grid gap-4 max-w-3xl mx-auto">
             {faqItems.map((item, index) => {
               const colors = ['primary', 'accent', 'secondary'];
-              const color = colors[index % colors.length];
+              const color = colors[index % colors.length] as ColorKey;
               return (
                 <Reveal key={item.question}>
                   <details className="faq-glow group bg-white/80 backdrop-blur-sm">
                     <div className="faq-glow-bg" />
                     <summary className="relative flex items-center justify-between p-6 cursor-pointer list-none">
                       <span className="text-sm font-semibold pr-4">{item.question}</span>
-                      <span className={`w-8 h-8 rounded-full bg-${color}-500/10 flex items-center justify-center text-${color}-500 transition-all duration-300 flex-shrink-0`}>
+                      <span className={`w-8 h-8 rounded-full ${colorClasses[color].bg} flex items-center justify-center ${colorClasses[color].text} transition-all duration-300 flex-shrink-0`}>
                         <svg className="w-4 h-4 transition-transform duration-300 group-open:rotate-45" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                           <line x1="12" y1="5" x2="12" y2="19" />
                           <line x1="5" y1="12" x2="19" y2="12" />
@@ -149,7 +150,7 @@ export default function ConsultationPage() {
                     </summary>
                     <div className="relative px-6 pb-6">
                       <p className="text-sm text-[color:var(--color-slate-light)]">{item.answer}</p>
-                      <div className={`mt-4 h-[2px] w-16 rounded-full bg-gradient-to-r from-${color}-500 to-${color}-400`} />
+                      <div className={`mt-4 h-[2px] w-16 rounded-full bg-gradient-to-r ${colorClasses[color].from} ${colorClasses[color].to}`} />
                     </div>
                   </details>
                 </Reveal>

@@ -105,9 +105,12 @@ export function ContactForm({ source, submitText, showTransactionVolume }: Conta
             disabled={isSubmitting}
           >
             <option value="Bookkeeping">Bookkeeping</option>
-            <option value="Tax compliance">Tax compliance</option>
-            <option value="Payroll">Payroll (coming soon)</option>
-            <option value="Business setup">Business setup (coming soon)</option>
+            <option value="Financial Reports">Financial Reports</option>
+            <option value="Tax Compliance">Tax Compliance</option>
+            <option value="Payroll">Payroll</option>
+            <option value="Initial Setup">Initial Setup</option>
+            <option value="Consultation">Consultation</option>
+            <option value="Training">Training</option>
           </select>
         </label>
         {showTransactionVolume && (

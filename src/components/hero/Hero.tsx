@@ -35,7 +35,7 @@ export function Hero({
 
       <div className="container-grid relative z-10 py-20 lg:py-28">
         <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-          <div className="space-y-8">
+          <div className="space-y-10">
             <span className="badge-new">Available for new clients</span>
 
             <HeroHeadline text={headline} subtitle={subtitle} />

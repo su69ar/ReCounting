@@ -6,7 +6,7 @@ export const motionTokens = {
     fast: 0.15,
     normal: 0.3,
     medium: 0.5,
-    slow: 0.8,
+    slow: 0.7,
     slower: 1.2,
     slowest: 2,
   },
@@ -14,7 +14,7 @@ export const motionTokens = {
   stagger: {
     tight: 0.03,
     normal: 0.08,
-    relaxed: 0.12,
+    relaxed: 0.1,
     slow: 0.2,
   },
 
@@ -31,23 +31,23 @@ export const motionTokens = {
     enter: "power3.out",
     enterSmooth: "power2.out",
     enterBounce: "back.out(1.4)",
-    
+
     exit: "power2.in",
     exitSmooth: "power1.in",
-    
+
     hover: "power2.out",
     click: "power3.out",
-    
+
     scroll: "power1.inOut",
     scrub: "none",
-    
+
     elastic: "elastic.out(1, 0.3)",
     bounce: "bounce.out",
     spring: "back.out(1.7)",
   },
 
   scrollTrigger: {
-    start: "top 85%",
+    start: "top 90%",
     end: "bottom 15%",
     toggleActions: "play none none reverse",
   },
@@ -68,9 +68,9 @@ export const motionTokens = {
 
 export const motionDefaults = {
   ease: motionTokens.ease.enter,
-  duration: motionTokens.duration.slow,
-  stagger: motionTokens.stagger.relaxed,
-  distance: motionTokens.distance.md,
+  duration: motionTokens.duration.medium,
+  stagger: motionTokens.stagger.normal,
+  distance: motionTokens.distance.sm,
 };
 
 export const prefersReducedMotion = () =>

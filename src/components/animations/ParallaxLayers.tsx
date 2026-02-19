@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap";
+import { gsap, useGSAP } from "@/lib/gsap";
 import { prefersReducedMotion } from "@/lib/motion";
 
 type ParallaxLayersProps = {
@@ -11,7 +11,7 @@ type ParallaxLayersProps = {
 
 type ParallaxLayerProps = {
   children: React.ReactNode;
-  speed?: number; 
+  speed?: number;
   className?: string;
 };
 
@@ -21,6 +21,8 @@ export function ParallaxLayer({ children, speed = 0, className }: ParallaxLayerP
   useGSAP(() => {
     if (!layerRef.current || prefersReducedMotion() || speed === 0) return;
 
+    gsap.set(layerRef.current, { willChange: "transform" });
+
     gsap.to(layerRef.current, {
       yPercent: speed * 50,
       ease: "none",
@@ -28,7 +30,7 @@ export function ParallaxLayer({ children, speed = 0, className }: ParallaxLayerP
         trigger: layerRef.current.parentElement,
         start: "top bottom",
         end: "bottom top",
-        scrub: true,
+        scrub: 0.5, // Smooth scrub
       },
     });
   }, { scope: layerRef });

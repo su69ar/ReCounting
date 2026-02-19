@@ -21,7 +21,7 @@ export function HeroHeadline({ text, subtitle }: HeroHeadlineProps) {
 
     const ctx = gsap.context(() => {
       let headlineSplit: SplitText | null = null;
-      
+
       try {
         headlineSplit = new SplitText(headlineRef.current, {
           type: "chars,words",
@@ -67,7 +67,7 @@ export function HeroHeadline({ text, subtitle }: HeroHeadlineProps) {
         let subtitleSplit: SplitText | null = null;
         try {
           subtitleSplit = new SplitText(subtitleRef.current, { type: "words" });
-          
+
           tl.from(subtitleSplit.words, {
             y: 30,
             autoAlpha: 0,
@@ -93,7 +93,7 @@ export function HeroHeadline({ text, subtitle }: HeroHeadlineProps) {
   }, []);
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       <h1
         ref={headlineRef}
         className="heading-hero text-neutral-900"
@@ -104,7 +104,7 @@ export function HeroHeadline({ text, subtitle }: HeroHeadlineProps) {
       {subtitle && (
         <p
           ref={subtitleRef}
-          className="text-lg sm:text-xl text-neutral-500 max-w-2xl"
+          className="text-lg sm:text-xl text-neutral-600 max-w-2xl"
         >
           {subtitle}
         </p>

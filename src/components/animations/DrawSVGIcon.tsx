@@ -5,7 +5,7 @@ import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap";
 import { prefersReducedMotion } from "@/lib/motion";
 
 type DrawSVGIconProps = {
-  children: React.ReactNode; 
+  children: React.ReactNode;
   className?: string;
   duration?: number;
   delay?: number;
@@ -16,7 +16,7 @@ type DrawSVGIconProps = {
 export function DrawSVGIcon({
   children,
   className,
-  duration = 1.5,
+  duration = 0.7,
   delay = 0,
   triggerOnScroll = true,
   stagger = 0.1,
@@ -27,7 +27,7 @@ export function DrawSVGIcon({
     if (!containerRef.current || prefersReducedMotion()) return;
 
     const paths = containerRef.current.querySelectorAll("path, line, polyline, polygon, rect, circle, ellipse");
-    
+
     if (paths.length === 0) return;
 
     try {

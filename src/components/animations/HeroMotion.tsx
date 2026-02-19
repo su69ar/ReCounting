@@ -1,9 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
+import { gsap, useGSAP } from "@/lib/gsap";
 import { motionDefaults, prefersReducedMotion } from "@/lib/motion";
 
 type HeroMotionProps = {
@@ -17,36 +15,50 @@ export function HeroMotion({ children }: HeroMotionProps) {
     () => {
       if (!ref.current) return;
 
-      gsap.registerPlugin(ScrollTrigger);
+      const items = ref.current.querySelectorAll(".hero-item");
+      const floats = ref.current.querySelectorAll(".hero-float");
 
-      const prefersReduced = prefersReducedMotion();
-
-      if (prefersReduced) {
-        gsap.set(".hero-item", { autoAlpha: 1, y: 0 });
+      if (prefersReducedMotion()) {
+        gsap.set(items, { autoAlpha: 1, y: 0 });
+        gsap.set(floats, { y: 0 });
         gsap.set(".hero-parallax", { y: 0 });
         return;
       }
 
-      gsap.set(".hero-item", { willChange: "transform, opacity" });
+      // Initial set
+      gsap.set(items, { autoAlpha: 0, y: motionDefaults.distance });
 
-      const tl = gsap.timeline({ defaults: { ease: motionDefaults.ease } });
-      tl.from(".hero-item", {
-        y: motionDefaults.distance,
-        autoAlpha: 0,
-        duration: motionDefaults.duration,
-        stagger: motionDefaults.stagger,
+      const tl = gsap.timeline({
+        defaults: { ease: "recounting-enter" } // Use custom ease
+      });
+
+      tl.to(items, {
+        y: 0,
+        autoAlpha: 1,
+        duration: 0.5, // Snappier duration
+        stagger: 0.06, // Tighter stagger
+        onStart: () => {
+          items.forEach((el) => {
+            (el as HTMLElement).style.willChange = "transform, opacity";
+          });
+        },
         onComplete: () => {
-          gsap.set(".hero-item", { clearProps: "willChange" });
+          items.forEach((el) => {
+            (el as HTMLElement).style.willChange = "auto";
+          });
         },
       });
 
-      gsap.to(".hero-float", {
-        y: 12,
-        duration: 4,
-        ease: "sine.inOut",
-        repeat: -1,
-        yoyo: true,
-      });
+      // Float animation — scoped and using context for auto-cleanup
+      if (floats.length) {
+        gsap.to(floats, {
+          y: 8,
+          duration: 3,
+          ease: "sine.inOut",
+          yoyo: true,
+          repeat: -1,
+        });
+      }
 
       gsap.to(".hero-parallax", {
         y: 60,

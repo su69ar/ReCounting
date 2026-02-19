@@ -2,6 +2,7 @@
 
 import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
+import NextImage from "next/image";
 import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap";
 import { useMagneticButton } from "@/hooks/useMagneticButton";
 import { MegaMenu } from "./MegaMenu";
@@ -19,8 +20,8 @@ const mobileServices = [
     description: "Monthly accounting & reconciliations",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
-        <rect x="3" y="3" width="18" height="18" rx="2" strokeLinecap="round"/>
-        <path d="M7 7h10M7 12h10M7 17h6" strokeLinecap="round"/>
+        <rect x="3" y="3" width="18" height="18" rx="2" strokeLinecap="round" />
+        <path d="M7 7h10M7 12h10M7 17h6" strokeLinecap="round" />
       </svg>
     ),
   },
@@ -30,8 +31,8 @@ const mobileServices = [
     description: "P&L, balance sheet & cash flow",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
-        <path d="M18 20V10M12 20V4M6 20v-6" strokeLinecap="round"/>
-        <rect x="2" y="20" width="20" height="2" rx="1"/>
+        <path d="M18 20V10M12 20V4M6 20v-6" strokeLinecap="round" />
+        <rect x="2" y="20" width="20" height="2" rx="1" />
       </svg>
     ),
   },
@@ -41,8 +42,8 @@ const mobileServices = [
     description: "PPh, PPN & SPT filings",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" strokeLinecap="round"/>
-        <path d="m9 12 2 2 4-4" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" strokeLinecap="round" />
+        <path d="m9 12 2 2 4-4" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
   },
@@ -52,9 +53,9 @@ const mobileServices = [
     description: "Staff salaries & BPJS",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
-        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" strokeLinecap="round"/>
-        <circle cx="9" cy="7" r="4"/>
-        <path d="M23 21v-2a4 4 0 0 0-3-3.87" strokeLinecap="round"/>
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" strokeLinecap="round" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87" strokeLinecap="round" />
       </svg>
     ),
   },
@@ -64,7 +65,7 @@ const mobileServices = [
     description: "Data migration & opening balances",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
-        <path d="M3 21h18M5 21V7l8-4 8 4v14M8 21V11h8v10" strokeLinecap="round"/>
+        <path d="M3 21h18M5 21V7l8-4 8 4v14M8 21V11h8v10" strokeLinecap="round" />
       </svg>
     ),
   },
@@ -74,7 +75,7 @@ const mobileServices = [
     description: "Report review & accounting advice",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
-        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7A8.38 8.38 0 0 1 4 11.5a8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" strokeLinecap="round"/>
+        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7A8.38 8.38 0 0 1 4 11.5a8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" strokeLinecap="round" />
       </svg>
     ),
   },
@@ -84,8 +85,8 @@ const mobileServices = [
     description: "Accounting software training",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
-        <rect x="3" y="4" width="18" height="18" rx="2" strokeLinecap="round"/>
-        <path d="M16 2v4M8 2v4M3 10h18" strokeLinecap="round"/>
+        <rect x="3" y="4" width="18" height="18" rx="2" strokeLinecap="round" />
+        <path d="M16 2v4M8 2v4M3 10h18" strokeLinecap="round" />
       </svg>
     ),
   },
@@ -146,18 +147,21 @@ export function Header() {
     <header
       ref={headerRef}
       className={`sticky top-0 z-[100] w-full transition-all duration-300 ${isScrolled
-          ? "bg-white/90 backdrop-blur-lg border-b border-neutral-200 shadow-sm"
-          : "bg-transparent"
+        ? "bg-white/90 backdrop-blur-lg border-b border-neutral-200 shadow-sm"
+        : "bg-transparent"
         }`}
     >
       <div className="container-grid">
         <div className="flex h-20 items-center justify-between gap-6">
           <Link href="/" className="flex items-center gap-3 group">
             <span className="flex h-10 w-auto items-center justify-center transition-opacity hover:opacity-90">
-              <img
+              <NextImage
                 src="/assets/logo/ReCounting_Accounting_Services_Bali.png"
                 alt="ReCounting Logo"
+                width={180}
+                height={40}
                 className="h-10 w-auto object-contain"
+                priority
               />
             </span>
           </Link>
@@ -165,7 +169,7 @@ export function Header() {
           <nav className="hidden md:flex items-center gap-8">
             {/* Mega Menu for Services */}
             <MegaMenu />
-            
+
             {/* Regular nav items */}
             {navItems.map((item) => (
               <Link
@@ -224,10 +228,10 @@ export function Header() {
             <nav className="flex flex-col">
               {/* Expandable Services Section */}
               <MobileServicesMenu onClose={() => setIsMobileMenuOpen(false)} />
-              
+
               {/* Divider */}
               <div className="h-px bg-neutral-200 my-3" />
-              
+
               {/* Regular nav items */}
               {navItems.map((item) => (
                 <Link
@@ -240,7 +244,7 @@ export function Header() {
                   {item.label}
                 </Link>
               ))}
-              
+
               {/* Simple CTA - Same as navbar */}
               <div className="mt-4">
                 <Link
@@ -277,7 +281,7 @@ function MobileServicesMenu({ onClose }: { onClose: () => void }) {
           strokeWidth="2"
           className={`w-4 h-4 text-neutral-500 transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`}
         >
-          <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </button>
 
@@ -309,11 +313,11 @@ function MobileServicesMenu({ onClose }: { onClose: () => void }) {
                 strokeWidth="2"
                 className="w-4 h-4 text-neutral-300 group-hover:text-primary-500 group-hover:translate-x-1 transition-all"
               >
-                <path d="M9 18l6-6-6-6" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M9 18l6-6-6-6" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </Link>
           ))}
-          
+
           {/* View All Services Link */}
           <Link
             href="/services"
@@ -322,7 +326,7 @@ function MobileServicesMenu({ onClose }: { onClose: () => void }) {
           >
             <span className="text-sm font-medium text-primary-600">View All Services</span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4 text-primary-600">
-              <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </Link>
         </div>

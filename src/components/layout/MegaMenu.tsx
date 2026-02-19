@@ -68,39 +68,39 @@ const serviceCategories = [
 const Icons: Record<string, React.ReactNode> = {
   ledger: (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
-      <rect x="3" y="3" width="18" height="18" rx="2" strokeLinecap="round"/>
-      <path d="M7 7h10M7 12h10M7 17h6" strokeLinecap="round"/>
+      <rect x="3" y="3" width="18" height="18" rx="2" strokeLinecap="round" />
+      <path d="M7 7h10M7 12h10M7 17h6" strokeLinecap="round" />
     </svg>
   ),
   chart: (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
-      <path d="M18 20V10M12 20V4M6 20v-6" strokeLinecap="round"/>
-      <rect x="2" y="20" width="20" height="2" rx="1"/>
+      <path d="M18 20V10M12 20V4M6 20v-6" strokeLinecap="round" />
+      <rect x="2" y="20" width="20" height="2" rx="1" />
     </svg>
   ),
   file: (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
-      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" strokeLinecap="round"/>
-      <path d="M14 2v6h6M9 13h6M9 17h6" strokeLinecap="round"/>
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" strokeLinecap="round" />
+      <path d="M14 2v6h6M9 13h6M9 17h6" strokeLinecap="round" />
     </svg>
   ),
   calendar: (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
-      <rect x="3" y="4" width="18" height="18" rx="2" strokeLinecap="round"/>
-      <path d="M16 2v4M8 2v4M3 10h18" strokeLinecap="round"/>
+      <rect x="3" y="4" width="18" height="18" rx="2" strokeLinecap="round" />
+      <path d="M16 2v4M8 2v4M3 10h18" strokeLinecap="round" />
     </svg>
   ),
   users: (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
-      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" strokeLinecap="round"/>
-      <circle cx="9" cy="7" r="4"/>
-      <path d="M23 21v-2a4 4 0 0 0-3-3.87" strokeLinecap="round"/>
-      <path d="M16 3.13a4 4 0 0 1 0 7.75" strokeLinecap="round"/>
+      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" strokeLinecap="round" />
+      <circle cx="9" cy="7" r="4" />
+      <path d="M23 21v-2a4 4 0 0 0-3-3.87" strokeLinecap="round" />
+      <path d="M16 3.13a4 4 0 0 1 0 7.75" strokeLinecap="round" />
     </svg>
   ),
   building: (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
-      <path d="M3 21h18M5 21V7l8-4 8 4v14M8 21V11h8v10" strokeLinecap="round"/>
+      <path d="M3 21h18M5 21V7l8-4 8 4v14M8 21V11h8v10" strokeLinecap="round" />
     </svg>
   ),
 };
@@ -161,9 +161,8 @@ export function MegaMenu() {
     >
       {/* Trigger */}
       <button
-        className={`flex items-center gap-1.5 py-2 text-sm font-medium transition-colors ${
-          isOpen ? "text-primary-600" : "text-neutral-700 hover:text-primary-600"
-        }`}
+        className={`flex items-center gap-1.5 py-2 text-sm font-medium transition-colors ${isOpen ? "text-primary-600" : "text-neutral-700 hover:text-primary-600"
+          }`}
       >
         Services
         <svg
@@ -173,7 +172,7 @@ export function MegaMenu() {
           strokeWidth="2"
           className={`w-4 h-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
         >
-          <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </button>
 
@@ -181,7 +180,7 @@ export function MegaMenu() {
       {isOpen && (
         <div
           ref={panelRef}
-          className="fixed top-[72px] left-0 right-0 z-[100] px-4 sm:px-6 lg:px-8"
+          className="fixed top-20 left-0 right-0 z-[100] px-4 sm:px-6 lg:px-8"
         >
           <div className="max-w-[1100px] mx-auto">
             <div className="bg-white rounded-2xl shadow-2xl border border-neutral-200 overflow-hidden">
@@ -203,7 +202,7 @@ export function MegaMenu() {
                   >
                     View All Services
                     <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </Link>
 
@@ -264,7 +263,7 @@ export function MegaMenu() {
                       <div className="flex items-center gap-4">
                         <div className="w-12 h-12 rounded-xl bg-primary-100 flex items-center justify-center text-primary-600 shrink-0">
                           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-6 h-6">
-                            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7A8.38 8.38 0 0 1 4 11.5a8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" strokeLinecap="round"/>
+                            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7A8.38 8.38 0 0 1 4 11.5a8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" strokeLinecap="round" />
                           </svg>
                         </div>
                         <div className="min-w-0">
@@ -272,7 +271,7 @@ export function MegaMenu() {
                           <p className="text-xs text-neutral-500 mt-0.5">WhatsApp: 0811-3940-4640 • Response in less than 2 hours</p>
                         </div>
                       </div>
-                      
+
                       {/* Right: CTA Button - Fully Rounded */}
                       <Link
                         href="/free-consultation"
@@ -280,7 +279,7 @@ export function MegaMenu() {
                       >
                         <span>Book Free Consultation</span>
                         <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round"/>
+                          <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                       </Link>
                     </div>

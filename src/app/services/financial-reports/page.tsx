@@ -6,6 +6,7 @@ import { StaggerGroup } from "@/components/animations/StaggerGroup";
 import { SplitTextHeading } from "@/components/animations/SplitTextHeading";
 import { MaskReveal } from "@/components/animations/MaskReveal";
 import { primaryCta, secondaryCta, siteConfig } from "@/lib/site";
+import { colorClasses, type ColorKey } from "@/lib/color-map";
 import { generateServiceSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
@@ -194,7 +195,7 @@ export default function FinancialReportsPage() {
                       className="stagger-item flex items-center gap-3 group"
                     >
                       <span
-                        className={`check-glow bg-${item.color}-500/10 text-${item.color}-500`}
+                        className={`check-glow ${colorClasses[item.color as ColorKey].bg} ${colorClasses[item.color as ColorKey].text}`}
                       >
                         <svg
                           className="w-3.5 h-3.5"
@@ -241,7 +242,7 @@ export default function FinancialReportsPage() {
                 className={`group card-glow card-glow-${report.color} stagger-item p-6 relative overflow-hidden`}
               >
                 <div
-                  className={`icon-glow bg-${report.color}-500/10 text-${report.color}-500 mb-4 relative z-10`}
+                  className={`icon-glow ${colorClasses[report.color as ColorKey].bg} ${colorClasses[report.color as ColorKey].text} mb-4 relative z-10`}
                 >
                   <svg
                     className="w-5 h-5"
@@ -303,7 +304,7 @@ export default function FinancialReportsPage() {
                   {report.description}
                 </p>
                 <div
-                  className={`mt-4 h-[2px] w-0 rounded-full bg-gradient-to-r from-${report.color}-500 to-${report.color}-400 group-hover:w-16 transition-all duration-500`}
+                  className={`mt-4 h-[2px] w-0 rounded-full bg-gradient-to-r ${colorClasses[report.color as ColorKey].from} ${colorClasses[report.color as ColorKey].to} group-hover:w-16 transition-all duration-500`}
                 />
               </div>
             ))}
@@ -326,11 +327,11 @@ export default function FinancialReportsPage() {
                 key={item.step}
                 className={`group card-glow card-glow-${item.color} stagger-item p-6 relative overflow-hidden`}
               >
-                <span className={`step-number text-${item.color}-500`}>
+                <span className={`step-number ${colorClasses[item.color as ColorKey].text}`}>
                   {item.step}
                 </span>
                 <div
-                  className={`icon-glow bg-${item.color}-500/10 text-${item.color}-500 mb-4 relative z-10`}
+                  className={`icon-glow ${colorClasses[item.color as ColorKey].bg} ${colorClasses[item.color as ColorKey].text} mb-4 relative z-10`}
                 >
                   <svg
                     className="w-5 h-5"
@@ -374,7 +375,7 @@ export default function FinancialReportsPage() {
                   {item.description}
                 </p>
                 <div
-                  className={`mt-4 h-[2px] w-0 rounded-full bg-gradient-to-r from-${item.color}-500 to-${item.color}-400 group-hover:w-16 transition-all duration-500`}
+                  className={`mt-4 h-[2px] w-0 rounded-full bg-gradient-to-r ${colorClasses[item.color as ColorKey].from} ${colorClasses[item.color as ColorKey].to} group-hover:w-16 transition-all duration-500`}
                 />
               </div>
             ))}
@@ -431,7 +432,7 @@ export default function FinancialReportsPage() {
           <div className="mt-6 grid gap-4 max-w-3xl mx-auto">
             {faqItems.map((item, index) => {
               const colors = ["primary", "accent", "secondary"];
-              const color = colors[index % colors.length];
+              const color = colors[index % colors.length] as ColorKey;
               return (
                 <Reveal key={item.question}>
                   <details className="faq-glow group bg-white/80 backdrop-blur-sm">
@@ -441,7 +442,7 @@ export default function FinancialReportsPage() {
                         {item.question}
                       </span>
                       <span
-                        className={`w-8 h-8 rounded-full bg-${color}-500/10 flex items-center justify-center text-${color}-500 transition-all duration-300 flex-shrink-0`}
+                        className={`w-8 h-8 rounded-full ${colorClasses[color].bg} flex items-center justify-center ${colorClasses[color].text} transition-all duration-300 flex-shrink-0`}
                       >
                         <svg
                           className="w-4 h-4 transition-transform duration-300 group-open:rotate-45"
@@ -460,7 +461,7 @@ export default function FinancialReportsPage() {
                         {item.answer}
                       </p>
                       <div
-                        className={`mt-4 h-[2px] w-16 rounded-full bg-gradient-to-r from-${color}-500 to-${color}-400`}
+                        className={`mt-4 h-[2px] w-16 rounded-full bg-gradient-to-r ${colorClasses[color].from} ${colorClasses[color].to}`}
                       />
                     </div>
                   </details>

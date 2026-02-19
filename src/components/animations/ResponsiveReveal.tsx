@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap";
+import { gsap, useGSAP } from "@/lib/gsap";
 import { motionTokens, prefersReducedMotion } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
@@ -65,8 +65,11 @@ export function ResponsiveReveal({
                         break;
                 }
 
-                gsap.from(ref.current, {
-                    ...fromVars,
+                const toVars: gsap.TweenVars = {
+                    autoAlpha: 1,
+                    x: 0,
+                    y: 0,
+                    scale: 1,
                     duration: motionTokens.duration.slow,
                     ease: motionTokens.ease.enter,
                     delay: desktop.delay,
@@ -75,7 +78,9 @@ export function ResponsiveReveal({
                         start,
                         toggleActions: once ? "play none none none" : "play none none reverse",
                     },
-                });
+                };
+
+                gsap.fromTo(ref.current, fromVars, toVars);
             });
 
             // Mobile animations (simpler)
@@ -91,8 +96,9 @@ export function ResponsiveReveal({
                         break;
                 }
 
-                gsap.from(ref.current, {
-                    ...fromVars,
+                const toVars: gsap.TweenVars = {
+                    autoAlpha: 1,
+                    y: 0,
                     duration: motionTokens.duration.medium,
                     ease: motionTokens.ease.enterSmooth,
                     delay: mobile.delay,
@@ -101,7 +107,9 @@ export function ResponsiveReveal({
                         start,
                         toggleActions: once ? "play none none none" : "play none none reverse",
                     },
-                });
+                };
+
+                gsap.fromTo(ref.current, fromVars, toVars);
             });
 
             return () => mm.revert();

@@ -1,0 +1,43 @@
+export const colorClasses = {
+    primary: {
+        bg: "bg-primary-500/10",
+        bgSolid: "bg-primary-500",
+        text: "text-primary-500",
+        textDark: "text-primary-600",
+        border: "border-primary-500",
+        from: "from-primary-500",
+        to: "to-primary-400",
+        glow: "card-glow-primary",
+        fromTransparent: "from-primary-500/0",
+        toTransparent: "to-primary-500/0",
+        viaMid: "via-primary-500/40",
+    },
+    accent: {
+        bg: "bg-accent-500/10",
+        bgSolid: "bg-accent-500",
+        text: "text-accent-500",
+        textDark: "text-accent-600",
+        border: "border-accent-500",
+        from: "from-accent-500",
+        to: "to-accent-400",
+        glow: "card-glow-accent",
+        fromTransparent: "from-accent-500/0",
+        toTransparent: "to-accent-500/0",
+        viaMid: "via-accent-500/40",
+    },
+    secondary: {
+        bg: "bg-secondary-500/10",
+        bgSolid: "bg-secondary-500",
+        text: "text-secondary-500",
+        textDark: "text-secondary-600",
+        border: "border-secondary-500",
+        from: "from-secondary-500",
+        to: "to-secondary-400",
+        glow: "card-glow-secondary",
+        fromTransparent: "from-secondary-500/0",
+        toTransparent: "to-secondary-500/0",
+        viaMid: "via-secondary-500/40",
+    },
+} as const;
+
+export type ColorKey = keyof typeof colorClasses;

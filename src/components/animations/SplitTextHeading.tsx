@@ -27,7 +27,7 @@ export function SplitTextHeading({
   animationType = "stagger",
   animateOnScroll = true,
   delay = 0,
-  duration = motionTokens.duration.slow,
+  duration = motionTokens.duration.medium,
   stagger = motionTokens.stagger.tight,
 }: SplitTextHeadingProps) {
   const ref = useRef<HTMLElement>(null);
@@ -51,16 +51,16 @@ export function SplitTextHeading({
         gsap.to(ref.current, { opacity: 1, duration: 0.5 });
         return;
       }
-      
-      const targets = splitType.includes("chars") ? split.chars : 
-                      splitType.includes("words") ? split.words : 
-                      split.lines;
+
+      const targets = splitType.includes("chars") ? split.chars :
+        splitType.includes("words") ? split.words :
+          split.lines;
 
       // Ensure targets are visible before animating
       gsap.set(targets, { opacity: 1 });
 
       let staggerConfig: gsap.NumberValue | gsap.StaggerVars = stagger;
-      
+
       switch (animationType) {
         case "wave":
           staggerConfig = {

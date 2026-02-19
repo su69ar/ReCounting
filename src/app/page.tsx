@@ -6,6 +6,7 @@ import { SplitTextHeading } from "@/components/animations/SplitTextHeading";
 import { MaskReveal } from "@/components/animations/MaskReveal";
 import { StoryScroll } from "@/components/animations/StoryScroll";
 import { FAQ } from "@/components/sections/FAQ";
+import { InstagramFeed } from "@/components/sections/InstagramFeed";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { TrustStrip } from "@/components/TrustStrip";
 import { primaryCta, secondaryCta, siteConfig } from "@/lib/site";
@@ -387,6 +388,25 @@ export default function Home() {
               </div>
             ))}
           </StaggerGroup>
+        </div>
+      </section>
+
+      <section className="section-space">
+        <div className="container-grid">
+          <Reveal>
+            <div className="mb-10 text-center">
+              <p className="badge-pill mb-3">Follow us</p>
+              <SplitTextHeading
+                text="ReCounting on Instagram"
+                as="h2"
+                className="section-title"
+              />
+              <p className="section-subtitle mt-3">
+                Follow <a href={siteConfig.socials.instagram} target="_blank" rel="noopener noreferrer" className="text-[color:var(--color-primary)] font-medium hover:underline">@recountingasia</a> for tax tips and team updates.
+              </p>
+            </div>
+          </Reveal>
+          <InstagramFeed limit={6} />
         </div>
       </section>
 

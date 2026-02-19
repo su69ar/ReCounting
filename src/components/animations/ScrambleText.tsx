@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useCallback } from "react";
 import { prefersReducedMotion } from "@/lib/motion";
 
 type ScrambleTextProps = {
@@ -19,66 +19,84 @@ export function ScrambleText({
   trigger = "load",
 }: ScrambleTextProps) {
   const elementRef = useRef<HTMLSpanElement>(null);
-  const [displayText, setDisplayText] = useState(text);
-  const [isAnimating, setIsAnimating] = useState(false);
+  const isAnimatingRef = useRef(false);
+  const frameRef = useRef<number>(0);
 
-  const scramble = () => {
-    if (isAnimating || prefersReducedMotion()) return;
+  const scramble = useCallback(() => {
+    if (isAnimatingRef.current || prefersReducedMotion() || !elementRef.current) return;
 
-    setIsAnimating(true);
-    const originalText = text;
-    const length = originalText.length;
-    const intervalTime = duration / (length * 3);
-    let iteration = 0;
+    isAnimatingRef.current = true;
+    const length = text.length;
+    const startTime = performance.now();
 
-    const interval = setInterval(() => {
-      setDisplayText(
-        originalText
-          .split("")
-          .map((char, index) => {
-            if (index < iteration / 3) {
-              return originalText[index];
-            }
-            return scrambleChars[Math.floor(Math.random() * scrambleChars.length)];
-          })
-          .join("")
+    const animate = (currentTime: number) => {
+      if (!elementRef.current) return;
+
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+
+      // Calculate how many characters should be revealed based on progress
+      const revealedCount = Math.floor(progress * length);
+
+      const scrambledText = text
+        .split("")
+        .map((char, index) => {
+          if (index < revealedCount) {
+            return char;
+          }
+          // Random character for unrevealed positions
+          return scrambleChars[Math.floor(Math.random() * scrambleChars.length)];
+        })
+        .join("");
+
+      elementRef.current.textContent = scrambledText;
+
+      if (progress < 1) {
+        frameRef.current = requestAnimationFrame(animate);
+      } else {
+        isAnimatingRef.current = false;
+        elementRef.current.textContent = text;
+      }
+    };
+
+    frameRef.current = requestAnimationFrame(animate);
+  }, [text, duration, scrambleChars]);
+
+  useEffect(() => {
+    if (prefersReducedMotion()) {
+      if (elementRef.current) elementRef.current.textContent = text;
+      return;
+    }
+
+    if (trigger === "load") {
+      scramble();
+    } else if (trigger === "scroll") {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            scramble();
+            observer.disconnect();
+          }
+        },
+        { threshold: 0.5 }
       );
 
-      if (iteration >= length * 3) {
-        clearInterval(interval);
-        setDisplayText(originalText);
-        setIsAnimating(false);
+      if (elementRef.current) {
+        observer.observe(elementRef.current);
       }
 
-      iteration++;
-    }, intervalTime);
-  };
-
-  useEffect(() => {
-    if (trigger === "load" && !prefersReducedMotion()) {
-      scramble();
+      return () => observer.disconnect();
     }
+  }, [trigger, text, scramble]);
+
+  // Clean up animation frame on unmount
+  useEffect(() => {
+    return () => {
+      if (frameRef.current) {
+        cancelAnimationFrame(frameRef.current);
+      }
+    };
   }, []);
-
-  useEffect(() => {
-    if (trigger !== "scroll" || prefersReducedMotion()) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          scramble();
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.5 }
-    );
-
-    if (elementRef.current) {
-      observer.observe(elementRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, [trigger]);
 
   return (
     <span
@@ -86,7 +104,7 @@ export function ScrambleText({
       className={className}
       onMouseEnter={trigger === "hover" ? scramble : undefined}
     >
-      {displayText}
+      {text}
     </span>
   );
 }

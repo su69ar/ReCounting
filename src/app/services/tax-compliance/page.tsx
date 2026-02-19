@@ -6,6 +6,7 @@ import { StaggerGroup } from "@/components/animations/StaggerGroup";
 import { SplitTextHeading } from "@/components/animations/SplitTextHeading";
 import { MaskReveal } from "@/components/animations/MaskReveal";
 import { primaryCta, secondaryCta, siteConfig } from "@/lib/site";
+import { colorClasses, type ColorKey } from "@/lib/color-map";
 import { generateServiceSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
@@ -127,7 +128,7 @@ export default function TaxCompliancePage() {
                     { text: "Audit-ready compliance files", color: "accent" },
                   ].map((item) => (
                     <li key={item.text} className="stagger-item flex items-center gap-3 group">
-                      <span className={`check-glow bg-${item.color}-500/10 text-${item.color}-500`}>
+                      <span className={`check-glow ${colorClasses[item.color as ColorKey].bg} ${colorClasses[item.color as ColorKey].text}`}>
                         <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
                           <polyline points="20 6 9 17 4 12" />
                         </svg>
@@ -179,10 +180,10 @@ export default function TaxCompliancePage() {
               ].map((item) => (
                 <div key={item.title} className={`group card-glow card-glow-${item.color} stagger-item p-6 relative overflow-hidden`}>
                   {/* Step number background */}
-                  <span className={`step-number text-${item.color}-500`}>{item.step}</span>
+                  <span className={`step-number ${colorClasses[item.color as ColorKey].text}`}>{item.step}</span>
 
                   {/* Icon */}
-                  <div className={`icon-glow bg-${item.color}-500/10 text-${item.color}-500 mb-4 relative z-10`}>
+                  <div className={`icon-glow ${colorClasses[item.color as ColorKey].bg} ${colorClasses[item.color as ColorKey].text} mb-4 relative z-10`}>
                     {item.icon === "search" && (
                       <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                         <circle cx="11" cy="11" r="8" />
@@ -211,7 +212,7 @@ export default function TaxCompliancePage() {
                   </p>
 
                   {/* Glow bar */}
-                  <div className={`mt-4 h-[2px] w-0 rounded-full bg-gradient-to-r from-${item.color}-500 to-${item.color}-400 group-hover:w-16 transition-all duration-500`} />
+                  <div className={`mt-4 h-[2px] w-0 rounded-full bg-gradient-to-r ${colorClasses[item.color as ColorKey].from} ${colorClasses[item.color as ColorKey].to} group-hover:w-16 transition-all duration-500`} />
                 </div>
               ))}
             </StaggerGroup>
@@ -256,11 +257,11 @@ export default function TaxCompliancePage() {
                     >
                       {/* Animated gradient border */}
                       <div className={`absolute -inset-[1px] rounded-xl bg-gradient-to-r 
-                          from-${item.color}-500/0 via-${item.color}-500/40 to-${item.color}-500/0 
+                          ${colorClasses[item.color as ColorKey].fromTransparent} ${colorClasses[item.color as ColorKey].viaMid} ${colorClasses[item.color as ColorKey].toTransparent} 
                           opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-[1px]`} />
                       <div className={`relative card-glow card-glow-${item.color} p-4 h-full flex items-center gap-4`}>
                         {/* Frequency badge */}
-                        <span className={`px-2 py-1 rounded-md text-xs font-semibold bg-${item.color}-500/10 text-${item.color}-500`}>
+                        <span className={`px-2 py-1 rounded-md text-xs font-semibold ${colorClasses[item.color as ColorKey].bg} ${colorClasses[item.color as ColorKey].text}`}>
                           {item.freq}
                         </span>
                         <span className="text-sm">{item.text}</span>
@@ -322,7 +323,7 @@ export default function TaxCompliancePage() {
                         key={item.text}
                         className={`group card-glow card-glow-${item.color} stagger-item flex items-center gap-4 p-4`}
                       >
-                        <span className={`check-glow bg-${item.color}-500/10 text-${item.color}-500`}>
+                        <span className={`check-glow ${colorClasses[item.color as ColorKey].bg} ${colorClasses[item.color as ColorKey].text}`}>
                           <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
                             <polyline points="20 6 9 17 4 12" />
                           </svg>
@@ -357,7 +358,7 @@ export default function TaxCompliancePage() {
           <div className="mt-6 grid gap-4 max-w-3xl mx-auto">
             {faqItems.map((item, index) => {
               const colors = ['primary', 'accent', 'secondary'];
-              const color = colors[index % colors.length];
+              const color = colors[index % colors.length] as ColorKey;
               return (
                 <Reveal key={item.question}>
                   <details className="faq-glow group bg-white/80 backdrop-blur-sm">
@@ -365,7 +366,7 @@ export default function TaxCompliancePage() {
                     <div className="faq-glow-bg" />
                     <summary className="relative flex items-center justify-between p-6 cursor-pointer list-none">
                       <span className="text-sm font-semibold pr-4">{item.question}</span>
-                      <span className={`w-8 h-8 rounded-full bg-${color}-500/10 flex items-center justify-center text-${color}-500 transition-all duration-300 flex-shrink-0`}>
+                      <span className={`w-8 h-8 rounded-full ${colorClasses[color].bg} flex items-center justify-center ${colorClasses[color].text} transition-all duration-300 flex-shrink-0`}>
                         <svg className="w-4 h-4 transition-transform duration-300 group-open:rotate-45" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                           <line x1="12" y1="5" x2="12" y2="19" />
                           <line x1="5" y1="12" x2="19" y2="12" />
@@ -377,7 +378,7 @@ export default function TaxCompliancePage() {
                         {item.answer}
                       </p>
                       {/* Glow bar */}
-                      <div className={`mt-4 h-[2px] w-16 rounded-full bg-gradient-to-r from-${color}-500 to-${color}-400`} />
+                      <div className={`mt-4 h-[2px] w-16 rounded-full bg-gradient-to-r ${colorClasses[color].from} ${colorClasses[color].to}`} />
                     </div>
                   </details>
                 </Reveal>

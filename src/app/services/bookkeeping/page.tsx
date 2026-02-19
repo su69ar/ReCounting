@@ -7,6 +7,7 @@ import { SplitTextHeading } from "@/components/animations/SplitTextHeading";
 import { MaskReveal } from "@/components/animations/MaskReveal";
 import { primaryCta, secondaryCta, siteConfig } from "@/lib/site";
 import { generateServiceSchema } from "@/lib/schema";
+import { colorClasses, type ColorKey } from "@/lib/color-map";
 
 export const metadata: Metadata = {
   title: "Expert Bookkeeping Services in Bali",
@@ -126,7 +127,7 @@ export default function BookkeepingPage() {
                     { text: "Compliance-ready reports for tax filing", color: "accent" },
                   ].map((item) => (
                     <li key={item.text} className="stagger-item flex items-center gap-3 group">
-                      <span className={`check-glow bg-${item.color}-500/10 text-${item.color}-500`}>
+                      <span className={`check-glow ${colorClasses[item.color as ColorKey].bg} ${colorClasses[item.color as ColorKey].text}`}>
                         <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
                           <polyline points="20 6 9 17 4 12" />
                         </svg>
@@ -178,10 +179,10 @@ export default function BookkeepingPage() {
               ].map((item) => (
                 <div key={item.title} className={`group card-glow card-glow-${item.color} stagger-item p-6 relative overflow-hidden`}>
                   {/* Step number background */}
-                  <span className={`step-number text-${item.color}-500`}>{item.step}</span>
+                  <span className={`step-number ${colorClasses[item.color as ColorKey].text}`}>{item.step}</span>
 
                   {/* Icon */}
-                  <div className={`icon-glow bg-${item.color}-500/10 text-${item.color}-500 mb-4 relative z-10`}>
+                  <div className={`icon-glow ${colorClasses[item.color as ColorKey].bg} ${colorClasses[item.color as ColorKey].text} mb-4 relative z-10`}>
                     {item.icon === "setup" && (
                       <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                         <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
@@ -208,7 +209,7 @@ export default function BookkeepingPage() {
                   </p>
 
                   {/* Glow bar */}
-                  <div className={`mt-4 h-[2px] w-0 rounded-full bg-gradient-to-r from-${item.color}-500 to-${item.color}-400 group-hover:w-16 transition-all duration-500`} />
+                  <div className={`mt-4 h-[2px] w-0 rounded-full bg-gradient-to-r ${colorClasses[item.color as ColorKey].from} ${colorClasses[item.color as ColorKey].to} group-hover:w-16 transition-all duration-500`} />
                 </div>
               ))}
             </StaggerGroup>
@@ -245,7 +246,7 @@ export default function BookkeepingPage() {
                     key={item.text}
                     className={`group card-glow card-glow-${item.color} stagger-item flex items-center gap-4 p-4`}
                   >
-                    <span className={`check-glow bg-${item.color}-500/10 text-${item.color}-500`}>
+                    <span className={`check-glow ${colorClasses[item.color as ColorKey].bg} ${colorClasses[item.color as ColorKey].text}`}>
                       <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
                         <polyline points="20 6 9 17 4 12" />
                       </svg>
@@ -313,7 +314,7 @@ export default function BookkeepingPage() {
                       className="group stagger-item relative"
                     >
                       <div className={`absolute -inset-[1px] rounded-xl bg-gradient-to-r 
-                          from-${tier.color}-500/0 via-${tier.color}-500/40 to-${tier.color}-500/0 
+                          ${colorClasses[tier.color as ColorKey].fromTransparent} ${colorClasses[tier.color as ColorKey].viaMid} ${colorClasses[tier.color as ColorKey].toTransparent} 
                           ${tier.popular ? "opacity-100" : "opacity-0 group-hover:opacity-100"} transition-opacity duration-500 blur-[1px]`} />
                       <div className={`relative card-glow card-glow-${tier.color} p-5 h-full flex flex-col`}>
                         <div className="flex items-center justify-between">
@@ -322,19 +323,19 @@ export default function BookkeepingPage() {
                             <span className="badge-gradient text-[10px]">Popular</span>
                           )}
                         </div>
-                        <p className={`mt-2 text-xl font-bold text-${tier.color}-600`}>
+                        <p className={`mt-2 text-xl font-bold ${colorClasses[tier.color as ColorKey].textDark}`}>
                           {tier.price}
                           <span className="text-xs font-normal text-[color:var(--color-slate-light)]">{tier.unit}</span>
                         </p>
                         <ul className="mt-3 space-y-2 text-xs text-[color:var(--color-slate-light)] flex-1">
                           {tier.features.map((f) => (
                             <li key={f} className="flex items-center gap-2">
-                              <span className={`w-1.5 h-1.5 rounded-full bg-${tier.color}-500`} />
+                              <span className={`w-1.5 h-1.5 rounded-full ${colorClasses[tier.color as ColorKey].bgSolid}`} />
                               {f}
                             </li>
                           ))}
                         </ul>
-                        <div className={`mt-4 h-[2px] w-0 rounded-full bg-gradient-to-r from-${tier.color}-500 to-${tier.color}-400 group-hover:w-full transition-all duration-500`} />
+                        <div className={`mt-4 h-[2px] w-0 rounded-full bg-gradient-to-r ${colorClasses[tier.color as ColorKey].from} ${colorClasses[tier.color as ColorKey].to} group-hover:w-full transition-all duration-500`} />
                       </div>
                     </div>
                   ))}
@@ -366,7 +367,7 @@ export default function BookkeepingPage() {
           <div className="mt-6 grid gap-4 max-w-3xl mx-auto">
             {faqItems.map((item, index) => {
               const colors = ['primary', 'accent', 'secondary'];
-              const color = colors[index % colors.length];
+              const color = colors[index % colors.length] as ColorKey;
               return (
                 <Reveal key={item.question}>
                   <details className="faq-glow group bg-white/80 backdrop-blur-sm">
@@ -374,7 +375,7 @@ export default function BookkeepingPage() {
                     <div className="faq-glow-bg" />
                     <summary className="relative flex items-center justify-between p-6 cursor-pointer list-none">
                       <span className="text-sm font-semibold pr-4">{item.question}</span>
-                      <span className={`w-8 h-8 rounded-full bg-${color}-500/10 flex items-center justify-center text-${color}-500 transition-all duration-300 flex-shrink-0`}>
+                      <span className={`w-8 h-8 rounded-full ${colorClasses[color].bg} flex items-center justify-center ${colorClasses[color].text} transition-all duration-300 flex-shrink-0`}>
                         <svg className="w-4 h-4 transition-transform duration-300 group-open:rotate-45" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                           <line x1="12" y1="5" x2="12" y2="19" />
                           <line x1="5" y1="12" x2="19" y2="12" />
@@ -386,7 +387,7 @@ export default function BookkeepingPage() {
                         {item.answer}
                       </p>
                       {/* Glow bar */}
-                      <div className={`mt-4 h-[2px] w-16 rounded-full bg-gradient-to-r from-${color}-500 to-${color}-400`} />
+                      <div className={`mt-4 h-[2px] w-16 rounded-full bg-gradient-to-r ${colorClasses[color].from} ${colorClasses[color].to}`} />
                     </div>
                   </details>
                 </Reveal>

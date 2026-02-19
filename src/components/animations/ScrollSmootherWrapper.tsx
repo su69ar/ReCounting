@@ -15,18 +15,18 @@ export function ScrollSmootherWrapper({ children }: ScrollSmootherWrapperProps) 
 
   useLayoutEffect(() => {
     if (!wrapperRef.current || !contentRef.current) return;
-    
+
     const prefersReduced = prefersReducedMotion();
-    
+
     if (prefersReduced) return;
 
     smootherRef.current = ScrollSmoother.create({
       wrapper: wrapperRef.current,
       content: contentRef.current,
-      smooth: 1.2,
+      smooth: 0.6,
       effects: true,
       smoothTouch: 0.1,
-      normalizeScroll: true,
+      normalizeScroll: false,
     });
 
     const handleResize = () => {

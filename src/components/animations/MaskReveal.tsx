@@ -1,12 +1,8 @@
 "use client";
 
 import { useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
+import { gsap, useGSAP } from "@/lib/gsap";
 import { motionDefaults, prefersReducedMotion } from "@/lib/motion";
-
-gsap.registerPlugin(ScrollTrigger);
 
 type MaskRevealProps = {
   children: React.ReactNode;
@@ -38,6 +34,12 @@ export function MaskReveal({ children, className, radius = 24 }: MaskRevealProps
             trigger: ref.current,
             start: "top 85%",
             toggleActions: "play none none reverse",
+          },
+          onStart: () => {
+            if (ref.current) ref.current.style.willChange = "clip-path";
+          },
+          onComplete: () => {
+            if (ref.current) ref.current.style.willChange = "auto";
           },
         }
       );

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useCallback } from "react";
+import { useRef, useCallback, useEffect } from "react";
 import { gsap } from "@/lib/gsap";
 import { prefersReducedMotion } from "@/lib/motion";
 
@@ -15,6 +15,20 @@ export function useMagneticButton<T extends HTMLElement>({
 }: MagneticConfig = {}) {
   const ref = useRef<T | null>(null);
   const rectRef = useRef<DOMRect | null>(null);
+  const xTo = useRef<gsap.QuickToFunc | null>(null);
+  const yTo = useRef<gsap.QuickToFunc | null>(null);
+
+  // Initialize quickTo instance
+  useEffect(() => {
+    if (!ref.current || prefersReducedMotion()) return;
+
+    xTo.current = gsap.quickTo(ref.current, "x", { duration: duration, ease: "power3" });
+    yTo.current = gsap.quickTo(ref.current, "y", { duration: duration, ease: "power3" });
+
+    return () => {
+      // clean up if needed
+    };
+  }, [duration]);
 
   const handleMouseMove = useCallback((e: React.MouseEvent | MouseEvent) => {
     if (!ref.current || !rectRef.current || prefersReducedMotion()) return;
@@ -23,13 +37,9 @@ export function useMagneticButton<T extends HTMLElement>({
     const x = e.clientX - rect.left - rect.width / 2;
     const y = e.clientY - rect.top - rect.height / 2;
 
-    gsap.to(ref.current, {
-      x: x * strength,
-      y: y * strength,
-      duration: duration * 0.5,
-      ease: "power2.out",
-    });
-  }, [strength, duration]);
+    xTo.current?.(x * strength);
+    yTo.current?.(y * strength);
+  }, [strength]);
 
   const handleMouseEnter = useCallback(() => {
     if (!ref.current) return;
@@ -39,13 +49,9 @@ export function useMagneticButton<T extends HTMLElement>({
   const handleMouseLeave = useCallback(() => {
     if (!ref.current || prefersReducedMotion()) return;
 
-    gsap.to(ref.current, {
-      x: 0,
-      y: 0,
-      duration,
-      ease: "elastic.out(1, 0.3)",
-    });
-  }, [duration]);
+    xTo.current?.(0);
+    yTo.current?.(0);
+  }, []);
 
   return {
     ref,

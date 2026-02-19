@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Reveal } from "@/components/animations/Reveal";
+import { SplitTextHeading } from "@/components/animations/SplitTextHeading";
 import { blogPosts } from "@/data/content";
 import { siteConfig } from "@/lib/site";
 
@@ -31,11 +32,13 @@ export default function BlogPage() {
             {/* Decorative glow */}
             <div className="absolute -top-10 -left-10 w-32 h-32 bg-[color:var(--color-primary)]/10 rounded-full blur-3xl pointer-events-none" />
             <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-[color:var(--color-accent)]/10 rounded-full blur-3xl pointer-events-none" />
-            
+
             <p className="badge-gradient inline-flex mb-3">Blog</p>
-            <h1 className="text-4xl font-bold tracking-tight text-[color:var(--color-slate-dark)]">
-              ReCounting insights & tax updates
-            </h1>
+            <SplitTextHeading
+              text="ReCounting insights & tax updates"
+              as="h1"
+              className="mt-4 text-4xl font-bold tracking-tight text-[color:var(--color-slate-dark)]"
+            />
             <p className="section-subtitle mt-4">
               Practical guidance for Bali business owners, expats, and SMEs.
             </p>
@@ -52,22 +55,22 @@ export default function BlogPage() {
                 <article className={`group card-glow card-glow-${color} flex h-full flex-col p-6 relative overflow-hidden`}>
                   {/* Background glow orb */}
                   <div className={`absolute -top-20 -right-20 w-40 h-40 bg-${color}-500/10 rounded-full blur-3xl group-hover:bg-${color}-500/15 transition-colors pointer-events-none`} />
-                  
+
                   {/* Category badge dengan gradient */}
                   <span className={`badge-gradient mb-3 inline-flex group-hover:shadow-glow-${color} transition-shadow`}>
                     {post.category}
                   </span>
-                  
+
                   <h2 className="mt-3 text-lg font-semibold relative z-10">
                     <Link href={post.href} className="link-glow group-hover:text-[color:var(--color-primary)] transition-colors">
                       {post.title}
                     </Link>
                   </h2>
-                  
+
                   <p className="mt-3 text-sm text-[color:var(--color-slate-light)] relative z-10 flex-grow">
                     {post.description}
                   </p>
-                  
+
                   {/* Bottom dengan glow bar */}
                   <div className="mt-auto pt-4 flex items-center justify-between relative z-10">
                     <span className="text-xs text-[color:var(--color-slate-light)]">

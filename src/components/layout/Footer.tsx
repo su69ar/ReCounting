@@ -2,6 +2,7 @@
 
 import { useRef, useEffect } from "react";
 import Link from "next/link";
+import NextImage from "next/image";
 import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap";
 import { motionTokens, prefersReducedMotion } from "@/lib/motion";
 import { siteConfig } from "@/lib/site";
@@ -41,27 +42,27 @@ export function Footer() {
   // Ensure visibility immediately on mount
   useEffect(() => {
     if (!footerRef.current) return;
-    
+
     // Force visibility immediately
     const sections = footerRef.current.querySelectorAll(".footer-section");
     gsap.set(sections, { opacity: 1, y: 0, visibility: "visible" });
-    
+
     // Refresh ScrollTrigger after a short delay
     const timer = setTimeout(() => {
       ScrollTrigger.refresh();
     }, 100);
-    
+
     return () => clearTimeout(timer);
   }, []);
 
   useGSAP(() => {
     if (!footerRef.current) return;
-    
+
     const prefersReduced = prefersReducedMotion();
-    
+
     // Skip animation if user prefers reduced motion
     if (prefersReduced) return;
-    
+
     // Skip if already animated this session
     if (hasAnimated.current) {
       gsap.set(".footer-section", { opacity: 1, y: 0 });
@@ -137,27 +138,29 @@ export function Footer() {
   }, { scope: footerRef });
 
   return (
-    <footer ref={footerRef} className="border-t border-neutral-200 bg-white" style={{ opacity: 1, visibility: "visible" }}>
+    <footer ref={footerRef} className="border-t border-neutral-200 bg-white">
       <div className="container-grid py-16 lg:py-20">
         <div className="grid gap-12 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
-          <div className="footer-section space-y-6" style={{ opacity: 1, visibility: "visible" }}>
+          <div className="footer-section space-y-6">
             <div className="flex items-center gap-3">
               <span className="flex h-12 w-auto items-center justify-center">
-                <img
+                <NextImage
                   src="/assets/logo/ReCounting_Accounting_Services_Bali.png"
                   alt="ReCounting Logo"
+                  width={180}
+                  height={40}
                   className="h-10 w-auto object-contain"
                 />
               </span>
             </div>
-            
+
             <p className="text-sm text-neutral-500 max-w-xs leading-relaxed">
-              Stress-free accounting, bookkeeping, and tax compliance for SMEs and 
+              Stress-free accounting, bookkeeping, and tax compliance for SMEs and
               expats across Bali. Your trusted finance partner on the ground.
             </p>
 
             <div className="space-y-3">
-              <a 
+              <a
                 href={`mailto:${siteConfig.email}`}
                 className="footer-link flex items-center gap-2 text-sm text-neutral-600"
               >
@@ -166,7 +169,7 @@ export function Footer() {
                 </svg>
                 {siteConfig.email}
               </a>
-              <a 
+              <a
                 href={`tel:${siteConfig.phoneIntl}`}
                 className="footer-link flex items-center gap-2 text-sm text-neutral-600"
               >
@@ -201,7 +204,7 @@ export function Footer() {
             </div>
           </div>
 
-          <div className="footer-section space-y-4" style={{ opacity: 1, visibility: "visible" }}>
+          <div className="footer-section space-y-4">
             <h3 className="text-sm font-semibold text-neutral-900 uppercase tracking-wide">
               Services
             </h3>
@@ -218,7 +221,7 @@ export function Footer() {
             </nav>
           </div>
 
-          <div className="footer-section space-y-4" style={{ opacity: 1, visibility: "visible" }}>
+          <div className="footer-section space-y-4">
             <h3 className="text-sm font-semibold text-neutral-900 uppercase tracking-wide">
               Company
             </h3>
@@ -235,7 +238,7 @@ export function Footer() {
             </nav>
           </div>
 
-          <div className="footer-section space-y-4" style={{ opacity: 1, visibility: "visible" }}>
+          <div className="footer-section space-y-4">
             <h3 className="text-sm font-semibold text-neutral-900 uppercase tracking-wide">
               Resources
             </h3>
@@ -259,7 +262,7 @@ export function Footer() {
             © {new Date().getFullYear()} ReCounting. All rights reserved.
           </p>
           <p className="text-xs text-neutral-400 max-w-lg">
-            Legal: Accounting guidance is educational only and not legal or tax advice. 
+            Legal: Accounting guidance is educational only and not legal or tax advice.
             Always verify with licensed professionals.
           </p>
         </div>

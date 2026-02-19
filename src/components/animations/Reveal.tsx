@@ -34,13 +34,16 @@ export function Reveal({
       if (!ref.current) return;
       const prefersReduced = prefersReducedMotion();
 
-      // Always ensure visibility first
-      gsap.set(ref.current, { opacity: 1, y: 0, x: 0, scale: 1, visibility: "visible" });
+      // Remove the initial set to visible which causes FOUC
+      // gsap.set(ref.current, { opacity: 1, y: 0, x: 0, scale: 1, visibility: "visible" });
 
-      if (prefersReduced) return;
+      if (prefersReduced) {
+        gsap.set(ref.current, { opacity: 1, visibility: "visible" });
+        return;
+      }
 
       const fromVars: gsap.TweenVars = { opacity: 0 };
-      
+
       switch (variant) {
         case "fade":
           break;
@@ -59,6 +62,9 @@ export function Reveal({
         case "mask":
           break;
       }
+
+      // Ensure visibility is set to visible before animation starts (but opacity is 0 from fromVars)
+      fromVars.visibility = "visible";
 
       gsap.fromTo(
         ref.current,
@@ -92,7 +98,7 @@ export function Reveal({
   );
 
   return (
-    <div ref={ref} className={className} style={{ opacity: 1, visibility: "visible" }}>
+    <div ref={ref} className={className} style={{ opacity: 0, visibility: "hidden" }}>
       {children}
     </div>
   );

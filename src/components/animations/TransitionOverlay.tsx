@@ -1,8 +1,8 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import { usePathname } from "next/navigation";
-import { gsap } from "@/lib/gsap";
+import { gsap, useGSAP } from "@/lib/gsap";
 import { prefersReducedMotion } from "@/lib/motion";
 
 export function TransitionOverlay() {
@@ -10,7 +10,7 @@ export function TransitionOverlay() {
   const pathname = usePathname();
   const isFirstRender = useRef(true);
 
-  useEffect(() => {
+  useGSAP(() => {
     if (!overlayRef.current || prefersReducedMotion()) return;
 
     if (isFirstRender.current) {
@@ -19,23 +19,23 @@ export function TransitionOverlay() {
     }
 
     const tl = gsap.timeline();
-    
+
     tl.set(overlayRef.current, { display: "block" })
       .fromTo(
         overlayRef.current,
         { scaleY: 0, transformOrigin: "bottom" },
-        { scaleY: 1, duration: 0.3, ease: "power2.inOut" }
+        { scaleY: 1, duration: 0.2, ease: "power2.inOut" }
       )
       .to(overlayRef.current, {
         scaleY: 0,
         transformOrigin: "top",
-        duration: 0.3,
+        duration: 0.2,
         ease: "power2.inOut",
-        delay: 0.1,
+        delay: 0.05,
       })
       .set(overlayRef.current, { display: "none" });
 
-  }, [pathname]);
+  }, { dependencies: [pathname], scope: overlayRef });
 
   return (
     <div

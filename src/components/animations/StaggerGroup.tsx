@@ -1,12 +1,8 @@
 "use client";
 
 import { useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
+import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 import { motionDefaults, prefersReducedMotion } from "@/lib/motion";
-
-gsap.registerPlugin(ScrollTrigger);
 
 type StaggerGroupProps = {
   children: React.ReactNode;
@@ -63,7 +59,13 @@ export function StaggerGroup({
             }
           ),
         onLeaveBack: (batch) =>
-          gsap.set(batch, { opacity: 0, y: motionDefaults.distance, overwrite: "auto" }),
+          gsap.to(batch, {
+            opacity: 0,
+            y: motionDefaults.distance,
+            duration: 0.3,
+            ease: motionDefaults.ease,
+            overwrite: "auto",
+          }),
       });
     },
     { scope: ref }
