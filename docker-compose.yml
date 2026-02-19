@@ -3,6 +3,16 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        - LEAD_WEBHOOK_URL=${LEAD_WEBHOOK_URL}
+        - LEAD_WEBHOOK_SECRET=${LEAD_WEBHOOK_SECRET}
+        - INSTAGRAM_ACCESS_TOKEN=${INSTAGRAM_ACCESS_TOKEN}
+        - INSTAGRAM_ACCOUNT_ID=${INSTAGRAM_ACCOUNT_ID}
+        - INSTAGRAM_REFRESH_SECRET=${INSTAGRAM_REFRESH_SECRET}
+        - EMAIL_USER=${EMAIL_USER}
+        - EMAIL_APP_PASSWORD=${EMAIL_APP_PASSWORD}
+        - EMAIL_FROM=${EMAIL_FROM}
+        - ADMIN_EMAIL=${ADMIN_EMAIL}
     container_name: recounting-app
     restart: unless-stopped
     ports:
