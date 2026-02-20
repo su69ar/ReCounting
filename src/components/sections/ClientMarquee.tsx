@@ -19,33 +19,52 @@ const clients = [
 export function ClientMarquee() {
     return (
         <div className="w-full overflow-hidden mt-16 py-10 flex flex-col items-center">
-            <div className="flex w-[200%] md:w-[200%] animate-marquee">
-                <div className="flex w-1/2 justify-around items-center">
-                    {clients.map((client) => (
-                        <div key={client.name} className="flex-shrink-0 px-8 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
-                            <Image src={client.src} alt={client.name} width={160} height={70} className="object-contain max-h-[70px] w-auto max-w-[160px]" />
-                        </div>
-                    ))}
-                </div>
-                <div className="flex w-1/2 justify-around items-center">
-                    {clients.map((client) => (
-                        <div key={client.name + '-copy'} className="flex-shrink-0 px-8 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
-                            <Image src={client.src} alt={client.name} width={160} height={70} className="object-contain max-h-[70px] w-auto max-w-[160px]" />
-                        </div>
-                    ))}
+            <div className="relative flex max-w-[100vw] overflow-hidden group mask-marquee">
+                <div className="flex animate-marquee group-hover:[animation-play-state:paused]">
+                    {/* First set of logos */}
+                    <div className="flex items-center space-x-16 px-8 min-w-max">
+                        {clients.map((client) => (
+                            <div key={client.name} className="flex-shrink-0 transition-transform duration-300 hover:scale-105">
+                                <Image
+                                    src={client.src}
+                                    alt={client.name}
+                                    width={240}
+                                    height={100}
+                                    className="object-contain h-[90px] w-auto max-w-[220px]"
+                                    priority
+                                />
+                            </div>
+                        ))}
+                    </div>
+                    {/* Second set of logos (Duplicate for infinite seamless scrolling) */}
+                    <div className="flex items-center space-x-16 px-8 min-w-max" aria-hidden="true">
+                        {clients.map((client) => (
+                            <div key={client.name + '-copy'} className="flex-shrink-0 transition-transform duration-300 hover:scale-105">
+                                <Image
+                                    src={client.src}
+                                    alt={client.name}
+                                    width={240}
+                                    height={100}
+                                    className="object-contain h-[90px] w-auto max-w-[220px]"
+                                    priority
+                                />
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
             <style dangerouslySetInnerHTML={{
                 __html: `
         @keyframes marquee {
-          0% { transform: translateX(0); }
+          0% { transform: translateX(0%); }
           100% { transform: translateX(-50%); }
         }
         .animate-marquee {
           animation: marquee 35s linear infinite;
         }
-        .animate-marquee:hover {
-          animation-play-state: paused;
+        .mask-marquee {
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
         }
       `}} />
         </div>
