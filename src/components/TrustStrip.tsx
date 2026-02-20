@@ -12,9 +12,9 @@ interface TrustStripProps {
 }
 
 const defaultItems: TrustItem[] = [
-  { label: "Trusted by 50+ Bali businesses", icon: "dot" },
-  { label: "PKF Certified Partner", icon: "dot" },
-  { label: "Registered Indonesian Tax Consultant", icon: "dot" },
+  { label: "Empowering 25+ Businesses in Bali", icon: "dot" },
+  { label: "Certified Xero & Jurnal Partners", icon: "dot" },
+  { label: "Registered Tax & Compliance Specialists", icon: "dot" },
 ];
 
 export function TrustStrip({ items = defaultItems }: TrustStripProps) {
