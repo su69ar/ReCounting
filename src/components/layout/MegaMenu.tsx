@@ -47,7 +47,7 @@ const serviceCategories = [
     ],
   },
   {
-    title: "Advisory & Training",
+    title: "Advisory & Support",
     services: [
       {
         title: "Consultation",
@@ -58,8 +58,14 @@ const serviceCategories = [
       {
         title: "Training",
         href: "/services/training",
-        description: "Accounting software training",
-        icon: "users",
+        description: "Staff training for Xero & Jurnal",
+        icon: "building",
+      },
+      {
+        title: "Help Center (FAQ)",
+        href: "/accounting-services-faq-help-center",
+        description: "Answers to common accounting questions",
+        icon: "faq",
       },
     ],
   },
@@ -101,6 +107,12 @@ const Icons: Record<string, React.ReactNode> = {
   building: (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
       <path d="M3 21h18M5 21V7l8-4 8 4v14M8 21V11h8v10" strokeLinecap="round" />
+    </svg>
+  ),
+  faq: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+      <circle cx="12" cy="12" r="10" strokeLinecap="round" />
+      <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   ),
 };

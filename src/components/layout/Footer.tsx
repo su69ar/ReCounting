@@ -261,10 +261,6 @@ export function Footer() {
           <p className="text-xs text-neutral-500">
             © {new Date().getFullYear()} ReCounting. All rights reserved.
           </p>
-          <p className="text-xs text-neutral-400 max-w-lg">
-            Legal: Accounting guidance is educational only and not legal or tax advice.
-            Always verify with licensed professionals.
-          </p>
         </div>
       </div>
     </footer>

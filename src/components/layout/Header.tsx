@@ -11,6 +11,7 @@ const navItems = [
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
   { label: "Blog", href: "/blog" },
+  { label: "Help Center", href: "/accounting-services-faq-help-center" },
 ];
 
 const mobileServices = [

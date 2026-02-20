@@ -7,6 +7,7 @@ import { MaskReveal } from "@/components/animations/MaskReveal";
 import { StoryScroll } from "@/components/animations/StoryScroll";
 import { FAQ } from "@/components/sections/FAQ";
 import { InstagramFeed } from "@/components/sections/InstagramFeed";
+import { ClientMarquee } from "@/components/sections/ClientMarquee";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { TrustStrip } from "@/components/TrustStrip";
 import { primaryCta, secondaryCta, siteConfig } from "@/lib/site";
@@ -388,6 +389,7 @@ export default function Home() {
               </div>
             ))}
           </StaggerGroup>
+          <ClientMarquee />
         </div>
       </section>
 
@@ -402,7 +404,7 @@ export default function Home() {
                 className="section-title"
               />
               <p className="section-subtitle mt-3">
-                Follow <a href={siteConfig.socials.instagram} target="_blank" rel="noopener noreferrer" className="text-[color:var(--color-primary)] font-medium hover:underline">@recountingasia</a> for tax tips and team updates.
+                Follow <a href={siteConfig.socials.instagram} target="_blank" rel="noopener noreferrer" className="text-[color:var(--color-primary)] font-medium hover:underline">@recountingasia</a> for accounting, bookkeeping, tax tips and updates.
               </p>
             </div>
           </Reveal>

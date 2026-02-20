@@ -15,6 +15,7 @@ const routes: RouteConfig[] = [
   { path: "/free-consultation", priority: 0.9, changeFrequency: "weekly" },
   { path: "/about", priority: 0.8, changeFrequency: "monthly" },
   { path: "/contact", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/accounting-services-faq-help-center", priority: 0.8, changeFrequency: "monthly" },
 
   // Service pages
   { path: "/services/bookkeeping", priority: 0.8, changeFrequency: "monthly" },

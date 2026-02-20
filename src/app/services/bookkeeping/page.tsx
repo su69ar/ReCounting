@@ -284,66 +284,84 @@ export default function BookkeepingPage() {
                     custom? Book a free consultation.
                   </p>
                 </div>
-                <StaggerGroup className="grid gap-4 md:grid-cols-3">
+                <StaggerGroup className="grid gap-6 lg:gap-8 md:grid-cols-3">
                   {[
                     {
-                      name: "Package A",
+                      name: "Starter Ledger",
                       price: "Rp 3,500,000",
                       unit: "/month",
-                      features: ["Up to 200 transactions/month", "Monthly financial statements"],
+                      desc: "For small businesses & startups",
+                      features: ["Up to 200 transactions/month", "Dedicated accountant", "Standard chat support", "Monthly financial statements"],
                       color: "primary",
                     },
                     {
-                      name: "Package B",
+                      name: "Growth Partner",
                       price: "Rp 4,500,000",
                       unit: "/month",
-                      features: ["201 to 400 transactions/month", "Monthly financial statements"],
+                      desc: "For growing companies",
+                      features: ["201 to 400 transactions/month", "Dedicated accountant", "Priority chat support", "Monthly financial statements", "Tax planning review"],
                       color: "accent",
                       popular: true,
                     },
                     {
-                      name: "Package C",
+                      name: "Corporate Complete",
                       price: "Rp 5,500,000",
                       unit: "/month",
-                      features: ["401 to 600 transactions/month", "Monthly financial statements"],
+                      desc: "For established operations",
+                      features: ["401 to 600 transactions/month", "Senior accountant", "Priority chat & call support", "Monthly financial statements", "Advanced tax planning"],
                       color: "secondary",
                     },
                   ].map((tier) => (
                     <div
                       key={tier.name}
-                      className="group stagger-item relative"
+                      className={`group stagger-item relative flex flex-col h-full bg-white rounded-2xl border ${tier.popular ? "border-[color:var(--color-accent)] shadow-[0_8px_30px_rgb(0,0,0,0.06)] md:-translate-y-4 md:scale-105 z-10" : "border-neutral-200 mt-4"} overflow-hidden transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)]`}
                     >
-                      <div className={`absolute -inset-[1px] rounded-xl bg-gradient-to-r 
-                          ${colorClasses[tier.color as ColorKey].fromTransparent} ${colorClasses[tier.color as ColorKey].viaMid} ${colorClasses[tier.color as ColorKey].toTransparent} 
-                          ${tier.popular ? "opacity-100" : "opacity-0 group-hover:opacity-100"} transition-opacity duration-500 blur-[1px]`} />
-                      <div className={`relative card-glow card-glow-${tier.color} p-5 h-full flex flex-col`}>
-                        <div className="flex items-center justify-between">
-                          <span className="text-sm font-semibold text-[color:var(--color-slate-dark)]">{tier.name}</span>
+                      {tier.popular && (
+                        <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-[color:var(--color-accent)] to-[color:var(--color-primary)]" />
+                      )}
+                      <div className="p-6 md:p-8 flex flex-col h-full">
+                        <div className="flex items-center justify-between mb-4">
+                          <span className="text-xl font-semibold text-[color:var(--color-slate-dark)]">{tier.name}</span>
                           {tier.popular && (
-                            <span className="badge-gradient text-[10px]">Popular</span>
+                            <span className="bg-[color:var(--color-accent)]/10 text-[color:var(--color-accent)] text-xs px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">
+                              Popular
+                            </span>
                           )}
                         </div>
-                        <p className={`mt-2 text-xl font-bold ${colorClasses[tier.color as ColorKey].textDark}`}>
+                        <p className="text-sm text-[color:var(--color-slate-light)] mb-6 h-5">{tier.desc}</p>
+                        <p className={`text-3xl font-bold ${colorClasses[tier.color as ColorKey].textDark} mb-1 flex items-end gap-1`}>
                           {tier.price}
-                          <span className="text-xs font-normal text-[color:var(--color-slate-light)]">{tier.unit}</span>
+                          <span className="text-sm font-normal text-[color:var(--color-slate-light)] mb-1 pb-1">{tier.unit}</span>
                         </p>
-                        <ul className="mt-3 space-y-2 text-xs text-[color:var(--color-slate-light)] flex-1">
-                          {tier.features.map((f) => (
-                            <li key={f} className="flex items-center gap-2">
-                              <span className={`w-1.5 h-1.5 rounded-full ${colorClasses[tier.color as ColorKey].bgSolid}`} />
-                              {f}
-                            </li>
-                          ))}
-                        </ul>
-                        <div className={`mt-4 h-[2px] w-0 rounded-full bg-gradient-to-r ${colorClasses[tier.color as ColorKey].from} ${colorClasses[tier.color as ColorKey].to} group-hover:w-full transition-all duration-500`} />
+
+                        <div className="mt-8 pt-6 border-t border-neutral-100 flex-1">
+                          <p className="text-sm font-semibold text-[color:var(--color-slate-dark)] mb-4">What's included:</p>
+                          <ul className="space-y-3.5 text-sm text-[color:var(--color-slate-light)]">
+                            {tier.features.map((f) => (
+                              <li key={f} className="flex items-start gap-3">
+                                <span className={`w-5 h-5 flex items-center justify-center rounded-full mt-0.5 ${colorClasses[tier.color as ColorKey].bgSolid} flex-shrink-0 text-white`}>
+                                  <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+                                </span>
+                                {f}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        <div className="mt-8 pt-4">
+                          <Link href={primaryCta.href} className={`w-full py-3 px-4 rounded-xl font-medium flex items-center justify-center transition-colors ${tier.popular ? "bg-[color:var(--color-accent)] text-white hover:bg-[color:var(--color-accent)]/90" : "bg-neutral-100 text-[color:var(--color-slate-dark)] hover:bg-neutral-200"}`}>
+                            Get Started
+                          </Link>
+                        </div>
                       </div>
                     </div>
                   ))}
                 </StaggerGroup>
-                <p className="mt-4 text-xs text-[color:var(--color-slate-light)] text-center">
-                  Monthly bookkeeping services with final output in the form of monthly financial statements.
-                  For transactions above 600/month, contact us for a custom quote.
-                </p>
+                <div className="mt-12 text-center relative z-20">
+                  <p className="text-sm text-[color:var(--color-slate-light)] bg-white/50 backdrop-blur-sm inline-block py-2 px-6 rounded-full border border-neutral-100">
+                    Need support for transactions above 600/month? <Link href="/free-consultation" className="text-[color:var(--color-primary)] font-medium underline underline-offset-4">Contact us for a custom quote</Link>.
+                  </p>
+                </div>
               </div>
             </Reveal>
           </MaskReveal>

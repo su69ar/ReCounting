@@ -39,12 +39,15 @@ function getStoredConsent(): ConsentValue | null {
 }
 
 export function ConsentBanner() {
-  const [visible, setVisible] = useState(() => getStoredConsent() === null);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const stored = getStoredConsent();
-    if (!stored) return;
-    applyConsent(stored);
+    if (stored === null) {
+      setVisible(true);
+    } else {
+      applyConsent(stored);
+    }
   }, []);
 
   const handleChoice = useCallback((value: ConsentValue) => {
