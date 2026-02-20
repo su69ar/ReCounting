@@ -28,6 +28,7 @@ jobs:
             --exclude '.git/' \
             --exclude 'node_modules/' \
             --exclude '.next/' \
+            --exclude '.env' \
             --exclude '*.log' \
             "$GITHUB_WORKSPACE/recounting-app/" "$TARGET_DIR/"
 
@@ -47,15 +48,15 @@ jobs:
 
           echo "=== Loading environment variables ==="
 
-          # Load .env file and export each variable
+          # Load .env file if it exists (don't fail if missing)
           if [ -f .env ]; then
             set -a
             . .env
             set +a
             echo "✅ Environment variables loaded from .env"
           else
-            echo "⚠️ .env file not found!"
-            exit 1
+            echo "⚠️ .env file not found, building with default/empty env vars"
+            echo "Note: Instagram and email features may not work without credentials"
           fi
 
           echo "=== Starting Docker Compose Build ==="
