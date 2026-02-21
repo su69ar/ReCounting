@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 
 const team: { name: string; role: string; credential: string; image?: string }[] = [
   { name: "Rikotama", role: "Head Accountant & Advisor", credential: "Xero Certified Advisor. 8+ years of experience in accounting", image: "/team/rikotama.png" },
-  { name: "Toni Artana", role: "Tax Compliance Lead", credential: "10+ years of experience in Indonesian tax compliance, PPh, PPN, and SPT filing", image: "/team/ReCounting_Toni.jpeg" },
+  { name: "Toni Artana", role: "Tax Compliance Lead", credential: "10+ years of experience in Indonesian tax compliance, PPh, PPN, and SPT filing", image: "/team/ReCounting_Toni_.png" },
   { name: "Medita", role: "Client Success Manager", credential: "English-first client support and onboarding for expat and local businesses", image: "/team/ReCounting_Medita.png" },
 ];
 
