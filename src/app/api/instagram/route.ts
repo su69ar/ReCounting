@@ -1,6 +1,10 @@
 import { NextResponse } from 'next/server';
 
-const INSTAGRAM_API_BASE = 'https://graph.instagram.com';
+// Use Facebook Graph API for Page Access Tokens (EAAM...)
+// Use Instagram Graph API for User Access Tokens (IGQ...)
+const INSTAGRAM_API_BASE = process.env.INSTAGRAM_ACCESS_TOKEN?.startsWith('EAA')
+  ? 'https://graph.facebook.com/v19.0'
+  : 'https://graph.instagram.com';
 
 export type InstagramMedia = {
   id: string;
