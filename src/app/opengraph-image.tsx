@@ -58,7 +58,7 @@ export default function OpenGraphImage() {
           }}
         >
           <img
-            src={`${siteConfig.url}/assets/logo/ReCounting_Accounting_Services_Bali.png`}
+            src={`${siteConfig.url}/assets/logo/ReCounting_Accounting_Tax_Services_Bali.png`}
             alt="ReCounting Logo"
             width="120"
             height="120"

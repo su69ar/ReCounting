@@ -145,7 +145,7 @@ export function Footer() {
             <div className="flex items-center gap-3">
               <span className="flex h-12 w-auto items-center justify-center">
                 <NextImage
-                  src="/assets/logo/ReCounting_Accounting_Services_Bali.png"
+                  src="/assets/logo/ReCounting_Accounting_Tax_Services_Bali.png"
                   alt="ReCounting Logo"
                   width={180}
                   height={40}

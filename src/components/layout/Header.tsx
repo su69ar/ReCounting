@@ -157,7 +157,7 @@ export function Header() {
           <Link href="/" className="flex items-center gap-3 group">
             <span className="flex h-10 w-auto items-center justify-center transition-opacity hover:opacity-90">
               <NextImage
-                src="/assets/logo/ReCounting_Accounting_Services_Bali.png"
+                src="/assets/logo/ReCounting_Accounting_Tax_Services_Bali.png"
                 alt="ReCounting Logo"
                 width={180}
                 height={40}
