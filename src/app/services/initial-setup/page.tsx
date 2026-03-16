@@ -220,7 +220,6 @@ export default function InitialSetupPage() {
                     { text: "Fixed assets with depreciation schedules", color: "secondary" },
                     { text: "Inventory & product catalog configured", color: "primary" },
                     { text: "Accounts payable & receivable organized", color: "accent" },
-                    { text: "Team training + 3 months support included", color: "secondary" },
                   ].map((item) => (
                     <li key={item.text} className="stagger-item flex items-center gap-3 group">
                       <span className={`check-glow ${colorClasses[item.color as ColorKey].bg} ${colorClasses[item.color as ColorKey].text}`}>
