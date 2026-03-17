@@ -36,7 +36,8 @@ const routes: RouteConfig[] = [
   // Blog pages
   { path: "/blog", priority: 0.9, changeFrequency: "weekly", lastModified: siteLastUpdated },
   { path: "/blog/best-bali-accounting-service", priority: 0.8, changeFrequency: "monthly", lastModified: siteLastUpdated },
-  { path: "/blog/tax-deadlines-indonesia-2024", priority: 0.7, changeFrequency: "yearly", lastModified: new Date("2026-02-01") },
+  { path: "/blog/tax-deadlines-indonesia-2026", priority: 0.8, changeFrequency: "monthly", lastModified: siteLastUpdated },
+  { path: "/blog/tax-preparation-indonesia-2026", priority: 0.8, changeFrequency: "monthly", lastModified: siteLastUpdated },
   { path: "/blog/ppn-pph-explained", priority: 0.7, changeFrequency: "yearly", lastModified: new Date("2026-02-01") },
   { path: "/blog/bookkeeping-best-practices", priority: 0.7, changeFrequency: "yearly", lastModified: new Date("2026-02-01") },
 

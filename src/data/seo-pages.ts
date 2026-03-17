@@ -243,9 +243,9 @@ export const commercialLandingPages: CommercialLandingPageConfig[] = [
         description: "Explore nationwide tax support beyond Bali-only operations.",
       },
       {
-        href: "/blog/tax-deadlines-indonesia-2024",
-        title: "Indonesia Tax Deadlines Guide",
-        description: "Use our current deadlines article as a filing reference point.",
+        href: "/blog/tax-deadlines-indonesia-2026",
+        title: "Indonesia Tax Deadlines 2026",
+        description: "Use our current 2026 deadlines article as a filing reference point.",
       },
     ],
   },

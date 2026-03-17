@@ -106,6 +106,18 @@ We provide services in:
 - Red flags in reporting, process, and communication
 - URL: ${siteConfig.url}/blog/best-bali-accounting-service
 
+## 2026 Tax Resources
+
+### Indonesia Tax Deadlines 2026
+- Monthly PPh, PPN, and annual SPT deadline overview
+- Written for Bali SMEs, PT PMA companies, and expat-owned businesses
+- URL: ${siteConfig.url}/blog/tax-deadlines-indonesia-2026
+
+### 2026 Tax Preparation Checklist
+- Filing-season checklist for Bali SMEs and PT PMA
+- Covers books, tax records, Coretax access, and extension planning
+- URL: ${siteConfig.url}/blog/tax-preparation-indonesia-2026
+
 ## URL
 
 ${siteConfig.url}

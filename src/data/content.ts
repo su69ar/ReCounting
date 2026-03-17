@@ -149,13 +149,22 @@ export const blogPosts = [
     date: "2026-03-17",
   },
   {
-    title: "Indonesia Tax Deadlines 2025: Key Filing Dates for Businesses",
+    title: "Indonesia Tax Deadlines 2026: Monthly and Annual Filing Dates",
     description:
-      "Key filing deadlines for SPT, PPh, and PPN plus a simple compliance checklist for SMEs.",
-    href: "/blog/tax-deadlines-indonesia-2024",
+      "A practical 2026 calendar for PPh, PPN, and annual SPT deadlines, written for Bali SMEs, PT PMA companies, and finance teams.",
+    href: "/blog/tax-deadlines-indonesia-2026",
     category: "Tax Compliance",
+    readTime: "9 min read",
+    date: "2026-03-17",
+  },
+  {
+    title: "2026 Tax Preparation Checklist for Bali SMEs and PT PMA",
+    description:
+      "Prepare for 2026 filing season with a practical checklist covering books, tax records, Coretax access, and extension planning.",
+    href: "/blog/tax-preparation-indonesia-2026",
+    category: "Tax Prep",
     readTime: "8 min read",
-    date: "2025-01-10",
+    date: "2026-03-17",
   },
   {
     title: "PPh vs PPN: What's the Difference?",
