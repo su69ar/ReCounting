@@ -141,6 +141,34 @@ export default function Home() {
 
       <TrustStrip />
 
+      <section className="border-b border-[color:var(--color-border)] bg-[color:var(--color-cream)]/60">
+        <div className="container-grid py-8">
+          <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
+            <div className="max-w-3xl">
+              <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[color:var(--color-primary)]">
+                Bali accounting and tax support
+              </p>
+              <p className="mt-3 text-base leading-7 text-[color:var(--color-slate-dark)] md:text-lg">
+                ReCounting helps Bali SMEs, PT PMA companies, and foreign-owned
+                businesses stay on top of bookkeeping, monthly reporting,
+                payroll support, and Indonesian tax compliance with clear
+                communication and practical follow-through.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-[color:var(--color-border)] bg-white p-5">
+              <p className="text-sm font-semibold text-[color:var(--color-slate-dark)]">
+                Best fit for businesses that need:
+              </p>
+              <ul className="mt-3 space-y-2 text-sm text-[color:var(--color-slate-light)]">
+                <li>Clean monthly books and reconciliations</li>
+                <li>PPh, PPN, and annual filing support</li>
+                <li>English-first guidance for founders and directors</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="border-y border-[color:var(--color-border)] bg-white">
         <div className="container-grid section-space">
           <StaggerGroup className="grid gap-8 md:grid-cols-3">
@@ -456,7 +484,10 @@ export default function Home() {
                 key={testimonial.name}
                 className="card card-hover stagger-item h-full p-6"
               >
-                <p className="text-sm text-[color:var(--color-slate-light)]">
+                <p
+                  data-nosnippet
+                  className="text-sm text-[color:var(--color-slate-light)]"
+                >
                   {testimonial.quote}
                 </p>
                 <div className="mt-6">
