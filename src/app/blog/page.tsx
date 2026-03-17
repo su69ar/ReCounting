@@ -9,7 +9,7 @@ import { siteConfig } from "@/lib/site";
 export const metadata: Metadata = {
   title: "ReCounting Blog | Accounting Tips for Bali Businesses",
   description:
-    "Expert guides on Indonesian tax, bookkeeping, payroll, and compliance. Tips for SMEs and expats.",
+    "Expert guides on Bali accounting services, Indonesian tax, bookkeeping, payroll, compliance, and buyer guides for SMEs and expat-owned businesses.",
   alternates: { canonical: "/blog" },
 };
 
@@ -40,7 +40,8 @@ export default function BlogPage() {
               className="mt-4 text-4xl font-bold tracking-tight text-[color:var(--color-slate-dark)]"
             />
             <p className="section-subtitle mt-4">
-              Practical guidance for Bali business owners, expats, and SMEs.
+              Practical guidance for Bali business owners, expats, and SMEs, including
+              buyer guides for accounting and tax services.
             </p>
             <div className="mt-4 glow-bar glow-bar-md" />
           </div>

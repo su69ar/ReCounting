@@ -34,11 +34,23 @@ Indonesian tax compliance services including:
 - Monthly accounting support for Bali businesses
 - Management reporting and reconciliations
 - Compliance-ready books for SMEs and PT PMA companies
+- URL: ${siteConfig.url}/bali-accounting-services
+
+### Bali Tax Services
+- PPh, PPN, and annual SPT support for Bali businesses
+- English-first communication for founders and operators
+- URL: ${siteConfig.url}/bali-tax-services
+
+### Indonesia Accounting Services
+- Monthly accounting support for founders and finance teams across Indonesia
+- Reporting workflows for Bali-based and remote-managed companies
+- URL: ${siteConfig.url}/indonesia-accounting-services
 
 ### Indonesia Tax Services
 - Ongoing tax compliance support across Indonesia
 - SPT, PPh, and PPN reporting workflows
 - English-first advisory for founders and finance teams
+- URL: ${siteConfig.url}/indonesia-tax-services
 
 ### Payroll Services
 Complete payroll management:
@@ -85,6 +97,14 @@ We provide services in:
 3. **Technology-Driven**: Modern cloud-based accounting solutions
 4. **Transparent Pricing**: Clear, upfront pricing with no hidden fees
 5. **Personalized Service**: Dedicated accountant for each client
+
+## Buyer Guides
+
+### Best Bali Accounting Service Guide
+- How to compare Bali accounting providers
+- What to ask before hiring an accountant or bookkeeper
+- Red flags in reporting, process, and communication
+- URL: ${siteConfig.url}/blog/best-bali-accounting-service
 
 ## URL
 

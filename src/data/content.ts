@@ -140,6 +140,15 @@ export const faqs = [
 
 export const blogPosts = [
   {
+    title: "How to Choose the Best Bali Accounting Service for Your Business",
+    description:
+      "A practical buyer guide for founders comparing Bali accounting services, bookkeepers, and tax support providers.",
+    href: "/blog/best-bali-accounting-service",
+    category: "Buyer Guide",
+    readTime: "9 min read",
+    date: "2026-03-17",
+  },
+  {
     title: "Indonesia Tax Deadlines 2025: Key Filing Dates for Businesses",
     description:
       "Key filing deadlines for SPT, PPh, and PPN plus a simple compliance checklist for SMEs.",

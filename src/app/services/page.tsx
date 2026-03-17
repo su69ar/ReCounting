@@ -6,6 +6,7 @@ import { StaggerGroup } from "@/components/animations/StaggerGroup";
 import { SplitTextHeading } from "@/components/animations/SplitTextHeading";
 import { MaskReveal } from "@/components/animations/MaskReveal";
 import { services } from "@/data/content";
+import { strategicSeoLinks } from "@/data/seo-pages";
 import { primaryCta, secondaryCta, siteConfig } from "@/lib/site";
 import { colorClasses, type ColorKey } from "@/lib/color-map";
 
@@ -89,6 +90,44 @@ export default function ServicesPage() {
                   </div>
                 </div>
               </div>
+            );
+          })}
+        </StaggerGroup>
+
+        <Reveal>
+          <div className="mt-12 max-w-2xl">
+            <p className="badge-gradient inline-flex mb-3">Commercial pages</p>
+            <SplitTextHeading
+              text="Explore our exact-match Bali and Indonesia service pages"
+              as="h2"
+              className="text-2xl font-semibold"
+            />
+            <p className="mt-3 text-sm text-[color:var(--color-slate-light)]">
+              These pages are built around the search phrases founders actually use
+              when they are ready to compare accounting and tax providers.
+            </p>
+          </div>
+        </Reveal>
+        <StaggerGroup className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-5">
+          {strategicSeoLinks.map((item, index) => {
+            const colors: ColorKey[] = ["primary", "accent", "secondary", "primary", "accent"];
+            const color = colors[index % colors.length];
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`card-glow ${colorClasses[color].glow} stagger-item h-full p-6`}
+              >
+                <p className={`text-xs font-semibold uppercase tracking-wide ${colorClasses[color].text}`}>
+                  Search path
+                </p>
+                <h3 className="mt-3 text-lg font-semibold text-[color:var(--color-slate-dark)]">
+                  {item.title}
+                </h3>
+                <p className="mt-3 text-sm text-[color:var(--color-slate-light)]">
+                  {item.description}
+                </p>
+              </Link>
             );
           })}
         </StaggerGroup>

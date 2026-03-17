@@ -19,6 +19,10 @@ const routes: RouteConfig[] = [
   { path: "/about", priority: 0.8, changeFrequency: "monthly", lastModified: siteLastUpdated },
   { path: "/contact", priority: 0.8, changeFrequency: "monthly", lastModified: siteLastUpdated },
   { path: "/accounting-services-faq-help-center", priority: 0.8, changeFrequency: "monthly", lastModified: siteLastUpdated },
+  { path: "/bali-accounting-services", priority: 0.9, changeFrequency: "weekly", lastModified: siteLastUpdated },
+  { path: "/bali-tax-services", priority: 0.9, changeFrequency: "weekly", lastModified: siteLastUpdated },
+  { path: "/indonesia-accounting-services", priority: 0.9, changeFrequency: "weekly", lastModified: siteLastUpdated },
+  { path: "/indonesia-tax-services", priority: 0.9, changeFrequency: "weekly", lastModified: siteLastUpdated },
 
   // Service pages
   { path: "/services/bookkeeping", priority: 0.8, changeFrequency: "monthly", lastModified: siteLastUpdated },
@@ -31,6 +35,7 @@ const routes: RouteConfig[] = [
 
   // Blog pages
   { path: "/blog", priority: 0.9, changeFrequency: "weekly", lastModified: siteLastUpdated },
+  { path: "/blog/best-bali-accounting-service", priority: 0.8, changeFrequency: "monthly", lastModified: siteLastUpdated },
   { path: "/blog/tax-deadlines-indonesia-2024", priority: 0.7, changeFrequency: "yearly", lastModified: new Date("2026-02-01") },
   { path: "/blog/ppn-pph-explained", priority: 0.7, changeFrequency: "yearly", lastModified: new Date("2026-02-01") },
   { path: "/blog/bookkeeping-best-practices", priority: 0.7, changeFrequency: "yearly", lastModified: new Date("2026-02-01") },

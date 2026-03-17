@@ -20,6 +20,7 @@ import {
   testimonials,
   valueProps,
 } from "@/data/content";
+import { strategicSeoLinks } from "@/data/seo-pages";
 
 export const metadata: Metadata = {
   title: "Bali Accounting Services | Tax, Bookkeeping & Payroll",
@@ -226,6 +227,46 @@ export default function Home() {
                   </Link>
                 </div>
               </div>
+            ))}
+          </StaggerGroup>
+        </div>
+      </section>
+
+      <section className="section-space bg-white">
+        <div className="container-grid">
+          <Reveal>
+            <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+              <div className="max-w-2xl">
+                <p className="badge-gradient inline-flex mb-3">Search intent pages</p>
+                <SplitTextHeading
+                  text="Popular searches we are building authority around"
+                  as="h2"
+                  className="section-title"
+                />
+                <p className="section-subtitle mt-3">
+                  These pages target the exact commercial searches founders use when
+                  looking for accounting and tax support in Bali and across Indonesia.
+                </p>
+              </div>
+            </div>
+          </Reveal>
+          <StaggerGroup className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-5">
+            {strategicSeoLinks.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="card card-hover stagger-item h-full p-6"
+              >
+                <p className="text-xs font-semibold uppercase tracking-wide text-[color:var(--color-primary)]">
+                  SEO Hub
+                </p>
+                <h3 className="mt-3 text-lg font-semibold text-[color:var(--color-slate-dark)]">
+                  {item.title}
+                </h3>
+                <p className="mt-3 text-sm text-[color:var(--color-slate-light)]">
+                  {item.description}
+                </p>
+              </Link>
             ))}
           </StaggerGroup>
         </div>
