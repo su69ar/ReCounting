@@ -22,18 +22,18 @@ attempt=1
 while [ "${attempt}" -le "${MAX_ATTEMPTS}" ]; do
   home_html="$(fetch "${SITE_URL}/")"
   robots_txt="$(fetch "${SITE_URL}/robots.txt")"
-  sitemap_headers="$(fetch_head "${SITE_URL}/sitemap.xml")"
-  http_sitemap_headers="$(fetch_head "http://${SITE_HOST}/sitemap.xml")"
+  sitemap_headers="$(fetch_head "${SITE_URL}/sitemap.xml" | tr -d '\r')"
+  http_sitemap_headers="$(fetch_head "http://${SITE_HOST}/sitemap.xml" | tr -d '\r')"
 
-  if echo "${home_html}" | grep -q '<link rel="canonical" href="https://recounting.my.id/"' &&
-    echo "${home_html}" | grep -q '<meta name="robots" content="index, follow"' &&
-    ! echo "${home_html}" | grep -q 'your-google-verification-code' &&
-    echo "${robots_txt}" | grep -q 'Sitemap: https://recounting.my.id/sitemap.xml' &&
-    ! echo "${robots_txt}" | grep -q '/_next/' &&
-    echo "${sitemap_headers}" | grep -Eiq '^HTTP/.* 200' &&
-    echo "${sitemap_headers}" | grep -Eiq '^content-type: application/xml' &&
-    echo "${http_sitemap_headers}" | grep -Eiq '^HTTP/.* 30[18]' &&
-    echo "${http_sitemap_headers}" | grep -Eiq '^location: https://recounting\.my\.id/sitemap\.xml/?$'; then
+  if grep -q '<link rel="canonical" href="https://recounting.my.id/"' <<<"${home_html}" &&
+    grep -q '<meta name="robots" content="index, follow"' <<<"${home_html}" &&
+    ! grep -q 'your-google-verification-code' <<<"${home_html}" &&
+    grep -q 'Sitemap: https://recounting.my.id/sitemap.xml' <<<"${robots_txt}" &&
+    ! grep -q '/_next/' <<<"${robots_txt}" &&
+    grep -Eiq '^HTTP/.* 200' <<<"${sitemap_headers}" &&
+    grep -Eiq '^content-type: application/xml' <<<"${sitemap_headers}" &&
+    grep -Eiq '^HTTP/.* 30[18]' <<<"${http_sitemap_headers}" &&
+    grep -Eiq '^location: https://recounting\.my\.id/sitemap\.xml/?$' <<<"${http_sitemap_headers}"; then
     echo "SEO checks passed"
     exit 0
   fi
