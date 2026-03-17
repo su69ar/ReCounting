@@ -73,7 +73,7 @@ export const strategicSeoLinks: SeoLinkCard[] = [
 export const commercialLandingPages: CommercialLandingPageConfig[] = [
   {
     slug: "bali-accounting-services",
-    title: "Bali Accounting Services for SMEs, PT PMA, and Expats",
+    title: "Bali Accounting Services for SMEs & PT PMA | ReCounting",
     description:
       "Bali accounting services for SMEs, PT PMA companies, and expat-owned businesses. Get monthly bookkeeping, reconciliations, management reporting, and compliance-ready support from a Bali-based team.",
     eyebrow: "Bali Accounting Services",
@@ -162,7 +162,7 @@ export const commercialLandingPages: CommercialLandingPageConfig[] = [
   },
   {
     slug: "bali-tax-services",
-    title: "Bali Tax Services for SMEs, PT PMA, and Expat-Owned Businesses",
+    title: "Bali Tax Services for SMEs & PT PMA | ReCounting",
     description:
       "Bali tax services for SMEs, PT PMA companies, and expat-owned businesses. Get support for PPh, PPN, SPT filing, tax calendars, and practical compliance guidance in Bali.",
     eyebrow: "Bali Tax Services",
@@ -251,7 +251,7 @@ export const commercialLandingPages: CommercialLandingPageConfig[] = [
   },
   {
     slug: "indonesia-accounting-services",
-    title: "Indonesia Accounting Services for SMEs, PT PMA, and Remote Owners",
+    title: "Indonesia Accounting Services for SMEs & PT PMA | ReCounting",
     description:
       "Indonesia accounting services for SMEs, PT PMA companies, and remote owners who need bookkeeping, reconciliations, monthly reporting, and finance support across Indonesia.",
     eyebrow: "Indonesia Accounting Services",
@@ -340,7 +340,7 @@ export const commercialLandingPages: CommercialLandingPageConfig[] = [
   },
   {
     slug: "indonesia-tax-services",
-    title: "Indonesia Tax Services for SMEs, PT PMA, and Growing Companies",
+    title: "Indonesia Tax Services for SMEs & PT PMA | ReCounting",
     description:
       "Indonesia tax services for SMEs, PT PMA companies, and growing businesses that need support for PPh, PPN, annual SPT filing, and a cleaner tax calendar across Indonesia.",
     eyebrow: "Indonesia Tax Services",

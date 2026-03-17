@@ -32,7 +32,7 @@ const googleSiteVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: "ReCounting | Bali Accounting Services & Bali Tax Services",
+    default: "Bali Accounting Services & Bali Tax Services | ReCounting",
     template: "%s | ReCounting",
   },
   description: siteConfig.description,
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_ID",
     url: siteConfig.url,
-    title: "ReCounting | Bali Accounting Services & Bali Tax Services",
+    title: "Bali Accounting Services & Bali Tax Services | ReCounting",
     description: siteConfig.description,
     siteName: "ReCounting",
     images: [
@@ -82,7 +82,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "ReCounting | Bali Accounting Services & Bali Tax Services",
+    title: "Bali Accounting Services & Bali Tax Services | ReCounting",
     description: siteConfig.description,
     images: ["/assets/logo/ReCounting_Accounting_Tax_Services_Bali.png"],
   },

@@ -11,7 +11,7 @@ import { primaryCta, secondaryCta, siteConfig } from "@/lib/site";
 import { colorClasses, type ColorKey } from "@/lib/color-map";
 
 export const metadata: Metadata = {
-  title: "Bali Accounting Services & Indonesia Tax Services",
+  title: "Bali Accounting Services, Tax & Bookkeeping | ReCounting",
   description:
     "Explore Bali accounting services, Bali tax services, bookkeeping, payroll, and Indonesia compliance support for SMEs, PT PMA companies, and expat-owned businesses.",
   alternates: { canonical: "/services" },

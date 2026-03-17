@@ -23,7 +23,7 @@ import {
 import { strategicSeoLinks } from "@/data/seo-pages";
 
 export const metadata: Metadata = {
-  title: "Bali Accounting Services | Tax, Bookkeeping & Payroll",
+  title: "Bali Accounting Services & Bali Tax Services | ReCounting",
   description:
     "ReCounting provides Bali accounting services, Bali tax services, bookkeeping, payroll, and reporting support for SMEs, PT PMA companies, and expat-owned businesses across Bali and Indonesia.",
   alternates: {

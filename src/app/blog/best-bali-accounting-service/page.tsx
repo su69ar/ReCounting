@@ -9,7 +9,7 @@ import { primaryCta, secondaryCta, siteConfig } from "@/lib/site";
 import { generateArticleSchema, generateFAQSchema, generateBreadcrumbSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "How to Choose the Best Bali Accounting Service for Your Business",
+  title: "Best Bali Accounting Service: How to Choose | ReCounting",
   description:
     "A practical guide to choosing the best Bali accounting service for SMEs, PT PMA companies, and expat-owned businesses. Learn what to compare, what to avoid, and what good reporting should look like.",
   alternates: { canonical: "/blog/best-bali-accounting-service" },
