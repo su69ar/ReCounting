@@ -22,9 +22,10 @@ export function proxy(request: NextRequest) {
 
   if (!isLocalHost && forwardedProto === "http") {
     const canonicalUrl = new URL(siteConfig.url);
-    const secureUrl = request.nextUrl.clone();
-    secureUrl.protocol = canonicalUrl.protocol;
-    secureUrl.host = canonicalUrl.host;
+    const secureUrl = new URL(
+      `${request.nextUrl.pathname}${request.nextUrl.search}`,
+      canonicalUrl,
+    );
     return NextResponse.redirect(secureUrl, 308);
   }
 
