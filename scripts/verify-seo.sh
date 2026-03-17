@@ -4,7 +4,7 @@ set -euo pipefail
 
 SITE_URL="${SITE_URL:-https://recounting.my.id}"
 SITE_HOST="${SITE_HOST:-recounting.my.id}"
-SITEMAP_PATH="${SITEMAP_PATH:-/sitemap-main.xml}"
+SITEMAP_PATH="${SITEMAP_PATH:-/recounting-index.xml}"
 MAX_ATTEMPTS="${MAX_ATTEMPTS:-20}"
 SLEEP_SECONDS="${SLEEP_SECONDS:-3}"
 
