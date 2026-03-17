@@ -20,9 +20,11 @@ const routes: RouteConfig[] = [
   { path: "/contact", priority: 0.8, changeFrequency: "monthly", lastModified: siteLastUpdated },
   { path: "/accounting-services-faq-help-center", priority: 0.8, changeFrequency: "monthly", lastModified: siteLastUpdated },
   { path: "/bali-accounting-services", priority: 0.9, changeFrequency: "weekly", lastModified: siteLastUpdated },
+  { path: "/bali-accounting-services-pt-pma", priority: 0.8, changeFrequency: "weekly", lastModified: siteLastUpdated },
   { path: "/bali-tax-services", priority: 0.9, changeFrequency: "weekly", lastModified: siteLastUpdated },
   { path: "/indonesia-accounting-services", priority: 0.9, changeFrequency: "weekly", lastModified: siteLastUpdated },
   { path: "/indonesia-tax-services", priority: 0.9, changeFrequency: "weekly", lastModified: siteLastUpdated },
+  { path: "/indonesia-tax-services-foreign-owned-companies", priority: 0.8, changeFrequency: "weekly", lastModified: siteLastUpdated },
 
   // Service pages
   { path: "/services/bookkeeping", priority: 0.8, changeFrequency: "monthly", lastModified: siteLastUpdated },

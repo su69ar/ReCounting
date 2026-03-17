@@ -12,7 +12,7 @@ import { generateServiceSchema } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Bali Tax Services & Indonesia Tax Compliance",
   description:
-    "Bali tax services and Indonesia tax compliance for SMEs, PT PMA companies, and expat-owned businesses. PPh, PPN, SPT filing with clear timelines and English-speaking support.",
+    "Bali tax services and Indonesia tax compliance for SMEs, PT PMA, and foreign-owned companies. Get PPh, PPN, annual SPT, deadlines, and English-first support.",
   alternates: { canonical: "/services/tax-compliance" },
 };
 

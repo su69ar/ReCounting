@@ -36,6 +36,11 @@ Indonesian tax compliance services including:
 - Compliance-ready books for SMEs and PT PMA companies
 - URL: ${siteConfig.url}/bali-accounting-services
 
+### Bali Accounting Services for PT PMA
+- Accounting support for PT PMA and expat-owned businesses in Bali
+- English-first management reporting for foreign directors and remote owners
+- URL: ${siteConfig.url}/bali-accounting-services-pt-pma
+
 ### Bali Tax Services
 - PPh, PPN, and annual SPT support for Bali businesses
 - English-first communication for founders and operators
@@ -51,6 +56,11 @@ Indonesian tax compliance services including:
 - SPT, PPh, and PPN reporting workflows
 - English-first advisory for founders and finance teams
 - URL: ${siteConfig.url}/indonesia-tax-services
+
+### Indonesia Tax Services for Foreign-Owned Companies
+- Tax support for PT PMA and foreign-owned companies
+- Filing workflows for PPh, PPN, annual SPT, and compliance calendars
+- URL: ${siteConfig.url}/indonesia-tax-services-foreign-owned-companies
 
 ### Payroll Services
 Complete payroll management:

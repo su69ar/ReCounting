@@ -45,6 +45,12 @@ export const strategicSeoLinks: SeoLinkCard[] = [
       "A commercial landing page for Bali-based bookkeeping, reporting, and finance support.",
   },
   {
+    href: "/bali-accounting-services-pt-pma",
+    title: "Bali Accounting for PT PMA",
+    description:
+      "Built for PT PMA and expat-owned businesses that need English-first reporting and cleaner monthly close.",
+  },
+  {
     href: "/bali-tax-services",
     title: "Bali Tax Services",
     description:
@@ -61,6 +67,12 @@ export const strategicSeoLinks: SeoLinkCard[] = [
     title: "Indonesia Tax Services",
     description:
       "Nationwide tax support for SMEs, PT PMA companies, and remote finance teams.",
+  },
+  {
+    href: "/indonesia-tax-services-foreign-owned-companies",
+    title: "Indonesia Tax for Foreign-Owned Companies",
+    description:
+      "A commercial page for PT PMA and foreign-owned companies that need clearer tax workflows in Indonesia.",
   },
   {
     href: "/blog/best-bali-accounting-service",
@@ -149,14 +161,103 @@ export const commercialLandingPages: CommercialLandingPageConfig[] = [
         description: "See the detailed monthly bookkeeping scope and deliverables.",
       },
       {
-        href: "/services/financial-reports",
-        title: "Financial Reports",
-        description: "Explore how we prepare management-ready and compliance-ready reports.",
+        href: "/bali-accounting-services-pt-pma",
+        title: "Bali Accounting for PT PMA",
+        description: "See the accounting page built specifically for PT PMA and expat-owned businesses.",
       },
       {
         href: "/blog/best-bali-accounting-service",
         title: "Best Bali Accounting Service Guide",
         description: "A buyer guide for choosing the right accountant in Bali.",
+      },
+    ],
+  },
+  {
+    slug: "bali-accounting-services-pt-pma",
+    title: "Bali Accounting Services for PT PMA & Expat-Owned Businesses | ReCounting",
+    description:
+      "Bali accounting services for PT PMA and expat-owned businesses. Get bookkeeping, monthly reports, reconciliations, and tax-ready records from a Bali-based team.",
+    eyebrow: "PT PMA Accounting Bali",
+    heading: "Bali accounting services for PT PMA and expat-owned businesses",
+    intro:
+      "Foreign-owned companies in Bali usually need more than bookkeeping. They need clear English reporting, a reliable monthly close, and records that stay ready for tax and director review.",
+    priceNote: "Scope depends on entity complexity and reporting requirements",
+    serviceName: "PT PMA Accounting Services in Bali",
+    serviceDescription:
+      "Bali accounting services for PT PMA and expat-owned businesses including bookkeeping, reconciliations, management reporting, and tax-ready record support.",
+    includedTitle: "What this PT PMA accounting support includes",
+    includedItems: [
+      { text: "Monthly bookkeeping built for PT PMA operations", color: "primary" },
+      { text: "Director-ready management reports in English", color: "accent" },
+      { text: "Bank and balance sheet reconciliations", color: "secondary" },
+      { text: "Accounting files prepared for tax workflows", color: "primary" },
+      { text: "Support for remote owners and local admin teams", color: "accent" },
+    ],
+    processTitle: "How we support PT PMA accounting in Bali",
+    processItems: [
+      {
+        step: "01",
+        title: "Review your entity and records",
+        description:
+          "We assess your current bookkeeping quality, reporting expectations, and where the PT PMA setup is creating friction.",
+        color: "primary",
+      },
+      {
+        step: "02",
+        title: "Standardize the monthly close",
+        description:
+          "We build a reporting workflow around source documents, reconciliations, and deadlines so each month closes cleanly.",
+        color: "accent",
+      },
+      {
+        step: "03",
+        title: "Report clearly to owners",
+        description:
+          "You receive practical monthly reports and direct English communication for directors, partners, and remote stakeholders.",
+        color: "secondary",
+      },
+    ],
+    audienceTitle: "Best fit for",
+    audienceIntro:
+      "This page is designed for PT PMA and expat-owned businesses that need a real accounting workflow, not just reactive admin support.",
+    audienceItems: [
+      { text: "PT PMA companies with foreign directors or shareholders", color: "primary" },
+      { text: "Expat-owned SMEs that need English-first reporting", color: "accent" },
+      { text: "Businesses with a local admin team but no strong accounting lead", color: "secondary" },
+      { text: "Founders who need cleaner books before tax deadlines or investor review", color: "primary" },
+    ],
+    faqs: [
+      {
+        question: "Do you specifically support PT PMA companies in Bali?",
+        answer:
+          "Yes. This page is built for PT PMA and expat-owned businesses that need monthly bookkeeping, management reporting, and a cleaner accounting process.",
+      },
+      {
+        question: "Can you report in English for foreign directors?",
+        answer:
+          "Yes. We structure communication and reporting so foreign directors or remote owners can understand the numbers and next actions clearly.",
+      },
+      {
+        question: "Can you coordinate with our internal admin team?",
+        answer:
+          "Yes. Many PT PMA clients already have an internal admin, and we build the accounting workflow around that team rather than replacing them blindly.",
+      },
+    ],
+    relatedLinks: [
+      {
+        href: "/bali-accounting-services",
+        title: "Bali Accounting Services",
+        description: "See the broader Bali accounting page for general commercial intent.",
+      },
+      {
+        href: "/indonesia-tax-services-foreign-owned-companies",
+        title: "Indonesia Tax for Foreign-Owned Companies",
+        description: "Explore the tax page built for PT PMA and foreign-owned compliance workflows.",
+      },
+      {
+        href: "/blog/tax-preparation-indonesia-2026",
+        title: "2026 Tax Preparation Checklist",
+        description: "Use the 2026 filing checklist to keep accounting records ready before deadlines.",
       },
     ],
   },
@@ -416,14 +517,103 @@ export const commercialLandingPages: CommercialLandingPageConfig[] = [
         description: "Review the Bali-focused tax landing page for local intent queries.",
       },
       {
-        href: "/services/tax-compliance",
-        title: "Tax Compliance Service",
-        description: "See the detailed tax service scope and process.",
+        href: "/indonesia-tax-services-foreign-owned-companies",
+        title: "Tax for Foreign-Owned Companies",
+        description: "Review the page built for PT PMA and foreign-owned company tax workflows.",
       },
       {
-        href: "/blog/ppn-pph-explained",
-        title: "PPh vs PPN Explained",
-        description: "A plain-English guide to the two taxes most founders confuse.",
+        href: "/blog/tax-deadlines-indonesia-2026",
+        title: "Indonesia Tax Deadlines 2026",
+        description: "Use the current deadlines page to anchor monthly and annual filing calendars.",
+      },
+    ],
+  },
+  {
+    slug: "indonesia-tax-services-foreign-owned-companies",
+    title: "Indonesia Tax Services for Foreign-Owned Companies | ReCounting",
+    description:
+      "Indonesia tax services for foreign-owned companies and PT PMA entities. Get support for PPh, PPN, annual SPT, deadlines, and clearer compliance workflows.",
+    eyebrow: "Foreign-Owned Company Tax",
+    heading: "Indonesia tax services for foreign-owned companies that need clearer compliance",
+    intro:
+      "Foreign-owned businesses operating in Indonesia often struggle because the filings are local while the decision-makers are remote. This page is built for teams that need clear tax workflows, English explanations, and less deadline risk.",
+    priceNote: "Tax scope is confirmed after a filing and document review",
+    serviceName: "Indonesia Tax Services for Foreign-Owned Companies",
+    serviceDescription:
+      "Indonesia tax services for foreign-owned companies and PT PMA entities including PPh, PPN, annual SPT, deadline tracking, and practical compliance support.",
+    includedTitle: "What this foreign-owned company tax support covers",
+    includedItems: [
+      { text: "PPh, PPN, and annual SPT workflow support", color: "primary" },
+      { text: "Filing calendars and deadline follow-up", color: "accent" },
+      { text: "English explanations for directors and finance leads", color: "secondary" },
+      { text: "Review of missing records and compliance gaps", color: "primary" },
+      { text: "Coordination with bookkeeping and payroll inputs", color: "accent" },
+    ],
+    processTitle: "How we run tax support for foreign-owned companies",
+    processItems: [
+      {
+        step: "01",
+        title: "Review structure and tax exposure",
+        description:
+          "We identify which filings apply to the company, what has been missed, and where the current process is vulnerable.",
+        color: "primary",
+      },
+      {
+        step: "02",
+        title: "Organize records and deadlines",
+        description:
+          "We align books, payroll inputs, invoices, and filing dates so the tax workflow becomes predictable instead of reactive.",
+        color: "accent",
+      },
+      {
+        step: "03",
+        title: "Maintain filing discipline",
+        description:
+          "We keep communication direct, document requests clear, and deadline ownership visible for remote stakeholders.",
+        color: "secondary",
+      },
+    ],
+    audienceTitle: "Strong fit for",
+    audienceIntro:
+      "This page targets PT PMA and foreign-owned companies that need Indonesian tax support in a format directors can actually operate with.",
+    audienceItems: [
+      { text: "PT PMA entities with foreign shareholders or directors", color: "primary" },
+      { text: "Foreign-owned SMEs managing Indonesia filings remotely", color: "accent" },
+      { text: "Teams cleaning up inconsistent PPh, PPN, or annual SPT workflows", color: "secondary" },
+      { text: "Companies that need English-first compliance communication", color: "primary" },
+    ],
+    faqs: [
+      {
+        question: "Do you support tax work for PT PMA and foreign-owned companies?",
+        answer:
+          "Yes. We support PT PMA and foreign-owned businesses that need recurring filing support, deadline coordination, and clearer compliance communication.",
+      },
+      {
+        question: "Can you explain Indonesian tax obligations in English?",
+        answer:
+          "Yes. This page is specifically designed for founders, directors, and finance stakeholders who need English-first communication around Indonesian tax work.",
+      },
+      {
+        question: "Can you work alongside our internal bookkeeper or admin?",
+        answer:
+          "Yes. In many cases we strengthen the tax workflow around an existing bookkeeper or admin team rather than replacing them.",
+      },
+    ],
+    relatedLinks: [
+      {
+        href: "/indonesia-tax-services",
+        title: "Indonesia Tax Services",
+        description: "See the broader nationwide tax service page for general commercial searches.",
+      },
+      {
+        href: "/bali-accounting-services-pt-pma",
+        title: "Bali Accounting for PT PMA",
+        description: "Pair tax process with accounting support built for PT PMA and expat-owned businesses.",
+      },
+      {
+        href: "/blog/tax-deadlines-indonesia-2026",
+        title: "Indonesia Tax Deadlines 2026",
+        description: "Use the 2026 deadlines article to keep monthly and annual filings on track.",
       },
     ],
   },

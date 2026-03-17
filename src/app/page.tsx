@@ -25,7 +25,7 @@ import { strategicSeoLinks } from "@/data/seo-pages";
 export const metadata: Metadata = {
   title: "Bali Accounting Services & Bali Tax Services | ReCounting",
   description:
-    "ReCounting provides Bali accounting services, Bali tax services, bookkeeping, payroll, and reporting support for SMEs, PT PMA companies, and expat-owned businesses across Bali and Indonesia.",
+    "Bali accounting services and Bali tax services for SMEs, PT PMA, and foreign-owned companies. Get bookkeeping, payroll, reporting, and practical compliance support.",
   alternates: {
     canonical: "/",
   },
@@ -250,7 +250,7 @@ export default function Home() {
               </div>
             </div>
           </Reveal>
-          <StaggerGroup className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-5">
+          <StaggerGroup className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {strategicSeoLinks.map((item) => (
               <Link
                 key={item.href}

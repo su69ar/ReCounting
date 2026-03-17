@@ -13,7 +13,7 @@ import { colorClasses, type ColorKey } from "@/lib/color-map";
 export const metadata: Metadata = {
   title: "Bali Accounting Services, Tax & Bookkeeping | ReCounting",
   description:
-    "Explore Bali accounting services, Bali tax services, bookkeeping, payroll, and Indonesia compliance support for SMEs, PT PMA companies, and expat-owned businesses.",
+    "Explore Bali accounting, bookkeeping, tax compliance, payroll, and reporting services for SMEs, PT PMA, and foreign-owned companies.",
   alternates: { canonical: "/services" },
 };
 
@@ -108,7 +108,7 @@ export default function ServicesPage() {
             </p>
           </div>
         </Reveal>
-        <StaggerGroup className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-5">
+        <StaggerGroup className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {strategicSeoLinks.map((item, index) => {
             const colors: ColorKey[] = ["primary", "accent", "secondary", "primary", "accent"];
             const color = colors[index % colors.length];

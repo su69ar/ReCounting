@@ -12,7 +12,7 @@ import { colorClasses, type ColorKey } from "@/lib/color-map";
 export const metadata: Metadata = {
   title: "Bali Bookkeeping Services for SMEs, PT PMA, and Expats",
   description:
-    "Professional Bali bookkeeping services for SMEs, PT PMA companies, and expat-owned businesses. Monthly accounting, reconciliation, reporting, and compliance-ready records.",
+    "Bali bookkeeping services for SMEs, PT PMA, and foreign-owned businesses. Get monthly bookkeeping, reconciliations, reporting, and tax-ready records from a local team.",
   alternates: { canonical: "/services/bookkeeping" },
 };
 
