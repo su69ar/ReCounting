@@ -223,7 +223,7 @@ export default function Home() {
                     href={service.href}
                     className="text-sm font-semibold text-[color:var(--color-primary)]"
                   >
-                    {"disabled" in service && service.disabled ? "Notify me" : "Learn more"}
+                    {"disabled" in service && service.disabled ? "Notify me" : `View ${service.title}`}
                   </Link>
                 </div>
               </div>

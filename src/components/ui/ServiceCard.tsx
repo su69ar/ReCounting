@@ -92,7 +92,7 @@ export function ServiceCard({
         className="mt-6 inline-flex items-center gap-2 text-sm font-semibold 
                    text-primary-600 group-hover:text-primary-700"
       >
-        {disabled ? "Notify me" : "Learn more"}
+        {disabled ? "Notify me" : `View ${title}`}
         <span ref={arrowRef} className="text-lg">→</span>
       </Link>
     </Card>

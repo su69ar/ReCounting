@@ -85,7 +85,7 @@ export default function ServicesPage() {
                       href={service.href}
                       className="link-glow text-sm font-semibold text-[color:var(--color-primary)]"
                     >
-                      {"disabled" in service && service.disabled ? "Notify me" : "Learn more"}
+                      {"disabled" in service && service.disabled ? "Notify me" : `View ${service.title}`}
                     </Link>
                   </div>
                 </div>
