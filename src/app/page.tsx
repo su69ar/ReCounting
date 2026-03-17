@@ -20,7 +20,6 @@ import {
   testimonials,
   valueProps,
 } from "@/data/content";
-import { strategicSeoLinks } from "@/data/seo-pages";
 
 export const metadata: Metadata = {
   title: "Bali Accounting Services & Bali Tax Services | ReCounting",
@@ -83,6 +82,37 @@ const faqSchema = {
     },
   })),
 };
+
+const homepageAudiencePaths = [
+  {
+    href: "/bali-accounting-services",
+    label: "For Bali businesses",
+    title: "Accounting and bookkeeping support in Bali",
+    description:
+      "Monthly bookkeeping, reconciliations, and reporting for businesses that need cleaner numbers and less admin stress.",
+  },
+  {
+    href: "/bali-tax-services",
+    label: "For tax and filing",
+    title: "Tax support with clear deadlines and practical guidance",
+    description:
+      "PPh, PPN, and annual SPT workflows for founders who want filings handled properly and explained clearly.",
+  },
+  {
+    href: "/bali-accounting-services-pt-pma",
+    label: "For PT PMA",
+    title: "English-first support for PT PMA and foreign-owned companies",
+    description:
+      "A better fit for directors and owners who need local execution, English communication, and reliable monthly reporting.",
+  },
+  {
+    href: "/indonesia-tax-services",
+    label: "For Indonesia-wide operations",
+    title: "Accounting and tax support beyond Bali-only operations",
+    description:
+      "For businesses with remote owners, multi-location workflows, or a wider Indonesia footprint that needs dependable support.",
+  },
+];
 
 export default function Home() {
   return (
@@ -237,28 +267,37 @@ export default function Home() {
           <Reveal>
             <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
               <div className="max-w-2xl">
-                <p className="badge-gradient inline-flex mb-3">Search intent pages</p>
+                <p className="badge-gradient inline-flex mb-3">Popular solutions</p>
                 <SplitTextHeading
-                  text="Popular searches we are building authority around"
+                  text="Find the right support for your business"
                   as="h2"
                   className="section-title"
                 />
                 <p className="section-subtitle mt-3">
-                  These pages target the exact commercial searches founders use when
-                  looking for accounting and tax support in Bali and across Indonesia.
+                  Whether you need bookkeeping, tax filing, PT PMA support, or
+                  a partner who can work across Indonesia, start with the path
+                  that best matches your business.
                 </p>
+              </div>
+              <div className="flex-shrink-0">
+                <Link
+                  href="/services"
+                  className="btn-secondary inline-flex items-center justify-center whitespace-nowrap"
+                >
+                  Explore all services
+                </Link>
               </div>
             </div>
           </Reveal>
-          <StaggerGroup className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {strategicSeoLinks.map((item) => (
+          <StaggerGroup className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            {homepageAudiencePaths.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 className="card card-hover stagger-item h-full p-6"
               >
                 <p className="text-xs font-semibold uppercase tracking-wide text-[color:var(--color-primary)]">
-                  SEO Hub
+                  {item.label}
                 </p>
                 <h3 className="mt-3 text-lg font-semibold text-[color:var(--color-slate-dark)]">
                   {item.title}
