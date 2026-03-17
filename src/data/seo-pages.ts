@@ -57,6 +57,12 @@ export const strategicSeoLinks: SeoLinkCard[] = [
       "Focused tax support for PPh, PPN, SPT filing, and practical Bali business compliance.",
   },
   {
+    href: "/bali-tax-services-pt-pma",
+    title: "Bali Tax for PT PMA",
+    description:
+      "Built for PT PMA and expat-owned businesses that need clearer Bali tax workflows and English-first compliance support.",
+  },
+  {
     href: "/indonesia-accounting-services",
     title: "Indonesia Accounting Services",
     description:
@@ -334,9 +340,9 @@ export const commercialLandingPages: CommercialLandingPageConfig[] = [
     ],
     relatedLinks: [
       {
-        href: "/services/tax-compliance",
-        title: "Tax Compliance Service",
-        description: "See the detailed tax-compliance scope for Indonesia filings.",
+        href: "/bali-tax-services-pt-pma",
+        title: "Bali Tax for PT PMA",
+        description: "Review the Bali tax landing page built specifically for PT PMA and expat-owned businesses.",
       },
       {
         href: "/indonesia-tax-services",
@@ -347,6 +353,95 @@ export const commercialLandingPages: CommercialLandingPageConfig[] = [
         href: "/blog/tax-deadlines-indonesia-2026",
         title: "Indonesia Tax Deadlines 2026",
         description: "Use our current 2026 deadlines article as a filing reference point.",
+      },
+    ],
+  },
+  {
+    slug: "bali-tax-services-pt-pma",
+    title: "Bali Tax Services for PT PMA & Expat-Owned Businesses | ReCounting",
+    description:
+      "Bali tax services for PT PMA and expat-owned businesses. Get support for PPh, PPN, annual SPT, deadlines, and English-first tax communication from a Bali-based team.",
+    eyebrow: "PT PMA Tax Bali",
+    heading: "Bali tax services for PT PMA and expat-owned businesses",
+    intro:
+      "PT PMA and foreign-owned businesses in Bali usually need more than filing reminders. They need a tax process that is clear for local operators, understandable for foreign directors, and disciplined enough to avoid last-minute chaos.",
+    priceNote: "Scope depends on filing exposure, entity setup, and document quality",
+    serviceName: "PT PMA Tax Services in Bali",
+    serviceDescription:
+      "Bali tax services for PT PMA and expat-owned businesses including PPh, PPN, annual SPT, deadline coordination, and English-first compliance support.",
+    includedTitle: "What this PT PMA tax support includes",
+    includedItems: [
+      { text: "PPh, PPN, and annual SPT filing workflow support", color: "primary" },
+      { text: "Deadline tracking and tax calendar coordination", color: "accent" },
+      { text: "English-first communication for foreign directors", color: "secondary" },
+      { text: "Review of missing records and filing gaps", color: "primary" },
+      { text: "Coordination with bookkeeping, payroll, and local admin teams", color: "accent" },
+    ],
+    processTitle: "How we support PT PMA tax work in Bali",
+    processItems: [
+      {
+        step: "01",
+        title: "Review filings and exposure",
+        description:
+          "We assess what taxes apply, where records are incomplete, and which deadlines or prior filings need immediate attention.",
+        color: "primary",
+      },
+      {
+        step: "02",
+        title: "Organize the filing process",
+        description:
+          "We align documents, monthly accounting output, payroll data, and filing dates so the process becomes predictable.",
+        color: "accent",
+      },
+      {
+        step: "03",
+        title: "Keep directors informed",
+        description:
+          "We explain obligations and next steps in plain English so directors and remote owners can make decisions without confusion.",
+        color: "secondary",
+      },
+    ],
+    audienceTitle: "Best fit for",
+    audienceIntro:
+      "This page targets PT PMA and expat-owned businesses in Bali that need tax execution and communication to be clean, visible, and operationally usable.",
+    audienceItems: [
+      { text: "PT PMA entities with foreign directors or shareholders", color: "primary" },
+      { text: "Expat-owned businesses managing Bali operations locally", color: "accent" },
+      { text: "Companies with recurring PPh and PPN obligations", color: "secondary" },
+      { text: "Teams cleaning up tax workflows after inconsistent prior filings", color: "primary" },
+    ],
+    faqs: [
+      {
+        question: "Do you specifically support PT PMA tax work in Bali?",
+        answer:
+          "Yes. This page is built for PT PMA and expat-owned businesses that need support for recurring tax filings, annual SPT, and stronger deadline control in Bali.",
+      },
+      {
+        question: "Can you explain Bali tax obligations in English?",
+        answer:
+          "Yes. We provide English-first explanations so foreign directors and owners understand filings, records, and upcoming actions clearly.",
+      },
+      {
+        question: "Can you work with our existing admin or bookkeeper?",
+        answer:
+          "Yes. In many cases we strengthen the tax process around an internal admin or bookkeeper rather than replacing them.",
+      },
+    ],
+    relatedLinks: [
+      {
+        href: "/bali-tax-services",
+        title: "Bali Tax Services",
+        description: "See the broader Bali tax landing page for general commercial intent.",
+      },
+      {
+        href: "/indonesia-tax-services-foreign-owned-companies",
+        title: "Indonesia Tax for Foreign-Owned Companies",
+        description: "Explore the nationwide tax page built for PT PMA and foreign-owned company workflows.",
+      },
+      {
+        href: "/blog/tax-deadlines-indonesia-2026",
+        title: "Indonesia Tax Deadlines 2026",
+        description: "Use the current deadline guide to keep monthly and annual filings on schedule.",
       },
     ],
   },
@@ -606,9 +701,9 @@ export const commercialLandingPages: CommercialLandingPageConfig[] = [
         description: "See the broader nationwide tax service page for general commercial searches.",
       },
       {
-        href: "/bali-accounting-services-pt-pma",
-        title: "Bali Accounting for PT PMA",
-        description: "Pair tax process with accounting support built for PT PMA and expat-owned businesses.",
+        href: "/bali-tax-services-pt-pma",
+        title: "Bali Tax for PT PMA",
+        description: "Review the Bali-focused tax landing page for PT PMA and expat-owned businesses.",
       },
       {
         href: "/blog/tax-deadlines-indonesia-2026",
