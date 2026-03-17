@@ -39,11 +39,12 @@ jobs:
           # Clean up all dangling images (no time filter for active development)
           docker image prune -af || true
           # Clean up Next.js cache to ensure fresh builds
-          rm -rf .next || true
+          rm -rf /home/dotdev/Documents/Workspaces/Dotdev/Projects/ReCounting/recounting-app/.next || true
 
       - name: Load environment and build container
         run: |
-          set -x  # Enable command logging
+          set -euo pipefail
+          set -x
           cd /home/dotdev/Documents/Workspaces/Dotdev/Projects/ReCounting/recounting-app
 
           echo "=== Loading environment variables ==="
@@ -61,9 +62,6 @@ jobs:
 
           echo "=== Starting Docker Compose Build ==="
 
-          # Stop any existing container first
-          docker compose down 2>/dev/null || true
-
           # Build with error output (env vars now available from shell)
           if ! docker compose build --no-cache 2>&1 | tee /tmp/build.log; then
             echo "=== BUILD FAILED ==="
@@ -71,39 +69,48 @@ jobs:
             exit 1
           fi
 
-          echo "=== Build successful, starting container ==="
-          docker compose up -d
+          echo "=== Build successful, recreating container ==="
+          if ! docker compose up -d --force-recreate --remove-orphans --wait --wait-timeout 120; then
+            echo "=== STARTUP FAILED ==="
+            docker compose ps
+            docker compose logs --tail=200
+            exit 1
+          fi
 
           echo "=== Verifying container ==="
-          sleep 5
-          if docker ps | grep -q recounting-app; then
+          docker compose ps
+          if docker ps --filter name=recounting-app --format '{{.Names}}' | grep -q '^recounting-app$'; then
             echo "✅ Container is running"
 
             # Test app response
             if curl -f http://localhost:3103/ > /dev/null 2>&1; then
               echo "✅ Application is responding"
             else
-              echo "⚠️ Application not responding yet"
+              echo "❌ Application is not responding on localhost:3103"
+              docker compose logs --tail=200
+              exit 1
             fi
             echo "=== Deployment completed successfully ==="
           else
             echo "❌ Container failed to start"
-            docker compose logs
+            docker compose logs --tail=200
             exit 1
           fi
 
       - name: Verify deployment
         run: |
+          set -euo pipefail
           # Check if container is running
-          if docker ps | grep -q recounting-app; then
+          if docker ps --filter name=recounting-app --format '{{.Names}}' | grep -q '^recounting-app$'; then
             echo "✅ Container is running"
 
             # Check if app is responding
-            sleep 5
             if curl -f http://localhost:3103/ > /dev/null 2>&1; then
               echo "✅ Application is responding"
             else
-              echo "⚠️ Application not responding yet, but container is running"
+              echo "❌ Application is not responding on localhost:3103"
+              docker compose logs --tail=200
+              exit 1
             fi
           else
             echo "❌ Container is not running"
