@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "ReCounting",
   url: "https://recounting.my.id",
   description:
-    "Stress-free accounting, bookkeeping, and tax compliance services for SMEs and expats in Bali, Indonesia.",
+    "Bali accounting services, Bali tax services, bookkeeping, payroll, and Indonesia compliance support for SMEs, PT PMA companies, and expat-owned businesses.",
   phone: "0811-3940-4640",
   phoneIntl: "+62 811-3940-4640",
   whatsappNumber: "6281139404640",

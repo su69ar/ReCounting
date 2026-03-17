@@ -17,6 +17,15 @@ export const organizationSchema = {
     description: siteConfig.description,
     email: siteConfig.email,
     telephone: siteConfig.phoneIntl,
+    knowsAbout: [
+        "Bali accounting services",
+        "Bali tax services",
+        "Indonesia accounting services",
+        "Indonesia tax services",
+        "Bookkeeping services",
+        "Payroll services",
+        "PT PMA accounting support",
+    ],
     address: {
         "@type": "PostalAddress",
         streetAddress: "Jalan Sedap Malam No 9A",
@@ -53,6 +62,14 @@ export const localBusinessSchema = {
     telephone: siteConfig.phoneIntl,
     email: siteConfig.email,
     priceRange: "$$",
+    serviceType: [
+        "Bali accounting services",
+        "Bali tax services",
+        "Indonesia accounting services",
+        "Indonesia tax services",
+        "Bookkeeping services",
+        "Payroll services",
+    ],
     address: {
         "@type": "PostalAddress",
         streetAddress: "Jalan Sedap Malam No 9A",
@@ -82,6 +99,10 @@ export const localBusinessSchema = {
         {
             "@type": "State",
             name: "Bali",
+        },
+        {
+            "@type": "Country",
+            name: "Indonesia",
         },
     ],
     hasOfferCatalog: {
@@ -155,10 +176,16 @@ export function generateServiceSchema(service: {
         provider: {
             "@id": `${siteConfig.url}#organization`,
         },
-        areaServed: {
-            "@type": "State",
-            name: "Bali",
-        },
+        areaServed: [
+            {
+                "@type": "State",
+                name: "Bali",
+            },
+            {
+                "@type": "Country",
+                name: "Indonesia",
+            },
+        ],
     };
 }
 

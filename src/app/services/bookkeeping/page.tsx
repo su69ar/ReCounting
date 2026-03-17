@@ -10,9 +10,9 @@ import { generateServiceSchema } from "@/lib/schema";
 import { colorClasses, type ColorKey } from "@/lib/color-map";
 
 export const metadata: Metadata = {
-  title: "Expert Bookkeeping Services in Bali",
+  title: "Bali Bookkeeping Services for SMEs, PT PMA, and Expats",
   description:
-    "Professional bookkeeping services in Bali. Monthly accounting, transaction entry, bank reconciliation, and reporting. English-speaking, compliance-ready team.",
+    "Professional Bali bookkeeping services for SMEs, PT PMA companies, and expat-owned businesses. Monthly accounting, reconciliation, reporting, and compliance-ready records.",
   alternates: { canonical: "/services/bookkeeping" },
 };
 
@@ -87,7 +87,7 @@ export default function BookkeepingPage() {
               <div className="space-y-5">
                 <p className="badge-pill">Bookkeeping</p>
                 <SplitTextHeading
-                  text="Professional Bookkeeping Services in Bali"
+                  text="Professional bookkeeping services in Bali for growing businesses"
                   as="h1"
                   className="text-4xl font-bold tracking-tight text-[color:var(--color-slate-dark)]"
                 />

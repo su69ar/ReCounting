@@ -10,9 +10,9 @@ import { colorClasses, type ColorKey } from "@/lib/color-map";
 import { generateServiceSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Tax Compliance & Filing Services in Indonesia",
+  title: "Bali Tax Services & Indonesia Tax Compliance",
   description:
-    "PPh, PPN, SPT filing made simple. Expert tax compliance for Bali businesses. English-speaking support with clear timelines.",
+    "Bali tax services and Indonesia tax compliance for SMEs, PT PMA companies, and expat-owned businesses. PPh, PPN, SPT filing with clear timelines and English-speaking support.",
   alternates: { canonical: "/services/tax-compliance" },
 };
 
@@ -88,7 +88,7 @@ export default function TaxCompliancePage() {
               <div className="space-y-5">
                 <p className="badge-pill">Tax Compliance</p>
                 <SplitTextHeading
-                  text="Indonesian Tax Compliance Made Simple"
+                  text="Bali tax services and Indonesia tax compliance made simple"
                   as="h1"
                   className="text-4xl font-bold tracking-tight text-[color:var(--color-slate-dark)]"
                 />

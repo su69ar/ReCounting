@@ -123,6 +123,9 @@ Copy `.env.example` to `.env.local` and configure:
 # Lead capture webhook (optional)
 LEAD_WEBHOOK_URL=
 LEAD_WEBHOOK_SECRET=
+
+# Google Search Console / SEO
+NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=
 ```
 
 ## Deployment
@@ -141,7 +144,7 @@ npm run start
 ## Contact
 
 **ReCounting**
-- Website: [recounting.asia](https://recounting.asia)
+- Website: [recounting.my.id](https://recounting.my.id)
 - Email: recountingasia@gmail.com
 - WhatsApp: +62 811-3940-4640
 - Address: Jalan Sedap Malam No 9A, Sanur Kaja, Denpasar, Bali

@@ -22,9 +22,9 @@ import {
 } from "@/data/content";
 
 export const metadata: Metadata = {
-  title: "Accounting & Bookkeeping Services for Bali",
+  title: "Bali Accounting Services | Tax, Bookkeeping & Payroll",
   description:
-    "Stress-free accounting for SMEs & expats in Bali. Tax compliance, bookkeeping, payroll. Book a free consultation today.",
+    "ReCounting provides Bali accounting services, Bali tax services, bookkeeping, payroll, and reporting support for SMEs, PT PMA companies, and expat-owned businesses across Bali and Indonesia.",
   alternates: {
     canonical: "/",
   },
@@ -90,8 +90,8 @@ export default function Home() {
       <JsonLd data={faqSchema} />
 
       <Hero
-        headline="Stress-Free Accounting for Your Bali Business"
-        subtitle="Get professional bookkeeping, tax compliance, and payroll support so you can focus on growth. Free consultation included."
+        headline="Stress-Free Bali Accounting Services for Your Business"
+        subtitle="Get Bali accounting services, Bali tax services, bookkeeping, payroll, and Indonesia compliance support so you can focus on growth. Free consultation included."
         stats={stats}
         primaryCta={primaryCta}
         secondaryCta={secondaryCta}
@@ -183,9 +183,10 @@ export default function Home() {
                   className="section-title"
                 />
                 <p className="section-subtitle mt-3">
-                  Looking for a bookkeeper in Bali? Our accounting services
-                  combine clear deliverables, local compliance expertise, and a
-                  team that works at your pace.
+                  Looking for Bali accounting services or Bali tax services?
+                  Our bookkeeping, payroll, and compliance support combine clear
+                  deliverables, local expertise, and English-first communication
+                  for businesses operating in Bali and across Indonesia.
                 </p>
               </div>
               <div className="flex-shrink-0">

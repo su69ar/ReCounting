@@ -10,9 +10,9 @@ import { primaryCta, secondaryCta, siteConfig } from "@/lib/site";
 import { colorClasses, type ColorKey } from "@/lib/color-map";
 
 export const metadata: Metadata = {
-  title: "Accounting Services",
+  title: "Bali Accounting Services & Indonesia Tax Services",
   description:
-    "Explore bookkeeping, tax compliance, payroll, and business setup services built for Bali SMEs and expats.",
+    "Explore Bali accounting services, Bali tax services, bookkeeping, payroll, and Indonesia compliance support for SMEs, PT PMA companies, and expat-owned businesses.",
   alternates: { canonical: "/services" },
 };
 
@@ -34,13 +34,14 @@ export default function ServicesPage() {
           <div className="max-w-2xl">
             <p className="badge-pill">Services</p>
             <SplitTextHeading
-              text="Accounting services tailored to Bali SMEs & expats"
+              text="Bali accounting services and Indonesia tax support"
               as="h1"
               className="mt-4 text-4xl font-bold tracking-tight text-[color:var(--color-slate-dark)]"
             />
             <p className="section-subtitle mt-4">
-              Bookkeeping, tax compliance, and reporting that keep you compliant
-              with Indonesian regulations while freeing up your time.
+              Bookkeeping, payroll, financial reporting, and tax compliance that
+              keep Bali businesses and Indonesia-based operations compliant while
+              freeing up your time.
             </p>
           </div>
         </Reveal>

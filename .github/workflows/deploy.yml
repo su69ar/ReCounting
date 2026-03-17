@@ -109,3 +109,8 @@ jobs:
             echo "❌ Container is not running"
             exit 1
           fi
+
+      - name: Verify public SEO endpoints
+        run: |
+          cd /home/dotdev/Documents/Workspaces/Dotdev/Projects/ReCounting/recounting-app
+          SITE_URL="https://recounting.my.id" bash scripts/verify-seo.sh

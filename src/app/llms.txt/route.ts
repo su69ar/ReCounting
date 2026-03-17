@@ -12,7 +12,7 @@ export async function GET() {
 
 ## About ReCounting
 
-ReCounting is a professional accounting and bookkeeping service based in Bali, Indonesia. We specialize in serving SMEs (Small and Medium Enterprises) and expats who need reliable financial management services.
+ReCounting is a Bali-based accounting, bookkeeping, payroll, and tax compliance service in Indonesia. We specialize in serving SMEs, PT PMA companies, and expat-owned businesses that need reliable financial management support.
 
 ## Services
 
@@ -29,6 +29,16 @@ Indonesian tax compliance services including:
 - PPh (Income Tax) filing
 - Annual tax returns
 - Tax consultation
+
+### Bali Accounting Services
+- Monthly accounting support for Bali businesses
+- Management reporting and reconciliations
+- Compliance-ready books for SMEs and PT PMA companies
+
+### Indonesia Tax Services
+- Ongoing tax compliance support across Indonesia
+- SPT, PPh, and PPN reporting workflows
+- English-first advisory for founders and finance teams
 
 ### Payroll Services
 Complete payroll management:
@@ -60,6 +70,7 @@ We are located in Sanur Kaja, Denpasar, Bali, Indonesia. We primarily serve busi
 - Seminyak
 - Canggu
 - Greater Bali area
+- Indonesia-wide remote clients
 
 ## Languages
 

@@ -27,16 +27,25 @@ const sora = Sora({
   display: "swap",
 });
 
+const googleSiteVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: "ReCounting | Accounting & Bookkeeping Services in Bali",
+    default: "ReCounting | Bali Accounting Services & Bali Tax Services",
     template: "%s | ReCounting",
   },
   description: siteConfig.description,
   applicationName: "ReCounting",
   keywords: [
     "accounting services Bali",
+    "Bali accounting services",
+    "Bali tax services",
+    "Indonesia tax services",
+    "Indonesia accounting services",
+    "Bali bookkeeping services",
+    "accounting outsourcing Indonesia",
+    "PT PMA accounting Bali",
     "bookkeeper Bali",
     "tax compliance Indonesia",
     "payroll services Bali",
@@ -59,7 +68,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_ID",
     url: siteConfig.url,
-    title: "ReCounting | Accounting & Bookkeeping Services in Bali",
+    title: "ReCounting | Bali Accounting Services & Bali Tax Services",
     description: siteConfig.description,
     siteName: "ReCounting",
     images: [
@@ -67,13 +76,13 @@ export const metadata: Metadata = {
         url: "/assets/logo/ReCounting_Accounting_Tax_Services_Bali.png",
         width: 1200,
         height: 630,
-        alt: "ReCounting | Accounting & Bookkeeping Services in Bali",
+        alt: "ReCounting | Bali Accounting Services & Bali Tax Services",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "ReCounting | Accounting & Bookkeeping Services in Bali",
+    title: "ReCounting | Bali Accounting Services & Bali Tax Services",
     description: siteConfig.description,
     images: ["/assets/logo/ReCounting_Accounting_Tax_Services_Bali.png"],
   },
@@ -91,9 +100,13 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "your-google-verification-code", // TODO: Add actual verification code
-  },
+  ...(googleSiteVerification
+    ? {
+        verification: {
+          google: googleSiteVerification,
+        },
+      }
+    : {}),
 };
 
 export default function RootLayout({
@@ -160,4 +173,3 @@ export default function RootLayout({
     </html>
   );
 }
-
