@@ -141,50 +141,56 @@ export default function Home() {
 
       <TrustStrip />
 
-      <section className="border-b border-[color:var(--color-border)] bg-[color:var(--color-cream)]/60">
-        <div className="container-grid py-8">
-          <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
-            <div className="max-w-3xl">
-              <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[color:var(--color-primary)]">
+      <section className="bg-white border-y border-[color:var(--color-border)]">
+        <div className="container-grid py-14 md:py-20 lg:py-24">
+          {/* Top Section */}
+          <div className="mb-14 grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
+            <div className="max-w-3xl pr-4 md:pr-8">
+              <p className="text-[0.8rem] font-bold uppercase tracking-[0.15em] text-[color:var(--color-primary)]">
                 Bali accounting and tax support
               </p>
-              <p className="mt-3 text-base leading-7 text-[color:var(--color-slate-dark)] md:text-lg">
+              <p className="mt-4 text-base leading-relaxed text-[color:var(--color-slate-dark)] md:text-lg md:leading-[1.8]">
                 ReCounting helps Bali SMEs, PT PMA companies, and foreign-owned
                 businesses stay on top of bookkeeping, monthly reporting,
                 payroll support, and Indonesian tax compliance with clear
                 communication and practical follow-through.
               </p>
             </div>
-            <div className="rounded-2xl border border-[color:var(--color-border)] bg-white p-5">
-              <p className="text-sm font-semibold text-[color:var(--color-slate-dark)]">
+            <div className="rounded-[1.25rem] border border-[color:var(--color-border)]/80 bg-white p-7 md:p-8 shadow-sm">
+              <p className="text-[0.95rem] font-bold text-[color:var(--color-slate-dark)]">
                 Best fit for businesses that need:
               </p>
-              <ul className="mt-3 space-y-2 text-sm text-[color:var(--color-slate-light)]">
-                <li>Clean monthly books and reconciliations</li>
-                <li>PPh, PPN, and annual filing support</li>
-                <li>English-first guidance for founders and directors</li>
+              <ul className="mt-5 space-y-4 text-[0.95rem] text-[color:var(--color-slate-light)] font-medium">
+                <li className="flex items-start gap-3">
+                  <span className="mt-[0.45rem] h-[5px] w-[5px] rounded-full bg-[color:var(--color-slate-light)] flex-shrink-0" />
+                  <span>Clean monthly books and reconciliations</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="mt-[0.45rem] h-[5px] w-[5px] rounded-full bg-[color:var(--color-slate-light)] flex-shrink-0" />
+                  <span>PPh, PPN, and annual filing support</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="mt-[0.45rem] h-[5px] w-[5px] rounded-full bg-[color:var(--color-slate-light)] flex-shrink-0" />
+                  <span>English-first guidance for founders and directors</span>
+                </li>
               </ul>
             </div>
           </div>
-        </div>
-      </section>
 
-      <section className="border-y border-[color:var(--color-border)] bg-white">
-        <div className="container-grid section-space">
-          <StaggerGroup className="grid gap-8 md:grid-cols-3">
+          <StaggerGroup className="grid gap-6 md:gap-8 md:grid-cols-3">
             {valueProps.map((prop) => (
               <div
                 key={prop.title}
-                className="card card-hover stagger-item p-6"
+                className="rounded-[1.25rem] border border-[color:var(--color-border)]/80 bg-white p-7 md:p-8 shadow-sm transition-shadow hover:shadow-md"
               >
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[color:var(--color-primary)]/10 text-[color:var(--color-primary)]">
+                <div className="mb-6 flex h-[3rem] w-[3rem] items-center justify-center rounded-full bg-[#f2f6f8] text-[color:var(--color-primary)] transition-transform duration-300 hover:scale-105">
                   {prop.icon === "clock" && (
                     <svg
                       viewBox="0 0 24 24"
-                      className="h-6 w-6"
+                      className="h-5 w-5"
                       fill="none"
                       stroke="currentColor"
-                      strokeWidth="2"
+                      strokeWidth="2.5"
                     >
                       <circle cx="12" cy="12" r="9" />
                       <path strokeLinecap="round" d="M12 7v5l3 3" />
@@ -193,10 +199,10 @@ export default function Home() {
                   {prop.icon === "shield" && (
                     <svg
                       viewBox="0 0 24 24"
-                      className="h-6 w-6"
+                      className="h-5 w-5"
                       fill="none"
                       stroke="currentColor"
-                      strokeWidth="2"
+                      strokeWidth="2.5"
                     >
                       <path
                         strokeLinecap="round"
@@ -207,10 +213,10 @@ export default function Home() {
                   {prop.icon === "chat" && (
                     <svg
                       viewBox="0 0 24 24"
-                      className="h-6 w-6"
+                      className="h-5 w-5"
                       fill="none"
                       stroke="currentColor"
-                      strokeWidth="2"
+                      strokeWidth="2.5"
                     >
                       <path
                         strokeLinecap="round"
@@ -219,10 +225,10 @@ export default function Home() {
                     </svg>
                   )}
                 </div>
-                <h3 className="text-lg font-semibold text-[color:var(--color-slate-dark)]">
+                <h3 className="text-[1.15rem] font-bold text-[color:var(--color-slate-dark)]">
                   {prop.title}
                 </h3>
-                <p className="mt-2 text-sm text-[color:var(--color-slate-light)]">
+                <p className="mt-3 text-[0.95rem] leading-relaxed text-[color:var(--color-slate-light)]">
                   {prop.description}
                 </p>
               </div>
@@ -233,53 +239,66 @@ export default function Home() {
 
       <section id="services" className="section-space">
         <div className="container-grid">
-          <Reveal>
-            <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-              <div className="max-w-2xl">
+          <div className="mb-14 grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+            <Reveal>
+              <div className="relative w-full aspect-square md:aspect-[4/5] lg:aspect-[3.5/4] overflow-hidden rounded-[2rem] border border-[color:var(--color-border)] shadow-sm">
+                <img 
+                  src="/team/ReCounting_Bali_Accounting_Services.png" 
+                  alt="ReCounting Bali Accounting Services Team" 
+                  className="absolute inset-0 w-full h-full object-cover object-[center_15%]"
+                />
+              </div>
+            </Reveal>
+            <Reveal delay={0.2}>
+              <div className="flex flex-col items-start justify-center py-4 md:py-8 lg:px-6">
                 <SplitTextHeading
                   text="Services built for Bali businesses"
                   as="h2"
                   className="section-title"
                 />
-                <p className="section-subtitle mt-3">
+                <p className="mt-5 text-base leading-relaxed text-[color:var(--color-slate-dark)] md:text-[1.1rem] md:leading-[1.8] max-w-2xl">
                   Looking for Bali accounting services or Bali tax services?
                   Our bookkeeping, payroll, and compliance support combine clear
                   deliverables, local expertise, and English-first communication
                   for businesses operating in Bali and across Indonesia.
                 </p>
+                <div className="mt-10">
+                  <Link
+                    href="/services"
+                    className="btn-secondary inline-flex items-center justify-center whitespace-nowrap"
+                  >
+                    View all services
+                  </Link>
+                </div>
               </div>
-              <div className="flex-shrink-0">
-                <Link
-                  href="/services"
-                  className="btn-secondary inline-flex items-center justify-center whitespace-nowrap"
-                >
-                  View all services
-                </Link>
-              </div>
-            </div>
-          </Reveal>
-          <StaggerGroup className="mt-10 grid gap-6 md:grid-cols-2">
+            </Reveal>
+          </div>
+
+          <StaggerGroup className="mt-4 grid gap-6 md:grid-cols-2">
             {services.slice(0, 4).map((service) => (
               <div
                 key={service.title}
-                className={`card card-hover stagger-item h-full p-6 ${"disabled" in service && service.disabled ? "opacity-60" : ""
+                className={`rounded-[1.25rem] border border-[color:var(--color-border)]/80 bg-white p-7 md:p-8 flex flex-col shadow-sm transition-all hover:shadow-md hover:border-[color:var(--color-primary)]/20 ${"disabled" in service && service.disabled ? "opacity-60" : ""
                   }`}
               >
                 {service.badge && (
-                  <span className="mb-3 inline-flex rounded-full bg-[color:var(--color-primary)]/10 px-3 py-1 text-xs font-semibold text-[color:var(--color-primary)]">
-                    {service.badge}
-                  </span>
+                  <div className="mb-4">
+                    <span className="inline-flex items-center rounded-full bg-[#f2f6f8] px-3.5 py-1 text-xs font-bold tracking-wide text-[color:var(--color-primary)]">
+                      {service.badge}
+                    </span>
+                  </div>
                 )}
-                <h3 className="text-xl font-semibold text-[color:var(--color-slate-dark)]">
+                <h3 className="text-[1.3rem] font-bold tracking-tight text-[color:var(--color-slate-dark)]">
                   {service.title}
                 </h3>
-                <p className="mt-3 text-sm text-[color:var(--color-slate-light)]">
+                <p className="mt-3 leading-relaxed text-[0.95rem] text-[color:var(--color-slate-light)] flex-grow font-medium">
                   {service.description}
                 </p>
-                <div className="mt-6">
+                
+                <div className="mt-8">
                   <Link
                     href={service.href}
-                    className="text-sm font-semibold text-[color:var(--color-primary)]"
+                    className="font-bold text-[0.9rem] text-[color:var(--color-slate-dark)] hover:text-[color:var(--color-primary)] transition-colors inline-block"
                   >
                     {"disabled" in service && service.disabled ? "Notify me" : `View ${service.title}`}
                   </Link>
@@ -292,31 +311,40 @@ export default function Home() {
 
       <section className="section-space bg-white">
         <div className="container-grid">
-          <Reveal>
-            <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-              <div className="max-w-2xl">
+          <div className="mb-14 grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+            <Reveal>
+              <div className="flex flex-col items-start justify-center py-4 md:py-8 lg:pr-6">
                 <p className="badge-gradient inline-flex mb-3">Popular solutions</p>
                 <SplitTextHeading
                   text="Find the right support for your business"
                   as="h2"
                   className="section-title"
                 />
-                <p className="section-subtitle mt-3">
+                <p className="mt-5 text-base leading-relaxed text-[color:var(--color-slate-dark)] md:text-[1.1rem] md:leading-[1.8] max-w-2xl">
                   Whether you need bookkeeping, tax filing, PT PMA support, or
                   a partner who can work across Indonesia, start with the path
                   that best matches your business.
                 </p>
+                <div className="mt-10">
+                  <Link
+                    href="/services"
+                    className="btn-secondary inline-flex items-center justify-center whitespace-nowrap"
+                  >
+                    Explore all services
+                  </Link>
+                </div>
               </div>
-              <div className="flex-shrink-0">
-                <Link
-                  href="/services"
-                  className="btn-secondary inline-flex items-center justify-center whitespace-nowrap"
-                >
-                  Explore all services
-                </Link>
+            </Reveal>
+            <Reveal delay={0.2}>
+              <div className="w-full h-full overflow-hidden rounded-[2rem] border border-[color:var(--color-border)] shadow-sm">
+                <img 
+                  src="/team/ReCounting_Bali_Accounting_Tax_Services.png" 
+                  alt="ReCounting Bali Accounting and Tax Services Team" 
+                  className="w-full h-full object-cover min-h-[300px] lg:min-h-[420px] object-[center_30%]"
+                />
               </div>
-            </div>
-          </Reveal>
+            </Reveal>
+          </div>
           <StaggerGroup className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
             {homepageAudiencePaths.map((item) => (
               <Link
@@ -342,19 +370,29 @@ export default function Home() {
       <section className="section-space bg-white">
         <div className="container-grid">
           <Reveal>
-            <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:items-center">
-              <div className="space-y-4">
-                <SplitTextHeading
-                  text="A clear, compliant accounting workflow"
-                  as="h2"
-                  className="section-title"
-                />
-                <p className="section-subtitle">
-                  We design a workflow around your business so you always know
-                  your numbers, deadlines, and next steps.
-                </p>
+            <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:items-start">
+              <div className="flex flex-col gap-8 md:gap-10 h-full">
+                <div className="space-y-4">
+                  <SplitTextHeading
+                    text="A clear, compliant accounting workflow"
+                    as="h2"
+                    className="section-title"
+                  />
+                  <p className="mt-5 text-base leading-relaxed text-[color:var(--color-slate-dark)] md:text-[1.1rem] md:leading-[1.8] max-w-lg">
+                    We design a workflow around your business so you always know
+                    your numbers, deadlines, and next steps.
+                  </p>
+                </div>
+                {/* The image is allowed to define its natural height without forced aspect ratio crops */}
+                <div className="w-full mt-auto overflow-hidden rounded-[2rem] border border-[color:var(--color-border)] shadow-[0_4px_24px_rgba(33,28,24,0.02)]">
+                  <img 
+                    src="/team/Bali_Accounting_Tax_Services_ReCounting_Team.png" 
+                    alt="ReCounting Bali Accounting and Tax Workflow Team" 
+                    className="w-full h-auto block"
+                  />
+                </div>
               </div>
-              <StaggerGroup className="grid gap-4">
+              <StaggerGroup className="grid gap-4 md:gap-5">
                 {[
                   {
                     title: "Discovery & setup",
@@ -373,14 +411,17 @@ export default function Home() {
                     desc: "Fast WhatsApp responses and English-first guidance.",
                   },
                 ].map((step, index) => (
-                  <div key={step.title} className="card stagger-item p-5">
-                    <p className="text-xs font-bold text-[color:var(--color-primary)]">
+                  <div 
+                    key={step.title} 
+                    className="stagger-item flex flex-col justify-center rounded-[1.25rem] border border-[color:var(--color-border)]/80 bg-white p-6 md:p-8 shadow-sm transition-shadow hover:shadow-md"
+                  >
+                    <p className="text-[0.85rem] font-bold text-[#446b9e]">
                       Step {index + 1}
                     </p>
-                    <h3 className="mt-2 text-lg font-semibold">
+                    <h3 className="mt-2 text-[1.15rem] font-bold text-[color:var(--color-slate-dark)]">
                       {step.title}
                     </h3>
-                    <p className="mt-2 text-sm text-[color:var(--color-slate-light)]">
+                    <p className="mt-2 text-[0.95rem] text-[color:var(--color-slate-light)] font-medium">
                       {step.desc}
                     </p>
                   </div>
