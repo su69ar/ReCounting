@@ -15,6 +15,8 @@ import { GrainOverlay } from "@/components/GrainOverlay";
 import { ConsentBanner } from "@/components/ConsentBanner";
 import { Favicon } from "@/components/Favicon";
 
+const socialImage = `${siteConfig.url}/assets/logo/ReCounting_Accounting_Tax_Services_Bali.png`;
+
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-plus",
@@ -73,7 +75,7 @@ export const metadata: Metadata = {
     siteName: "ReCounting",
     images: [
       {
-        url: "/assets/logo/ReCounting_Accounting_Tax_Services_Bali.png",
+        url: socialImage,
         width: 1200,
         height: 630,
         alt: "ReCounting | Bali Accounting Services & Bali Tax Services",
@@ -84,7 +86,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Bali Accounting Services & Bali Tax Services | ReCounting",
     description: siteConfig.description,
-    images: ["/assets/logo/ReCounting_Accounting_Tax_Services_Bali.png"],
+    images: [socialImage],
   },
   alternates: {
     canonical: siteConfig.url,
