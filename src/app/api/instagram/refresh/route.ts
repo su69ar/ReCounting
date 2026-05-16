@@ -3,6 +3,20 @@ import fs from 'fs';
 import path from 'path';
 import { sendInstagramTokenRefreshEmail } from '@/lib/email';
 
+// In our production setup the Next.js app runs inside a Docker container with
+// env vars baked at build time (see docker-compose.yml `args:` block). The
+// container cannot write to the host's `.env`, so writing in-container is
+// pointless — restart wipes it, and the build-args path needs a fresh image
+// to pick up new env values anyway.
+//
+// We still attempt an in-container `.env` write for dev convenience (npm run
+// dev locally), but the *real* persistence path is:
+//   1. Host cron calls this endpoint with the refresh secret.
+//   2. Endpoint returns the new token in the response body.
+//   3. Host cron script writes new token to the host `.env`.
+//   4. Host cron script triggers `docker compose up -d --build` so the new
+//      token is baked into the next image.
+
 const ENV_PATH = path.join(process.cwd(), '.env');
 
 type RefreshResponse = {
@@ -13,33 +27,26 @@ type RefreshResponse = {
 
 type EnvWriteResult = { ok: true } | { ok: false; error: string };
 
-function updateEnvFile(newToken: string): EnvWriteResult {
+function updateInContainerEnvFile(newToken: string): EnvWriteResult {
   try {
-    let envContent = '';
-    if (fs.existsSync(ENV_PATH)) {
-      envContent = fs.readFileSync(ENV_PATH, 'utf-8');
+    if (!fs.existsSync(ENV_PATH)) {
+      return { ok: false, error: `.env not found at ${ENV_PATH}` };
     }
-
+    const envContent = fs.readFileSync(ENV_PATH, 'utf-8');
     const lines = envContent.split('\n');
     let found = false;
-
-    const updatedLines = lines.map((line) => {
+    const updated = lines.map((line) => {
       if (line.startsWith('INSTAGRAM_ACCESS_TOKEN=')) {
         found = true;
         return `INSTAGRAM_ACCESS_TOKEN=${newToken}`;
       }
       return line;
     });
-
-    if (!found) {
-      updatedLines.push(`INSTAGRAM_ACCESS_TOKEN=${newToken}`);
-    }
-
-    fs.writeFileSync(ENV_PATH, updatedLines.join('\n'));
+    if (!found) updated.push(`INSTAGRAM_ACCESS_TOKEN=${newToken}`);
+    fs.writeFileSync(ENV_PATH, updated.join('\n'));
     return { ok: true };
   } catch (err) {
-    const error = err instanceof Error ? err.message : String(err);
-    return { ok: false, error };
+    return { ok: false, error: err instanceof Error ? err.message : String(err) };
   }
 }
 
@@ -84,9 +91,12 @@ export async function POST(request: Request) {
     const expiresAt = new Date(Date.now() + data.expires_in * 1000).toISOString();
     const refreshedAt = new Date().toISOString();
 
-    const envWrite = updateEnvFile(newToken);
+    // In-container .env write — best-effort for dev parity. In our Docker
+    // setup this changes the in-container copy only; the host cron script is
+    // responsible for the real persistent write.
+    const envWrite = updateInContainerEnvFile(newToken);
 
-    // Send notification email — fire and forget, do not fail the response on email failure
+    // Fire-and-forget admin email
     sendInstagramTokenRefreshEmail({
       newToken,
       expiresInDays,
@@ -99,11 +109,12 @@ export async function POST(request: Request) {
       console.error('[instagram-refresh] Email notification failed:', err);
     });
 
+    // Return the new token in the response body so the host cron can persist
+    // it to the host .env and trigger a rebuild.
     return NextResponse.json({
       success: true,
-      message: envWrite.ok
-        ? 'Token refreshed and .env updated'
-        : 'Token refreshed but .env write failed — see email for manual instructions',
+      message: 'Token refreshed — host cron must persist to .env and rebuild container',
+      newToken,
       expiresInDays,
       expiresAt,
       refreshedAt,
@@ -119,7 +130,6 @@ export async function POST(request: Request) {
   }
 }
 
-// GET endpoint to check token status
 export async function GET() {
   const token = process.env.INSTAGRAM_ACCESS_TOKEN;
   const accountId = process.env.INSTAGRAM_ACCOUNT_ID;

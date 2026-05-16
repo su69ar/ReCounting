@@ -1,36 +1,54 @@
 #!/usr/bin/env bash
-# Instagram Token Refresh — VPS cron job
+# Instagram Token Refresh — VPS host-side cron job (Docker setup)
 # ---------------------------------------------------------------------------
-# Calls POST /api/instagram/refresh weekly. Meta long-lived tokens last
-# 60 days but the refresh endpoint resets the 60-day clock, so as long as
-# this script succeeds at least once every ~55 days the token never expires.
+# This script lives in the repo (web/scripts/) but is invoked from the HOST,
+# not from inside the Docker container.
 #
-# Recommended cron schedule (every Monday 03:00 server time):
-#   0 3 * * 1 /path/to/web/scripts/refresh-instagram-token.sh
+# Architecture context (recounting-app on Ubuntu VPS):
+#   - Next.js app runs in Docker (recounting-app, port 3103)
+#   - env vars are baked into the image at build time via docker-compose args
+#   - the host's .env is the source of truth — container .env is throwaway
+#   - GitHub Actions deploys by rsync + docker compose build/up (no .env push)
 #
-# Sources config from <repo>/.env to keep secrets out of version control.
+# So the refresh flow must:
+#   1. Call POST /api/instagram/refresh inside the container (Meta API requires
+#      the current still-valid token to refresh — the container has it).
+#   2. Parse the new token from the response.
+#   3. Write the new token to the HOST .env (this script does it).
+#   4. Rebuild + restart the container so the build args pick up the new env.
+#
+# Recommended cron (weekly):
+#   0 3 * * 1 /home/dotdev/.../recounting-app/web/scripts/refresh-instagram-token.sh
 # ---------------------------------------------------------------------------
 
 set -euo pipefail
 
-# Resolve repo root from script location (works regardless of cwd at cron time).
+# Resolve repo root (web/ parent) from script location.
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
-REPO_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
+WEB_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
+REPO_DIR="$(cd "${WEB_DIR}/.." && pwd)"
 ENV_FILE="${REPO_DIR}/.env"
 
 # Defaults — override via env or .env
-SITE_URL="${SITE_URL:-http://localhost:3000}"
+SITE_URL="${SITE_URL:-http://127.0.0.1:3103}"
 LOG_FILE="${INSTAGRAM_REFRESH_LOG:-/var/log/instagram-refresh.log}"
-SERVICE_RESTART_CMD="${INSTAGRAM_SERVICE_RESTART_CMD:-}"  # e.g. "systemctl restart recounting" or "pm2 reload recounting"
+DOCKER_COMPOSE_CMD="${DOCKER_COMPOSE_CMD:-docker compose}"
+DOCKER_COMPOSE_FILE="${DOCKER_COMPOSE_FILE:-${REPO_DIR}/docker-compose.yml}"
+DRY_RUN="${DRY_RUN:-0}"
 
-# Load INSTAGRAM_REFRESH_SECRET from .env if not already set in env.
+# Load INSTAGRAM_REFRESH_SECRET from host .env.
 if [[ -z "${INSTAGRAM_REFRESH_SECRET:-}" && -f "${ENV_FILE}" ]]; then
-  # shellcheck disable=SC1090,SC2046
-  export $(grep -E '^INSTAGRAM_REFRESH_SECRET=' "${ENV_FILE}" | xargs -I {} echo {})
+  INSTAGRAM_REFRESH_SECRET="$(grep -E '^INSTAGRAM_REFRESH_SECRET=' "${ENV_FILE}" | head -1 | cut -d'=' -f2- )"
+  export INSTAGRAM_REFRESH_SECRET
 fi
 
 if [[ -z "${INSTAGRAM_REFRESH_SECRET:-}" ]]; then
   echo "ERROR: INSTAGRAM_REFRESH_SECRET not set (checked env and ${ENV_FILE})" >&2
+  exit 2
+fi
+
+if [[ ! -f "${ENV_FILE}" ]]; then
+  echo "ERROR: host .env not found at ${ENV_FILE}" >&2
   exit 2
 fi
 
@@ -40,13 +58,16 @@ if ! touch "${LOG_FILE}" 2>/dev/null; then
 fi
 
 log() {
-  printf '[%s] %s\n' "$(date -u '+%Y-%m-%dT%H:%M:%SZ')" "$1" >> "${LOG_FILE}"
+  printf '[%s] %s\n' "$(date -u '+%Y-%m-%dT%H:%M:%SZ')" "$1" | tee -a "${LOG_FILE}" >/dev/null
 }
 
-log "begin refresh — SITE_URL=${SITE_URL}"
+log "begin refresh — SITE_URL=${SITE_URL} ENV_FILE=${ENV_FILE} DRY_RUN=${DRY_RUN}"
 
-# Make the API request — fail fast on network errors, capture body + status.
-HTTP_CODE=$(curl --silent --show-error --output /tmp/instagram-refresh-response.json \
+# --- Step 1: Call refresh endpoint inside the container. ---
+RESPONSE_FILE="$(mktemp)"
+trap 'rm -f "${RESPONSE_FILE}"' EXIT
+
+HTTP_CODE=$(curl --silent --show-error --output "${RESPONSE_FILE}" \
   --write-out '%{http_code}' \
   --max-time 30 \
   --retry 2 --retry-delay 5 \
@@ -55,28 +76,83 @@ HTTP_CODE=$(curl --silent --show-error --output /tmp/instagram-refresh-response.
   -H "Content-Type: application/json" \
   -d '{}' 2>>"${LOG_FILE}") || HTTP_CODE="000"
 
-RESPONSE=$(cat /tmp/instagram-refresh-response.json 2>/dev/null || echo '{}')
-rm -f /tmp/instagram-refresh-response.json
+RESPONSE="$(cat "${RESPONSE_FILE}")"
+log "http_code=${HTTP_CODE} response_size=${#RESPONSE}B"
 
-log "http_code=${HTTP_CODE} response=${RESPONSE}"
+if [[ "${HTTP_CODE}" != "200" ]]; then
+  log "FAILURE: refresh endpoint did not return 200 (got ${HTTP_CODE})"
+  log "response: ${RESPONSE}"
+  exit 1
+fi
 
-if [[ "${HTTP_CODE}" == "200" ]] && echo "${RESPONSE}" | grep -q '"success":true'; then
-  log "SUCCESS: token refreshed"
+# --- Step 2: Parse new token from response. ---
+# Use python3 (always present on Ubuntu) for safe JSON parsing — avoid jq dep.
+NEW_TOKEN="$(python3 -c "import sys, json; d = json.load(sys.stdin); print(d.get('newToken', ''))" <<<"${RESPONSE}" 2>>"${LOG_FILE}" || echo "")"
+EXPIRES_DAYS="$(python3 -c "import sys, json; d = json.load(sys.stdin); print(d.get('expiresInDays', ''))" <<<"${RESPONSE}" 2>>"${LOG_FILE}" || echo "")"
 
-  # Optional: restart service so the new .env is picked up
-  if [[ -n "${SERVICE_RESTART_CMD}" ]]; then
-    log "running service restart: ${SERVICE_RESTART_CMD}"
-    if eval "${SERVICE_RESTART_CMD}" >>"${LOG_FILE}" 2>&1; then
-      log "restart ok"
-    else
-      log "WARN: restart command exited non-zero — token is refreshed but server may serve stale token until next deploy"
-    fi
-  else
-    log "no SERVICE_RESTART_CMD configured — server process must reload .env on its own or via next deploy"
-  fi
+if [[ -z "${NEW_TOKEN}" ]]; then
+  log "FAILURE: response did not contain newToken field"
+  log "response: ${RESPONSE}"
+  exit 1
+fi
 
+log "got new token (len=${#NEW_TOKEN}) — expires in ${EXPIRES_DAYS} days"
+
+# --- Step 3: Persist to host .env atomically. ---
+if [[ "${DRY_RUN}" == "1" ]]; then
+  log "DRY_RUN=1 — skipping .env write and container rebuild"
+  log "would have written INSTAGRAM_ACCESS_TOKEN to ${ENV_FILE}"
   exit 0
 fi
 
-log "FAILURE: refresh did not succeed (http=${HTTP_CODE})"
+# Backup current .env before mutation.
+BACKUP="${ENV_FILE}.bak.$(date -u +%Y%m%d-%H%M%S)"
+cp "${ENV_FILE}" "${BACKUP}"
+log "backed up .env to ${BACKUP}"
+
+# Use a tmpfile + mv for atomicity (no half-written .env if power dies).
+TMP_ENV="$(mktemp)"
+awk -v tok="${NEW_TOKEN}" '
+  BEGIN { written = 0 }
+  /^INSTAGRAM_ACCESS_TOKEN=/ { print "INSTAGRAM_ACCESS_TOKEN=" tok; written = 1; next }
+  { print }
+  END { if (!written) print "INSTAGRAM_ACCESS_TOKEN=" tok }
+' "${ENV_FILE}" > "${TMP_ENV}"
+
+# Sanity-check: tmpfile must contain the new token and be non-empty.
+if [[ ! -s "${TMP_ENV}" ]] || ! grep -q "^INSTAGRAM_ACCESS_TOKEN=${NEW_TOKEN}$" "${TMP_ENV}"; then
+  log "FAILURE: tmpfile sanity-check failed — leaving original .env untouched"
+  rm -f "${TMP_ENV}"
+  exit 1
+fi
+
+# Atomic replace + preserve perms.
+chmod --reference="${ENV_FILE}" "${TMP_ENV}" 2>/dev/null || chmod 0640 "${TMP_ENV}"
+mv "${TMP_ENV}" "${ENV_FILE}"
+log "wrote new token to ${ENV_FILE}"
+
+# Keep only the last 5 backups to avoid disk creep.
+ls -1t "${ENV_FILE}".bak.* 2>/dev/null | tail -n +6 | xargs -r rm -f
+log "pruned old .env backups (kept latest 5)"
+
+# --- Step 4: Rebuild + restart container so build args pick up new token. ---
+log "rebuilding container via ${DOCKER_COMPOSE_CMD} -f ${DOCKER_COMPOSE_FILE} up -d --build"
+if (cd "${REPO_DIR}" && set -a && . "${ENV_FILE}" && set +a && ${DOCKER_COMPOSE_CMD} -f "${DOCKER_COMPOSE_FILE}" up -d --build --remove-orphans) >>"${LOG_FILE}" 2>&1; then
+  log "container rebuild + up succeeded"
+else
+  log "FAILURE: container rebuild failed — restoring previous .env from ${BACKUP}"
+  cp "${BACKUP}" "${ENV_FILE}"
+  exit 1
+fi
+
+# --- Step 5: Verify the new token is live. ---
+sleep 5
+VERIFY="$(curl --silent --max-time 10 "${SITE_URL}/api/instagram/refresh" || echo '{}')"
+if echo "${VERIFY}" | grep -q '"valid":true'; then
+  log "SUCCESS: container running new token, /api/instagram/refresh reports valid:true"
+  exit 0
+fi
+
+log "WARN: container restarted but verify-endpoint did not return valid:true"
+log "verify response: ${VERIFY}"
 exit 1

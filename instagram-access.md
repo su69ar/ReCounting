@@ -220,14 +220,16 @@ Instagram Graph API long-lived tokens **last 60 days**. Meta provides a
 `refresh_access_token` endpoint that resets the 60-day clock on a still-valid
 token — but it does **not** work on already-expired tokens.
 
-Strategy: call refresh weekly via cron. As long as the cron runs at least once
-every ~55 days, the token never expires.
+Strategy: call refresh weekly via host cron. As long as the cron runs at
+least once every ~55 days, the token never expires.
 
 ```
 Day 0   ──┐  Generate first long-lived token (manual, one-time)
           │
-Day 7   ──┤  Cron POST /api/instagram/refresh   → expiry resets to day 67
-Day 14  ──┤  Cron POST /api/instagram/refresh   → expiry resets to day 74
+Day 7   ──┤  Host cron → POST /api/instagram/refresh
+          │     ↳ Meta returns new token (60-day clock reset)
+          │     ↳ Cron writes host .env + rebuilds container
+Day 14  ──┤  Host cron → POST /api/instagram/refresh  (same flow)
 …         │  (every Monday)
 Day N+7 ──┘  Token always has 50-60 days of life remaining
 ```
@@ -236,82 +238,124 @@ If the cron fails for more than 60 days straight, the token dies and you must
 regenerate manually via Meta Developer Portal (see "Manual Token Generation"
 below).
 
-## Cron Job Setup (VPS Ubuntu)
+### Why host-side cron (not in-container)
 
-### 1. No script edits needed
+The Next.js app runs in Docker with env vars baked at build time via
+`docker-compose.yml` build args. The host `.env` is the source of truth.
 
-The cron script (`scripts/refresh-instagram-token.sh`) reads
-`INSTAGRAM_REFRESH_SECRET` directly from the project `.env` file at runtime.
-You do **not** need to edit secrets into the script.
+Implication for token refresh:
+- Endpoint `/api/instagram/refresh` runs *inside* the container — it can call
+  Meta but **cannot persist** to the host `.env`.
+- The refresh response includes the new token in the body.
+- The **host cron script** reads that token from the response, writes it to
+  the host `.env`, and triggers `docker compose up -d --build` so the next
+  image bakes in the new token.
+- A `.env.bak.<timestamp>` backup is created on every refresh and the latest 5
+  are retained for easy rollback.
 
-You can optionally override these via environment variables at cron time:
+## Cron Job Setup (VPS Ubuntu + Docker)
+
+### 1. Confirm script paths
+
+The cron script lives in the repo at `web/scripts/refresh-instagram-token.sh`.
+On the VPS this resolves to:
+
+```
+/home/dotdev/Documents/Workspaces/Dotdev/Projects/ReCounting/recounting-app/web/scripts/refresh-instagram-token.sh
+```
+
+The script reads `INSTAGRAM_REFRESH_SECRET` directly from the host `.env` at
+runtime. You do **not** edit secrets into the script or crontab.
+
+Environment overrides accepted at cron time:
 
 | Env var | Default | Purpose |
 |---|---|---|
-| `SITE_URL` | `http://localhost:3000` | Where the Next.js server is reachable from the cron host |
-| `INSTAGRAM_REFRESH_LOG` | `/var/log/instagram-refresh.log` | Log path (falls back to `/tmp` if unwritable) |
-| `INSTAGRAM_SERVICE_RESTART_CMD` | `""` | Optional command to reload service so refreshed `.env` is picked up |
+| `SITE_URL` | `http://127.0.0.1:3103` | Inside-host endpoint for the container |
+| `INSTAGRAM_REFRESH_LOG` | `/var/log/instagram-refresh.log` | Log path (falls back to `/tmp`) |
+| `DOCKER_COMPOSE_CMD` | `docker compose` | Override if using `docker-compose` legacy |
+| `DOCKER_COMPOSE_FILE` | `<repo>/docker-compose.yml` | Compose file path |
+| `DRY_RUN` | `0` | Set to `1` to test parse path without touching `.env` or container |
 
-### 2. Setup the cron entry
+### 2. Dry-run test first
+
+```bash
+DRY_RUN=1 /home/dotdev/Documents/Workspaces/Dotdev/Projects/ReCounting/recounting-app/web/scripts/refresh-instagram-token.sh
+tail -10 /var/log/instagram-refresh.log
+```
+
+You should see lines like:
+```
+[2026-05-16T03:00:01Z] begin refresh — SITE_URL=http://127.0.0.1:3103 ...
+[2026-05-16T03:00:02Z] http_code=200 response_size=420B
+[2026-05-16T03:00:02Z] got new token (len=186) — expires in 60 days
+[2026-05-16T03:00:02Z] DRY_RUN=1 — skipping .env write and container rebuild
+```
+
+If the script fails here, fix before installing cron (almost always: log
+permission, refresh secret missing, or container not reachable on port 3103).
+
+### 3. Real run (writes .env, rebuilds container)
+
+```bash
+/home/dotdev/Documents/Workspaces/Dotdev/Projects/ReCounting/recounting-app/web/scripts/refresh-instagram-token.sh
+```
+
+What happens:
+1. Script POSTs to `http://127.0.0.1:3103/api/instagram/refresh`
+2. Container exchanges current token → new token via Meta API
+3. Container returns `{success: true, newToken: "IGAA..."}` in response body
+4. Script backs up host `.env` to `.env.bak.<timestamp>` (keeps last 5)
+5. Script atomically rewrites `INSTAGRAM_ACCESS_TOKEN=` line in host `.env`
+6. Script runs `docker compose -f <repo>/docker-compose.yml up -d --build`
+7. Container rebuilt with new token baked in as build arg
+8. Script verifies via `GET /api/instagram/refresh` that new container reports `valid:true`
+9. Admin email sent with new token + expiry
+
+Expected log on success:
+```
+[2026-05-16T03:00:01Z] begin refresh — ...
+[2026-05-16T03:00:02Z] http_code=200 response_size=420B
+[2026-05-16T03:00:02Z] got new token (len=186) — expires in 60 days
+[2026-05-16T03:00:02Z] backed up .env to .../recounting-app/.env.bak.20260516-030002
+[2026-05-16T03:00:02Z] wrote new token to .../recounting-app/.env
+[2026-05-16T03:00:02Z] pruned old .env backups (kept latest 5)
+[2026-05-16T03:00:02Z] rebuilding container via docker compose ...
+[2026-05-16T03:01:30Z] container rebuild + up succeeded
+[2026-05-16T03:01:35Z] SUCCESS: container running new token, ...
+```
+
+### 4. Install cron
 
 ```bash
 crontab -e
 ```
 
-Add (adjust path to your repo + restart command for your service manager):
+Add:
 
 ```cron
-# Refresh Instagram token every Monday at 03:00 server time.
-# .env updated automatically by the API route; service restart picks up new env.
-0 3 * * 1 SITE_URL="https://recounting.my.id" \
-           INSTAGRAM_SERVICE_RESTART_CMD="systemctl restart recounting" \
-           /opt/recounting/web/scripts/refresh-instagram-token.sh
+# Refresh Instagram token every Monday 03:00 WITA — rebuilds Docker container
+0 3 * * 1 /home/dotdev/Documents/Workspaces/Dotdev/Projects/ReCounting/recounting-app/web/scripts/refresh-instagram-token.sh
 ```
 
-For PM2:
-```cron
-0 3 * * 1 SITE_URL="https://recounting.my.id" \
-           INSTAGRAM_SERVICE_RESTART_CMD="pm2 reload recounting" \
-           /opt/recounting/web/scripts/refresh-instagram-token.sh
-```
+That's it. No env vars in the crontab — script reads everything from the host
+`.env` and uses safe defaults for paths.
 
-For Docker Compose:
-```cron
-0 3 * * 1 SITE_URL="https://recounting.my.id" \
-           INSTAGRAM_SERVICE_RESTART_CMD="docker compose -f /opt/recounting/docker-compose.yml restart web" \
-           /opt/recounting/web/scripts/refresh-instagram-token.sh
-```
-
-### 3. Prepare log file (optional)
+### 5. Prepare log file (optional)
 
 ```bash
 sudo touch /var/log/instagram-refresh.log
 sudo chown $USER:$USER /var/log/instagram-refresh.log
 ```
 
-If the path is unwritable, the script falls back to `/tmp/instagram-refresh.log`
-automatically.
+If unwritable, the script falls back to `/tmp/instagram-refresh.log` automatically.
 
-### 4. Test cron manually
+### 6. GitHub Actions deploy compatibility
 
-```bash
-# Run the script directly to verify everything works.
-SITE_URL="https://recounting.my.id" /opt/recounting/web/scripts/refresh-instagram-token.sh
-
-# Inspect log
-tail -20 /var/log/instagram-refresh.log
-```
-
-A successful run logs:
-```
-[2026-05-16T03:00:01Z] begin refresh — SITE_URL=https://recounting.my.id
-[2026-05-16T03:00:02Z] http_code=200 response={"success":true,...}
-[2026-05-16T03:00:02Z] SUCCESS: token refreshed
-```
-
-The admin also receives an email summary at `ADMIN_EMAIL` containing the new
-token and expiry date, in case you also need to update env elsewhere
-(staging server, secret manager, etc.).
+`deploy.yml` already rsyncs from checkout to host but **excludes `.env`**, so
+the cron-updated `.env` survives deploys. Each `docker compose build --no-cache`
+in the deploy workflow rebuilds with whatever is currently in the host `.env`,
+which is what we want.
 
 ## Manual Token Refresh
 
@@ -441,6 +485,7 @@ Jangan ubah file API atau komponen kecuali diminta. Baca instagram-access.md unt
 | 2026-05-16 | Token expired (60-day natural expiry, cron was never installed). Regenerated. |
 | 2026-05-16 | Hardened refresh endpoint: reads INSTAGRAM_REFRESH_SECRET (not REFRESH_SECRET), sends admin email on every refresh, reports envWriteOk in response. |
 | 2026-05-16 | Cron script now reads secret from .env, supports optional service restart command, logs to /var/log or /tmp fallback. |
+| 2026-05-16 | Cron script rewritten for Docker setup: parses new token from API response, atomically writes host .env with backup retention, triggers docker compose up --build, verifies post-rebuild health. Endpoint now returns newToken in response body so host can persist. |
 
 ---
 
