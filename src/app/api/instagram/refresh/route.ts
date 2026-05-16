@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
+import { sendInstagramTokenRefreshEmail } from '@/lib/email';
 
 const ENV_PATH = path.join(process.cwd(), '.env');
 
@@ -10,43 +11,57 @@ type RefreshResponse = {
   expires_in: number;
 };
 
-function updateEnvFile(newToken: string) {
-  let envContent = '';
+type EnvWriteResult = { ok: true } | { ok: false; error: string };
 
-  if (fs.existsSync(ENV_PATH)) {
-    envContent = fs.readFileSync(ENV_PATH, 'utf-8');
-  }
-
-  const lines = envContent.split('\n');
-  let found = false;
-
-  const updatedLines = lines.map((line) => {
-    if (line.startsWith('INSTAGRAM_ACCESS_TOKEN=')) {
-      found = true;
-      return `INSTAGRAM_ACCESS_TOKEN=${newToken}`;
+function updateEnvFile(newToken: string): EnvWriteResult {
+  try {
+    let envContent = '';
+    if (fs.existsSync(ENV_PATH)) {
+      envContent = fs.readFileSync(ENV_PATH, 'utf-8');
     }
-    return line;
-  });
 
-  if (!found) {
-    updatedLines.push(`INSTAGRAM_ACCESS_TOKEN=${newToken}`);
+    const lines = envContent.split('\n');
+    let found = false;
+
+    const updatedLines = lines.map((line) => {
+      if (line.startsWith('INSTAGRAM_ACCESS_TOKEN=')) {
+        found = true;
+        return `INSTAGRAM_ACCESS_TOKEN=${newToken}`;
+      }
+      return line;
+    });
+
+    if (!found) {
+      updatedLines.push(`INSTAGRAM_ACCESS_TOKEN=${newToken}`);
+    }
+
+    fs.writeFileSync(ENV_PATH, updatedLines.join('\n'));
+    return { ok: true };
+  } catch (err) {
+    const error = err instanceof Error ? err.message : String(err);
+    return { ok: false, error };
   }
-
-  fs.writeFileSync(ENV_PATH, updatedLines.join('\n'));
 }
 
 export async function POST(request: Request) {
   const authHeader = request.headers.get('authorization');
-  const expectedAuth = `Bearer ${process.env.REFRESH_SECRET || 'refresh-token-secret'}`;
-
-  if (authHeader !== expectedAuth) {
+  const secret = process.env.INSTAGRAM_REFRESH_SECRET;
+  if (!secret) {
+    return NextResponse.json(
+      { error: 'INSTAGRAM_REFRESH_SECRET not configured on server' },
+      { status: 500 }
+    );
+  }
+  if (authHeader !== `Bearer ${secret}`) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
   const currentToken = process.env.INSTAGRAM_ACCESS_TOKEN;
-
   if (!currentToken) {
-    return NextResponse.json({ error: 'No Instagram token configured' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'No Instagram token configured' },
+      { status: 500 }
+    );
   }
 
   try {
@@ -55,9 +70,10 @@ export async function POST(request: Request) {
     );
 
     if (!response.ok) {
-      const error = await response.json();
+      const errBody = await response.json().catch(() => ({}));
+      console.error('[instagram-refresh] Meta rejected refresh:', errBody);
       return NextResponse.json(
-        { error: 'Failed to refresh token', details: error },
+        { error: 'Failed to refresh token', details: errBody },
         { status: response.status }
       );
     }
@@ -65,18 +81,37 @@ export async function POST(request: Request) {
     const data: RefreshResponse = await response.json();
     const newToken = data.access_token;
     const expiresInDays = Math.round(data.expires_in / 86400);
+    const expiresAt = new Date(Date.now() + data.expires_in * 1000).toISOString();
+    const refreshedAt = new Date().toISOString();
 
-    // Update .env file
-    updateEnvFile(newToken);
+    const envWrite = updateEnvFile(newToken);
+
+    // Send notification email — fire and forget, do not fail the response on email failure
+    sendInstagramTokenRefreshEmail({
+      newToken,
+      expiresInDays,
+      expiresAt,
+      refreshedAt,
+      envWriteOk: envWrite.ok,
+      envWriteError: envWrite.ok ? undefined : envWrite.error,
+      hostname: request.headers.get('host') || undefined,
+    }).catch((err) => {
+      console.error('[instagram-refresh] Email notification failed:', err);
+    });
 
     return NextResponse.json({
       success: true,
-      message: 'Token refreshed successfully',
+      message: envWrite.ok
+        ? 'Token refreshed and .env updated'
+        : 'Token refreshed but .env write failed — see email for manual instructions',
       expiresInDays,
-      refreshedAt: new Date().toISOString(),
+      expiresAt,
+      refreshedAt,
+      envWriteOk: envWrite.ok,
+      ...(envWrite.ok ? {} : { envWriteError: envWrite.error }),
     });
   } catch (error) {
-    console.error('Token refresh error:', error);
+    console.error('[instagram-refresh] Internal error:', error);
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }
@@ -99,10 +134,12 @@ export async function GET() {
     );
 
     if (!response.ok) {
+      const errBody = await response.json().catch(() => ({}));
       return NextResponse.json({
         configured: true,
         valid: false,
         error: 'Token may be expired or invalid',
+        details: errBody,
       });
     }
 
@@ -114,7 +151,8 @@ export async function GET() {
       username: data.username,
       accountId: data.id,
     });
-  } catch {
+  } catch (error) {
+    console.error('[instagram-refresh] GET status error:', error);
     return NextResponse.json({
       configured: true,
       valid: false,

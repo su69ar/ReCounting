@@ -214,114 +214,182 @@ export default function Page() {
 - **Loading State**: Skeleton placeholder
 - **Error Handling**: Graceful fallback message
 
+## How Tokens Stay Valid Forever
+
+Instagram Graph API long-lived tokens **last 60 days**. Meta provides a
+`refresh_access_token` endpoint that resets the 60-day clock on a still-valid
+token — but it does **not** work on already-expired tokens.
+
+Strategy: call refresh weekly via cron. As long as the cron runs at least once
+every ~55 days, the token never expires.
+
+```
+Day 0   ──┐  Generate first long-lived token (manual, one-time)
+          │
+Day 7   ──┤  Cron POST /api/instagram/refresh   → expiry resets to day 67
+Day 14  ──┤  Cron POST /api/instagram/refresh   → expiry resets to day 74
+…         │  (every Monday)
+Day N+7 ──┘  Token always has 50-60 days of life remaining
+```
+
+If the cron fails for more than 60 days straight, the token dies and you must
+regenerate manually via Meta Developer Portal (see "Manual Token Generation"
+below).
+
 ## Cron Job Setup (VPS Ubuntu)
 
-### 1. Edit Script Configuration
+### 1. No script edits needed
 
-```bash
-nano /path/to/project/scripts/refresh-instagram-token.sh
-```
+The cron script (`scripts/refresh-instagram-token.sh`) reads
+`INSTAGRAM_REFRESH_SECRET` directly from the project `.env` file at runtime.
+You do **not** need to edit secrets into the script.
 
-Update nilai:
-```bash
-SITE_URL="https://recounting.my.id"
-REFRESH_SECRET="CHANGE_TO_MATCH_INSTAGRAM_REFRESH_SECRET_IN_ENV"
-LOG_FILE="/var/log/instagram-refresh.log"
-```
+You can optionally override these via environment variables at cron time:
 
-### 2. Setup Cron
+| Env var | Default | Purpose |
+|---|---|---|
+| `SITE_URL` | `http://localhost:3000` | Where the Next.js server is reachable from the cron host |
+| `INSTAGRAM_REFRESH_LOG` | `/var/log/instagram-refresh.log` | Log path (falls back to `/tmp` if unwritable) |
+| `INSTAGRAM_SERVICE_RESTART_CMD` | `""` | Optional command to reload service so refreshed `.env` is picked up |
+
+### 2. Setup the cron entry
 
 ```bash
 crontab -e
 ```
 
-Tambahkan:
+Add (adjust path to your repo + restart command for your service manager):
+
 ```cron
-# Refresh Instagram token setiap Senin jam 3 pagi
-0 3 * * 1 /path/to/project/scripts/refresh-instagram-token.sh
+# Refresh Instagram token every Monday at 03:00 server time.
+# .env updated automatically by the API route; service restart picks up new env.
+0 3 * * 1 SITE_URL="https://recounting.my.id" \
+           INSTAGRAM_SERVICE_RESTART_CMD="systemctl restart recounting" \
+           /opt/recounting/web/scripts/refresh-instagram-token.sh
 ```
 
-### 3. Create Log File
+For PM2:
+```cron
+0 3 * * 1 SITE_URL="https://recounting.my.id" \
+           INSTAGRAM_SERVICE_RESTART_CMD="pm2 reload recounting" \
+           /opt/recounting/web/scripts/refresh-instagram-token.sh
+```
+
+For Docker Compose:
+```cron
+0 3 * * 1 SITE_URL="https://recounting.my.id" \
+           INSTAGRAM_SERVICE_RESTART_CMD="docker compose -f /opt/recounting/docker-compose.yml restart web" \
+           /opt/recounting/web/scripts/refresh-instagram-token.sh
+```
+
+### 3. Prepare log file (optional)
 
 ```bash
 sudo touch /var/log/instagram-refresh.log
 sudo chown $USER:$USER /var/log/instagram-refresh.log
 ```
 
-### 4. Test Cron
+If the path is unwritable, the script falls back to `/tmp/instagram-refresh.log`
+automatically.
+
+### 4. Test cron manually
 
 ```bash
-# Run manually to test
-/path/to/project/scripts/refresh-instagram-token.sh
+# Run the script directly to verify everything works.
+SITE_URL="https://recounting.my.id" /opt/recounting/web/scripts/refresh-instagram-token.sh
 
-# Check log
-cat /var/log/instagram-refresh.log
+# Inspect log
+tail -20 /var/log/instagram-refresh.log
 ```
+
+A successful run logs:
+```
+[2026-05-16T03:00:01Z] begin refresh — SITE_URL=https://recounting.my.id
+[2026-05-16T03:00:02Z] http_code=200 response={"success":true,...}
+[2026-05-16T03:00:02Z] SUCCESS: token refreshed
+```
+
+The admin also receives an email summary at `ADMIN_EMAIL` containing the new
+token and expiry date, in case you also need to update env elsewhere
+(staging server, secret manager, etc.).
 
 ## Manual Token Refresh
 
-Jika perlu refresh token secara manual:
-
-### Option 1: Via API
+Force a refresh on demand:
 
 ```bash
 curl -X POST "https://recounting.my.id/api/instagram/refresh" \
-  -H "Authorization: Bearer your-refresh-secret"
+  -H "Authorization: Bearer $INSTAGRAM_REFRESH_SECRET"
 ```
 
-### Option 2: Via Meta Developer
+Response contains `expiresInDays` and `envWriteOk` so you can verify the
+refresh succeeded and whether the server `.env` was updated automatically.
 
-1. Buka https://developers.facebook.com/apps/
-2. Pilih app → Instagram → Settings
-3. Generate new token
-4. Update `.env`:
-   ```env
-   INSTAGRAM_ACCESS_TOKEN=new_token_here
-   ```
-5. Restart service
+## Manual Token Generation (when token has fully expired)
+
+If the cron failed for >60 days straight, the refresh endpoint can no longer
+recover the token. You must regenerate from scratch:
+
+1. Open https://developers.facebook.com/apps/ and pick your app
+2. Sidebar → **Instagram → API setup with Instagram login**
+3. Section "Generate access tokens" → pick `@recountingasia` → **Generate**
+4. Copy the new token (starts with `IGAA…`)
+5. Update both:
+   - Production `.env` (via your deploy platform dashboard)
+   - Local `.env` (just edit the file)
+6. Restart the service so Next.js picks up the new value
+7. Verify: `curl https://recounting.my.id/api/instagram/refresh` should return
+   `"valid":true`
+8. Confirm cron is still scheduled so it does not happen again:
+   `crontab -l | grep refresh-instagram-token`
 
 ## Troubleshooting
 
-### Token Expired
+### Symptom: "Failed to fetch Instagram posts" on the homepage
 
-**Symptom:** Feed tidak muncul, error "Invalid OAuth access token"
+1. Hit the status endpoint: `curl https://recounting.my.id/api/instagram/refresh`
+   - `valid: true` → token is fine; problem is elsewhere (DNS, CORS, caching)
+   - `valid: false` → token expired or revoked; follow Manual Token Generation
+2. Check cron log: `tail -30 /var/log/instagram-refresh.log`
+3. If cron has been silent, run the script manually to see the failure:
+   `SITE_URL=https://recounting.my.id /opt/recounting/web/scripts/refresh-instagram-token.sh`
 
-**Solution:**
-1. Check status: `GET /api/instagram/refresh`
-2. Jika `valid: false`, refresh token manual
-3. Pastikan cron job berjalan
+### Cron not firing
 
-### Cron Job Not Working
-
-**Check:**
 ```bash
-# List cron jobs
-crontab -l
-
-# Check script permission
-ls -la /path/to/script/refresh-instagram-token.sh
-
-# Make executable
-chmod +x /path/to/script/refresh-instagram-token.sh
-
-# Check log
-cat /var/log/instagram-refresh.log
+crontab -l                              # confirm entry present
+ls -la /opt/recounting/web/scripts/refresh-instagram-token.sh  # confirm executable
+chmod +x /opt/recounting/web/scripts/refresh-instagram-token.sh  # if not
+tail -50 /var/log/syslog | grep CRON    # confirm cron daemon ran it
 ```
 
-### CORS Error
+### `.env` write fails on refresh
 
-Jika feed error di production tapi OK di localhost:
+The endpoint logs `envWriteOk: false` and emails the new token to
+`ADMIN_EMAIL`. Common causes:
+- File system mounted read-only (Docker without writable volume)
+- Process user lacks write permission on `.env`
+- Working directory at runtime is not the repo root
 
-1. Pastikan `SITE_URL` di script benar
-2. Pastikan server mendukung HTTPS (Cloudflare handles this)
-3. Check browser console untuk detail error
+Fix: ensure the Next.js process can write to `.env`, OR rely on the email
+notification flow and paste the new token into production env yourself.
+
+### Cron OK but feed still shows error
+
+The Next.js process caches `process.env.INSTAGRAM_ACCESS_TOKEN` at boot. After
+`.env` is rewritten, you must restart the service to pick up the new value.
+That's what `INSTAGRAM_SERVICE_RESTART_CMD` in the cron entry does — make
+sure it's set.
 
 ## Security Notes
 
 1. **`.env` tidak boleh di-commit** ke repository
-2. **`INSTAGRAM_REFRESH_SECRET`** harus string random panjang
+2. **`INSTAGRAM_REFRESH_SECRET`** harus string random panjang (≥32 chars)
 3. **Endpoint `/api/instagram/refresh`** memerlukan Authorization header
 4. **Token di `.env`** hanya bisa dibaca server-side
+5. **Cron entry** boleh mengandung `SITE_URL` dan restart command tetapi
+   **jangan** menulis `INSTAGRAM_REFRESH_SECRET` langsung di crontab — script
+   reads it from `.env` so it never appears in `crontab -l` or process listings
 
 ## API Reference Links
 
@@ -370,6 +438,9 @@ Jangan ubah file API atau komponen kecuali diminta. Baca instagram-access.md unt
 |------|---------|
 | 2026-02-19 | Initial setup - Instagram Graph API integration |
 | 2026-02-19 | Added auto-refresh system with cron job |
+| 2026-05-16 | Token expired (60-day natural expiry, cron was never installed). Regenerated. |
+| 2026-05-16 | Hardened refresh endpoint: reads INSTAGRAM_REFRESH_SECRET (not REFRESH_SECRET), sends admin email on every refresh, reports envWriteOk in response. |
+| 2026-05-16 | Cron script now reads secret from .env, supports optional service restart command, logs to /var/log or /tmp fallback. |
 
 ---
 
