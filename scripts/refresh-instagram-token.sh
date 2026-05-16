@@ -76,11 +76,15 @@ log "begin refresh — SITE_URL=${SITE_URL} ENV_FILE=${ENV_FILE} DRY_RUN=${DRY_R
 RESPONSE_FILE="$(mktemp)"
 trap 'rm -f "${RESPONSE_FILE}"' EXIT
 
+# Use trailing slash explicitly because next.config.ts has trailingSlash: true
+# (otherwise Next.js returns 308 to add the slash and curl won't replay POST).
+# --location-trusted re-sends Authorization on redirects as a belt-and-braces.
 HTTP_CODE=$(curl --silent --show-error --output "${RESPONSE_FILE}" \
   --write-out '%{http_code}' \
   --max-time 30 \
   --retry 2 --retry-delay 5 \
-  -X POST "${SITE_URL}/api/instagram/refresh" \
+  --location-trusted \
+  -X POST "${SITE_URL}/api/instagram/refresh/" \
   -H "Authorization: Bearer ${INSTAGRAM_REFRESH_SECRET}" \
   -H "Content-Type: application/json" \
   -d '{}' 2>>"${LOG_FILE}") || HTTP_CODE="000"
@@ -156,7 +160,7 @@ fi
 
 # --- Step 5: Verify the new token is live. ---
 sleep 5
-VERIFY="$(curl --silent --max-time 10 "${SITE_URL}/api/instagram/refresh" || echo '{}')"
+VERIFY="$(curl --silent --max-time 10 --location-trusted "${SITE_URL}/api/instagram/refresh/" || echo '{}')"
 if echo "${VERIFY}" | grep -q '"valid":true'; then
   log "SUCCESS: container running new token, /api/instagram/refresh reports valid:true"
   exit 0
