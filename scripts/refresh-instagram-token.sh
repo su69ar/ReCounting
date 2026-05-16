@@ -23,10 +23,19 @@
 
 set -euo pipefail
 
-# Resolve repo root (web/ parent) from script location.
+# Resolve repo root from script location.
+# Script always lives in <repo>/scripts/, so repo root = SCRIPT_DIR/..
+# (We handle both flat layout and an optional web/ subfolder by checking
+# where docker-compose.yml lives.)
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
-WEB_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
-REPO_DIR="$(cd "${WEB_DIR}/.." && pwd)"
+REPO_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
+
+# Some workspaces nest the Next.js app inside web/ — if that's the case, the
+# real repo root (with docker-compose.yml + .env) is one level up.
+if [[ ! -f "${REPO_DIR}/docker-compose.yml" && -f "${REPO_DIR}/../docker-compose.yml" ]]; then
+  REPO_DIR="$(cd "${REPO_DIR}/.." && pwd)"
+fi
+
 ENV_FILE="${REPO_DIR}/.env"
 
 # Defaults — override via env or .env
