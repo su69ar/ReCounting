@@ -7,6 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "sitemap": "node scripts/regenerate-sitemaps.mjs",
+    "prebuild": "node scripts/regenerate-sitemaps.mjs",
     "verify:seo": "bash scripts/verify-seo.sh"
   },
   "dependencies": {

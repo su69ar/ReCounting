@@ -4,6 +4,7 @@ import { StaggerGroup } from "@/components/animations/StaggerGroup";
 import { SplitTextHeading } from "@/components/animations/SplitTextHeading";
 import { MaskReveal } from "@/components/animations/MaskReveal";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { colorClasses, type ColorKey } from "@/lib/color-map";
 import { generateBreadcrumbSchema, generateFAQSchema, generateServiceSchema } from "@/lib/schema";
 import { primaryCta, secondaryCta, siteConfig } from "@/lib/site";
@@ -37,6 +38,10 @@ export function CommercialLandingPage({
 
       <section className="section-space">
         <div className="container-grid">
+          <Breadcrumbs
+            className="mb-6"
+            items={[{ name: "Home", href: "/" }, { name: page.eyebrow }]}
+          />
           <Reveal>
             <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
               <div className="space-y-5">

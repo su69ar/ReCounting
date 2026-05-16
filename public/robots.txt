@@ -1,7 +1,30 @@
 User-Agent: *
 Allow: /
+
+# Allow common resource paths explicitly
+Allow: /_next/static/
+Allow: /_next/image
+Allow: /assets/
+Allow: /clients/
+Allow: /team/
+
+# Block API and admin
 Disallow: /api/
 Disallow: /admin/
 Disallow: /private/
 
+# AI training and crawl bots — explicit allow for indexing AI search citations
+User-Agent: GPTBot
+Allow: /
+
+User-Agent: ClaudeBot
+Allow: /
+
+User-Agent: PerplexityBot
+Allow: /
+
+User-Agent: Google-Extended
+Allow: /
+
 Sitemap: https://recounting.my.id/recounting-index.xml
+Sitemap: https://recounting.my.id/sitemap.xml
